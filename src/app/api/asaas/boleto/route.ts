@@ -5,12 +5,13 @@ import { prisma } from "@/lib/prisma";
 import { boletoSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { DEMO_USER_ID, demoBoleto } from "@/lib/demo";
 
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
 
     const ip = request.headers.get("x-forwarded-for") || "anonymous";
     const rateLimit = checkRateLimit(`boleto:${user.id}:${ip}`);
@@ -31,6 +32,22 @@ export async function POST(request: NextRequest) {
 
     const { customerName, customerCpfCnpj, amount, dueDate, description } =
       validation.data;
+
+    // Demo mode: return mock boleto
+    if (user.id === DEMO_USER_ID) {
+      const mock = demoBoleto(amount, customerName, dueDate, description);
+      return successResponse({
+        id: mock.id,
+        status: mock.status,
+        value: mock.value,
+        dueDate: mock.dueDate,
+        barCode: mock.barCode,
+        bankSlipUrl: null,
+        invoiceUrl: null,
+        customer: customerName,
+        description: mock.description,
+      });
+    }
 
     // Find or create customer
     let customerId: string;

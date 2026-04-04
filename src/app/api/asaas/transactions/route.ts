@@ -3,11 +3,24 @@ import { getCurrentUser } from "@/lib/auth";
 import { getTransactions } from "@/lib/asaas";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/lib/api-response";
+import { DEMO_USER_ID, DEMO_TRANSACTIONS } from "@/lib/demo";
 
 export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
+
+    // Demo mode: return mock transaction list
+    if (user.id === DEMO_USER_ID) {
+      const limit = Math.min(parseInt(new URL(request.url).searchParams.get("limit") || "20"), 100);
+      const offset = parseInt(new URL(request.url).searchParams.get("offset") || "0");
+      const slice = DEMO_TRANSACTIONS.data.slice(offset, offset + limit);
+      return successResponse({
+        data: slice,
+        total: DEMO_TRANSACTIONS.totalCount,
+        hasMore: offset + limit < DEMO_TRANSACTIONS.totalCount,
+      });
+    }
 
     const url = new URL(request.url);
     const source = url.searchParams.get("source") || "local";

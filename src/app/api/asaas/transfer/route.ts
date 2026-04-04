@@ -1,16 +1,17 @@
-import { NextRequest } from "next/server";
+﻿import { NextRequest } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { createTransfer } from "@/lib/asaas";
 import { prisma } from "@/lib/prisma";
 import { transferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
+import { DEMO_USER_ID, demoTransfer } from "@/lib/demo";
 
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
 
     const ip = request.headers.get("x-forwarded-for") || "anonymous";
     const config = getRateLimitConfig("/api/asaas/transfer");
@@ -32,6 +33,11 @@ export async function POST(request: NextRequest) {
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
 
+    // Demo mode: return mock transfer result
+    if (user.id === DEMO_USER_ID) {
+      return successResponse(demoTransfer(amount, pixKey, description));
+    }
+
     const transfer = await createTransfer(
       {
         value: amount,
@@ -40,7 +46,7 @@ export async function POST(request: NextRequest) {
         pixAddressKeyType: pixKeyType,
         description,
       },
-      user.asaasApiKey
+      user.asaasApiKey!
     );
 
     // Record transaction

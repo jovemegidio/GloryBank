@@ -2,6 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 import bcrypt from "bcryptjs";
+import { DEMO_MODE, DEMO_USER_ID, DEMO_USER } from "./demo";
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "fallback-secret-do-not-use-in-production"
@@ -85,6 +86,21 @@ export async function getSession() {
   const payload = await verifyToken(token);
   if (!payload) return null;
 
+  // Demo mode: return a fake session without touching the database
+  if (DEMO_MODE && payload.userId === DEMO_USER_ID) {
+    return {
+      id: "demo-session",
+      userId: DEMO_USER_ID,
+      token: "demo-token",
+      userAgent: null,
+      ipAddress: null,
+      expiresAt: new Date(Date.now() + SESSION_DURATION * 1000),
+      createdAt: DEMO_USER.createdAt,
+      user: DEMO_USER,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+  }
+
   const session = await prisma.session.findUnique({
     where: { id: payload.sessionId },
     include: { user: true },
@@ -106,12 +122,26 @@ export async function destroySession() {
 
   if (token) {
     const payload = await verifyToken(token);
-    if (payload) {
+    // Demo mode: just clear the cookie, no DB record to delete
+    if (payload && !(DEMO_MODE && payload.userId === DEMO_USER_ID)) {
       await prisma.session.delete({ where: { id: payload.sessionId } }).catch(() => {});
     }
   }
 
   cookieStore.delete("session");
+}
+
+/** Creates a cookie-based session for the demo user without any DB interaction */
+export async function createDemoSession() {
+  const jwt = await createToken({ userId: DEMO_USER_ID, sessionId: "demo-session" });
+  const cookieStore = await cookies();
+  cookieStore.set("session", jwt, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: SESSION_DURATION,
+  });
 }
 
 export async function getCurrentUser() {

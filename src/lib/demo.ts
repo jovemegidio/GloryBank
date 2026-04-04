@@ -1,0 +1,230 @@
+/**
+ * DEMO MODE
+ * Set DEMO_MODE=true in .env to enable a fully-functional sandbox
+ * that works without a real PostgreSQL database or Asaas API key.
+ *
+ * Demo credentials:
+ *   Email:  demo@glorybank.com
+ *   Senha:  Demo@123456
+ */
+
+export const DEMO_MODE = process.env.DEMO_MODE === "true";
+
+export const DEMO_USER_ID = "demo-user-glorybank-2025";
+export const DEMO_EMAIL = "demo@glorybank.com";
+export const DEMO_PASSWORD = "Demo@123456";
+
+/** Fake user object — matches the Prisma User model shape */
+export const DEMO_USER = {
+  id: DEMO_USER_ID,
+  name: "João Demo Silva",
+  email: DEMO_EMAIL,
+  cpfCnpj: "123.456.789-09",
+  phone: "11999887766",
+  passwordHash: "",
+  asaasCustomerId: null,
+  asaasAccountId: "demo-asaas-account",
+  asaasWalletId: "demo-wallet-id",
+  asaasApiKey: null, // keeps Asaas calls disabled → mocks kick in
+  birthDate: null,
+  address: "Av. Paulista",
+  addressNumber: "1000",
+  province: "Bela Vista",
+  postalCode: "01310-100",
+  city: "São Paulo",
+  state: "SP",
+  isActive: true,
+  isVerified: true,
+  createdAt: new Date("2025-01-15"),
+  updatedAt: new Date("2025-01-15"),
+};
+
+/** Mock balance returned on the /api/asaas/balance endpoint */
+export const DEMO_BALANCE = {
+  balance: 12450.0,
+  statistics: {
+    pending: 500.0,
+    overdue: 0,
+    confirmed: 11950.0,
+  },
+};
+
+const now = Date.now();
+
+/** Mock transaction list returned on the /api/asaas/transactions endpoint */
+export const DEMO_TRANSACTIONS = {
+  data: [
+    {
+      id: "demo-tx-1",
+      type: "PIX_RECEIVED",
+      status: "CONFIRMED",
+      amount: 1500.0,
+      fee: null,
+      description: "PIX de João Silva",
+      pixKey: null,
+      pixKeyType: null,
+      boletoUrl: null,
+      boletoBarCode: null,
+      recipientName: "João Silva",
+      recipientCpfCnpj: null,
+      date: new Date(now - 2 * 3600 * 1000).toISOString(),
+    },
+    {
+      id: "demo-tx-2",
+      type: "PIX_SENT",
+      status: "CONFIRMED",
+      amount: 250.0,
+      fee: null,
+      description: "Pagamento aluguel",
+      pixKey: "maria@email.com",
+      pixKeyType: "EMAIL",
+      boletoUrl: null,
+      boletoBarCode: null,
+      recipientName: "Maria Santos",
+      recipientCpfCnpj: null,
+      date: new Date(now - 26 * 3600 * 1000).toISOString(),
+    },
+    {
+      id: "demo-tx-3",
+      type: "BOLETO_CREATED",
+      status: "PENDING",
+      amount: 189.9,
+      fee: null,
+      description: "Energia Elétrica",
+      pixKey: null,
+      pixKeyType: null,
+      boletoUrl: null,
+      boletoBarCode:
+        "34191.09008 67629.640001 56900.630006 3 84690000018990",
+      recipientName: "Energia Elétrica SP",
+      recipientCpfCnpj: null,
+      date: new Date(now - 5 * 24 * 3600 * 1000).toISOString(),
+    },
+    {
+      id: "demo-tx-4",
+      type: "PIX_RECEIVED",
+      status: "CONFIRMED",
+      amount: 3200.0,
+      fee: null,
+      description: "Salário mensal",
+      pixKey: null,
+      pixKeyType: null,
+      boletoUrl: null,
+      boletoBarCode: null,
+      recipientName: "Empresa Tech Ltda",
+      recipientCpfCnpj: null,
+      date: new Date(now - 7 * 24 * 3600 * 1000).toISOString(),
+    },
+    {
+      id: "demo-tx-5",
+      type: "TRANSFER_SENT",
+      status: "CONFIRMED",
+      amount: 800.0,
+      fee: 0,
+      description: "Reserva de emergência",
+      pixKey: "poupanca@banco.com",
+      pixKeyType: "EMAIL",
+      boletoUrl: null,
+      boletoBarCode: null,
+      recipientName: "Conta Poupança",
+      recipientCpfCnpj: null,
+      date: new Date(now - 10 * 24 * 3600 * 1000).toISOString(),
+    },
+    {
+      id: "demo-tx-6",
+      type: "PIX_RECEIVED",
+      status: "CONFIRMED",
+      amount: 450.0,
+      fee: null,
+      description: "Venda produto",
+      pixKey: null,
+      pixKeyType: null,
+      boletoUrl: null,
+      boletoBarCode: null,
+      recipientName: "Carlos Ferreira",
+      recipientCpfCnpj: null,
+      date: new Date(now - 12 * 24 * 3600 * 1000).toISOString(),
+    },
+  ],
+  totalCount: 6,
+  hasMore: false,
+};
+
+/** Mock PIX keys */
+export const DEMO_PIX_KEYS = {
+  data: [
+    { id: "demo-key-1", key: DEMO_EMAIL, keyType: "EMAIL", status: "ACTIVE" },
+    {
+      id: "demo-key-2",
+      key: "11999887766",
+      keyType: "PHONE",
+      status: "ACTIVE",
+    },
+  ],
+  totalCount: 2,
+};
+
+/** Mock PIX QR Code response */
+export const demoPIXQrCode = (value?: number) => ({
+  id: "demo-qrcode-" + Date.now(),
+  encodedImage:
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+  payload:
+    "00020126360014br.gov.bcb.pix0114+5511999887766520400005303986" +
+    (value ? `54${String(value.toFixed(2)).length.toString().padStart(2, "0")}${value.toFixed(2)}` : "") +
+    "5802BR5913Joao Demo6009Sao Paulo6304A4B3",
+  expirationDate: new Date(Date.now() + 3600 * 1000).toISOString(),
+  value: value || 0,
+});
+
+/** Mock PIX transfer result */
+export const demoPIXTransfer = (
+  pixKey: string,
+  amount: number,
+  description?: string
+) => ({
+  id: "demo-pix-" + Date.now(),
+  status: "DONE",
+  value: amount,
+  pixAddressKey: pixKey,
+  description: description || "Transferência PIX",
+  transferFee: 0,
+  effectiveDate: new Date().toISOString(),
+});
+
+/** Mock boleto result */
+export const demoBoleto = (
+  amount: number,
+  customerName: string,
+  dueDate: string,
+  description?: string
+) => ({
+  id: "demo-pay-" + Date.now(),
+  status: "PENDING",
+  value: amount,
+  billingType: "BOLETO",
+  dueDate,
+  description: description || "Boleto GloryBank",
+  barCode:
+    "34191.09008 67629.640001 56900.630006 3 " +
+    Math.floor(84690000000000 + amount * 100),
+  bankSlipUrl: null,
+  invoiceUrl: null,
+  customer: customerName,
+});
+
+/** Mock transfer result */
+export const demoTransfer = (
+  amount: number,
+  pixKey: string,
+  description?: string
+) => ({
+  id: "demo-transfer-" + Date.now(),
+  status: "DONE",
+  value: amount,
+  operationType: "PIX",
+  pixAddressKey: pixKey,
+  description: description || "Transferência",
+  transferFee: 0,
+  effectiveDate: new Date().toISOString(),
+});

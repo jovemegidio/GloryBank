@@ -5,9 +5,18 @@ import { prisma } from "@/lib/prisma";
 import { createSubAccount } from "@/lib/asaas";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
+import { DEMO_MODE } from "@/lib/demo";
 
 export async function POST(request: NextRequest) {
   try {
+    // Demo mode: registration is disabled — use the demo account
+    if (DEMO_MODE) {
+      return errorResponse(
+        "Cadastro desabilitado no modo demonstração. Use: demo@glorybank.com / Demo@123456",
+        403
+      );
+    }
+
     // Rate limiting
     const ip = request.headers.get("x-forwarded-for") || "anonymous";
     const config = getRateLimitConfig("/api/auth/register");

@@ -5,13 +5,14 @@ import { prisma } from "@/lib/prisma";
 import { pixTransferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
+import { DEMO_USER_ID, DEMO_PIX_KEYS, demoPIXQrCode, demoPIXTransfer } from "@/lib/demo";
 
 // Send PIX
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
 
     // Rate limiting
     const ip = request.headers.get("x-forwarded-for") || "anonymous";
@@ -33,6 +34,11 @@ export async function POST(request: NextRequest) {
     }
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
+
+    // Demo mode: return mock PIX result
+    if (user.id === DEMO_USER_ID) {
+      return successResponse(demoPIXTransfer(pixKey, amount, description));
+    }
 
     const pixResult = await createPixTransfer(
       {
@@ -70,10 +76,27 @@ export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
 
     const url = new URL(request.url);
     const action = url.searchParams.get("action");
+
+    // Demo mode: return mock data for all PIX actions
+    if (user.id === DEMO_USER_ID) {
+      if (action === "qrcode") {
+        const value = url.searchParams.get("value");
+        return successResponse(demoPIXQrCode(value ? parseFloat(value) : undefined));
+      }
+      if (action === "create-key") {
+        return successResponse({
+          id: "demo-key-" + Date.now(),
+          key: "random-evp-key-" + Date.now(),
+          keyType: "EVP",
+          status: "ACTIVE",
+        });
+      }
+      return successResponse(DEMO_PIX_KEYS);
+    }
 
     if (action === "qrcode") {
       const value = url.searchParams.get("value");
