@@ -39,7 +39,7 @@ export function QuickActions() {
     <div className="grid grid-cols-4 gap-3">
       {actions.map((action) => (
         <Link
-          key={action.href}
+          key={action.label}
           href={action.href}
           className="group flex flex-col items-center gap-2.5 rounded-2xl p-4 transition-all duration-200 hover:scale-[1.02]"
           style={{ background: "#141828", border: "1px solid rgba(30,35,56,0.8)" }}
