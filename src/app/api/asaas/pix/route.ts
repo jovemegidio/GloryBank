@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta bancária não configurada", 400);
 
     // Rate limiting
     const ip = request.headers.get("x-forwarded-for") || "anonymous";
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser();
     if (!user) return errorResponse("Não autenticado", 401);
-    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta não configurada no Asaas", 400);
+    if (!user.asaasApiKey && user.id !== DEMO_USER_ID) return errorResponse("Conta bancária não configurada", 400);
 
     const url = new URL(request.url);
     const action = url.searchParams.get("action");
