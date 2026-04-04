@@ -1,7 +1,7 @@
 /**
  * DEMO MODE
- * Set DEMO_MODE=true in .env to enable a fully-functional sandbox
- * that works without a real PostgreSQL database or Asaas API key.
+ * Set DEMO_MODE=true in the online deployment environment to enable
+ * a fully-functional sandbox without PostgreSQL or Asaas credentials.
  *
  * Demo credentials:
  *   Email:  demo@glorybank.com

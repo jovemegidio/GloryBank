@@ -1,45 +1,73 @@
 ﻿# GloryBank — Internet Banking Digital
 
-Plataforma de internet banking completa construída com Next.js 16, integração Asaas (sub-contas), autenticação JWT segura e Prisma ORM.
+<p align="center">
+  <a href="https://jovemegidio.github.io/GloryBank"><img src="https://img.shields.io/badge/Landing%20Page-GitHub%20Pages-0f172a?style=for-the-badge&logo=github" alt="Landing Page"/></a>
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/jovemegidio/GloryBank&env=JWT_SECRET,DEMO_MODE,NEXT_PUBLIC_APP_URL&envDescription=Configure%20a%20URL%20online%20da%20apresenta%C3%A7%C3%A3o%20e%20publique%20em%20modo%20demo&project-name=glorybank"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+  <img src="https://img.shields.io/badge/Presentation%20Mode-Online-red?style=for-the-badge" alt="Presentation Mode"/>
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js 16"/>
+</p>
 
-**[Ver Demo](https://jovemegidio.github.io/GloryBank)**
+<p align="center">
+  Repositório preparado para apresentação online de um internet banking profissional.<br/>
+  O foco aqui é demonstração visual e navegação em modo demo, sem fluxo local documentado no git.
+</p>
 
 ---
 
-## 🧪 Conta de Demonstração
+## Apresentação online
 
-O projeto inclui um **modo demonstração** que roda sem banco de dados ou chave Asaas real.  
-Ideal para porftólio, apresentações e testes rápidos.
+| Item | Link |
+|---|---|
+| Landing institucional | https://jovemegidio.github.io/GloryBank |
+| Código-fonte | https://github.com/jovemegidio/GloryBank |
+| Deploy online | via Vercel com modo demo |
+
+Credenciais de apresentação:
 
 | Campo | Valor |
 |---|---|
-| Email | `demo@glorybank.com` |
+| Login | `demo@glorybank.com` |
 | Senha | `Demo@123456` |
 
-A tela de login possui o botão **"Entrar como Demo"** para autenticação com um clique.
-
-**O que funciona em modo demo:**
-- ✅ Login/logout
-- ✅ Dashboard com saldo de R$ 12.450,00
-- ✅ Extrato com 6 transações fictícias
-- ✅ Enviar PIX (retorna resposta simulada)
-- ✅ Gerar QR Code PIX
-- ✅ Gerar boleto (retorna código de barras mock)
-- ✅ Transferências
-- ✅ Chaves PIX (mock)
-- ❌ Cadastro de novos usuários (desabilitado no demo)
+> O botão "Entrar como Demo" na tela de login faz o acesso com um clique.
 
 ---
 
-## Funcionalidades
+## Publicação online em 1 clique
 
-- **PIX** — envio, recebimento, geração de QR Code e gerenciamento de chaves
-- **Boletos** — geração com código de barras e acompanhamento de status
-- **Transferências** — entre contas via PIX
-- **Extrato** — histórico paginado com filtros por data e tipo
-- **Minha Conta** — dados pessoais e chaves PIX cadastradas
-- **Autenticação** — login/registro com JWT HttpOnly, bcrypt 12 rounds
-- **Rate Limiting** — proteção contra abuso nas rotas de auth e transações
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jovemegidio/GloryBank&env=JWT_SECRET,DEMO_MODE,NEXT_PUBLIC_APP_URL&envDescription=Configure%20somente%20a%20URL%20online%20da%20apresenta%C3%A7%C3%A3o&project-name=glorybank&demo-title=GloryBank&demo-description=Internet%20Banking%20Digital%20para%20apresenta%C3%A7%C3%A3o)
+
+Variáveis mínimas para a apresentação online:
+
+| Variável | Valor |
+|---|---|
+| `DEMO_MODE` | `true` |
+| `JWT_SECRET` | string aleatória com 64+ caracteres |
+| `NEXT_PUBLIC_APP_URL` | URL pública do deploy |
+
+---
+
+## O que está pronto para demo
+
+| Funcionalidade | Status |
+|---|---|
+| Login / Logout | ✅ |
+| Dashboard com saldo | ✅ |
+| Extrato com transações | ✅ |
+| PIX simulado | ✅ |
+| Boleto simulado | ✅ |
+| Transferências simuladas | ✅ |
+| Visual mobile | ✅ |
+| Navegação institucional | ✅ |
+
+---
+
+## Direção do projeto
+
+- Apresentação visual de internet banking com identidade premium
+- Navegação em modo demo, sem dependência de infraestrutura local descrita no repositório
+- Landing em GitHub Pages para showcase
+- Aplicação Next.js pronta para publicação online em modo demonstração
 
 ---
 
@@ -47,164 +75,12 @@ A tela de login possui o botão **"Entrar como Demo"** para autenticação com u
 
 | Camada | Tecnologia |
 |---|---|
-| Framework | Next.js 16.2.2 (App Router, Turbopack) |
+| Framework | Next.js 16.2.2 |
 | Linguagem | TypeScript 5 |
-| Banco de dados | PostgreSQL via Prisma 6 |
-| Autenticação | `jose` JWT + bcryptjs |
-| Pagamentos | Asaas API (sub-contas) |
-| Formulários | react-hook-form 7 + Zod |
-| Estilos | Tailwind CSS v4 |
-
----
-
-## Pre-requisitos
-
-### Modo Demo (recomendado para porftólio)
-
-Não precisa de banco de dados nem Asaas. Apenas:
-
-- Node.js 20+
-- `.env` com `DEMO_MODE=true` (já é o padrão do `.env.example`)
-
-### Modo Completo (integração real Asaas)
-
-- Node.js 20+
-- Uma conta Asaas sandbox gratuita
-- PostgreSQL (local, Neon, Railway, etc.) ou Prisma Postgres
-
----
-
-## Instalação e configuração
-
-### Início rápido — Modo Demo
-
-```bash
-git clone https://github.com/jovemegidio/GloryBank.git
-cd GloryBank
-npm install
-cp .env.example .env   # DEMO_MODE=true já está configurado
-npm run dev
-```
-
-Abra http://localhost:3000 e clique em **"Entrar como Demo"**.
-
-> **Nota para Google Drive/OneDrive:** instale em caminho local
-> (ex: `C:\Temp\GloryBank`), copie `node_modules` de volta com robocopy.
-
----
-
-### Configuração completa (banco de dados + Asaas real)
-
-#### 1. Clone o repositório
-
-```bash
-git clone https://github.com/jovemegidio/GloryBank.git
-cd GloryBank
-npm install
-```
-
-#### 2. Configure as variáveis de ambiente
-
-```bash
-cp .env.example .env
-```
-
-Edite `.env`:
-
-```env
-# Banco de dados
-DATABASE_URL="postgresql://user:senha@localhost:5432/glorybank"
-
-# Segredo JWT — gere um valor forte:
-# node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
-JWT_SECRET="seu-segredo-jwt-aqui"
-
-# Chave API Asaas (sandbox)
-ASAAS_API_KEY="$aact_..."
-ASAAS_API_URL="https://sandbox.asaas.com/api/v3"
-
-# Desative o modo demo
-DEMO_MODE=false
-```
-
-#### 3. Crie as tabelas e o usuário demo
-
-```bash
-npx prisma db push
-npm run db:seed
-```
-
-O seed cria automaticamente:
-- Conta demo: `demo@glorybank.com` / `Demo@123456`
-- 5 transações de exemplo no extrato
-
-
-
-> A conta demo já aparece como botão **"Entrar como Demo"** na tela de login.
-
-### 5. Inicie o servidor
-
-```bash
-npm run dev
-```
-
-Acesse http://localhost:3000
-
----
-
-## Como obter a chave Asaas (sandbox)
-
-1. Acesse https://sandbox.asaas.com e crie uma conta gratuita
-2. Vá em **Configurações → Integrações**
-3. Copie a **Chave de API** (começa com `$aact_`)
-4. Cole em `ASAAS_API_KEY` no seu `.env`
-
----
-
-## Como testar
-
-### Criar conta
-1. Acesse `/register`
-2. Preencha nome, e-mail, CPF/CNPJ, telefone e senha
-3. Uma sub-conta Asaas é criada automaticamente
-
-### PIX
-1. Acesse **PIX** no menu
-2. Enviar: insira chave PIX e valor
-3. Receber: clique em "Gerar QR Code"
-4. Gerenciar chaves: crie chave EVP ou cadastre CPF/e-mail/telefone
-
-### Boleto
-1. Acesse **Boleto**
-2. Preencha valor, vencimento e descrição
-3. Código de barras e link são exibidos após a criação
-
----
-
-## Build producao
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## Estrutura
-
-```
-src/
-├── app/
-│   ├── (auth)/          # Login e registro
-│   ├── (dashboard)/     # Painel autenticado
-│   ├── api/             # API routes (auth + asaas)
-│   └── globals.css
-├── components/
-│   ├── dashboard/       # Sidebar, Header, BalanceCard...
-│   └── ui/              # Button, Input, Card, Badge...
-├── lib/                 # auth, asaas, validations, rate-limit
-└── types/
-```
+| UI | Tailwind CSS v4 |
+| Formulários | react-hook-form + Zod |
+| Autenticação demo | JWT HttpOnly |
+| Integração futura | Prisma + Asaas |
 
 ---
 
@@ -214,20 +90,18 @@ src/
 |---|---|
 | JWT HttpOnly | Cookie não acessível via JavaScript |
 | bcrypt 12 rounds | Hash seguro de senhas |
-| Rate Limiting | 5 req/15min auth, 20 req/min transações |
-| Security Headers | X-Frame-Options, X-Content-Type-Options, CSP |
-| Middleware | Verificação de sessão em todas as rotas protegidas |
-| Zod | Validação de entrada em todas as rotas de API |
-| OWASP Top 10 | Práticas seguidas no desenvolvimento |
+| Rate Limiting | Proteção de rotas críticas |
+| Security Headers | Cabeçalhos defensivos em todas as respostas |
+| Middleware | Verificação de sessão nas rotas protegidas |
+| Zod | Validação de entrada nas APIs |
 
 ---
 
 ## GitHub Pages
 
-A demo estática está em `docs/index.html` e é publicada automaticamente
-via GitHub Actions ao fazer push na branch `main`.
+A landing page estática de apresentação está em `docs/index.html`.
 
-Configure em: **Settings → Pages → Source → branch `main` → `/docs`**
+Publicação: **Settings → Pages → Source → branch `main` → `/docs`**
 
 ---
 

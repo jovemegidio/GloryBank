@@ -93,8 +93,8 @@ async function main() {
   console.log(`   ID:     ${demoUser.id}`);
   console.log(`   Transações: ${sampleTx.length} inseridas`);
   console.log("");
-  console.log("💡 Tip: Set DEMO_MODE=true in .env to use this account");
-  console.log("   without a real Asaas API key.");
+  console.log("💡 Tip: Keep DEMO_MODE=true in the online environment for presentation mode");
+  console.log("   and no real Asaas API key will be required.");
 }
 
 main()
