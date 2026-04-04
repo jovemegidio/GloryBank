@@ -16,7 +16,7 @@ export async function GET() {
         email: user.email,
         cpfCnpj: user.cpfCnpj,
         phone: user.phone,
-        asaasAccountId: user.asaasAccountId,
+        accountActive: !!user.asaasAccountId,
         isVerified: user.isVerified,
         createdAt: user.createdAt,
       },

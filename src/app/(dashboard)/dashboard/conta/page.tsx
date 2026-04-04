@@ -23,7 +23,7 @@ interface UserData {
   email: string;
   cpfCnpj: string;
   phone: string;
-  asaasAccountId: string | null;
+  accountActive: boolean;
   isVerified: boolean;
   createdAt: string;
 }
@@ -154,15 +154,11 @@ export default function ContaPage() {
                   <div>
                     <p className="text-sm font-medium">Status da Conta</p>
                     <p className="text-xs text-slate-500">
-                      {user.asaasAccountId
-                        ? "Conta ativa no Asaas"
-                        : "Pendente de ativação"}
+                      Conta bancária digital
                     </p>
                   </div>
-                  <Badge
-                    variant={user.asaasAccountId ? "success" : "warning"}
-                  >
-                    {user.asaasAccountId ? "Ativa" : "Pendente"}
+                  <Badge variant="success">
+                    Ativa
                   </Badge>
                 </div>
 

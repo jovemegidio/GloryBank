@@ -78,6 +78,25 @@ export default function Home() {
               Acessar conta
             </Link>
           </div>
+
+          {/* Demo banner */}
+          <div className="mt-8 inline-flex items-center justify-center gap-4 rounded-2xl px-6 py-4 text-sm max-w-lg w-full" style={{ background: "rgba(124,58,237,0.07)", border: "1px solid rgba(124,58,237,0.18)" }}>
+            <div className="text-left flex-1">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400 mb-1">🧪 Acesso Demonstração</p>
+              <p className="text-[12px] text-slate-400">
+                <span className="font-mono text-slate-200">demo@glorybank.com</span>
+                {" "}·{" "}
+                <span className="font-mono text-slate-200">Demo@123456</span>
+              </p>
+            </div>
+            <Link
+              href="/login"
+              className="shrink-0 rounded-xl px-4 py-2 text-[12px] font-semibold text-white transition-opacity hover:opacity-80"
+              style={{ background: "#7C3AED" }}
+            >
+              Acessar Demo
+            </Link>
+          </div>
         </div>
       </section>
 
