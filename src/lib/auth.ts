@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
-import bcrypt from "bcryptjs";
 import { DEMO_MODE, DEMO_USER_ID, DEMO_USER } from "./demo";
 
 const JWT_SECRET = new TextEncoder().encode(
@@ -11,6 +10,7 @@ const JWT_SECRET = new TextEncoder().encode(
 const SESSION_DURATION = 60 * 60 * 24 * 7; // 7 days in seconds
 
 export async function hashPassword(password: string): Promise<string> {
+  const bcrypt = (await import("bcryptjs")).default;
   return bcrypt.hash(password, 12);
 }
 
@@ -18,6 +18,7 @@ export async function verifyPassword(
   password: string,
   hash: string
 ): Promise<boolean> {
+  const bcrypt = (await import("bcryptjs")).default;
   return bcrypt.compare(password, hash);
 }
 
