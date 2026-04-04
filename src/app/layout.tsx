@@ -13,8 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GloryBank - Sua conta digital completa",
-  description: "Envie e receba PIX, gere boletos e gerencie suas finanças com segurança.",
+  title: {
+    default: "GloryBank — Internet Banking Digital",
+    template: "%s | GloryBank",
+  },
+  description:
+    "GloryBank — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança AES-256.",
+  keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
+  themeColor: "#0c0f1a",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  manifest: undefined,
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({

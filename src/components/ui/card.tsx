@@ -3,6 +3,7 @@ interface CardProps {
   className?: string;
   onClick?: () => void;
   hover?: boolean;
+  noPadding?: boolean;
 }
 
 export function Card({
@@ -10,12 +11,13 @@ export function Card({
   className = "",
   onClick,
   hover = false,
+  noPadding = false,
 }: CardProps) {
   return (
     <div
       onClick={onClick}
-      className={`rounded-2xl p-6 ${hover ? "cursor-pointer transition-all duration-200 hover:border-violet-500/30" : ""} ${onClick ? "cursor-pointer" : ""} ${className}`}
-      style={{ background: "#141828", border: "1px solid rgba(30,35,56,0.8)" }}
+      className={`rounded-2xl overflow-hidden ${noPadding ? "" : "p-6"} ${hover ? "cursor-pointer transition-all duration-150 hover:border-violet-500/30" : ""} ${onClick ? "cursor-pointer" : ""} ${className}`}
+      style={{ background: "#111628", border: "1px solid rgba(26,30,52,0.9)" }}
     >
       {children}
     </div>

@@ -48,55 +48,78 @@ const statusConfig: Record<string, { variant: "success" | "warning" | "error" | 
 export function TransactionList({ transactions }: TransactionListProps) {
   if (transactions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="mb-3 rounded-full p-4" style={{ background: "rgba(30,35,56,0.5)" }}>
-          <FileText className="h-6 w-6 text-slate-500" />
+      <div className="flex flex-col items-center justify-center py-14 text-center">
+        <div
+          className="mb-3 rounded-full p-4"
+          style={{ background: "rgba(30,35,56,0.4)" }}
+        >
+          <FileText className="h-6 w-6 text-slate-600" />
         </div>
-        <p className="text-sm text-slate-500">Nenhuma transação encontrada</p>
+        <p className="text-[13px] font-medium text-slate-500">Nenhuma transação encontrada</p>
+        <p className="mt-1 text-[11px] text-slate-600">
+          Suas movimentações aparecerão aqui
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-1">
+    <div className="divide-y" style={{ borderColor: "rgba(30,35,56,0.4)" }}>
       {transactions.map((tx) => {
-        const config = typeConfig[tx.type] || typeConfig.DEPOSIT;
-        const status = statusConfig[tx.status] || statusConfig.PENDING;
+        const config = typeConfig[tx.type] ?? typeConfig.DEPOSIT;
+        const status = statusConfig[tx.status] ?? statusConfig.PENDING;
         const Icon = config.icon;
-        const isPositive = tx.type.includes("RECEIVED") || tx.type === "DEPOSIT" || tx.type === "BOLETO_PAID";
+        const isPositive =
+          tx.type.includes("RECEIVED") ||
+          tx.type === "DEPOSIT" ||
+          tx.type === "BOLETO_PAID";
 
         return (
           <div
             key={tx.id}
-            className="flex items-center justify-between rounded-xl px-3 py-3 transition-all duration-200 hover:bg-white/[0.03]"
+            className="group flex items-center gap-3 px-4 py-3.5 sm:px-6 transition-colors hover:bg-white/[0.02]"
           >
-            <div className="flex items-center gap-3">
-              <div
-                className={`flex h-9 w-9 items-center justify-center rounded-xl ${config.color}`}
-                style={{ background: config.bg }}
-              >
-                <Icon className="h-4 w-4" />
-              </div>
-              <div>
-                <p className="text-[13px] font-medium text-slate-200">
-                  {config.label}
-                </p>
-                <p className="text-[11px] text-slate-500">
-                  {tx.recipientName || tx.description || formatDate(tx.date)}
-                </p>
-              </div>
+            {/* Icon */}
+            <div
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${config.color}`}
+              style={{ background: config.bg }}
+            >
+              <Icon className="h-4 w-4" />
             </div>
-            <div className="text-right">
-              <p
-                className={`text-[13px] font-semibold ${
-                  isPositive ? "text-green-400" : "text-red-400"
-                }`}
-              >
-                {isPositive ? "+" : "-"} {formatCurrency(Math.abs(tx.amount))}
+
+            {/* Description */}
+            <div className="min-w-0 flex-1">
+              <p className="text-[13px] font-medium text-slate-200 truncate">
+                {config.label}
               </p>
+              <p className="text-[11px] text-slate-500 truncate">
+                {tx.recipientName ?? tx.description ?? formatDate(tx.date)}
+              </p>
+            </div>
+
+            {/* Date — hidden on very small screens */}
+            <div className="hidden sm:block text-right shrink-0">
+              <p className="text-[11px] text-slate-600">{formatDate(tx.date)}</p>
               <Badge variant={status.variant} size="sm">
                 {status.label}
               </Badge>
+            </div>
+
+            {/* Amount */}
+            <div className="text-right shrink-0 ml-2">
+              <p
+                className={`text-[13px] font-semibold tabular-nums ${
+                  isPositive ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {isPositive ? "+" : "−"}{formatCurrency(Math.abs(tx.amount))}
+              </p>
+              {/* Status badge on mobile */}
+              <div className="sm:hidden mt-0.5">
+                <Badge variant={status.variant} size="sm">
+                  {status.label}
+                </Badge>
+              </div>
             </div>
           </div>
         );
@@ -104,3 +127,4 @@ export function TransactionList({ transactions }: TransactionListProps) {
     </div>
   );
 }
+

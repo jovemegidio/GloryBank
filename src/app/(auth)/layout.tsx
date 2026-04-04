@@ -7,49 +7,81 @@ export default function AuthLayout({
 }) {
   return (
     <div className="flex min-h-screen" style={{ background: "#0c0f1a" }}>
-      {/* Left side - branding */}
-      <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #07080F 0%, #120E2E 50%, #1A1040 100%)" }} />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full" style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full" style={{ background: "radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%)" }} />
+      {/* Left side — branding panel (desktop only) */}
+      <div className="hidden lg:flex lg:w-[45%] xl:w-1/2 items-center justify-center p-12 relative overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(160deg, #07080F 0%, #110C28 50%, #1A1040 100%)",
+          }}
+        />
+        {/* Decorative glows */}
+        <div
+          className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 65%)" }}
+        />
+        <div
+          className="absolute -bottom-20 -left-20 w-[300px] h-[300px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(217,119,6,0.05) 0%, transparent 70%)" }}
+        />
 
-        <div className="relative max-w-md text-center">
+        <div className="relative max-w-sm text-center">
+          {/* Logo */}
           <div className="mb-8 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl" style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)" }}>
-              <Landmark className="h-8 w-8 text-violet-400" />
+            <div
+              className="flex h-16 w-16 items-center justify-center rounded-2xl"
+              style={{
+                background: "linear-gradient(135deg, #5B21B6, #7C3AED)",
+                boxShadow: "0 8px 32px rgba(124,58,237,0.35)",
+              }}
+            >
+              <Landmark className="h-8 w-8 text-white" strokeWidth={1.75} />
             </div>
           </div>
-          <h1 className="mb-2 text-4xl font-bold text-white tracking-tight">
+
+          <h1 className="mb-2 text-4xl font-bold tracking-tight text-white">
             Glory<span className="text-amber-400">Bank</span>
           </h1>
-          <p className="text-[15px] text-slate-400 leading-relaxed mb-10">
-            Sua conta digital completa. Envie e receba PIX, gere boletos e
-            gerencie suas finanças com total segurança.
+          <p className="mb-2 text-[13px] font-semibold uppercase tracking-widest text-violet-400/70">
+            Internet Banking Digital
           </p>
+          <p className="mb-10 text-[15px] leading-relaxed text-slate-400">
+            Sua conta digital completa. PIX, boletos e transferências com
+            segurança de nível bancário.
+          </p>
+
+          {/* Stat pills */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-xl p-4" style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.12)" }}>
-              <Zap className="h-5 w-5 text-violet-400 mx-auto mb-2" />
-              <p className="text-sm font-semibold text-white">PIX</p>
-              <p className="text-[11px] text-slate-500">Instantâneo</p>
-            </div>
-            <div className="rounded-xl p-4" style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.12)" }}>
-              <Clock className="h-5 w-5 text-violet-400 mx-auto mb-2" />
-              <p className="text-sm font-semibold text-white">24/7</p>
-              <p className="text-[11px] text-slate-500">Disponível</p>
-            </div>
-            <div className="rounded-xl p-4" style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.12)" }}>
-              <ShieldCheck className="h-5 w-5 text-violet-400 mx-auto mb-2" />
-              <p className="text-sm font-semibold text-white">Seguro</p>
-              <p className="text-[11px] text-slate-500">Criptografia</p>
-            </div>
+            {[
+              { Icon: Zap, label: "PIX", sub: "Instantâneo" },
+              { Icon: Clock, label: "24/7", sub: "Disponível" },
+              { Icon: ShieldCheck, label: "Seguro", sub: "AES-256" },
+            ].map(({ Icon, label, sub }) => (
+              <div
+                key={label}
+                className="rounded-xl p-4"
+                style={{
+                  background: "rgba(124,58,237,0.06)",
+                  border: "1px solid rgba(124,58,237,0.1)",
+                }}
+              >
+                <Icon className="h-5 w-5 text-violet-400 mx-auto mb-2" />
+                <p className="text-[13px] font-semibold text-white">{label}</p>
+                <p className="text-[10px] text-slate-500">{sub}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Right side - form */}
-      <div className="flex w-full lg:w-1/2 items-center justify-center p-6" style={{ background: "#0e1220" }}>
-        <div className="w-full max-w-md">{children}</div>
+      {/* Right side — form */}
+      <div
+        className="flex w-full lg:w-[55%] xl:w-1/2 items-start lg:items-center justify-center p-5 sm:p-8 pt-10 sm:pt-8"
+        style={{ background: "#0e1221" }}
+      >
+        <div className="w-full max-w-[400px]">{children}</div>
       </div>
     </div>
   );
 }
+

@@ -95,12 +95,14 @@ export function DashboardClient({ userName }: DashboardClientProps) {
 
         {/* Recent Transactions — skeleton until data arrives */}
         <div className="fade-in-up-delay-3">
-          <Card>
-            <CardHeader>
+          <Card noPadding>
+            <CardHeader className="px-4 pt-5 pb-0 sm:px-6">
               <CardTitle>Transações Recentes</CardTitle>
             </CardHeader>
             {transactions === null ? (
-              <SkeletonTransactions />
+              <div className="px-6 pb-4">
+                <SkeletonTransactions />
+              </div>
             ) : (
               <TransactionList transactions={transactions} />
             )}
