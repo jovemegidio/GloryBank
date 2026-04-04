@@ -6,6 +6,31 @@ Plataforma de internet banking completa construída com Next.js 16, integração
 
 ---
 
+## 🧪 Conta de Demonstração
+
+O projeto inclui um **modo demonstração** que roda sem banco de dados ou chave Asaas real.  
+Ideal para porftólio, apresentações e testes rápidos.
+
+| Campo | Valor |
+|---|---|
+| Email | `demo@glorybank.com` |
+| Senha | `Demo@123456` |
+
+A tela de login possui o botão **"Entrar como Demo"** para autenticação com um clique.
+
+**O que funciona em modo demo:**
+- ✅ Login/logout
+- ✅ Dashboard com saldo de R$ 12.450,00
+- ✅ Extrato com 6 transações fictícias
+- ✅ Enviar PIX (retorna resposta simulada)
+- ✅ Gerar QR Code PIX
+- ✅ Gerar boleto (retorna código de barras mock)
+- ✅ Transferências
+- ✅ Chaves PIX (mock)
+- ❌ Cadastro de novos usuários (desabilitado no demo)
+
+---
+
 ## Funcionalidades
 
 - **PIX** — envio, recebimento, geração de QR Code e gerenciamento de chaves
@@ -34,32 +59,51 @@ Plataforma de internet banking completa construída com Next.js 16, integração
 
 ## Pre-requisitos
 
+### Modo Demo (recomendado para porftólio)
+
+Não precisa de banco de dados nem Asaas. Apenas:
+
+- Node.js 20+
+- `.env` com `DEMO_MODE=true` (já é o padrão do `.env.example`)
+
+### Modo Completo (integração real Asaas)
+
 - Node.js 20+
 - Uma conta Asaas sandbox gratuita
 - PostgreSQL (local, Neon, Railway, etc.) ou Prisma Postgres
 
 ---
 
-## Instalacao e configuracao
+## Instalação e configuração
 
-### 1. Clone o repositório
+### Início rápido — Modo Demo
 
 ```bash
 git clone https://github.com/jovemegidio/GloryBank.git
 cd GloryBank
+npm install
+cp .env.example .env   # DEMO_MODE=true já está configurado
+npm run dev
 ```
 
-### 2. Instale as dependências
+Abra http://localhost:3000 e clique em **"Entrar como Demo"**.
+
+> **Nota para Google Drive/OneDrive:** instale em caminho local
+> (ex: `C:\Temp\GloryBank`), copie `node_modules` de volta com robocopy.
+
+---
+
+### Configuração completa (banco de dados + Asaas real)
+
+#### 1. Clone o repositório
 
 ```bash
+git clone https://github.com/jovemegidio/GloryBank.git
+cd GloryBank
 npm install
 ```
 
-> **Nota:** Se estiver em pasta sincronizada com Google Drive ou OneDrive,
-> instale em um caminho local (ex: `C:\Temp\GloryBank`) para evitar erros
-> de escrita durante a extração dos pacotes.
-
-### 3. Configure as variáveis de ambiente
+#### 2. Configure as variáveis de ambiente
 
 ```bash
 cp .env.example .env
@@ -78,21 +122,23 @@ JWT_SECRET="seu-segredo-jwt-aqui"
 # Chave API Asaas (sandbox)
 ASAAS_API_KEY="$aact_..."
 ASAAS_API_URL="https://sandbox.asaas.com/api/v3"
+
+# Desative o modo demo
+DEMO_MODE=false
 ```
 
-### 4. Crie as tabelas e o usuário demo
+#### 3. Crie as tabelas e o usuário demo
 
 ```bash
 npx prisma db push
 npm run db:seed
 ```
 
-O seed cria automaticamente uma conta de demonstração:
+O seed cria automaticamente:
+- Conta demo: `demo@glorybank.com` / `Demo@123456`
+- 5 transações de exemplo no extrato
 
-| Campo | Valor |
-|---|---|
-| Email | `demo@glorybank.com` |
-| Senha | `Demo@123456` |
+
 
 > A conta demo já aparece como botão **"Entrar como Demo"** na tela de login.
 
