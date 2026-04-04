@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --gb-primary: #7C3AED;
+  --gb-primary-dark: #6D28D9;
+  --gb-primary-light: #A78BFA;
+  --gb-gold: #D97706;
+  --gb-gold-light: #F59E0B;
+  --gb-dark: #07080F;
+  --gb-dark-card: #0C0E1C;
+  --gb-dark-border: #1A1D32;
+  --gb-dark-hover: #161928;
+  --gb-text: #F1F5F9;
+  --gb-text-muted: #94A3B8;
+  --gb-text-dim: #64748B;
+  --gb-danger: #EF4444;
+  --gb-warning: #F59E0B;
+  --gb-info: #3B82F6;
+  --gb-success: #22C55E;
+  --background: #07080F;
+  --foreground: #F1F5F9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e2338 transparent;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #1e2338; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background-color: #2d3450; }
+
+/* Banking card shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(20, 24, 40, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 35, 56, 0.8);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #7C3AED;
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: #f1f5f9;
+}
+
+/* Smooth page transitions */
+.page-enter { opacity: 0; transform: translateY(8px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease; }
