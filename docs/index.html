@@ -3,597 +3,406 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GloryBank - Internet Banking Digital</title>
-  <meta name="description" content="GloryBank - Sua conta digital completa com PIX, boletos e transferências.">
+  <title>GloryBank &mdash; Internet Banking Digital</title>
+  <meta name="description" content="GloryBank &mdash; Conta digital completa com PIX, boletos, transferências e gestão financeira. Banco digital moderno com segurança de nível bancário.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --primary: #7C3AED;
-      --primary-dark: #6D28D9;
-      --primary-light: #A78BFA;
-      --gold: #D97706;
-      --gold-light: #F59E0B;
-      --bg: #07080F;
-      --surface: #0C0E1C;
-      --card: #111328;
-      --border: rgba(26,29,50,0.8);
-      --border-light: rgba(124,58,237,0.15);
-      --text: #F1F5F9;
-      --muted: #94A3B8;
-      --dim: #64748B;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --p:#7C3AED;--pd:#6D28D9;--pl:#A78BFA;
+      --gold:#F59E0B;
+      --bg:#07080F;--surf:#0C0E1C;--card:#111328;
+      --bdr:rgba(26,29,50,.8);--bdrp:rgba(124,58,237,.18);
+      --txt:#F1F5F9;--mut:#94A3B8;--dim:#64748B;
     }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
+    html{scroll-behavior:smooth}
+    body{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
 
-    /* ─── HEADER ─── */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(7,8,15,0.85);
-      backdrop-filter: blur(16px) saturate(1.5);
-      border-bottom: 1px solid var(--border);
-    }
-    .header-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 1.5rem; height: 68px;
-    }
-    .logo { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-icon {
-      width: 38px; height: 38px; border-radius: 12px;
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.2);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .logo-icon svg { width: 18px; height: 18px; color: var(--primary-light); }
-    .logo-name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
-    .logo-name .glory { color: var(--text); }
-    .logo-name .bank { color: var(--gold-light); }
-    .nav { display: flex; align-items: center; gap: 0.5rem; }
-    .nav-link {
-      padding: 0.5rem 1rem; border-radius: 10px;
-      font-size: 13px; font-weight: 500; color: var(--muted);
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: var(--text); }
-    .nav-btn {
-      padding: 0.5rem 1.25rem; border-radius: 10px;
-      font-size: 13px; font-weight: 600; color: #fff;
-      background: var(--primary);
-      border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .nav-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+    /* HEADER */
+    .hdr{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,8,15,.88);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--bdr)}
+    .hdr-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:68px}
+    .logo{display:flex;align-items:center;gap:.75rem}
+    .logo-ico{width:36px;height:36px;border-radius:11px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.22);display:flex;align-items:center;justify-content:center}
+    .logo-ico svg{width:17px;height:17px;color:var(--pl)}
+    .logo-n{font-size:18px;font-weight:800;letter-spacing:-.02em}
+    .logo-n b{color:var(--gold);font-weight:800}
+    .nav{display:flex;align-items:center;gap:.375rem}
+    .nav a{padding:.45rem .9rem;border-radius:9px;font-size:13px;font-weight:500;color:var(--mut);transition:color .2s}
+    .nav a:hover{color:var(--txt)}
+    .nav .n-demo{display:flex;align-items:center;gap:6px;padding:.45rem 1.1rem;border-radius:9px;font-size:13px;font-weight:600;color:var(--pl);background:rgba(124,58,237,.1);border:1px solid var(--bdrp);transition:background .2s}
+    .nav .n-demo:hover{background:rgba(124,58,237,.18)}
+    .nav .n-gh{padding:.45rem 1.1rem;border-radius:9px;font-size:13px;font-weight:600;color:#fff;background:var(--p);transition:background .2s,transform .1s}
+    .nav .n-gh:hover{background:var(--pd);transform:scale(1.02)}
 
-    /* ─── HERO ─── */
-    .hero {
-      position: relative; padding: 9rem 1.5rem 6rem; text-align: center;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: ""; position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 800px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: ""; position: absolute;
-      bottom: 0; left: 10%; width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(217,119,6,0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-content { position: relative; max-width: 760px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.375rem 1rem; border-radius: 9999px; margin-bottom: 1.5rem;
-      background: rgba(124,58,237,0.08);
-      border: 1px solid rgba(124,58,237,0.18);
-      font-size: 11px; font-weight: 700; color: var(--primary-light);
-      text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .hero-badge svg { width: 13px; height: 13px; }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800; line-height: 1.1;
-      letter-spacing: -0.03em; margin-bottom: 1.5rem;
-    }
-    .hero h1 .accent { color: var(--gold-light); }
-    .hero-desc {
-      font-size: 1.125rem; color: var(--muted);
-      max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.7;
-    }
-    .hero-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .btn-hero-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0.875rem 2rem; border-radius: 12px;
-      font-size: 15px; font-weight: 700; color: #fff; border: none; cursor: pointer;
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      box-shadow: 0 8px 32px rgba(124,58,237,0.35);
-      transition: all 0.2s;
-    }
-    .btn-hero-primary:hover { opacity: 0.92; transform: scale(1.02); }
-    .btn-hero-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0.875rem 2rem; border-radius: 12px;
-      font-size: 15px; font-weight: 500; color: var(--muted);
-      background: transparent; cursor: pointer;
-      border: 1px solid var(--border); transition: color 0.2s;
-    }
-    .btn-hero-outline:hover { color: var(--text); }
+    /* HERO */
+    .hero{position:relative;padding:9rem 1.5rem 5rem;text-align:center;overflow:hidden}
+    .hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.07) 0%,transparent 65%);pointer-events:none}
+    .hero-in{position:relative;max-width:760px;margin:0 auto}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-radius:9999px;margin-bottom:1.5rem;background:rgba(124,58,237,.08);border:1px solid var(--bdrp);font-size:11px;font-weight:700;color:var(--pl);text-transform:uppercase;letter-spacing:.06em}
+    .badge svg{width:13px;height:13px}
+    .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:1.4rem}
+    .hero h1 .acc{color:var(--gold)}
+    .hero-sub{font-size:1.1rem;color:var(--mut);max-width:560px;margin:0 auto 2.25rem;line-height:1.75}
+    .hero-btns{display:flex;justify-content:center;gap:.875rem;flex-wrap:wrap}
+    .btn-cta{display:inline-flex;align-items:center;gap:7px;padding:.85rem 2rem;border-radius:12px;font-size:15px;font-weight:700;color:#fff;border:none;cursor:pointer;background:linear-gradient(135deg,var(--pd),var(--p));box-shadow:0 8px 30px rgba(124,58,237,.32);transition:all .2s}
+    .btn-cta:hover{opacity:.92;transform:scale(1.02)}
+    .btn-out{display:inline-flex;align-items:center;gap:7px;padding:.85rem 2rem;border-radius:12px;font-size:15px;font-weight:500;color:var(--mut);border:1px solid var(--bdr);background:transparent;cursor:pointer;transition:color .2s}
+    .btn-out:hover{color:var(--txt)}
 
-    /* ─── STATS ─── */
-    .stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
-      max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem;
-    }
-    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-    .stat {
-      text-align: center; padding: 1.5rem 1rem; border-radius: 14px;
-      background: var(--surface); border: 1px solid var(--border);
-    }
-    .stat-value { font-size: 1.625rem; font-weight: 800; color: var(--primary-light); margin-bottom: 0.25rem; letter-spacing: -0.02em; }
-    .stat-label { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+    /* DEMO CARD */
+    .demo-card{margin:.875rem auto 0;max-width:480px;display:flex;align-items:center;gap:1rem;padding:.875rem 1.25rem;border-radius:16px;background:rgba(124,58,237,.07);border:1px solid var(--bdrp)}
+    .dc-info .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--pl);margin-bottom:.35rem}
+    .dc-info .creds{font-size:12px;color:var(--mut);line-height:1.7}
+    .dc-info code{font-family:monospace;color:var(--txt);background:rgba(255,255,255,.06);padding:.1rem .35rem;border-radius:4px;font-size:12px}
+    .dc-info .hint{font-size:11px;color:var(--dim);margin-top:.3rem}
+    .btn-run{flex-shrink:0;padding:.55rem 1.1rem;border-radius:10px;font-size:12px;font-weight:700;color:#fff;border:none;cursor:pointer;background:var(--p);transition:background .2s;white-space:nowrap}
+    .btn-run:hover{background:var(--pd)}
 
-    /* ─── FEATURES ─── */
-    .section { padding: 5rem 1.5rem; }
-    .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .section-header .eyebrow {
-      font-size: 11px; font-weight: 700; color: var(--primary-light);
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
-    }
-    .section-header h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-    .section-header p { color: var(--muted); max-width: 500px; margin: 0 auto; }
-    .features-grid {
-      max-width: 1060px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-    }
-    @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
-    .feature-card {
-      padding: 1.75rem; border-radius: 16px;
-      background: var(--card); border: 1px solid var(--border);
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .feature-card:hover { transform: translateY(-2px); border-color: rgba(124,58,237,0.2); }
-    .feature-icon {
-      width: 46px; height: 46px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.25rem;
-    }
-    .feature-icon svg { width: 20px; height: 20px; }
-    .feature-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 0.5rem; }
-    .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    /* STATS */
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:820px;margin:0 auto;padding:2rem 1.5rem 4rem}
+    .stat{text-align:center;padding:1.5rem 1rem;border-radius:14px;background:var(--surf);border:1px solid var(--bdr)}
+    .stat-v{font-size:1.5rem;font-weight:800;color:var(--pl);margin-bottom:.2rem;letter-spacing:-.02em}
+    .stat-l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;font-weight:500}
 
-    /* ─── DASHBOARD PREVIEW ─── */
-    .preview-wrap {
-      max-width: 920px; margin: 0 auto; border-radius: 20px; overflow: hidden;
-      background: var(--card); border: 1px solid var(--border);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    }
-    .preview-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.875rem 1.25rem;
-      background: var(--surface); border-bottom: 1px solid var(--border);
-    }
-    .preview-dots { display: flex; gap: 6px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-r { background: #ff5f57; }
-    .dot-y { background: #febc2e; }
-    .dot-g { background: #28c840; }
-    .preview-url { font-size: 12px; color: var(--dim); font-family: monospace; }
-    .preview-body {
-      display: grid; grid-template-columns: 56px 1fr; min-height: 400px;
-    }
-    .mock-sidebar {
-      background: #09090F; border-right: 1px solid var(--border);
-      display: flex; flex-direction: column; align-items: center;
-      padding: 1rem 0; gap: 0.5rem;
-    }
-    .mock-sb-logo {
-      width: 32px; height: 32px; border-radius: 8px;
-      background: rgba(124,58,237,0.15); margin-bottom: 0.5rem;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-sb-logo svg { width: 14px; height: 14px; color: var(--primary-light); }
-    .mock-sb-item {
-      width: 36px; height: 36px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--dim); transition: background 0.2s;
-    }
-    .mock-sb-item.active { background: rgba(124,58,237,0.12); color: var(--primary-light); }
-    .mock-sb-item svg { width: 16px; height: 16px; }
-    .preview-main { padding: 1.5rem; overflow: hidden; }
-    .mock-balance-card {
-      padding: 1.5rem; border-radius: 16px; margin-bottom: 1.25rem;
-      background: linear-gradient(135deg, #0D0720 0%, #120E2E 60%, #1A1040 100%);
-      border: 1px solid rgba(124,58,237,0.2);
-      position: relative; overflow: hidden;
-    }
-    .mock-balance-card::after {
-      content: ""; position: absolute; right: -40px; top: -40px;
-      width: 180px; height: 180px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
-    }
-    .mock-balance-label { font-size: 12px; color: var(--dim); margin-bottom: 0.35rem; }
-    .mock-balance-value { font-size: 2rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
-    .mock-actions {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0.625rem; margin-bottom: 1.25rem;
-    }
-    .mock-action {
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      padding: 0.875rem 0.5rem; border-radius: 12px;
-      background: var(--surface); border: 1px solid var(--border);
-    }
-    .mock-action-icon {
-      width: 34px; height: 34px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-action-icon svg { width: 16px; height: 16px; }
-    .mock-action-label { font-size: 10px; color: var(--dim); font-weight: 500; }
-    .mock-tx-title { font-size: 13px; font-weight: 700; margin-bottom: 0.875rem; }
-    .mock-tx {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.625rem 0; border-bottom: 1px solid rgba(26,29,50,0.4);
-    }
-    .mock-tx:last-child { border: none; }
-    .mock-tx-left { display: flex; align-items: center; gap: 0.625rem; }
-    .mock-tx-icon {
-      width: 30px; height: 30px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-tx-icon svg { width: 13px; height: 13px; }
-    .mock-tx-name { font-size: 12px; font-weight: 600; }
-    .mock-tx-info { font-size: 10px; color: var(--dim); }
-    .mock-tx-amount { font-size: 12px; font-weight: 700; }
-    .c-green { color: #22C55E; }
-    .c-red { color: #EF4444; }
-    .c-violet { color: var(--primary-light); }
-    .c-gold { color: var(--gold-light); }
+    /* SECTIONS */
+    .sec{padding:5rem 1.5rem}
+    .sec-hdr{text-align:center;margin-bottom:3.25rem}
+    .eyb{font-size:11px;font-weight:700;color:var(--pl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+    .sec-hdr h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.6rem}
+    .sec-hdr p{color:var(--mut);max-width:500px;margin:0 auto}
 
-    /* ─── SECURITY ─── */
-    .security-card {
-      max-width: 820px; margin: 0 auto;
-      padding: 3.5rem 2.5rem; border-radius: 20px; text-align: center;
-      background: linear-gradient(135deg, #0D0720 0%, #100D28 100%);
-      border: 1px solid rgba(124,58,237,0.18);
-      position: relative; overflow: hidden;
-    }
-    .security-card::before {
-      content: ""; position: absolute; right: -60px; top: -60px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
-    }
-    .security-card::after {
-      content: ""; position: absolute; left: -40px; bottom: -40px;
-      width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(217,119,6,0.05) 0%, transparent 70%);
-    }
-    .security-card > * { position: relative; }
-    .shield-icon {
-      width: 60px; height: 60px; border-radius: 18px; margin: 0 auto 1.5rem;
-      background: rgba(124,58,237,0.1);
-      border: 1px solid rgba(124,58,237,0.2);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .shield-icon svg { width: 28px; height: 28px; color: var(--primary-light); }
-    .security-card h2 { font-size: 1.625rem; font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
-    .security-card p { color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
-    .security-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.625rem; }
-    .security-pill {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.5rem 1rem; border-radius: 9999px;
-      background: rgba(124,58,237,0.08);
-      border: 1px solid rgba(124,58,237,0.15);
-      font-size: 12px; font-weight: 600; color: var(--primary-light);
-    }
-    .security-pill svg { width: 13px; height: 13px; }
+    /* FEATURES */
+    .feat-grid{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .feat{padding:1.75rem;border-radius:16px;background:var(--card);border:1px solid var(--bdr);transition:transform .2s,border-color .2s}
+    .feat:hover{transform:translateY(-2px);border-color:rgba(124,58,237,.22)}
+    .feat-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+    .feat-ico svg{width:19px;height:19px}
+    .feat h3{font-size:15px;font-weight:700;margin-bottom:.4rem}
+    .feat p{font-size:13px;color:var(--mut);line-height:1.65}
 
-    /* ─── TECH STACK ─── */
-    .tech-grid {
-      max-width: 700px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
-    }
-    @media (max-width: 600px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
-    .tech-item {
-      padding: 1.25rem; border-radius: 14px; text-align: center;
-      background: var(--card); border: 1px solid var(--border);
-    }
-    .tech-item .tech-name { font-size: 13px; font-weight: 700; margin-bottom: 0.25rem; }
-    .tech-item .tech-desc { font-size: 11px; color: var(--dim); }
+    /* PREVIEW */
+    .pw{max-width:920px;margin:0 auto;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--bdr);box-shadow:0 32px 80px rgba(0,0,0,.55)}
+    .pw-bar{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:var(--surf);border-bottom:1px solid var(--bdr)}
+    .pw-dots{display:flex;gap:6px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .pw-body{display:grid;grid-template-columns:56px 1fr;min-height:400px}
+    .pw-sb{background:#09090F;border-right:1px solid var(--bdr);display:flex;flex-direction:column;align-items:center;padding:1rem 0;gap:.5rem}
+    .pw-logo{width:32px;height:32px;border-radius:8px;background:rgba(124,58,237,.15);margin-bottom:.5rem;display:flex;align-items:center;justify-content:center}
+    .pw-logo svg{width:14px;height:14px;color:var(--pl)}
+    .pw-item{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--dim)}
+    .pw-item.on{background:rgba(124,58,237,.12);color:var(--pl)}
+    .pw-item svg{width:16px;height:16px}
+    .pw-main{padding:1.5rem;overflow:hidden}
+    .bal{padding:1.5rem;border-radius:16px;margin-bottom:1.25rem;background:linear-gradient(135deg,#0D0720,#120E2E 60%,#1A1040);border:1px solid rgba(124,58,237,.22);position:relative;overflow:hidden}
+    .bal::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 70%)}
+    .bal-l{font-size:12px;color:var(--dim);margin-bottom:.3rem}
+    .bal-v{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.03em}
+    .qs{display:grid;grid-template-columns:repeat(4,1fr);gap:.625rem;margin-bottom:1.25rem}
+    .q{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.875rem .5rem;border-radius:12px;background:var(--surf);border:1px solid var(--bdr)}
+    .q-i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+    .q-i svg{width:16px;height:16px}
+    .q-l{font-size:10px;color:var(--dim);font-weight:500}
+    .tx-hdr{font-size:13px;font-weight:700;margin-bottom:.875rem}
+    .tx{display:flex;align-items:center;justify-content:space-between;padding:.625rem 0;border-bottom:1px solid rgba(26,29,50,.4)}
+    .tx:last-child{border:none}
+    .tx-l{display:flex;align-items:center;gap:.625rem}
+    .tx-i{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+    .tx-i svg{width:13px;height:13px}
+    .tx-n{font-size:12px;font-weight:600}
+    .tx-d{font-size:10px;color:var(--dim)}
+    .tx-a{font-size:12px;font-weight:700}
+    .cg{color:#22C55E}.cr{color:#EF4444}.cv{color:var(--pl)}
 
-    /* ─── CTA ─── */
-    .cta { padding: 5rem 1.5rem; text-align: center; }
-    .cta h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; }
-    .cta p { color: var(--muted); margin-bottom: 2.5rem; max-width: 440px; margin-left: auto; margin-right: auto; }
-    .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    /* LOGIN CTA */
+    .login-cta{text-align:center;margin-top:2.5rem}
+    .login-cta p{font-size:14px;color:var(--mut);margin-bottom:1.25rem}
+    .login-box{display:inline-flex;align-items:center;gap:.875rem;padding:1rem 1.5rem;border-radius:18px;background:rgba(124,58,237,.07);border:1px solid var(--bdrp);flex-wrap:wrap;justify-content:center}
+    .login-box .lbl2{font-size:10px;font-weight:700;color:var(--pl);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem}
+    .login-box .creds2{font-size:12px;color:var(--mut)}
+    .login-box code{font-family:monospace;color:var(--txt);background:rgba(255,255,255,.05);padding:.1rem .35rem;border-radius:4px;font-size:12px}
+    .login-box .hint2{font-size:11px;color:var(--dim);margin-top:.3rem}
 
-    /* ─── FOOTER ─── */
-    .footer {
-      padding: 2rem 1.5rem; border-top: 1px solid var(--border);
-    }
-    .footer-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-copy { font-size: 12px; color: var(--dim); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 12px; color: var(--dim); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--muted); }
+    /* SECURITY */
+    .sec-card{max-width:820px;margin:0 auto;padding:3.5rem 2.5rem;border-radius:20px;text-align:center;background:linear-gradient(135deg,#0D0720,#100D28);border:1px solid var(--bdrp);position:relative;overflow:hidden}
+    .sec-card::before{content:"";position:absolute;right:-60px;top:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%)}
+    .sec-card>*{position:relative}
+    .sh-ico{width:58px;height:58px;border-radius:18px;margin:0 auto 1.5rem;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.22);display:flex;align-items:center;justify-content:center}
+    .sh-ico svg{width:26px;height:26px;color:var(--pl)}
+    .sec-card h2{font-size:1.625rem;font-weight:800;margin-bottom:.7rem;letter-spacing:-.02em}
+    .sec-card p{color:var(--mut);max-width:520px;margin:0 auto 2rem;line-height:1.7}
+    .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.625rem}
+    .pill{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:9999px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);font-size:12px;font-weight:600;color:var(--pl)}
+    .pill svg{width:13px;height:13px}
+
+    /* TECH */
+    .tech-grid{max-width:700px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+    .tech{padding:1.25rem;border-radius:14px;text-align:center;background:var(--card);border:1px solid var(--bdr)}
+    .tn{font-size:13px;font-weight:700;margin-bottom:.25rem}
+    .td{font-size:11px;color:var(--dim)}
+
+    /* CTA / FOOTER */
+    .cta{padding:5rem 1.5rem;text-align:center}
+    .cta h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;letter-spacing:-.02em}
+    .cta>p{color:var(--mut);margin-bottom:2.5rem;max-width:440px;margin-left:auto;margin-right:auto}
+    .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .foot{padding:2rem 1.5rem;border-top:1px solid var(--bdr)}
+    .foot-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .foot-copy{font-size:12px;color:var(--dim)}
+    .foot-links{display:flex;gap:1.5rem}
+    .foot-links a{font-size:12px;color:var(--dim);transition:color .2s}
+    .foot-links a:hover{color:var(--mut)}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){.feat-grid{grid-template-columns:1fr}.pw-body{grid-template-columns:1fr}.pw-sb{display:none}.qs{grid-template-columns:repeat(2,1fr)}.hide-sm{display:none}}
+    @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.tech-grid{grid-template-columns:repeat(2,1fr)}.hero-btns{flex-direction:column;align-items:center}.demo-card{flex-direction:column;text-align:center}}
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo">
-        <div class="logo-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-        </div>
-        <span class="logo-name"><span class="glory">Glory</span><span class="bank">Bank</span></span>
-      </div>
-      <nav class="nav">
-        <a href="#features" class="nav-link">Recursos</a>
-        <a href="#security" class="nav-link">Segurança</a>
-        <a href="#demo" class="nav-link">Demo</a>
-        <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="nav-btn">GitHub</a>
-      </nav>
-    </div>
-  </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-        Internet Banking 100% Seguro
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="logo">
+      <div class="logo-ico">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
       </div>
-      <h1>O banco digital que <span class="accent">liberta</span> suas finanças</h1>
-      <p class="hero-desc">PIX instantâneo, boletos, transferências e gestão financeira completa. Tudo em um só lugar, com segurança de nível bancário e integração Asaas.</p>
-      <div class="hero-btns">
-        <button class="btn-hero-primary" onclick="document.getElementById(&apos;demo&apos;).scrollIntoView({behavior:&apos;smooth&apos;})">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="8" height="8" x="3" y="3" rx="1"/><rect width="8" height="8" x="13" y="3" rx="1"/><rect width="8" height="8" x="3" y="13" rx="1"/><rect width="8" height="8" x="13" y="13" rx="1"/></svg>
-          Ver Dashboard
-        </button>
-        <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="btn-hero-outline">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          Ver no GitHub
-        </a>
-      </div>
+      <span class="logo-n">Glory<b>Bank</b></span>
     </div>
-  </section>
-
-  <!-- Stats -->
-  <div class="stats">
-    <div class="stat"><div class="stat-value">PIX</div><div class="stat-label">Instantâneo</div></div>
-    <div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Disponível</div></div>
-    <div class="stat"><div class="stat-value">0%</div><div class="stat-label">Taxa PIX</div></div>
-    <div class="stat"><div class="stat-value">AES-256</div><div class="stat-label">Criptografia</div></div>
+    <nav class="nav">
+      <a href="#features" class="hide-sm">Recursos</a>
+      <a href="#security" class="hide-sm">Segurança</a>
+      <a href="#demo-section" class="n-demo">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 3l14 9-14 9V3z"/></svg>
+        Ver Demo
+      </a>
+      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="n-gh">GitHub</a>
+    </nav>
   </div>
+</header>
 
-  <!-- Features -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <div class="eyebrow">Funcionalidades</div>
-      <h2>Tudo que você precisa em um banco digital</h2>
-      <p>Funcionalidades completas para gerenciar finanças pessoais e empresariais com segurança</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      Internet Banking 100% Seguro
     </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(124,58,237,0.1)">
-          <svg style="color:#A78BFA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg>
-        </div>
-        <h3>PIX Instantâneo</h3>
-        <p>Envie e receba pagamentos via PIX em segundos, sem taxas, com geração de QR Code e chaves PIX.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(59,130,246,0.1)">
-          <svg style="color:#60A5FA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
-        </div>
-        <h3>Transferências</h3>
-        <p>Realize transferências entre contas de forma rápida e segura, com confirmação em tempo real.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(168,85,247,0.1)">
-          <svg style="color:#C084FC" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
-        </div>
-        <h3>Boletos</h3>
-        <p>Gere boletos de cobrança com código de barras e acompanhe o status de pagamento automaticamente.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(239,68,68,0.1)">
-          <svg style="color:#F87171" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <h3>Segurança Total</h3>
-        <p>JWT HttpOnly, bcrypt, rate limiting, CORS e headers de proteção seguindo OWASP Top 10.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(245,158,11,0.1)">
-          <svg style="color:#FCD34D" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        </div>
-        <h3>Integração Asaas</h3>
-        <p>Sub-contas Asaas para cada usuário, com acesso completo à API de pagamentos brasileira.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(6,182,212,0.1)">
-          <svg style="color:#22D3EE" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/></svg>
-        </div>
-        <h3>Extrato em Tempo Real</h3>
-        <p>Histórico completo de transações com filtros por data, tipo e status, atualizado ao vivo.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dashboard Preview -->
-  <section id="demo" class="section" style="padding-top:0">
-    <div class="section-header">
-      <div class="eyebrow">Preview</div>
-      <h2>Dashboard Institucional</h2>
-      <p>Interface limpa e profissional para gerenciar suas finanças digitais</p>
-    </div>
-    <div class="preview-wrap">
-      <div class="preview-bar">
-        <div class="preview-dots">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
-        </div>
-        <span class="preview-url">glorybank.app/dashboard</span>
-        <div></div>
-      </div>
-      <div class="preview-body">
-        <!-- Mock Sidebar -->
-        <div class="mock-sidebar">
-          <div class="mock-sb-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-          </div>
-          <div class="mock-sb-item active">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-          </div>
-          <div class="mock-sb-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg>
-          </div>
-          <div class="mock-sb-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
-          </div>
-          <div class="mock-sb-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/></svg>
-          </div>
-        </div>
-        <!-- Mock Main Content -->
-        <div class="preview-main">
-          <div class="mock-balance-card">
-            <div class="mock-balance-label">Saldo disponível</div>
-            <div class="mock-balance-value">R$&nbsp;12.450,00</div>
-          </div>
-          <div class="mock-actions">
-            <div class="mock-action">
-              <div class="mock-action-icon" style="background:rgba(124,58,237,0.12)">
-                <svg style="color:#A78BFA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg>
-              </div>
-              <span class="mock-action-label">PIX</span>
-            </div>
-            <div class="mock-action">
-              <div class="mock-action-icon" style="background:rgba(59,130,246,0.1)">
-                <svg style="color:#60A5FA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/></svg>
-              </div>
-              <span class="mock-action-label">Transferir</span>
-            </div>
-            <div class="mock-action">
-              <div class="mock-action-icon" style="background:rgba(168,85,247,0.1)">
-                <svg style="color:#C084FC" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/></svg>
-              </div>
-              <span class="mock-action-label">Boleto</span>
-            </div>
-            <div class="mock-action">
-              <div class="mock-action-icon" style="background:rgba(245,158,11,0.1)">
-                <svg style="color:#FCD34D" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-              </div>
-              <span class="mock-action-label">Cobrar</span>
-            </div>
-          </div>
-          <div class="mock-tx-title">Transações Recentes</div>
-          <div class="mock-tx">
-            <div class="mock-tx-left">
-              <div class="mock-tx-icon" style="background:rgba(34,197,94,0.1)"><svg style="color:#22C55E" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></div>
-              <div><div class="mock-tx-name">PIX Recebido</div><div class="mock-tx-info">João Silva · Hoje</div></div>
-            </div>
-            <span class="mock-tx-amount c-green">+R$ 1.500,00</span>
-          </div>
-          <div class="mock-tx">
-            <div class="mock-tx-left">
-              <div class="mock-tx-icon" style="background:rgba(239,68,68,0.1)"><svg style="color:#F87171" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 5 7 7-7 7"/><path d="M5 12h14"/></svg></div>
-              <div><div class="mock-tx-name">PIX Enviado</div><div class="mock-tx-info">Maria Santos · Ontem</div></div>
-            </div>
-            <span class="mock-tx-amount c-red">-R$ 250,00</span>
-          </div>
-          <div class="mock-tx">
-            <div class="mock-tx-left">
-              <div class="mock-tx-icon" style="background:rgba(124,58,237,0.1)"><svg style="color:#A78BFA" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16h12a2 2 0 0 0 2-2V7Z"/></svg></div>
-              <div><div class="mock-tx-name">Boleto Gerado</div><div class="mock-tx-info">Energia Elétrica · 15/01</div></div>
-            </div>
-            <span class="mock-tx-amount c-violet">R$ 189,90</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Security -->
-  <section id="security" class="section">
-    <div class="security-card">
-      <div class="shield-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-      </div>
-      <h2>Segurança de Nível Bancário</h2>
-      <p>Construído com as melhores práticas de segurança do mercado financeiro. Seus dados e transações estão protegidos em todas as camadas.</p>
-      <div class="security-pills">
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>JWT HttpOnly</div>
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>bcrypt 12 rounds</div>
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93 19.07 19.07"/></svg>Rate Limiting</div>
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>OWASP Top 10</div>
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h4l5-5V2z"/></svg>Security Headers</div>
-        <div class="security-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Middleware Auth</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tech Stack -->
-  <section class="section" style="padding-top:1rem">
-    <div class="section-header">
-      <div class="eyebrow">Tecnologia</div>
-      <h2>Stack Moderna e Robusta</h2>
-      <p>Construído com as melhores ferramentas do ecossistema Node.js e React</p>
-    </div>
-    <div class="tech-grid">
-      <div class="tech-item"><div class="tech-name" style="color:#A78BFA">Next.js 16</div><div class="tech-desc">App Router · Turbopack</div></div>
-      <div class="tech-item"><div class="tech-name" style="color:#60A5FA">TypeScript 5</div><div class="tech-desc">Tipagem estática total</div></div>
-      <div class="tech-item"><div class="tech-name" style="color:#34D399">Prisma 6</div><div class="tech-desc">ORM + PostgreSQL</div></div>
-      <div class="tech-item"><div class="tech-name" style="color:#FCD34D">Asaas API</div><div class="tech-desc">Sub-contas bancárias</div></div>
-      <div class="tech-item"><div class="tech-name" style="color:#F87171">Zod + RHF</div><div class="tech-desc">Validação de formulários</div></div>
-      <div class="tech-item"><div class="tech-name" style="color:#C084FC">Tailwind v4</div><div class="tech-desc">Design system moderno</div></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Pronto para <span style="color:var(--gold-light)">começar</span>?</h2>
-    <p>Clone o repositório, configure suas variáveis de ambiente e tenha seu banco digital rodando em minutos.</p>
-    <div class="cta-buttons">
-      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="btn-hero-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.236-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    <h1>O banco digital que <span class="acc">liberta</span> suas finanças</h1>
+    <p class="hero-sub">PIX instantâneo, boletos, transferências e gestão financeira completa. Tudo em um só lugar, com segurança de nível bancário.</p>
+    <div class="hero-btns">
+      <button class="btn-cta" onclick="document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="8" height="8" x="3" y="3" rx="1"/><rect width="8" height="8" x="13" y="3" rx="1"/><rect width="8" height="8" x="3" y="13" rx="1"/><rect width="8" height="8" x="13" y="13" rx="1"/></svg>
+        Ver Dashboard
+      </button>
+      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="btn-out">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         Ver no GitHub
       </a>
-      <a href="https://github.com/jovemegidio/GloryBank#readme" target="_blank" rel="noopener" class="btn-hero-outline">
-        Documentação
-      </a>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="logo">
-        <div class="logo-icon" style="width:28px;height:28px;border-radius:8px;">
-          <svg style="width:13px;height:13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-        </div>
-        <span style="font-size:14px;font-weight:700">Glory<span style="color:var(--gold-light)">Bank</span></span>
+    <!-- DEMO CREDENTIALS CARD -->
+    <div class="demo-card">
+      <div class="dc-info">
+        <div class="lbl">&#x1F9EA; Acesso Demonstracao</div>
+        <div class="creds"><code>demo@glorybank.com</code>&nbsp;&middot;&nbsp;<code>Demo@123456</code></div>
+        <div class="hint">Execute localmente &rarr; <code>npm run dev</code> &rarr; localhost:3000/login</div>
       </div>
-      <div class="footer-copy">&copy; 2025 GloryBank. Todos os direitos reservados.</div>
-      <div class="footer-links">
-        <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/jovemegidio/GloryBank#readme" target="_blank" rel="noopener">Docs</a>
+      <button class="btn-run" onclick="document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">Ver Demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-v">PIX</div><div class="stat-l">Instantaneo</div></div>
+  <div class="stat"><div class="stat-v">24/7</div><div class="stat-l">Disponivel</div></div>
+  <div class="stat"><div class="stat-v">0%</div><div class="stat-l">Taxa PIX</div></div>
+  <div class="stat"><div class="stat-v">AES-256</div><div class="stat-l">Criptografia</div></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="sec">
+  <div class="sec-hdr">
+    <div class="eyb">Funcionalidades</div>
+    <h2>Tudo que voce precisa em um banco digital</h2>
+    <p>Funcionalidades completas para gerenciar financas pessoais e empresariais com seguranca</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(124,58,237,.1)"><svg style="color:#A78BFA" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg></div>
+      <h3>PIX Instantaneo</h3>
+      <p>Envie e receba pagamentos via PIX em segundos, sem taxas, com geracao de QR Code e gestao de chaves PIX.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(59,130,246,.1)"><svg style="color:#60A5FA" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg></div>
+      <h3>Transferencias</h3>
+      <p>Realize transferencias entre contas de forma rapida e segura, com confirmacao em tempo real.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(168,85,247,.1)"><svg style="color:#C084FC" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></div>
+      <h3>Boletos</h3>
+      <p>Gere boletos de cobranca com codigo de barras e acompanhe o status de pagamento automaticamente.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(239,68,68,.1)"><svg style="color:#F87171" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3>Seguranca Total</h3>
+      <p>JWT HttpOnly, bcrypt 12 rounds, rate limiting, CORS e headers de protecao seguindo OWASP Top 10.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(245,158,11,.1)"><svg style="color:#FCD34D" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+      <h3>Pagamentos Integrados</h3>
+      <p>API de pagamentos brasileira integrada, suportando PIX, boletos e transferencias com sub-contas por usuario.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ico" style="background:rgba(6,182,212,.1)"><svg style="color:#22D3EE" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/></svg></div>
+      <h3>Extrato em Tempo Real</h3>
+      <p>Historico completo de transacoes com filtros por data, tipo e status, atualizado ao vivo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD PREVIEW -->
+<section id="demo-section" class="sec" style="padding-top:0">
+  <div class="sec-hdr">
+    <div class="eyb">Preview</div>
+    <h2>Dashboard Institucional</h2>
+    <p>Interface limpa e profissional para gerenciar suas financas digitais</p>
+  </div>
+  <div class="pw">
+    <div class="pw-bar">
+      <div class="pw-dots">
+        <div class="dot" style="background:#ff5f57"></div>
+        <div class="dot" style="background:#febc2e"></div>
+        <div class="dot" style="background:#28c840"></div>
+      </div>
+      <span style="font-size:12px;color:var(--dim);font-family:monospace">glorybank.app/dashboard</span>
+      <div></div>
+    </div>
+    <div class="pw-body">
+      <div class="pw-sb">
+        <div class="pw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div>
+        <div class="pw-item on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div>
+        <div class="pw-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg></div>
+        <div class="pw-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg></div>
+        <div class="pw-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/></svg></div>
+      </div>
+      <div class="pw-main">
+        <div class="bal">
+          <div class="bal-l">Saldo disponivel</div>
+          <div class="bal-v">R$&nbsp;12.450,00</div>
+        </div>
+        <div class="qs">
+          <div class="q"><div class="q-i" style="background:rgba(124,58,237,.12)"><svg style="color:#A78BFA" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><rect width="5" height="5" x="16" y="16" rx="1"/></svg></div><span class="q-l">PIX</span></div>
+          <div class="q"><div class="q-i" style="background:rgba(59,130,246,.1)"><svg style="color:#60A5FA" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/></svg></div><span class="q-l">Transferir</span></div>
+          <div class="q"><div class="q-i" style="background:rgba(168,85,247,.1)"><svg style="color:#C084FC" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/></svg></div><span class="q-l">Boleto</span></div>
+          <div class="q"><div class="q-i" style="background:rgba(245,158,11,.1)"><svg style="color:#FCD34D" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg></div><span class="q-l">Cobrar</span></div>
+        </div>
+        <div class="tx-hdr">Transacoes Recentes</div>
+        <div class="tx">
+          <div class="tx-l">
+            <div class="tx-i" style="background:rgba(34,197,94,.1)"><svg class="cg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></div>
+            <div><div class="tx-n">Salario Outubro</div><div class="tx-d">Glory Tech &middot; Hoje</div></div>
+          </div>
+          <span class="tx-a cg">+R$ 8.500,00</span>
+        </div>
+        <div class="tx">
+          <div class="tx-l">
+            <div class="tx-i" style="background:rgba(239,68,68,.1)"><svg class="cr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 5 7 7-7 7"/><path d="M5 12h14"/></svg></div>
+            <div><div class="tx-n">PIX Enviado</div><div class="tx-d">Ana Souza &middot; Ontem</div></div>
+          </div>
+          <span class="tx-a cr">-R$ 1.200,00</span>
+        </div>
+        <div class="tx">
+          <div class="tx-l">
+            <div class="tx-i" style="background:rgba(124,58,237,.1)"><svg class="cv" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16h12a2 2 0 0 0 2-2V7Z"/></svg></div>
+            <div><div class="tx-n">Boleto Gerado</div><div class="tx-d">Enel SP &middot; 3 dias</div></div>
+          </div>
+          <span class="tx-a cv">R$ 189,90</span>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- LOGIN / DEMO CTA -->
+  <div class="login-cta">
+    <p>Quer explorar o dashboard completo?</p>
+    <div class="login-box">
+      <div>
+        <div class="lbl2">Credenciais de Demo</div>
+        <div class="creds2"><code>demo@glorybank.com</code>&nbsp;&middot;&nbsp;<code>Demo@123456</code></div>
+        <div class="hint2">Execute localmente &rarr; <code>npm run dev</code> &rarr; <code>localhost:3000/login</code></div>
+      </div>
+      <a href="https://github.com/jovemegidio/GloryBank#como-rodar-localmente" target="_blank" rel="noopener" class="btn-cta" style="font-size:13px;padding:.6rem 1.25rem;box-shadow:none">Como rodar &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="sec">
+  <div class="sec-card">
+    <div class="sh-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+    <h2>Seguranca de Nivel Bancario</h2>
+    <p>Construido com as melhores praticas de seguranca do mercado financeiro. Seus dados e transacoes estao protegidos em todas as camadas.</p>
+    <div class="pills">
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>JWT HttpOnly</div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>bcrypt 12 rounds</div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93 19.07 19.07"/></svg>Rate Limiting</div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>OWASP Top 10</div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h4l5-5V2z"/></svg>Security Headers</div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Middleware Auth</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="sec" style="padding-top:1rem">
+  <div class="sec-hdr">
+    <div class="eyb">Tecnologia</div>
+    <h2>Stack Moderna e Robusta</h2>
+    <p>Construido com as melhores ferramentas do ecossistema Node.js e React</p>
+  </div>
+  <div class="tech-grid">
+    <div class="tech"><div class="tn" style="color:#A78BFA">Next.js 16</div><div class="td">App Router &middot; Turbopack</div></div>
+    <div class="tech"><div class="tn" style="color:#60A5FA">TypeScript 5</div><div class="td">Tipagem estatica total</div></div>
+    <div class="tech"><div class="tn" style="color:#34D399">Prisma 6</div><div class="td">ORM + PostgreSQL</div></div>
+    <div class="tech"><div class="tn" style="color:#FCD34D">jose + bcrypt</div><div class="td">Auth seguro</div></div>
+    <div class="tech"><div class="tn" style="color:#F87171">Zod + RHF</div><div class="td">Validacao de formularios</div></div>
+    <div class="tech"><div class="tn" style="color:#C084FC">Tailwind v4</div><div class="td">Design system moderno</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Pronto para <span style="color:var(--gold)">comecar</span>?</h2>
+  <p>Clone o repositorio, configure suas variaveis de ambiente e tenha seu banco digital rodando em minutos.</p>
+  <div class="cta-btns">
+    <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener" class="btn-cta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.236-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      Ver no GitHub
+    </a>
+    <a href="https://github.com/jovemegidio/GloryBank#readme" target="_blank" rel="noopener" class="btn-out">Documentacao</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot-in">
+    <div class="logo">
+      <div class="logo-ico" style="width:28px;height:28px;border-radius:8px">
+        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+      </div>
+      <span style="font-size:14px;font-weight:700">Glory<b style="color:var(--gold)">Bank</b></span>
+    </div>
+    <div class="foot-copy">&copy; 2025 GloryBank. Todos os direitos reservados.</div>
+    <div class="foot-links">
+      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jovemegidio/GloryBank#readme" target="_blank" rel="noopener">Docs</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
