@@ -14,8 +14,10 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
   const [visible, setVisible] = useState(true);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl p-6" style={{ background: "linear-gradient(135deg, #0D0720 0%, #120E2E 50%, #1A1040 100%)", border: "1px solid rgba(124,58,237,0.2)" }}>
-      <div className="absolute right-0 top-0 h-48 w-48 translate-x-12 -translate-y-12 rounded-full" style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }} />
+    <div
+      className="relative overflow-hidden rounded-2xl p-6 fade-in-up"
+      style={{ background: "linear-gradient(135deg, #0D0720 0%, #120E2E 50%, #1A1040 100%)", border: "1px solid rgba(124,58,237,0.2)" }}
+    >      <div className="absolute right-0 top-0 h-48 w-48 translate-x-12 -translate-y-12 rounded-full" style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }} />
       <div className="absolute -left-8 bottom-0 h-32 w-32 translate-y-8 rounded-full" style={{ background: "radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%)" }} />
 
       <div className="relative">

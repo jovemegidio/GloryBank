@@ -26,7 +26,7 @@ const actions = [
     bg: "rgba(168,85,247,0.1)",
   },
   {
-    href: "/dashboard/pix",
+    href: "/dashboard/pix#cobrar",
     icon: Plus,
     label: "Cobrar",
     color: "text-amber-400",
@@ -41,7 +41,7 @@ export function QuickActions() {
         <Link
           key={action.label}
           href={action.href}
-          className="group flex flex-col items-center gap-2.5 rounded-2xl p-4 transition-all duration-200 hover:scale-[1.02]"
+          className="group flex flex-col items-center gap-2.5 rounded-2xl p-4 transition-all duration-200 hover:scale-[1.04] active:scale-[0.97]"
           style={{ background: "#141828", border: "1px solid rgba(30,35,56,0.8)" }}
         >
           <div

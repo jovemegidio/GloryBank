@@ -24,3 +24,64 @@ export function PageLoading() {
     </div>
   );
 }
+
+const pulse = "animate-pulse rounded-xl bg-white/[0.04]";
+
+export function SkeletonBalanceCard() {
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl p-6"
+      style={{
+        background: "linear-gradient(135deg,#0D0720 0%,#120E2E 50%,#1A1040 100%)",
+        border: "1px solid rgba(124,58,237,0.15)",
+      }}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2.5">
+          <div className={`${pulse} h-8 w-8`} />
+          <div className={`${pulse} h-3.5 w-28`} />
+        </div>
+        <div className={`${pulse} h-7 w-7`} />
+      </div>
+      <div className={`${pulse} h-9 w-48 mb-8`} />
+      <div className="flex gap-8">
+        <div className="flex items-center gap-3">
+          <div className={`${pulse} h-8 w-8`} />
+          <div className="space-y-1.5">
+            <div className={`${pulse} h-2.5 w-16`} />
+            <div className={`${pulse} h-3.5 w-20`} />
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className={`${pulse} h-8 w-8`} />
+          <div className="space-y-1.5">
+            <div className={`${pulse} h-2.5 w-16`} />
+            <div className={`${pulse} h-3.5 w-20`} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SkeletonTransactions() {
+  return (
+    <div className="space-y-1 p-4">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <div key={i} className="flex items-center justify-between rounded-xl px-3 py-3">
+          <div className="flex items-center gap-3">
+            <div className={`${pulse} h-9 w-9`} />
+            <div className="space-y-1.5">
+              <div className={`${pulse} h-3 w-28`} />
+              <div className={`${pulse} h-2.5 w-20`} />
+            </div>
+          </div>
+          <div className="text-right space-y-1.5">
+            <div className={`${pulse} h-3 w-20 ml-auto`} />
+            <div className={`${pulse} h-2.5 w-14 ml-auto`} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
