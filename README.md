@@ -80,11 +80,21 @@ ASAAS_API_KEY="$aact_..."
 ASAAS_API_URL="https://sandbox.asaas.com/api/v3"
 ```
 
-### 4. Crie as tabelas no banco
+### 4. Crie as tabelas e o usuário demo
 
 ```bash
 npx prisma db push
+npm run db:seed
 ```
+
+O seed cria automaticamente uma conta de demonstração:
+
+| Campo | Valor |
+|---|---|
+| Email | `demo@glorybank.com` |
+| Senha | `Demo@123456` |
+
+> A conta demo já aparece como botão **"Entrar como Demo"** na tela de login.
 
 ### 5. Inicie o servidor
 
