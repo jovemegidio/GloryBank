@@ -86,12 +86,12 @@ export default function ExtratoPage() {
           <div className="flex items-center gap-4">
             <Link
               href="/dashboard"
-              className="rounded-xl p-2 text-slate-500 hover:bg-white/[0.05]"
+              className="rounded-xl p-2 text-slate-500 hover:bg-black/[0.04]"
             >
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white">
+              <h1 className="text-2xl font-bold text-slate-800">
                 Extrato
               </h1>
               <p className="text-sm text-slate-500">

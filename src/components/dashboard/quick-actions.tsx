@@ -9,36 +9,36 @@ const actions = [
     icon: QrCode,
     label: "PIX",
     sublabel: "Instantâneo",
-    color: "text-violet-400",
-    bg: "rgba(124,58,237,0.12)",
-    borderColor: "rgba(124,58,237,0.15)",
+    color: "text-red-500",
+    bg: "rgba(227,6,19,0.08)",
+    borderColor: "rgba(227,6,19,0.12)",
   },
   {
     href: "/dashboard/transferir",
     icon: ArrowUpDown,
     label: "Transferir",
     sublabel: "TED / DOC",
-    color: "text-blue-400",
-    bg: "rgba(59,130,246,0.1)",
-    borderColor: "rgba(59,130,246,0.12)",
+    color: "text-blue-500",
+    bg: "rgba(59,130,246,0.08)",
+    borderColor: "rgba(59,130,246,0.1)",
   },
   {
     href: "/dashboard/boleto",
     icon: FileText,
     label: "Boleto",
     sublabel: "Gerar cobrança",
-    color: "text-purple-400",
-    bg: "rgba(168,85,247,0.1)",
-    borderColor: "rgba(168,85,247,0.12)",
+    color: "text-purple-500",
+    bg: "rgba(168,85,247,0.08)",
+    borderColor: "rgba(168,85,247,0.1)",
   },
   {
     href: "/dashboard/pix#cobrar",
     icon: Plus,
     label: "Cobrar",
     sublabel: "QR Code",
-    color: "text-amber-400",
-    bg: "rgba(245,158,11,0.1)",
-    borderColor: "rgba(245,158,11,0.12)",
+    color: "text-amber-500",
+    bg: "rgba(245,158,11,0.08)",
+    borderColor: "rgba(245,158,11,0.1)",
   },
 ];
 
@@ -51,8 +51,9 @@ export function QuickActions() {
           href={action.href}
           className="group flex flex-col items-center gap-2.5 rounded-2xl p-4 sm:p-4 transition-all duration-150 hover:scale-[1.03] active:scale-[0.97]"
           style={{
-            background: "#111628",
+            background: "#ffffff",
             border: `1px solid ${action.borderColor}`,
+            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
           }}
         >
           <div
@@ -62,10 +63,10 @@ export function QuickActions() {
             <action.icon className="h-5 w-5" />
           </div>
           <div className="text-center">
-            <p className="text-[13px] font-semibold text-slate-200 group-hover:text-white transition-colors">
+            <p className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">
               {action.label}
             </p>
-            <p className="text-[10px] text-slate-600 mt-0.5">{action.sublabel}</p>
+            <p className="text-[10px] text-slate-400 mt-0.5">{action.sublabel}</p>
           </div>
         </Link>
       ))}

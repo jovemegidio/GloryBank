@@ -15,7 +15,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-[13px] font-medium text-slate-300 mb-1.5"
+            className="block text-[13px] font-medium text-slate-600 mb-1.5"
           >
             {label}
           </label>
@@ -23,10 +23,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={selectId}
-          className={`w-full rounded-xl border border-[#1A1D32] px-4 py-2.5 text-sm text-slate-100 transition-all duration-200 focus:border-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20 disabled:opacity-50 ${
+          className={`w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-slate-800 transition-all duration-200 focus:border-red-500/50 focus:outline-none focus:ring-2 focus:ring-red-500/20 disabled:opacity-50 ${
             error ? "border-red-500/50 focus:border-red-500 focus:ring-red-500/20" : ""
           } ${className}`}
-          style={{ background: "rgba(12,15,26,0.8)" }}
+          style={{ background: "#ffffff" }}
           {...props}
         >
           {options.map((opt) => (

@@ -8,7 +8,7 @@ export function Loading({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`${sizeClasses[size]} animate-spin rounded-full border-violet-500 border-t-transparent`}
+        className={`${sizeClasses[size]} animate-spin rounded-full border-red-500 border-t-transparent`}
       />
     </div>
   );
@@ -25,15 +25,15 @@ export function PageLoading() {
   );
 }
 
-const pulse = "animate-pulse rounded-xl bg-white/[0.04]";
+const pulse = "animate-pulse rounded-xl bg-black/[0.04]";
 
 export function SkeletonBalanceCard() {
   return (
     <div
       className="relative overflow-hidden rounded-2xl p-6"
       style={{
-        background: "linear-gradient(135deg,#0D0720 0%,#120E2E 50%,#1A1040 100%)",
-        border: "1px solid rgba(124,58,237,0.15)",
+        background: "linear-gradient(135deg,#fff5f5 0%,#fee2e2 50%,#fecaca 100%)",
+        border: "1px solid rgba(227,6,19,0.1)",
       }}
     >
       <div className="flex items-center justify-between mb-6">

@@ -16,8 +16,8 @@ export function Card({
   return (
     <div
       onClick={onClick}
-      className={`rounded-2xl overflow-hidden ${noPadding ? "" : "p-6"} ${hover ? "cursor-pointer transition-all duration-150 hover:border-violet-500/30" : ""} ${onClick ? "cursor-pointer" : ""} ${className}`}
-      style={{ background: "#111628", border: "1px solid rgba(26,30,52,0.9)" }}
+      className={`rounded-2xl overflow-hidden ${noPadding ? "" : "p-6"} ${hover ? "cursor-pointer transition-all duration-150 hover:border-red-500/30" : ""} ${onClick ? "cursor-pointer" : ""} ${className}`}
+      style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
     >
       {children}
     </div>
@@ -42,7 +42,7 @@ export function CardTitle({
   className?: string;
 }) {
   return (
-    <h3 className={`text-[15px] font-semibold text-slate-100 ${className}`}>
+    <h3 className={`text-[15px] font-semibold text-slate-800 ${className}`}>
       {children}
     </h3>
   );

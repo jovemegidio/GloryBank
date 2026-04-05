@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "GloryBank — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança AES-256.",
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
-  themeColor: "#0c0f1a",
+  themeColor: "#e30613",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   manifest: undefined,
   robots: { index: false, follow: false },
@@ -36,7 +36,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0c0f1a] text-slate-100">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#f5f6f8] text-slate-800">{children}</body>
     </html>
   );
 }

@@ -132,12 +132,12 @@ export default function PixPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/dashboard"
-            className="rounded-xl p-2 text-slate-500 hover:bg-white/[0.05]"
+            className="rounded-xl p-2 text-slate-500 hover:bg-black/[0.04]"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-slate-800">
               PIX
             </h1>
             <p className="text-sm text-slate-500">
@@ -207,11 +207,11 @@ export default function PixPage() {
               className="cursor-pointer"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-900/30">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100">
                   <QrCode className="h-6 w-6 text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">
+                  <h3 className="font-semibold text-slate-800">
                     Gerar QR Code
                   </h3>
                   <p className="text-sm text-slate-500">
@@ -227,11 +227,11 @@ export default function PixPage() {
               className="cursor-pointer"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-900/30">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100">
                   <Key className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">
+                  <h3 className="font-semibold text-slate-800">
                     Criar Chave Aleatória
                   </h3>
                   <p className="text-sm text-slate-500">
@@ -251,7 +251,7 @@ export default function PixPage() {
         >
           {pendingData && (
             <div className="space-y-4">
-              <div className="rounded-xl p-4" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="rounded-xl p-4" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-sm text-slate-500">Chave PIX</span>
@@ -313,7 +313,7 @@ export default function PixPage() {
                   className="h-64 w-64 rounded-xl"
                 />
               </div>
-              <div className="rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <p className="text-xs text-slate-500 mb-1">Copia e Cola</p>
                 <p className="break-all text-xs font-mono">
                   {qrCodeData.payload}

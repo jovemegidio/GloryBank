@@ -61,19 +61,19 @@ export default function LoginPage() {
           <div
             className="flex h-10 w-10 items-center justify-center rounded-xl"
             style={{
-              background: "linear-gradient(135deg, #5B21B6, #7C3AED)",
-              boxShadow: "0 4px 16px rgba(124,58,237,0.3)",
+              background: "linear-gradient(135deg, #e30613, #ff4d4d)",
+              boxShadow: "0 4px 16px rgba(227,6,19,0.3)",
             }}
           >
             <Landmark className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
-          <span className="text-xl font-bold text-white">
-            Glory<span className="text-amber-400">Bank</span>
+          <span className="text-xl font-bold text-slate-800">
+            Glory<span className="text-red-500">Bank</span>
           </span>
         </div>
 
         <div className="mb-7">
-          <h2 className="text-[1.6rem] font-bold tracking-tight text-white">
+          <h2 className="text-[1.6rem] font-bold tracking-tight text-slate-800">
             Acesse sua conta
           </h2>
           <p className="mt-1.5 text-[13px] text-slate-500">
@@ -85,22 +85,22 @@ export default function LoginPage() {
         <div
           className="mb-6 rounded-xl p-4"
           style={{
-            background: "rgba(124,58,237,0.06)",
-            border: "1px solid rgba(124,58,237,0.18)",
+            background: "rgba(227,6,19,0.04)",
+            border: "1px solid rgba(227,6,19,0.12)",
           }}
         >
-          <p className="mb-2.5 text-[10px] font-bold uppercase tracking-widest text-violet-400">
+          <p className="mb-2.5 text-[10px] font-bold uppercase tracking-widest text-red-500">
             Conta de Demonstração
           </p>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="space-y-1">
-              <p className="text-[12px] text-slate-400">
-                <span className="text-slate-500">Login: </span>
-                <span className="font-mono font-medium text-slate-200">demo@glorybank.com</span>
+              <p className="text-[12px] text-slate-500">
+                <span className="text-slate-400">Login: </span>
+                <span className="font-mono font-medium text-slate-700">demo@glorybank.com</span>
               </p>
-              <p className="text-[12px] text-slate-400">
-                <span className="text-slate-500">Senha: </span>
-                <span className="font-mono font-medium text-slate-200">Demo@123456</span>
+              <p className="text-[12px] text-slate-500">
+                <span className="text-slate-400">Senha: </span>
+                <span className="font-mono font-medium text-slate-700">Demo@123456</span>
               </p>
             </div>
             <button
@@ -108,7 +108,7 @@ export default function LoginPage() {
               onClick={loginAsDemo}
               disabled={isLoading}
               className="shrink-0 rounded-lg px-4 py-2 text-[12px] font-semibold text-white transition-all hover:opacity-85 disabled:opacity-50 active:scale-95"
-              style={{ background: "linear-gradient(135deg, #5B21B6, #7C3AED)" }}
+              style={{ background: "linear-gradient(135deg, #e30613, #ff4d4d)" }}
             >
               Entrar como Demo
             </button>
@@ -150,7 +150,7 @@ export default function LoginPage() {
           Ainda não tem conta?{" "}
           <Link
             href="/register"
-            className="font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+            className="font-semibold text-red-500 hover:text-red-600 transition-colors"
           >
             Criar conta grátis
           </Link>

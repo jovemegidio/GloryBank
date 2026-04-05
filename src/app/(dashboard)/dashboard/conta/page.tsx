@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -74,16 +74,16 @@ export default function ContaPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/dashboard"
-            className="rounded-xl p-2 text-slate-500 hover:bg-white/[0.05]"
+            className="rounded-xl p-2 text-slate-500 hover:bg-black/[0.04]"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-slate-800">
               Minha Conta
             </h1>
             <p className="text-sm text-slate-500">
-              Gerencie suas informações e segurança
+              Gerencie suas informaÃ§Ãµes e seguranÃ§a
             </p>
           </div>
         </div>
@@ -99,7 +99,7 @@ export default function ContaPage() {
             </CardHeader>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <User className="h-4 w-4 text-slate-500" />
                 <div>
                   <p className="text-xs text-slate-500">Nome</p>
@@ -107,7 +107,7 @@ export default function ContaPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <Mail className="h-4 w-4 text-slate-500" />
                 <div>
                   <p className="text-xs text-slate-500">Email</p>
@@ -115,7 +115,7 @@ export default function ContaPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <CreditCard className="h-4 w-4 text-slate-500" />
                 <div>
                   <p className="text-xs text-slate-500">CPF/CNPJ</p>
@@ -127,7 +127,7 @@ export default function ContaPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="flex items-center gap-3 rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <Phone className="h-4 w-4 text-slate-500" />
                 <div>
                   <p className="text-xs text-slate-500">Telefone</p>
@@ -145,16 +145,16 @@ export default function ContaPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-400" />
-                  Segurança
+                  SeguranÃ§a
                 </CardTitle>
               </CardHeader>
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+                <div className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                   <div>
                     <p className="text-sm font-medium">Status da Conta</p>
                     <p className="text-xs text-slate-500">
-                      Conta bancária digital
+                      Conta bancÃ¡ria digital
                     </p>
                   </div>
                   <Badge variant="success">
@@ -162,11 +162,11 @@ export default function ContaPage() {
                   </Badge>
                 </div>
 
-                <div className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+                <div className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                   <div>
-                    <p className="text-sm font-medium">Verificação</p>
+                    <p className="text-sm font-medium">VerificaÃ§Ã£o</p>
                     <p className="text-xs text-slate-500">
-                      Verificação de identidade
+                      VerificaÃ§Ã£o de identidade
                     </p>
                   </div>
                   <Badge
@@ -193,7 +193,7 @@ export default function ContaPage() {
                     <div
                       key={key.id}
                       className="flex items-center justify-between rounded-xl p-3"
-                      style={{ background: "rgba(12,15,26,0.5)" }}
+                      style={{ background: "rgba(0,0,0,0.03)" }}
                     >
                       <div>
                         <p className="text-xs text-slate-500">{key.type}</p>
@@ -236,7 +236,7 @@ export default function ContaPage() {
                       }
                     }}
                   >
-                    Criar chave aleatória
+                    Criar chave aleatÃ³ria
                   </Button>
                 </div>
               )}

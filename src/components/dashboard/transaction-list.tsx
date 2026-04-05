@@ -51,12 +51,12 @@ export function TransactionList({ transactions }: TransactionListProps) {
       <div className="flex flex-col items-center justify-center py-14 text-center">
         <div
           className="mb-3 rounded-full p-4"
-          style={{ background: "rgba(30,35,56,0.4)" }}
+          style={{ background: "rgba(0,0,0,0.03)" }}
         >
-          <FileText className="h-6 w-6 text-slate-600" />
+          <FileText className="h-6 w-6 text-slate-400" />
         </div>
         <p className="text-[13px] font-medium text-slate-500">Nenhuma transação encontrada</p>
-        <p className="mt-1 text-[11px] text-slate-600">
+        <p className="mt-1 text-[11px] text-slate-400">
           Suas movimentações aparecerão aqui
         </p>
       </div>
@@ -64,7 +64,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
   }
 
   return (
-    <div className="divide-y" style={{ borderColor: "rgba(30,35,56,0.4)" }}>
+    <div className="divide-y" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
       {transactions.map((tx) => {
         const config = typeConfig[tx.type] ?? typeConfig.DEPOSIT;
         const status = statusConfig[tx.status] ?? statusConfig.PENDING;
@@ -77,7 +77,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
         return (
           <div
             key={tx.id}
-            className="group flex items-center gap-3 px-4 py-3.5 sm:px-6 transition-colors hover:bg-white/[0.02]"
+            className="group flex items-center gap-3 px-4 py-3.5 sm:px-6 transition-colors hover:bg-black/[0.02]"
           >
             {/* Icon */}
             <div
@@ -89,17 +89,17 @@ export function TransactionList({ transactions }: TransactionListProps) {
 
             {/* Description */}
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-medium text-slate-200 truncate">
+              <p className="text-[13px] font-medium text-slate-700 truncate">
                 {config.label}
               </p>
-              <p className="text-[11px] text-slate-500 truncate">
+              <p className="text-[11px] text-slate-400 truncate">
                 {tx.recipientName ?? tx.description ?? formatDate(tx.date)}
               </p>
             </div>
 
             {/* Date — hidden on very small screens */}
             <div className="hidden sm:block text-right shrink-0">
-              <p className="text-[11px] text-slate-600">{formatDate(tx.date)}</p>
+              <p className="text-[11px] text-slate-400">{formatDate(tx.date)}</p>
               <Badge variant={status.variant} size="sm">
                 {status.label}
               </Badge>

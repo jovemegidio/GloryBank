@@ -9,13 +9,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants = {
   primary:
-    "bg-violet-700 text-white hover:bg-violet-600 focus:ring-violet-500/40 shadow-lg shadow-violet-700/25",
+    "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/40 shadow-lg shadow-red-600/20",
   secondary:
-    "bg-slate-700 text-white hover:bg-slate-600 focus:ring-slate-500/40",
+    "bg-slate-100 text-slate-700 hover:bg-slate-200 focus:ring-slate-400/40",
   outline:
-    "border border-violet-500/30 text-violet-400 hover:bg-violet-500/10 focus:ring-violet-500/40",
+    "border border-red-500/30 text-red-600 hover:bg-red-500/10 focus:ring-red-500/40",
   ghost:
-    "text-slate-400 hover:bg-white/[0.05] hover:text-slate-200 focus:ring-slate-500/40",
+    "text-slate-500 hover:bg-black/[0.04] hover:text-slate-700 focus:ring-slate-400/40",
   danger:
     "bg-red-600 text-white hover:bg-red-500 focus:ring-red-500/40 shadow-lg shadow-red-600/20",
 };

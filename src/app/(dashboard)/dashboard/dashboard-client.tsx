@@ -64,7 +64,7 @@ export function DashboardClient({ userName }: DashboardClientProps) {
       <div className="space-y-6 fade-in-up">
         {/* Welcome */}
         <div className="fade-in-up">
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-slate-800">
             Bem-vindo, {userName.split(" ")[0]}!
           </h1>
           <p className="text-sm text-slate-500">
@@ -87,7 +87,7 @@ export function DashboardClient({ userName }: DashboardClientProps) {
 
         {/* Quick Actions — static, renders immediately */}
         <div className="fade-in-up-delay-2">
-          <h2 className="mb-3 text-[15px] font-semibold text-slate-200">
+          <h2 className="mb-3 text-[15px] font-semibold text-slate-700">
             Ações Rápidas
           </h2>
           <QuickActions />

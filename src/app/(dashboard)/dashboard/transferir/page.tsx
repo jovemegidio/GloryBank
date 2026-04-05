@@ -81,12 +81,12 @@ export default function TransferPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/dashboard"
-            className="rounded-xl p-2 text-slate-500 hover:bg-white/[0.05]"
+            className="rounded-xl p-2 text-slate-500 hover:bg-black/[0.04]"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-slate-800">
               Transferir
             </h1>
             <p className="text-sm text-slate-500">
@@ -156,7 +156,7 @@ export default function TransferPage() {
         >
           {pendingData && (
             <div className="space-y-4">
-              <div className="rounded-xl p-4" style={{ background: "rgba(12,15,26,0.5)" }}>
+              <div className="rounded-xl p-4" style={{ background: "rgba(0,0,0,0.03)" }}>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-sm text-slate-500">Chave PIX</span>

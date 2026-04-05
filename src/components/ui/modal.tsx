@@ -51,16 +51,16 @@ export function Modal({
       />
       <div
         className={`relative w-full ${sizeClasses[size]} mx-4 rounded-2xl p-6 shadow-2xl`}
-        style={{ background: "#141828", border: "1px solid rgba(30,35,56,0.8)" }}
+        style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 25px 50px rgba(0,0,0,0.15)" }}
       >
         {title && (
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-100">
+            <h2 className="text-lg font-semibold text-slate-800">
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 text-slate-500 transition-colors hover:bg-white/[0.05] hover:text-slate-300"
+              className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-black/[0.04] hover:text-slate-600"
             >
               <X className="h-5 w-5" />
             </button>

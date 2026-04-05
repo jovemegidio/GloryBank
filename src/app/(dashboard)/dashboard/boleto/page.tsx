@@ -68,12 +68,12 @@ export default function BoletoPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/dashboard"
-            className="rounded-xl p-2 text-slate-500 hover:bg-white/[0.05]"
+            className="rounded-xl p-2 text-slate-500 hover:bg-black/[0.04]"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-slate-800">
               Boleto
             </h1>
             <p className="text-sm text-slate-500">
@@ -144,7 +144,7 @@ export default function BoletoPage() {
           ) : (
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-violet-400">
+                <CardTitle className="flex items-center gap-2 text-red-500">
                   <FileText className="h-5 w-5" />
                   Boleto Gerado!
                 </CardTitle>
@@ -152,13 +152,13 @@ export default function BoletoPage() {
 
               <div className="space-y-4">
                 <div className="rounded-xl p-4" style={{ background: "rgba(16,185,129,0.08)" }}>
-                  <p className="text-center text-2xl font-bold text-violet-400">
+                  <p className="text-center text-2xl font-bold text-red-500">
                     {formatCurrency(boletoResult.value)}
                   </p>
                 </div>
 
                 {boletoResult.barCode && (
-                  <div className="rounded-xl p-3" style={{ background: "rgba(12,15,26,0.5)" }}>
+                  <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                     <p className="text-xs text-slate-500 mb-1">Código de barras</p>
                     <div className="flex items-center gap-2">
                       <p className="flex-1 break-all text-xs font-mono">
@@ -169,7 +169,7 @@ export default function BoletoPage() {
                           navigator.clipboard.writeText(boletoResult.barCode);
                           toast.success("Código copiado!");
                         }}
-                        className="rounded-lg p-1.5 text-slate-500 hover:bg-white/[0.05]"
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-black/[0.04]"
                       >
                         <Copy className="h-4 w-4" />
                       </button>
@@ -183,7 +183,7 @@ export default function BoletoPage() {
                       href={boletoResult.bankSlipUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-violet-700 py-2.5 text-sm font-medium text-white transition hover:bg-violet-600"
+                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-red-600 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
                     >
                       <ExternalLink className="h-4 w-4" />
                       Ver Boleto

@@ -17,7 +17,7 @@ export function DashboardShell({ children, userName, userEmail }: DashboardShell
   const closeSidebar = useCallback(() => setMobileSidebarOpen(false), []);
 
   return (
-    <div className="flex min-h-screen" style={{ background: "#0c0f1a" }}>
+    <div className="flex min-h-screen" style={{ background: "#f5f6f8" }}>
       {/* Mobile overlay backdrop */}
       {mobileSidebarOpen && (
         <div
