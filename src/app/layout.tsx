@@ -22,8 +22,13 @@ export const metadata: Metadata = {
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
   themeColor: "#e30613",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  manifest: undefined,
+  manifest: "/manifest.json",
   robots: { index: false, follow: false },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "GloryBank",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +41,14 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f5f6f8] text-slate-800">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#f5f6f8] text-slate-800">
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js')})}`,
+          }}
+        />
+      </body>
     </html>
   );
 }

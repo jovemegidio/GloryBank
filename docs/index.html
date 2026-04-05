@@ -1285,10 +1285,171 @@
 
     @media (max-width: 1120px) {
       .access-panel { grid-template-columns: 1fr; }
+      .download-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
       .access-card { padding: 24px; }
+      .download-card { padding: 24px; }
+    }
+
+    /* ─── DOWNLOAD APP ─── */
+    .download-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #161616 0%, #1c1c1c 100%);
+    }
+
+    .download-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .download-copy {
+      color: white;
+    }
+
+    .download-copy .eyebrow-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .download-copy h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      margin-bottom: 14px;
+    }
+
+    .download-copy > p {
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .download-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .download-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .download-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .download-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+    }
+
+    .download-card-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .download-card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+    }
+
+    .download-card-subtitle {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    .download-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .download-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .download-card-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .download-card-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .download-platforms {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .platform-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .platform-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     @media (max-width: 1120px) {
@@ -1474,6 +1635,7 @@
           <a href="#contas">Conta digital</a>
           <a href="#cartoes">Cartões</a>
           <a href="#seguranca">Segurança</a>
+          <a href="#download">Baixar app</a>
           <a href="#acesso">Acesso ao IB</a>
         </div>
         <div class="topbar-links">
@@ -1500,11 +1662,13 @@
           <a href="#beneficios">Benefícios</a>
           <a href="#app">App</a>
           <a href="#seguranca">Segurança</a>
+          <a href="#download">Download</a>
           <a href="#acesso">Acesso</a>
         </nav>
 
         <div class="header-actions">
           <a class="pill" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill" href="#download">Baixar app</a>
           <a class="pill pill-primary" href="#acesso">Acessar conta</a>
         </div>
       </div>
@@ -1845,8 +2009,65 @@
                   <div><span>Senha</span><strong>Demo@123456</strong></div>
                 </div>
               </div>
-              <a class="access-btn" href="/login">Entrar na conta</a>
-              <p class="access-register">Não tem conta? <a href="/register">Criar conta grátis</a></p>
+              <a class="access-btn" href="#" onclick="goToApp('/login'); return false;">Entrar na conta</a>
+              <p class="access-register">Não tem conta? <a href="#" onclick="goToApp('/register'); return false;">Criar conta grátis</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Baixe o GloryBank -->
+      <section class="section download-section" id="download">
+        <div class="section-inner">
+          <div class="download-grid">
+            <div class="download-copy">
+              <span class="eyebrow-label">Baixe o GloryBank</span>
+              <h2>Instale o aplicativo no seu computador ou celular.</h2>
+              <p>Assim como grandes bancos oferecem seus módulos de segurança e apps desktop, o GloryBank pode ser instalado direto no seu dispositivo para acesso rápido e seguro.</p>
+              <div class="download-platforms">
+                <span class="platform-badge"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Windows</span>
+                <span class="platform-badge"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>macOS</span>
+                <span class="platform-badge"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Linux</span>
+                <span class="platform-badge"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>Android</span>
+                <span class="platform-badge"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>iOS</span>
+              </div>
+            </div>
+            <div class="download-cards">
+              <!-- Internet Banking Desktop -->
+              <div class="download-card">
+                <div class="download-card-header">
+                  <div class="download-card-icon" style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: white;">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                  </div>
+                  <div>
+                    <div class="download-card-title">GloryBank Desktop</div>
+                    <div class="download-card-subtitle">Internet Banking para computador</div>
+                  </div>
+                </div>
+                <p>Instale o Internet Banking do GloryBank no seu computador. Acesse com um clique direto do desktop, sem precisar de navegador — semelhante ao módulo de segurança de grandes bancos.</p>
+                <a class="download-card-btn" id="installDesktopBtn" href="#" style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: white; box-shadow: 0 8px 24px rgba(227,6,19,0.2);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Instalar GloryBank Desktop
+                </a>
+              </div>
+
+              <!-- App Mobile -->
+              <div class="download-card">
+                <div class="download-card-header">
+                  <div class="download-card-icon" style="background: rgba(34,197,94,0.15); color: #22C55E;">
+                    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                  </div>
+                  <div>
+                    <div class="download-card-title">GloryBank Mobile</div>
+                    <div class="download-card-subtitle">App para celular e tablet</div>
+                  </div>
+                </div>
+                <p>Adicione o GloryBank à tela inicial do seu celular. O app funciona como nativo — acesso rápido ao saldo, PIX, transferências e extrato direto do bolso.</p>
+                <a class="download-card-btn" id="installMobileBtn" href="#" style="background: rgba(34,197,94,0.15); color: #22C55E;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Adicionar à tela inicial
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1861,7 +2082,7 @@
             </div>
             <div class="cta-actions">
               <a class="cta-secondary" href="#topo">Voltar ao topo</a>
-              <a class="cta-primary" href="/login">Acessar Internet Banking</a>
+              <a class="cta-primary" href="#" onclick="goToApp('/login'); return false;">Acessar Internet Banking</a>
             </div>
           </div>
         </div>
@@ -1884,6 +2105,7 @@
           <div class="footer-links">
             <a href="#contas">Conta digital</a>
             <a href="#beneficios">Benefícios</a>
+            <a href="#download">Baixar app</a>
             <a href="#acesso">Acessar conta</a>
             <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
           </div>
@@ -1896,5 +2118,59 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    // ─── APP URL RESOLUTION ───
+    // Detects if running on same origin as the Next.js app or on GitHub Pages
+    function goToApp(path) {
+      // If we're on the same origin as the Next.js app, use relative paths
+      // If on GitHub Pages, redirect to the configured app URL
+      var appUrl = window.GLORYBANK_APP_URL || window.location.origin;
+      window.location.href = appUrl + path;
+    }
+
+    // ─── PWA INSTALL PROMPT ───
+    var deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      // Update button text to show it's available
+      var desktopBtn = document.getElementById('installDesktopBtn');
+      if (desktopBtn) {
+        desktopBtn.style.boxShadow = '0 8px 24px rgba(227,6,19,0.3), 0 0 0 2px rgba(227,6,19,0.4)';
+      }
+    });
+
+    document.getElementById('installDesktopBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(result) {
+          if (result.outcome === 'accepted') {
+            this.textContent = '✓ Instalado com sucesso!';
+          }
+          deferredPrompt = null;
+        }.bind(this));
+      } else {
+        // If no install prompt available, open the app so user can install from there
+        goToApp('/login');
+      }
+    });
+
+    document.getElementById('installMobileBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      // On mobile, try the install prompt or guide user
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(result) {
+          deferredPrompt = null;
+        });
+      } else {
+        // Guide: open the app - browser will show add to homescreen
+        goToApp('/login');
+      }
+    });
+  </script>
 </body>
 </html>
