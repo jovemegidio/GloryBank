@@ -5,7 +5,16 @@ import { successResponse, errorResponse } from "@/lib/api-response";
 import { DEMO_USER_ID, DEMO_CARD_REQUESTS } from "@/lib/demo";
 
 // In-memory demo store
-let demoCards = [...DEMO_CARD_REQUESTS];
+let demoCards: Array<{
+  id: string;
+  cardType: string;
+  status: string;
+  lastFour: string;
+  brand: string;
+  cardName: string;
+  requestedAt: string;
+  approvedAt: string | null;
+}> = [...DEMO_CARD_REQUESTS];
 
 export async function GET() {
   try {
