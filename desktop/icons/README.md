@@ -1,9 +1,29 @@
-This directory should contain the app icons:
-- icon.png (512x512 or 1024x1024 PNG for all platforms)
-- icon.ico (Windows, multi-size .ico)
-- icon.icns (macOS)
+# Ícones do GloryBank Desktop
 
-You can generate these from the SVG in public/icons/icon-512x512.svg using tools like:
-- electron-icon-builder
-- https://www.electron.build/icons
-- ImageMagick: convert icon.png -resize 256x256 icon.ico
+Gere os ícones a partir do SVG do projeto:
+
+```bash
+cd desktop
+npm run generate-icons
+```
+
+Ou manualmente usando o SVG em `public/icons/icon-512.svg`:
+
+```bash
+# Instalar dependência
+npm install -g png-to-ico sharp-cli
+
+# PNG 512x512
+npx sharp -i ../public/icons/icon-512.svg -o icons/icon.png resize 512 512
+
+# ICO para Windows (multi-size)
+npx png-to-ico icons/icon.png > icons/icon.ico
+
+# ICNS para macOS
+# Use: https://cloudconvert.com/png-to-icns
+```
+
+Formatos necessários:
+- `icon.png` — 512×512 PNG (Linux e fallback)
+- `icon.ico` — Multi-size ICO (Windows)
+- `icon.icns` — ICNS (macOS)

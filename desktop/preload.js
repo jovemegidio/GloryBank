@@ -8,9 +8,15 @@ contextBridge.exposeInMainWorld("glorybank", {
   platform: process.platform,
   isDesktop: true,
   version: require("./package.json").version,
+  arch: process.arch,
 
   // Auto-update listener
   onUpdateReady: (callback) => {
     ipcRenderer.on("update-ready", () => callback());
   },
+
+  // Window controls
+  minimize: () => ipcRenderer.send("window-minimize"),
+  maximize: () => ipcRenderer.send("window-maximize"),
+  close: () => ipcRenderer.send("window-close"),
 });

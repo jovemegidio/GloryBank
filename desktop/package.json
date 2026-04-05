@@ -2,16 +2,19 @@
   "name": "glorybank-desktop",
   "version": "1.0.0",
   "description": "GloryBank — Internet Banking Desktop",
-  "author": "GloryBank",
+  "author": "GloryBank <contato@glorybank.com>",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dev": "cross-env GLORYBANK_URL=http://localhost:3000 electron .",
+    "generate-icons": "node scripts/generate-icons.js",
+    "prebuild": "npm run generate-icons",
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
-    "build": "electron-builder --win --mac --linux"
+    "build": "electron-builder --win --mac --linux",
+    "pack": "electron-builder --dir"
   },
   "dependencies": {
     "electron-updater": "^6.3.9"
@@ -19,7 +22,8 @@
   "devDependencies": {
     "electron": "^33.3.1",
     "electron-builder": "^25.1.8",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "sharp": "^0.33.5"
   },
   "build": {
     "appId": "com.glorybank.desktop",
