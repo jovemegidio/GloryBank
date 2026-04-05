@@ -15,6 +15,9 @@ import {
   ChevronRight,
   ShieldCheck,
   X,
+  Bell,
+  CalendarClock,
+  CreditCard,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,6 +27,9 @@ const menuItems = [
   { href: "/dashboard/transferir", icon: ArrowUpDown, label: "Transferências" },
   { href: "/dashboard/boleto", icon: FileText, label: "Boletos" },
   { href: "/dashboard/extrato", icon: Clock, label: "Extrato" },
+  { href: "/dashboard/cartao", icon: CreditCard, label: "Cartão" },
+  { href: "/dashboard/agendamentos", icon: CalendarClock, label: "Agendamentos" },
+  { href: "/dashboard/notificacoes", icon: Bell, label: "Notificações" },
   { href: "/dashboard/conta", icon: Settings, label: "Minha Conta" },
 ];
 

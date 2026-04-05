@@ -37,3 +37,33 @@ export interface DashboardData {
     email: string;
   };
 }
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface ScheduledTransferItem {
+  id: string;
+  pixKey: string;
+  pixKeyType: string;
+  amount: number;
+  description: string | null;
+  scheduledDate: string;
+  recurrence: string | null;
+  status: string;
+}
+
+export interface CardRequestItem {
+  id: string;
+  cardType: string;
+  status: string;
+  lastFour: string | null;
+  brand: string;
+  cardName: string | null;
+  requestedAt: string;
+  approvedAt: string | null;
+}

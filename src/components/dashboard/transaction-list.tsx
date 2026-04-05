@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import {
   ArrowUpRight,
   ArrowDownLeft,
   FileText,
   ArrowUpDown,
+  Receipt,
 } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { ReceiptModal } from "@/components/dashboard/receipt-modal";
 
 interface Transaction {
   id: string;
@@ -46,6 +49,8 @@ const statusConfig: Record<string, { variant: "success" | "warning" | "error" | 
 };
 
 export function TransactionList({ transactions }: TransactionListProps) {
+  const [receiptTx, setReceiptTx] = useState<Transaction | null>(null);
+
   if (transactions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-14 text-center">
@@ -121,9 +126,24 @@ export function TransactionList({ transactions }: TransactionListProps) {
                 </Badge>
               </div>
             </div>
+
+            {/* Receipt button */}
+            <button
+              onClick={() => setReceiptTx(tx)}
+              className="shrink-0 rounded-lg p-1.5 text-slate-400 opacity-0 transition-all group-hover:opacity-100 hover:bg-black/[0.04] hover:text-slate-600 sm:ml-1"
+              title="Ver comprovante"
+            >
+              <Receipt className="h-4 w-4" />
+            </button>
           </div>
         );
       })}
+
+      <ReceiptModal
+        transaction={receiptTx}
+        isOpen={!!receiptTx}
+        onClose={() => setReceiptTx(null)}
+      />
     </div>
   );
 }

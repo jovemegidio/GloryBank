@@ -1,0 +1,75 @@
+{
+  "name": "glorybank-desktop",
+  "version": "1.0.0",
+  "description": "GloryBank — Internet Banking Desktop",
+  "author": "GloryBank",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env GLORYBANK_URL=http://localhost:3000 electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build": "electron-builder --win --mac --linux"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "cross-env": "^7.0.3"
+  },
+  "build": {
+    "appId": "com.glorybank.desktop",
+    "productName": "GloryBank",
+    "copyright": "Copyright © 2025 GloryBank",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "icons/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icons/icon.ico",
+      "artifactName": "GloryBank-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icons/icon.ico",
+      "uninstallerIcon": "icons/icon.ico",
+      "installerHeaderIcon": "icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "GloryBank"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "icons/icon.icns",
+      "category": "public.app-category.finance",
+      "artifactName": "GloryBank-${version}.${ext}"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "icons",
+      "category": "Office;Finance",
+      "artifactName": "GloryBank-${version}.${ext}"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "jovemegidio",
+      "repo": "GloryBank"
+    }
+  }
+}

@@ -257,3 +257,103 @@ export const demoTransfer = (
   transferFee: 0,
   effectiveDate: new Date().toISOString(),
 });
+
+/** Mock notifications */
+export const DEMO_NOTIFICATIONS = [
+  {
+    id: "demo-notif-1",
+    userId: DEMO_USER_ID,
+    title: "PIX recebido",
+    message: "Você recebeu R$ 8.500,00 via PIX de Glory Tech Soluções Ltda",
+    isRead: false,
+    createdAt: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
+  },
+  {
+    id: "demo-notif-2",
+    userId: DEMO_USER_ID,
+    title: "PIX enviado com sucesso",
+    message: "Transferência de R$ 1.200,00 para Ana Souza realizada com sucesso",
+    isRead: false,
+    createdAt: new Date(Date.now() - 1 * 24 * 3600 * 1000).toISOString(),
+  },
+  {
+    id: "demo-notif-3",
+    userId: DEMO_USER_ID,
+    title: "Boleto gerado",
+    message: "Boleto de R$ 189,90 - Fatura Energia Elétrica gerado com vencimento em 10 dias",
+    isRead: true,
+    createdAt: new Date(Date.now() - 3 * 24 * 3600 * 1000).toISOString(),
+  },
+  {
+    id: "demo-notif-4",
+    userId: DEMO_USER_ID,
+    title: "Transferência agendada executada",
+    message: "A transferência agendada de R$ 350,00 para Carrefour foi executada automaticamente",
+    isRead: true,
+    createdAt: new Date(Date.now() - 4 * 24 * 3600 * 1000).toISOString(),
+  },
+  {
+    id: "demo-notif-5",
+    userId: DEMO_USER_ID,
+    title: "Novo cartão virtual disponível",
+    message: "Seu cartão virtual GloryBank Visa foi aprovado e já está disponível para uso",
+    isRead: true,
+    createdAt: new Date(Date.now() - 10 * 24 * 3600 * 1000).toISOString(),
+  },
+  {
+    id: "demo-notif-6",
+    userId: DEMO_USER_ID,
+    title: "Segurança: novo acesso",
+    message: "Detectamos um novo acesso à sua conta às 14:32 de São Paulo, SP",
+    isRead: true,
+    createdAt: new Date(Date.now() - 14 * 24 * 3600 * 1000).toISOString(),
+  },
+];
+
+/** Mock scheduled transfers */
+export const DEMO_SCHEDULED_TRANSFERS = [
+  {
+    id: "demo-sched-1",
+    pixKey: "ana.souza@gmail.com",
+    pixKeyType: "EMAIL",
+    amount: 1200.0,
+    description: "Aluguel mensal",
+    scheduledDate: new Date(Date.now() + 5 * 24 * 3600 * 1000).toISOString(),
+    recurrence: "MONTHLY",
+    status: "SCHEDULED",
+  },
+  {
+    id: "demo-sched-2",
+    pixKey: "65.301.215/0001-90",
+    pixKeyType: "CNPJ",
+    amount: 350.0,
+    description: "Supermercado semanal",
+    scheduledDate: new Date(Date.now() + 2 * 24 * 3600 * 1000).toISOString(),
+    recurrence: "WEEKLY",
+    status: "SCHEDULED",
+  },
+  {
+    id: "demo-sched-3",
+    pixKey: "11999887766",
+    pixKeyType: "PHONE",
+    amount: 500.0,
+    description: "Investimento mensal",
+    scheduledDate: new Date(Date.now() + 15 * 24 * 3600 * 1000).toISOString(),
+    recurrence: "MONTHLY",
+    status: "SCHEDULED",
+  },
+];
+
+/** Mock card requests */
+export const DEMO_CARD_REQUESTS = [
+  {
+    id: "demo-card-1",
+    cardType: "VIRTUAL",
+    status: "ACTIVE",
+    lastFour: "4829",
+    brand: "Visa",
+    cardName: "JOAO D SILVA",
+    requestedAt: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString(),
+    approvedAt: new Date(Date.now() - 29 * 24 * 3600 * 1000).toISOString(),
+  },
+];

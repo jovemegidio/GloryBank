@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ArrowLeft, Calendar, Filter } from "lucide-react";
+import { ArrowLeft, Calendar, Filter, Download, FileSpreadsheet } from "lucide-react";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { TransactionList } from "@/components/dashboard/transaction-list";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageLoading } from "@/components/ui/loading";
 import { Toaster } from "react-hot-toast";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
 interface TransactionData {
   id: string;
@@ -77,6 +78,83 @@ export default function ExtratoPage() {
 
   if (loading && transactions.length === 0) return <PageLoading />;
 
+  const typeLabels: Record<string, string> = {
+    PIX_SENT: "PIX Enviado",
+    PIX_RECEIVED: "PIX Recebido",
+    BOLETO_CREATED: "Boleto Gerado",
+    BOLETO_PAID: "Boleto Pago",
+    TRANSFER_SENT: "Transferência Enviada",
+    TRANSFER_RECEIVED: "Transferência Recebida",
+    DEPOSIT: "Depósito",
+    WITHDRAWAL: "Saque",
+  };
+
+  const statusLabels: Record<string, string> = {
+    PENDING: "Pendente",
+    CONFIRMED: "Confirmado",
+    CANCELLED: "Cancelado",
+    FAILED: "Falhou",
+    REFUNDED: "Estornado",
+  };
+
+  const exportCSV = () => {
+    if (transactions.length === 0) return;
+    const header = "Data,Tipo,Status,Descrição,Destinatário,Valor";
+    const rows = transactions.map((tx) => {
+      const isPositive = tx.type.includes("RECEIVED") || tx.type === "DEPOSIT" || tx.type === "BOLETO_PAID";
+      return [
+        formatDate(tx.date),
+        typeLabels[tx.type] || tx.type,
+        statusLabels[tx.status] || tx.status,
+        `"${(tx.description || "").replace(/"/g, '""')}"`,
+        `"${(tx.recipientName || "").replace(/"/g, '""')}"`,
+        `${isPositive ? "" : "-"}${Math.abs(tx.amount).toFixed(2)}`,
+      ].join(",");
+    });
+    const csv = "\uFEFF" + [header, ...rows].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `extrato-glorybank-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportPDF = () => {
+    if (transactions.length === 0) return;
+    const printWin = window.open("", "_blank", "width=800,height=600");
+    if (!printWin) return;
+    const rows = transactions
+      .map((tx) => {
+        const isPositive = tx.type.includes("RECEIVED") || tx.type === "DEPOSIT" || tx.type === "BOLETO_PAID";
+        return `<tr>
+          <td>${formatDate(tx.date)}</td>
+          <td>${typeLabels[tx.type] || tx.type}</td>
+          <td>${tx.recipientName || tx.description || "-"}</td>
+          <td style="color:${isPositive ? "#22c55e" : "#ef4444"};font-weight:600;text-align:right">
+            ${isPositive ? "+" : "−"} ${formatCurrency(Math.abs(tx.amount))}
+          </td>
+        </tr>`;
+      })
+      .join("");
+    printWin.document.write(`<!DOCTYPE html><html><head><title>Extrato GloryBank</title>
+      <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:24px;color:#1e293b}
+      .header{text-align:center;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #e30613}
+      .header h1{color:#e30613;font-size:22px}.header p{color:#64748b;font-size:12px;margin-top:4px}
+      table{width:100%;border-collapse:collapse;margin-top:16px}th{background:#f8fafc;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;text-align:left;padding:8px 12px;border-bottom:2px solid #e2e8f0}
+      td{padding:8px 12px;border-bottom:1px solid #f1f5f9;font-size:12px}tr:hover{background:#fafafa}
+      .footer{text-align:center;margin-top:24px;padding-top:16px;border-top:1px dashed #cbd5e1;color:#94a3b8;font-size:10px}
+      @media print{body{padding:16px}}</style></head><body>
+      <div class="header"><h1>GloryBank</h1><p>Extrato de Transações — ${new Date().toLocaleDateString("pt-BR")}</p></div>
+      <table><thead><tr><th>Data</th><th>Tipo</th><th>Destino/Descrição</th><th style="text-align:right">Valor</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="footer"><p>${transactions.length} transações listadas</p><p>Documento gerado eletronicamente por GloryBank</p></div>
+      </body></html>`);
+    printWin.document.close();
+    printWin.focus();
+    printWin.print();
+  };
+
   return (
     <>
       <Toaster position="top-right" />
@@ -99,13 +177,33 @@ export default function ExtratoPage() {
               </p>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            <Filter className="mr-2 h-4 w-4" />
-            Filtros
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              onClick={exportCSV}
+              size="sm"
+              title="Exportar CSV"
+            >
+              <FileSpreadsheet className="mr-1.5 h-4 w-4" />
+              CSV
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={exportPDF}
+              size="sm"
+              title="Exportar PDF"
+            >
+              <Download className="mr-1.5 h-4 w-4" />
+              PDF
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <Filter className="mr-2 h-4 w-4" />
+              Filtros
+            </Button>
+          </div>
         </div>
 
         {/* Filters */}

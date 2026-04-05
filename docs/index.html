@@ -2121,12 +2121,20 @@
 
   <script>
     // ─── APP URL RESOLUTION ───
-    // Detects if running on same origin as the Next.js app or on GitHub Pages
+    // Detects if running on GitHub Pages vs same-origin with the Next.js app.
+    // On GitHub Pages the Next.js routes don't exist, so we redirect to the
+    // deployed app URL. Adjust GLORYBANK_APP_URL below if your deploy changes.
+    var GLORYBANK_APP_URL = "https://glorybank.vercel.app";
+
     function goToApp(path) {
-      // If we're on the same origin as the Next.js app, use relative paths
-      // If on GitHub Pages, redirect to the configured app URL
-      var appUrl = window.GLORYBANK_APP_URL || window.location.origin;
-      window.location.href = appUrl + path;
+      var host = window.location.hostname;
+      // If we are on the same origin as the Next.js app (e.g. localhost or VPS)
+      // use relative navigation. Otherwise redirect to the configured app URL.
+      if (host === "localhost" || host === "127.0.0.1" || window.GLORYBANK_APP_URL) {
+        window.location.href = (window.GLORYBANK_APP_URL || window.location.origin) + path;
+      } else {
+        window.location.href = GLORYBANK_APP_URL + path;
+      }
     }
 
     // ─── PWA INSTALL PROMPT ───
