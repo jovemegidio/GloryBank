@@ -1121,6 +1121,176 @@
       flex-wrap: wrap;
     }
 
+    /* ─── ACCESS / LOGIN ─── */
+    .pill-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark)) !important;
+      color: white !important;
+      border: none !important;
+      box-shadow: 0 8px 24px rgba(227, 6, 19, 0.2);
+    }
+
+    .access-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .access-info .eyebrow-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .access-info h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      margin-bottom: 14px;
+    }
+
+    .access-info p {
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .access-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: 0 24px 56px rgba(17, 17, 17, 0.1);
+      border: 1px solid rgba(22, 22, 22, 0.06);
+    }
+
+    .access-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .access-card-header strong {
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .access-demo {
+      margin-bottom: 24px;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--brand-soft);
+      border: 1px solid rgba(227, 6, 19, 0.1);
+    }
+
+    .access-demo-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .access-demo-creds {
+      display: grid;
+      gap: 8px;
+    }
+
+    .access-demo-creds div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .access-demo-creds span {
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .access-demo-creds strong {
+      font-family: "SF Mono", "Menlo", monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .access-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      box-shadow: 0 12px 32px rgba(227, 6, 19, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .access-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(227, 6, 19, 0.3);
+    }
+
+    .access-register {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .access-register a {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .access-features {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .access-feat {
+      flex: 1 1 140px;
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--surface-alt);
+    }
+
+    .access-feat strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .access-feat span {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 1120px) {
+      .access-panel { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .access-card { padding: 24px; }
+    }
+
     @media (max-width: 1120px) {
       .hero-inner,
       .trust-panel,
@@ -1304,6 +1474,7 @@
           <a href="#contas">Conta digital</a>
           <a href="#cartoes">Cartões</a>
           <a href="#seguranca">Segurança</a>
+          <a href="#acesso">Acesso ao IB</a>
         </div>
         <div class="topbar-links">
           <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Repositório</a>
@@ -1329,11 +1500,12 @@
           <a href="#beneficios">Benefícios</a>
           <a href="#app">App</a>
           <a href="#seguranca">Segurança</a>
+          <a href="#acesso">Acesso</a>
         </nav>
 
         <div class="header-actions">
-          <a class="pill" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Ver código</a>
-          <a class="pill" href="#app">Entrar na demo</a>
+          <a class="pill" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill pill-primary" href="#acesso">Acessar conta</a>
         </div>
       </div>
     </header>
@@ -1346,7 +1518,7 @@
             <h1>O digital com a solidez visual de um grande banco.</h1>
             <p>GloryBank apresenta uma landing em vermelho e branco, com linguagem inspirada no app bancário do Santander: foco em saldo, atalhos rápidos, blocos informativos e uma experiência móvel clara, direta e premium.</p>
             <div class="hero-actions">
-              <a class="cta-primary" href="#app">Ver experiência</a>
+              <a class="cta-primary" href="#acesso">Acessar Internet Banking</a>
               <a class="cta-secondary" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Abrir repositório</a>
             </div>
             <div class="hero-note">Apresentação online com visual bancário, navegação mobile-first e foco em demonstração.</div>
@@ -1636,6 +1808,50 @@
         </div>
       </section>
 
+      <!-- Acesso ao Internet Banking -->
+      <section class="section section-alt" id="acesso">
+        <div class="section-inner">
+          <div class="access-panel">
+            <div class="access-info">
+              <span class="eyebrow-label">Internet Banking</span>
+              <h2>Acesse sua conta digital ou experimente a demonstração.</h2>
+              <p>Gerencie suas finanças, faça PIX, transferências e gere boletos direto pelo Internet Banking GloryBank. O painel web oferece a experiência completa de um banco digital.</p>
+              <div class="access-features">
+                <div class="access-feat">
+                  <strong>PIX Instantâneo</strong>
+                  <span>Envie e receba em segundos</span>
+                </div>
+                <div class="access-feat">
+                  <strong>Extrato completo</strong>
+                  <span>Histórico em tempo real</span>
+                </div>
+                <div class="access-feat">
+                  <strong>Boletos e TED</strong>
+                  <span>Gere e pague online</span>
+                </div>
+              </div>
+            </div>
+            <div class="access-card">
+              <div class="access-card-header">
+                <span class="brand-mark" style="width:36px; height:36px; border-radius:12px;" aria-hidden="true">
+                  <svg style="width:16px; height:16px;" viewBox="0 0 24 24"><path d="M3 22h18"></path><path d="M5 10h14"></path><path d="M7 10v8"></path><path d="M12 10v8"></path><path d="M17 10v8"></path><path d="M12 2 4 6v4h16V6Z"></path></svg>
+                </span>
+                <strong>GloryBank Internet Banking</strong>
+              </div>
+              <div class="access-demo">
+                <p class="access-demo-title">Conta de Demonstração</p>
+                <div class="access-demo-creds">
+                  <div><span>Login</span><strong>demo@glorybank.com</strong></div>
+                  <div><span>Senha</span><strong>Demo@123456</strong></div>
+                </div>
+              </div>
+              <a class="access-btn" href="/login">Entrar na conta</a>
+              <p class="access-register">Não tem conta? <a href="/register">Criar conta grátis</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" style="padding-top: 12px;">
         <div class="section-inner">
           <div class="cta-panel">
@@ -1645,7 +1861,7 @@
             </div>
             <div class="cta-actions">
               <a class="cta-secondary" href="#topo">Voltar ao topo</a>
-              <a class="cta-primary" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Abrir GloryBank</a>
+              <a class="cta-primary" href="/login">Acessar Internet Banking</a>
             </div>
           </div>
         </div>
@@ -1668,7 +1884,7 @@
           <div class="footer-links">
             <a href="#contas">Conta digital</a>
             <a href="#beneficios">Benefícios</a>
-            <a href="#app">App</a>
+            <a href="#acesso">Acessar conta</a>
             <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
