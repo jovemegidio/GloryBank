@@ -47,14 +47,6 @@ img{max-width:100%;display:block}
 .btn-green{background:var(--green);color:#fff;box-shadow:0 4px 16px rgba(0,166,80,.25)}
 .btn-green:hover{transform:translateY(-2px)}
 
-/* ── Topbar ── */
-.topbar{background:var(--indigo-deeper);color:rgba(255,255,255,.6);font-size:12px;font-weight:500}
-.topbar .w{display:flex;align-items:center;justify-content:space-between;min-height:38px;gap:12px}
-.topbar a{transition:color .2s}.topbar a:hover{color:#fff}
-.topbar-l,.topbar-r{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.baas-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 12px;border-radius:999px;background:var(--green-soft);color:#4ade80;font-size:11px;font-weight:700}
-.baas-chip img{width:14px;height:14px;border-radius:3px}
-
 /* ── Header ── */
 .header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.04);transition:box-shadow .35s var(--ease)}
 .header.scrolled{box-shadow:0 1px 32px rgba(79,70,229,.06)}
@@ -128,19 +120,17 @@ img{max-width:100%;display:block}
 .float-badge-2 b{display:block;font-size:13px;color:var(--ink);margin-bottom:4px}
 .float-badge-2 p{font-size:11px;color:var(--gold-dark);line-height:1.4}
 
-/* ── Asaas Partnership Banner ── */
-.asaas-banner{background:linear-gradient(135deg,#021912,#072e20);border-top:1px solid rgba(0,166,80,.12);border-bottom:1px solid rgba(0,166,80,.12);padding:32px 0}
-.asaas-banner .w{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.asaas-partner{display:flex;align-items:center;gap:20px;flex:1}
-.asaas-logos{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.asaas-logos .partner-logo{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.1);overflow:hidden;padding:6px}
-.asaas-logos .partner-logo img{width:100%;height:100%;object-fit:contain}
-.asaas-logos .partner-x{color:rgba(255,255,255,.3);font-size:18px;font-weight:300}
-.asaas-content h4{font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.asaas-content h4 .partnership-tag{display:inline-flex;padding:2px 8px;border-radius:999px;background:rgba(212,160,23,.2);color:var(--gold-light);font-size:10px;font-weight:800;letter-spacing:.04em}
-.asaas-content>p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;max-width:480px}
-.asaas-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.asaas-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;border:1px solid rgba(0,166,80,.2);color:#4ade80;font-size:10px;font-weight:700}
+/* ── Regulatory Strip ── */
+.reg-strip{background:#0a0e1a;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:14px 0}
+.reg-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.reg-strip-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.reg-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
+.reg-asaas-logo{height:14px;width:auto;opacity:.7;transition:opacity .2s}
+.reg-asaas-logo:hover{opacity:1}
+.reg-sep{color:rgba(255,255,255,.12);font-weight:200}
+.reg-text{font-size:11px;color:rgba(255,255,255,.3);font-weight:500}
+.reg-strip-tags{display:flex;gap:6px}
+.reg-tag{padding:3px 10px;border-radius:4px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);font-size:10px;font-weight:700;letter-spacing:.06em}
 
 /* ── Stats ── */
 .stats{position:relative;z-index:4;margin-top:-40px;padding-bottom:60px}
@@ -280,19 +270,22 @@ img{max-width:100%;display:block}
 .cta-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;position:relative;z-index:1}
 
 /* ── Footer ── */
-.footer{background:var(--indigo-deeper);color:rgba(255,255,255,.65);padding:40px 0 48px}
-.footer-top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px}
+.footer{background:var(--indigo-deeper);color:rgba(255,255,255,.65);padding:60px 0 0}
+.footer-top{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06)}
 .footer .logo-text b,.footer .logo-text b em{color:#fff}
 .footer .logo-text span{color:rgba(255,255,255,.35)}
-.footer-nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px}
-.footer-nav a{transition:color .2s}.footer-nav a:hover{color:#fff}
-.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.35)}
-.footer-bottom a{color:rgba(255,255,255,.4);text-decoration:underline;text-underline-offset:2px}
-.footer-bottom img{display:inline;width:14px;height:14px;vertical-align:middle;margin:0 2px;border-radius:2px}
-.footer-baas{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.footer-baas-logo{width:32px;height:32px;border-radius:8px;background:#fff;display:grid;place-items:center;overflow:hidden;padding:4px}
-.footer-baas-logo img{width:100%;height:100%;object-fit:contain}
-.footer-baas p{font-size:11px;color:rgba(255,255,255,.3);line-height:1.5;max-width:500px}
+.footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.footer-col{display:flex;flex-direction:column;gap:8px}
+.footer-col h5{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:4px}
+.footer-col a{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-reg{display:flex;align-items:center;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:20px;flex-wrap:wrap}
+.footer-reg-left{display:flex;align-items:flex-start;gap:14px}
+.footer-asaas-logo{height:14px;width:auto;opacity:.5;margin-top:3px;flex-shrink:0}
+.footer-reg p{font-size:11px;color:rgba(255,255,255,.25);line-height:1.6;max-width:600px}
+.footer-reg p strong{color:rgba(255,255,255,.4)}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 0;font-size:11px;color:rgba(255,255,255,.2)}
+.footer-bacen{font-weight:600;letter-spacing:.04em}
 
 /* ── Responsive ── */
 @media(max-width:1120px){
@@ -304,10 +297,11 @@ img{max-width:100%;display:block}
 }
 @media(max-width:880px){
   .nav{display:none}
-  .stats-row,.prod-grid,.ben-grid,.sec-grid,.show-metrics,.show-features,.feat-grid{grid-template-columns:1fr}
+  .stats-row,.prod-grid,.ben-grid,.sec-grid,.show-metrics,.show-features,.feat-grid,.footer-cols{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .reg-strip-inner{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:720px){
-  .topbar{display:none}
   .hero{min-height:auto}
   .hero .w{padding:40px 0 60px}
   .hero h1{font-size:38px}
@@ -326,25 +320,6 @@ img{max-width:100%;display:block}
 </style>
 </head>
 <body>
-
-<!-- ═══ TOPBAR ═══ -->
-<div class="topbar">
-  <div class="w">
-    <div class="topbar-l">
-      <a href="#contas">Conta digital</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#seguranca">Segurança</a>
-      <a href="#download">App</a>
-      <a href="#acesso">Internet Banking</a>
-    </div>
-    <div class="topbar-r">
-      <span class="baas-chip">
-       
-        BaaS por Asaas
-      </span>
-    </div>
-  </div>
-</div>
 
 <!-- ═══ HEADER ═══ -->
 <header class="header" id="topo">
@@ -374,10 +349,10 @@ img{max-width:100%;display:block}
       <div class="hero-badge">
         <span class="dot"></span>
        
-        Infraestrutura BaaS por <strong style="color:var(--gold-light);margin-left:4px">Asaas</strong>
+        Infraestrutura BaaS — Regulado pelo Banco Central
       </div>
       <h1>Sua conta digital com a <span class="gold">solidez</span> que você merece.</h1>
-      <p class="hero-sub">PIX instantâneo, transferências, boletos e cartão virtual. Tudo em uma plataforma segura com infraestrutura financeira Asaas, regulada pelo Banco Central.</p>
+      <p class="hero-sub">Gerencie PIX, transferências, boletos e cartão virtual em uma plataforma segura com infraestrutura financeira regulada pelo Banco Central do Brasil.</p>
       <div class="hero-actions">
         <a class="btn btn-lg btn-gold" href="#acesso">Abrir minha conta ›</a>
         <a class="btn btn-lg btn-ghost" href="#contas">Conhecer mais</a>
@@ -439,36 +414,25 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- ═══ ASAAS PARTNERSHIP BANNER ═══ -->
-<section class="asaas-banner">
+<!-- ═══ REGULATORY STRIP ═══ -->
+<div class="reg-strip">
   <div class="w">
-    <div class="asaas-partner">
-      <div class="asaas-logos">
-        <div class="partner-logo">
-          <img src="favicon.png" alt="CredBusiness">
-        </div>
-        <span class="partner-x">×</span>
-        <div class="partner-logo">
-          <img src="asaas-logo.svg" alt="Asaas Pagamentos S.A." style="filter:brightness(0) saturate(100%) invert(36%) sepia(95%) saturate(1000%) hue-rotate(130deg);padding:6px">
-        </div>
+    <div class="reg-strip-inner">
+      <div class="reg-strip-left">
+        <span class="reg-label">Operado por</span>
+        <img src="asaas-logo.svg" alt="Asaas Pagamentos S.A." class="reg-asaas-logo">
+        <span class="reg-sep">|</span>
+        <span class="reg-text">Instituição de Pagamento autorizada pelo Banco Central do Brasil</span>
       </div>
-      <div class="asaas-content">
-        <h4>CredBusiness + Asaas Pagamentos S.A. <span class="partnership-tag">PARCERIA BAAS</span></h4>
-        <p>Infraestrutura financeira regulada pelo Banco Central do Brasil. PIX, boletos, TED e cartão virtual no modelo Banking as a Service.</p>
-        <div class="asaas-tags">
-          <span class="asaas-tag">✓ Regulado BACEN</span>
-          <span class="asaas-tag">✓ Instituição de Pagamento</span>
-          <span class="asaas-tag">✓ BaaS Certificado</span>
-          <span class="asaas-tag">✓ PIX + TED + Boleto</span>
-        </div>
+      <div class="reg-strip-tags">
+        <span class="reg-tag">BACEN</span>
+        <span class="reg-tag">BaaS</span>
+        <span class="reg-tag">PIX</span>
+        <span class="reg-tag">TED</span>
       </div>
     </div>
-    <a class="btn btn-md btn-green" href="https://www.asaas.com" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Conheça a Asaas
-    </a>
   </div>
-</section>
+</div>
 
 <!-- ═══ STATS ═══ -->
 <section class="stats">
@@ -570,7 +534,7 @@ img{max-width:100%;display:block}
     <div class="showcase">
       <div class="show-left">
         <span class="tag-label"><span class="tag-dot"></span>Experiência</span>
-        <h3>Uma plataforma que parece produto real, não demonstração.</h3>
+        <h3>Uma plataforma completa de internet banking.</h3>
         <p>Design que conversa com banco de varejo: áreas informativas, CTAs claros, seção institucional e mockup de impacto.</p>
         <div class="show-metrics">
           <div class="show-metric"><b>1ª dobra</b><span>Hero impactante com saldo e atalhos rápidos.</span></div>
@@ -727,27 +691,37 @@ img{max-width:100%;display:block}
         <div class="logo-icon"><img src="favicon.png" alt="CredBusiness"></div>
         <div class="logo-text"><b>Cred<em>Business</em></b><span>Internet Banking</span></div>
       </a>
-      <div class="footer-nav">
-        <a href="#contas">Conta digital</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#beneficios">Benefícios</a>
-        <a href="#seguranca">Segurança</a>
-        <a href="#download">Download</a>
-        <a href="#acesso">Acessar conta</a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Produtos</h5>
+          <a href="#contas">Conta Digital</a>
+          <a href="#servicos">PIX Instantâneo</a>
+          <a href="#servicos">Cartão Virtual</a>
+          <a href="#servicos">Boletos e TED</a>
+        </div>
+        <div class="footer-col">
+          <h5>Institucional</h5>
+          <a href="#seguranca">Segurança</a>
+          <a href="#beneficios">Benefícios</a>
+          <a href="#download">Download</a>
+          <a href="#acesso">Internet Banking</a>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <a href="https://credbusiness.vercel.app/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+          <a href="https://credbusiness.vercel.app/termos" target="_blank" rel="noopener">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-reg">
+      <div class="footer-reg-left">
+        <img src="asaas-logo.svg" alt="Asaas" class="footer-asaas-logo">
+        <p>Serviços financeiros operados por <strong>Asaas Pagamentos S.A.</strong> — Instituição de Pagamento autorizada pelo Banco Central do Brasil. CNPJ: 19.540.550/0001-21</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 CredBusiness. Serviços financeiros por<a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a>, regulada pelo BACEN (BaaS).</span>
-      <span style="display:flex;gap:14px">
-        <a href="https://credbusiness.vercel.app/privacidade" target="_blank" rel="noopener">Privacidade</a>
-        <a href="https://credbusiness.vercel.app/termos" target="_blank" rel="noopener">Termos de Uso</a>
-      </span>
-    </div>
-    <div class="footer-baas">
-      <div class="footer-baas-logo">
-        <img src="asaas-logo.svg" alt="Asaas" style="filter:brightness(0) saturate(100%) invert(36%) sepia(95%) saturate(1000%) hue-rotate(130deg)">
-      </div>
-      <p>Infraestrutura financeira operada por <strong style="color:rgba(255,255,255,.6)">Asaas Pagamentos S.A.</strong> — Instituição de Pagamento autorizada pelo Banco Central do Brasil no modelo Banking as a Service (BaaS).</p>
+      <span>© 2026 CredBusiness. Todos os direitos reservados.</span>
+      <span class="footer-bacen">Regulado pelo Banco Central do Brasil</span>
     </div>
   </div>
 </footer>
