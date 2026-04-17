@@ -205,7 +205,7 @@ export default function FaturaPage() {
                           {card.cardType === "VIRTUAL"
                             ? "CARTÃO VIRTUAL"
                             : "CARTÃO FÍSICO"}{" "}
-                          GLORYBANK
+                          CREDBUSINESS
                         </p>
                         <p className="text-[12px] text-slate-500">
                           FINAL: {card.lastFour || "****"} · {card.brand}

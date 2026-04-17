@@ -3,8 +3,8 @@ const path = require("path");
 
 // ─── Configuration ───
 const APP_URL =
-  process.env.GLORYBANK_URL || "https://glorybank.vercel.app";
-const IS_DEV = process.env.NODE_ENV === "development" || !!process.env.GLORYBANK_URL;
+  process.env.CREDBUSINESS_URL || "https://credbusiness.vercel.app";
+const IS_DEV = process.env.NODE_ENV === "development" || !!process.env.CREDBUSINESS_URL;
 
 let mainWindow = null;
 let splashWindow = null;
@@ -68,7 +68,7 @@ function createWindow() {
     height: 860,
     minWidth: 960,
     minHeight: 640,
-    title: "GloryBank — Internet Banking",
+    title: "CredBusiness — Internet Banking",
     icon: path.join(__dirname, "icons", "icon.png"),
     backgroundColor: "#f8fafc",
     autoHideMenuBar: true,
@@ -121,7 +121,7 @@ function createWindow() {
       </style></head><body><div class="c">
       <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg></div>
       <h2>Sem conexão</h2>
-      <p>Não foi possível conectar ao servidor do GloryBank. Verifique sua conexão com a internet e tente novamente.</p>
+      <p>Não foi possível conectar ao servidor do CredBusiness. Verifique sua conexão com a internet e tente novamente.</p>
       <button onclick="location.href='${APP_URL}'">Tentar novamente</button>
       <code>${errorDesc} (${errorCode})</code>
       </div></body></html>
@@ -160,7 +160,7 @@ function createWindow() {
 function buildMenu() {
   const template = [
     {
-      label: "GloryBank",
+      label: "CredBusiness",
       submenu: [
         { label: "Início", accelerator: "CmdOrCtrl+H", click: () => mainWindow?.loadURL(APP_URL + "/dashboard") },
         { label: "PIX", accelerator: "CmdOrCtrl+P", click: () => mainWindow?.loadURL(APP_URL + "/dashboard/pix") },
@@ -214,10 +214,10 @@ function createTray() {
   try {
     const icon = nativeImage.createFromPath(iconPath).resize({ width: 16, height: 16 });
     tray = new Tray(icon);
-    tray.setToolTip("GloryBank – Internet Banking");
+    tray.setToolTip("CredBusiness – Internet Banking");
 
     const contextMenu = Menu.buildFromTemplate([
-      { label: "Abrir GloryBank", click: () => { mainWindow?.show(); mainWindow?.focus(); } },
+      { label: "Abrir CredBusiness", click: () => { mainWindow?.show(); mainWindow?.focus(); } },
       { label: "Início", click: () => { mainWindow?.show(); mainWindow?.loadURL(APP_URL + "/dashboard"); } },
       { type: "separator" },
       { label: "Sair", click: () => { tray = null; app.quit(); } },
@@ -244,7 +244,7 @@ function checkForUpdates() {
       dialog.showMessageBox(mainWindow, {
         type: "info",
         title: "Atualização disponível",
-        message: `GloryBank v${info.version} está pronta para instalar.`,
+        message: `CredBusiness v${info.version} está pronta para instalar.`,
         detail: "A atualização será aplicada ao reiniciar o aplicativo.",
         buttons: ["Reiniciar agora", "Depois"],
         defaultId: 0,

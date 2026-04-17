@@ -163,7 +163,7 @@ export default function CartaoPage() {
                 Nenhum cartão solicitado
               </p>
               <p className="mt-1 text-[11px] text-slate-400 mb-4">
-                Solicite seu cartão virtual ou físico GloryBank
+                Solicite seu cartão virtual ou físico CredBusiness
               </p>
               <Button onClick={() => setShowModal(true)} size="sm">
                 Solicitar cartão
@@ -205,7 +205,7 @@ export default function CartaoPage() {
                         <div className="flex items-center gap-2">
                           <Landmark className="h-5 w-5" />
                           <span className="text-sm font-bold tracking-wider">
-                            GloryBank
+                            CredBusiness
                           </span>
                         </div>
                         <div className="flex items-center gap-2">

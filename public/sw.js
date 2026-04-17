@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 
-const CACHE_NAME = 'glorybank-v1';
+const CACHE_NAME = 'credbusiness-v1';
 const OFFLINE_URL = '/login';
 
 // Assets to pre-cache

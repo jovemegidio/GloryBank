@@ -24,7 +24,7 @@ export default function Home() {
               <Landmark className="h-4.5 w-4.5 text-red-600" />
             </div>
             <span className="text-lg font-bold text-slate-800 tracking-tight">
-              Glory<span className="text-red-600">Bank</span>
+              Cred<span className="text-red-600">Business</span>
             </span>
           </div>
           <div className="flex items-center gap-3">
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="text-left flex-1">
               <p className="text-[11px] font-bold uppercase tracking-widest text-white mb-1">🧪 Acesso Demonstração</p>
               <p className="text-[12px] text-white/70">
-                <span className="font-mono text-white">demo@glorybank.com</span>
+                <span className="font-mono text-white">demo@credbusiness.com</span>
                 {" "}·{" "}
                 <span className="font-mono text-white">Demo@123456</span>
               </p>
@@ -201,11 +201,11 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <Landmark className="h-4 w-4 text-red-600" />
             <span className="text-sm font-semibold text-slate-600">
-              Glory<span className="text-red-600">Bank</span>
+              Cred<span className="text-red-600">Business</span>
             </span>
           </div>
           <p className="text-[12px] text-slate-400">
-            &copy; {new Date().getFullYear()} GloryBank. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} CredBusiness. Todos os direitos reservados.
           </p>
         </div>
       </footer>

@@ -16,7 +16,7 @@ export async function POST() {
       for (let i = 0; i < 32; i++) {
         secret += chars[Math.floor(Math.random() * chars.length)];
       }
-      const otpauthUri = `otpauth://totp/GloryBank:demo@glorybank.com?secret=${secret}&issuer=GloryBank&digits=6&period=30`;
+      const otpauthUri = `otpauth://totp/CredBusiness:demo@credbusiness.com?secret=${secret}&issuer=CredBusiness&digits=6&period=30`;
       return successResponse({
         secret,
         otpauthUri,
@@ -34,7 +34,7 @@ export async function POST() {
       secret += chars[array[i % 20] % 32];
     }
 
-    const otpauthUri = `otpauth://totp/GloryBank:${user.email}?secret=${secret}&issuer=GloryBank&digits=6&period=30`;
+    const otpauthUri = `otpauth://totp/CredBusiness:${user.email}?secret=${secret}&issuer=CredBusiness&digits=6&period=30`;
 
     return successResponse({
       secret,

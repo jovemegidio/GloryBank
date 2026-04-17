@@ -1,13 +1,13 @@
 {
-  "name": "glorybank-desktop",
+  "name": "credbusiness-desktop",
   "version": "1.0.0",
-  "description": "GloryBank — Internet Banking Desktop",
-  "author": "GloryBank <contato@glorybank.com>",
+  "description": "CredBusiness — Internet Banking Desktop",
+  "author": "CredBusiness <contato@credbusiness.com.br>",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "cross-env GLORYBANK_URL=http://localhost:3000 electron .",
+    "dev": "cross-env CREDBUSINESS_URL=http://localhost:3000 electron .",
     "generate-icons": "node scripts/generate-icons.js",
     "prebuild": "npm run generate-icons",
     "build:win": "electron-builder --win",
@@ -26,9 +26,9 @@
     "sharp": "^0.33.5"
   },
   "build": {
-    "appId": "com.glorybank.desktop",
-    "productName": "GloryBank",
-    "copyright": "Copyright © 2025 GloryBank",
+    "appId": "com.credbusiness.desktop",
+      "productName": "CredBusiness",
+      "copyright": "Copyright © 2025 CredBusiness",
     "directories": {
       "output": "dist"
     },
@@ -45,7 +45,7 @@
         }
       ],
       "icon": "icons/icon.ico",
-      "artifactName": "GloryBank-Setup-${version}.${ext}"
+      "artifactName": "CredBusiness-Setup-${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -56,19 +56,19 @@
       "installerHeaderIcon": "icons/icon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "GloryBank"
+      "shortcutName": "CredBusiness"
     },
     "mac": {
       "target": ["dmg"],
       "icon": "icons/icon.icns",
       "category": "public.app-category.finance",
-      "artifactName": "GloryBank-${version}.${ext}"
+      "artifactName": "CredBusiness-${version}.${ext}"
     },
     "linux": {
       "target": ["AppImage", "deb"],
       "icon": "icons",
       "category": "Office;Finance",
-      "artifactName": "GloryBank-${version}.${ext}"
+      "artifactName": "CredBusiness-${version}.${ext}"
     },
     "publish": {
       "provider": "github",

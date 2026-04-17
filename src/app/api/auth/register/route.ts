@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     // Demo mode: registration is disabled — use the demo account
     if (DEMO_MODE) {
       return errorResponse(
-        "Cadastro desabilitado no modo demonstração. Use: demo@glorybank.com / Demo@123456",
+        "Cadastro desabilitado no modo demonstração. Use: demo@credbusiness.com / Demo@123456",
         403
       );
     }

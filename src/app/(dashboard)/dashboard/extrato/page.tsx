@@ -116,7 +116,7 @@ export default function ExtratoPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `extrato-glorybank-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `extrato-credbusiness-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -138,7 +138,7 @@ export default function ExtratoPage() {
         </tr>`;
       })
       .join("");
-    printWin.document.write(`<!DOCTYPE html><html><head><title>Extrato GloryBank</title>
+    printWin.document.write(`<!DOCTYPE html><html><head><title>Extrato CredBusiness</title>
       <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:24px;color:#1e293b}
       .header{text-align:center;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #e30613}
       .header h1{color:#e30613;font-size:22px}.header p{color:#64748b;font-size:12px;margin-top:4px}
@@ -146,9 +146,9 @@ export default function ExtratoPage() {
       td{padding:8px 12px;border-bottom:1px solid #f1f5f9;font-size:12px}tr:hover{background:#fafafa}
       .footer{text-align:center;margin-top:24px;padding-top:16px;border-top:1px dashed #cbd5e1;color:#94a3b8;font-size:10px}
       @media print{body{padding:16px}}</style></head><body>
-      <div class="header"><h1>GloryBank</h1><p>Extrato de Transações — ${new Date().toLocaleDateString("pt-BR")}</p></div>
+      <div class="header"><h1>CredBusiness</h1><p>Extrato de Transações — ${new Date().toLocaleDateString("pt-BR")}</p></div>
       <table><thead><tr><th>Data</th><th>Tipo</th><th>Destino/Descrição</th><th style="text-align:right">Valor</th></tr></thead><tbody>${rows}</tbody></table>
-      <div class="footer"><p>${transactions.length} transações listadas</p><p>Documento gerado eletronicamente por GloryBank</p></div>
+      <div class="footer"><p>${transactions.length} transações listadas</p><p>Documento gerado eletronicamente por CredBusiness</p></div>
       </body></html>`);
     printWin.document.close();
     printWin.focus();

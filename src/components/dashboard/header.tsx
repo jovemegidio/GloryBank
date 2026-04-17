@@ -47,7 +47,7 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
           Olá, {userName.split(" ")[0]}!
         </h2>
         <p className="hidden sm:block text-[11px] text-slate-500">
-          Internet Banking — GloryBank
+          Internet Banking — CredBusiness
         </p>
       </div>
 

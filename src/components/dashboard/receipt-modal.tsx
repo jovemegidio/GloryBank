@@ -51,7 +51,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Comprovante - GloryBank</title>
+        <title>Comprovante - CredBusiness</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 24px; color: #1e293b; }
@@ -73,7 +73,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
       </head>
       <body>
         <div class="header">
-          <h1>GloryBank</h1>
+          <h1>CredBusiness</h1>
           <p>Comprovante de Transação</p>
         </div>
         <div class="amount">${isPositive ? "+" : "−"} ${formatCurrency(Math.abs(transaction.amount))}</div>
@@ -86,7 +86,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
           <div class="row"><span class="label">ID Transação</span><span class="value auth-code">${transaction.id}</span></div>
         </div>
         <div class="footer">
-          <p>Documento emitido eletronicamente por GloryBank</p>
+          <p>Documento emitido eletronicamente por CredBusiness</p>
           <p class="auth-code">Código de autenticação: ${transaction.id.toUpperCase().slice(-12)}</p>
           <p style="margin-top: 8px;">Este comprovante tem validade legal conforme Resolução BCB nº 1/2020</p>
         </div>
@@ -99,10 +99,10 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
   };
 
   const handleShare = async () => {
-    const text = `Comprovante GloryBank\n${typeLabels[transaction.type]}\nValor: ${isPositive ? "+" : "-"}${formatCurrency(Math.abs(transaction.amount))}\nData: ${formatDate(transaction.date)}${transaction.recipientName ? `\nDestinatário: ${transaction.recipientName}` : ""}\nID: ${transaction.id}`;
+    const text = `Comprovante CredBusiness\n${typeLabels[transaction.type]}\nValor: ${isPositive ? "+" : "-"}${formatCurrency(Math.abs(transaction.amount))}\nData: ${formatDate(transaction.date)}${transaction.recipientName ? `\nDestinatário: ${transaction.recipientName}` : ""}\nID: ${transaction.id}`;
 
     if (navigator.share) {
-      await navigator.share({ title: "Comprovante GloryBank", text });
+      await navigator.share({ title: "Comprovante CredBusiness", text });
     } else {
       await navigator.clipboard.writeText(text);
       alert("Comprovante copiado para a área de transferência!");

@@ -141,18 +141,17 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
       >
         <Link href="/dashboard" className="flex items-center gap-3 min-w-0" onClick={onMobileClose}>
           <div
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, #e30613, #ff4d4d)",
-              boxShadow: "0 4px 12px rgba(227,6,19,0.3)",
+              background: "transparent",
             }}
           >
-            <Landmark className="h-4.5 w-4.5 text-white" strokeWidth={2} />
+            <img src="/favicon.png" alt="CredBusiness" className="h-8 w-8 object-contain" />
           </div>
           {(!collapsed || mobileSidebarOpen) && (
             <div className="min-w-0">
-              <span className="text-[17px] font-bold tracking-tight text-white">Glory</span>
-              <span className="text-[17px] font-bold tracking-tight text-red-400">Bank</span>
+              <span className="text-[17px] font-bold tracking-tight text-white">Cred</span>
+              <span className="text-[17px] font-bold tracking-tight text-red-400">Business</span>
             </div>
           )}
         </Link>

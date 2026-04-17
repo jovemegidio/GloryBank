@@ -4,14 +4,14 @@
  * a fully-functional sandbox without PostgreSQL or Asaas credentials.
  *
  * Demo credentials:
- *   Email:  demo@glorybank.com
+ *   Email:  demo@credbusiness.com
  *   Senha:  Demo@123456
  */
 
 export const DEMO_MODE = process.env.DEMO_MODE === "true";
 
-export const DEMO_USER_ID = "demo-user-glorybank-2025";
-export const DEMO_EMAIL = "demo@glorybank.com";
+export const DEMO_USER_ID = "demo-user-credbusiness-2025";
+export const DEMO_EMAIL = "demo@credbusiness.com";
 export const DEMO_PASSWORD = "Demo@123456";
 
 /** Fake user object — matches the Prisma User model shape */
@@ -233,7 +233,7 @@ export const demoBoleto = (
   value: amount,
   billingType: "BOLETO",
   dueDate,
-  description: description || "Boleto GloryBank",
+  description: description || "Boleto CredBusiness",
   barCode:
     "34191.09008 67629.640001 56900.630006 3 " +
     Math.floor(84690000000000 + amount * 100),
@@ -296,7 +296,7 @@ export const DEMO_NOTIFICATIONS = [
     id: "demo-notif-5",
     userId: DEMO_USER_ID,
     title: "Novo cartão virtual disponível",
-    message: "Seu cartão virtual GloryBank Visa foi aprovado e já está disponível para uso",
+    message: "Seu cartão virtual CredBusiness Visa foi aprovado e já está disponível para uso",
     isRead: true,
     createdAt: new Date(Date.now() - 10 * 24 * 3600 * 1000).toISOString(),
   },

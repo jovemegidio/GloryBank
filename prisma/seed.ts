@@ -9,11 +9,11 @@ async function main() {
   const passwordHash = await bcrypt.hash("Demo@123456", 12);
 
   const demoUser = await prisma.user.upsert({
-    where: { email: "demo@glorybank.com" },
+    where: { email: "demo@credbusiness.com" },
     update: {},
     create: {
       name: "João Demo Silva",
-      email: "demo@glorybank.com",
+      email: "demo@credbusiness.com",
       cpfCnpj: "12345678901",
       phone: "11999887766",
       passwordHash,
@@ -88,7 +88,7 @@ async function main() {
   await prisma.transaction.createMany({ data: sampleTx });
 
   console.log("✅ Demo account ready:");
-  console.log("   Email:  demo@glorybank.com");
+  console.log("   Email:  demo@credbusiness.com");
   console.log("   Senha:  Demo@123456");
   console.log(`   ID:     ${demoUser.id}`);
   console.log(`   Transações: ${sampleTx.length} inseridas`);

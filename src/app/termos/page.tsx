@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Landmark, FileText, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso | GloryBank",
-  description: "Termos de Uso do GloryBank — condições para utilização dos serviços financeiros.",
+  title: "Termos de Uso | CredBusiness",
+  description: "Termos de Uso do CredBusiness — condições para utilização dos serviços financeiros.",
 };
 
 export default function TermsPage() {
@@ -49,7 +49,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-800">1. Aceite dos Termos</h2>
             <p>
-              Ao criar uma conta ou utilizar os serviços do GloryBank, você concorda com estes
+              Ao criar uma conta ou utilizar os serviços do CredBusiness, você concorda com estes
               Termos de Uso e com nossa{" "}
               <Link href="/privacidade" className="font-medium text-red-500 hover:underline">
                 Política de Privacidade
@@ -61,7 +61,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-800">2. Serviços Financeiros — Asaas</h2>
             <p>
-              Os serviços financeiros disponíveis no GloryBank (conta digital, PIX, boletos e
+              Os serviços financeiros disponíveis no CredBusiness (conta digital, PIX, boletos e
               transferências) são fornecidos pela{" "}
               <a
                 href="https://www.asaas.com"
@@ -72,7 +72,7 @@ export default function TermsPage() {
                 Asaas Pagamentos S.A.
               </a>
               , Instituição de Pagamento autorizada pelo Banco Central do Brasil (BACEN) sob o
-              modelo de Banking as a Service (BaaS). O GloryBank atua como plataforma intermediária.
+              modelo de Banking as a Service (BaaS). O CredBusiness atua como plataforma intermediária.
             </p>
           </section>
 
@@ -99,7 +99,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-800">5. Limitações e Disponibilidade</h2>
             <p>
-              O GloryBank e o Asaas podem impor limites de operações diárias, suspender
+              O CredBusiness e o Asaas podem impor limites de operações diárias, suspender
               ou encerrar contas que violem estes termos ou apresentem indícios de fraude,
               conforme exigido pela regulação vigente.
             </p>
@@ -126,8 +126,8 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold text-slate-800">7. Contato e Suporte</h2>
             <p>
               Para suporte ou dúvidas:{" "}
-              <a href="mailto:suporte@glorybank.com.br" className="font-medium text-red-500 hover:underline">
-                suporte@glorybank.com.br
+              <a href="mailto:suporte@credbusiness.com.br" className="font-medium text-red-500 hover:underline">
+                suporte@credbusiness.com.br
               </a>
             </p>
           </section>

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Landmark, ShieldCheck, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade | GloryBank",
-  description: "Política de Privacidade do GloryBank — como coletamos, usamos e protegemos seus dados pessoais.",
+  title: "Política de Privacidade | CredBusiness",
+  description: "Política de Privacidade do CredBusiness — como coletamos, usamos e protegemos seus dados pessoais.",
 };
 
 export default function PrivacyPage() {
@@ -47,9 +47,9 @@ export default function PrivacyPage() {
 
         <div className="prose prose-slate max-w-none space-y-6 text-[15px] leading-relaxed text-slate-700">
           <section>
-            <h2 className="text-xl font-semibold text-slate-800">1. Sobre o GloryBank e o Asaas</h2>
+            <h2 className="text-xl font-semibold text-slate-800">1. Sobre o CredBusiness e o Asaas</h2>
             <p>
-              O GloryBank é uma plataforma de internet banking digital que utiliza a infraestrutura de
+              O CredBusiness é uma plataforma de internet banking digital que utiliza a infraestrutura de
               Banking as a Service (BaaS) da{" "}
               <a
                 href="https://www.asaas.com"
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
               </a>
               , Instituição de Pagamento autorizada e regulada pelo Banco Central do Brasil (BACEN).
               Os serviços financeiros (contas digitais, PIX, boletos, transferências) são prestados
-              pelo Asaas, enquanto o GloryBank provê a interface e experiência ao usuário final.
+              pelo Asaas, enquanto o CredBusiness provê a interface e experiência ao usuário final.
             </p>
           </section>
 
@@ -120,8 +120,8 @@ export default function PrivacyPage() {
               Nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a
               acessar, corrigir, portar ou solicitar a exclusão dos seus dados. Para exercer esses
               direitos, entre em contato pelo e-mail:{" "}
-              <a href="mailto:privacidade@glorybank.com.br" className="font-medium text-red-500 hover:underline">
-                privacidade@glorybank.com.br
+              <a href="mailto:privacidade@credbusiness.com.br" className="font-medium text-red-500 hover:underline">
+                privacidade@credbusiness.com.br
               </a>
               .
             </p>
@@ -131,8 +131,8 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-semibold text-slate-800">7. Contato</h2>
             <p>
               Dúvidas sobre esta política podem ser enviadas para{" "}
-              <a href="mailto:privacidade@glorybank.com.br" className="font-medium text-red-500 hover:underline">
-                privacidade@glorybank.com.br
+              <a href="mailto:privacidade@credbusiness.com.br" className="font-medium text-red-500 hover:underline">
+                privacidade@credbusiness.com.br
               </a>
               .
             </p>

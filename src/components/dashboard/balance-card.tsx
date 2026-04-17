@@ -39,17 +39,17 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
-              className="flex h-8 w-8 items-center justify-center rounded-lg"
+              className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden"
               style={{
                 background: "rgba(255,255,255,0.2)",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
               }}
             >
-              <Landmark className="h-4 w-4 text-white" strokeWidth={2} />
+              <img src="/favicon.png" alt="CredBusiness" className="h-6 w-6 object-contain" />
             </div>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
-                GloryBank
+                CredBusiness
               </p>
               <p className="text-[10px] text-white/50">Conta Corrente Digital</p>
             </div>

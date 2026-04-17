@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "GloryBank — Internet Banking Digital",
-    template: "%s | GloryBank",
+    default: "CredBusiness — Internet Banking Digital",
+    template: "%s | CredBusiness",
   },
   description:
-    "GloryBank — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança AES-256.",
+    "CredBusiness — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança AES-256.",
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
   themeColor: "#e30613",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "GloryBank",
+    title: "CredBusiness",
   },
 };
 

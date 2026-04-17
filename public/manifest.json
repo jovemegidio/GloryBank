@@ -1,6 +1,6 @@
 {
-  "name": "GloryBank — Internet Banking Digital",
-  "short_name": "GloryBank",
+  "name": "CredBusiness — Internet Banking Digital",
+  "short_name": "CredBusiness",
   "description": "Internet Banking digital completo com PIX, boletos, transferências e gestão financeira.",
   "start_url": "/dashboard",
   "display": "standalone",

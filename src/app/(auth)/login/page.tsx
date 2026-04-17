@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   const loginAsDemo = () => {
-    onSubmit({ email: "demo@glorybank.com", password: "Demo@123456" });
+    onSubmit({ email: "demo@credbusiness.com", password: "Demo@123456" });
   };
 
   return (
@@ -60,16 +60,15 @@ export default function LoginPage() {
         {/* Mobile logo */}
         <div className="mb-8 flex items-center gap-3 lg:hidden">
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-xl"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, #e30613, #ff4d4d)",
-              boxShadow: "0 4px 16px rgba(227,6,19,0.3)",
+              background: "transparent",
             }}
           >
-            <Landmark className="h-5 w-5 text-white" strokeWidth={2} />
+            <img src="/favicon.png" alt="CredBusiness" className="h-8 w-8 object-contain" />
           </div>
           <span className="text-xl font-bold text-slate-800">
-            Glory<span className="text-red-500">Bank</span>
+            Cred<span className="text-red-500">Business</span>
           </span>
         </div>
 
@@ -78,7 +77,7 @@ export default function LoginPage() {
             Acesse sua conta
           </h2>
           <p className="mt-1.5 text-[13px] text-slate-500">
-            Internet Banking — GloryBank
+            Internet Banking — CredBusiness
           </p>
         </div>
 
@@ -97,7 +96,7 @@ export default function LoginPage() {
             <div className="space-y-1">
               <p className="text-[12px] text-slate-500">
                 <span className="text-slate-400">Login: </span>
-                <span className="font-mono font-medium text-slate-700">demo@glorybank.com</span>
+                <span className="font-mono font-medium text-slate-700">demo@credbusiness.com</span>
               </p>
               <p className="text-[12px] text-slate-500">
                 <span className="text-slate-400">Senha: </span>
