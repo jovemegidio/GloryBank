@@ -1956,18 +1956,18 @@
           <div class="news-grid">
             <article class="news-card">
               <span>Proteção</span>
-              <strong>Camadas de autenticação e controle de sessão</strong>
-              <p>Autenticação com cookies seguros, tratamento de sessão e estrutura preparada para experiência de acesso confiável.</p>
+              <strong>Autenticação em duas etapas (2FA)</strong>
+              <p>Suporte a TOTP (Google Authenticator, Authy) com verificação RFC 6238, além de cookies HTTPOnly, controle de sessão e audit log por operação financeira.</p>
             </article>
             <article class="news-card">
               <span>Operação</span>
-              <strong>Fluxos financeiros com leitura simples</strong>
-              <p>Pix, boletos, transferências e extrato são mostrados com clareza, sem exigir esforço cognitivo do usuário.</p>
+              <strong>Fluxos financeiros via Asaas BaaS</strong>
+              <p>PIX, boletos, TED e extrato integrados via API Asaas. Cada transação é registrada em audit log com IP, user-agent e timestamp para conformidade regulatória.</p>
             </article>
             <article class="news-card">
-              <span>Apresentação</span>
-              <strong>Pronta para GitHub Pages e demonstração online</strong>
-              <p>Narrativa pronta para exibição pública, portfólio e demonstração institucional totalmente online.</p>
+              <span>Conformidade</span>
+              <strong>Infraestrutura regulada pelo BACEN</strong>
+              <p>Os serviços financeiros são prestados pela <a href="https://www.asaas.com" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700;">Asaas Pagamentos S.A.</a>, Instituição de Pagamento autorizada pelo Banco Central do Brasil, operando no modelo Banking as a Service (BaaS).</p>
             </article>
           </div>
         </div>
@@ -2012,6 +2012,13 @@
               </div>
               <a class="access-btn" href="#" onclick="goToApp('/login'); return false;">Entrar na conta</a>
               <p class="access-register">Não tem conta? <a href="#" onclick="goToApp('/register'); return false;">Criar conta grátis</a></p>
+              <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(0,0,0,0.07);">
+                <p style="font-size:11px; color:#888; line-height:1.6;">
+                  Serviços financeiros fornecidos por
+                  <a href="https://www.asaas.com" target="_blank" rel="noopener" style="color:#00a650; font-weight:700;">Asaas Pagamentos S.A.</a>
+                  &mdash; Instituição de Pagamento autorizada pelo Banco Central do Brasil (BACEN).
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -2113,8 +2120,14 @@
         </div>
 
         <div class="footer-copy">
-          <span>© 2026 GloryBank. Página de apresentação com direção visual bancária institucional.</span>
-          <span>Feita para demonstração online e portfólio.</span>
+          <span>© 2026 GloryBank. Os serviços financeiros são prestados pela
+            <a href="https://www.asaas.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:underline;">Asaas Pagamentos S.A.</a>,
+            Instituição de Pagamento regulada pelo BACEN (BaaS).
+          </span>
+          <span style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+            <a href="https://glorybank.vercel.app/privacidade" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45); text-decoration:underline; font-size:12px;">Política de Privacidade</a>
+            <a href="https://glorybank.vercel.app/termos" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45); text-decoration:underline; font-size:12px;">Termos de Uso</a>
+          </span>
         </div>
       </div>
     </footer>
