@@ -4,200 +4,801 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CredBusiness | Internet Banking Digital</title>
-  <meta name="description" content="CredBusiness apresenta uma experiência de internet banking com visual institucional, PIX, transferências, cartões e gestão financeira em um só lugar.">
+  <meta name="description" content="CredBusiness — Internet Banking digital com PIX, transferências, boletos e cartão virtual. Infraestrutura financeira Asaas BaaS regulada pelo BACEN.">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#dc0a17;--brand-dark:#a00;--brand-soft:#fff1f2;
+      --green:#00a650;--green-soft:rgba(0,166,80,.12);
+      --ink:#0f172a;--ink2:#334155;--ink3:#64748b;
+      --line:#e2e8f0;--bg:#fff;--bg2:#f8fafc;--dark:#0f172a;
+      --radius:20px;--max:1200px;
+      --ease:cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .w{width:min(var(--max),100% - 48px);margin:0 auto}
+
+    /* ── buttons ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;font-weight:700;font-size:14px;transition:all .25s var(--ease);cursor:pointer;border:none}
+    .btn-lg{min-height:52px;padding:0 28px;border-radius:16px;font-size:15px}
+    .btn-brand{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;box-shadow:0 8px 28px rgba(220,10,23,.22)}
+    .btn-brand:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(220,10,23,.3)}
+    .btn-outline{border:1.5px solid var(--line);color:var(--ink);background:#fff;min-height:42px;padding:0 18px}
+    .btn-outline:hover{border-color:var(--ink);background:var(--bg2)}
+    .btn-white{background:#fff;color:var(--brand);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.16)}
+    .btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
+    .btn-ghost:hover{background:rgba(255,255,255,.18)}
+    .btn-green{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(0,166,80,.28);min-height:44px;padding:0 20px}
+    .btn-green:hover{transform:translateY(-2px)}
+
+    /* ── topbar ── */
+    .topbar{background:var(--dark);color:rgba(255,255,255,.65);font-size:12px;font-weight:500}
+    .topbar .w{display:flex;align-items:center;justify-content:space-between;min-height:40px;gap:12px}
+    .topbar a{transition:color .2s}.topbar a:hover{color:#fff}
+    .topbar-l,.topbar-r{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    .baas-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;background:var(--green-soft);color:#4ade80;font-size:11px;font-weight:700}
+
+    /* ── header ── */
+    .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.04);transition:box-shadow .3s var(--ease)}
+    .header.scrolled{box-shadow:0 1px 24px rgba(0,0,0,.06)}
+    .header .w{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0}
+    .logo-icon img{width:100%;height:100%;object-fit:contain}
+    .logo-t{display:flex;flex-direction:column;line-height:1}
+    .logo-t b{font-size:19px;letter-spacing:-.03em}.logo-t b em{font-style:normal;color:var(--brand)}
+    .logo-t span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-top:4px}
+    .nav{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600;color:var(--ink2)}
+    .nav a{transition:color .2s}.nav a:hover{color:var(--ink)}
+    .hdr-btns{display:flex;align-items:center;gap:8px}
+
+    /* ── hero ── */
+    .hero{position:relative;background:linear-gradient(145deg,#c5000d 0%,var(--brand) 40%,#f03 100%);overflow:hidden}
+    .hero::after{content:"";position:absolute;width:600px;height:600px;border-radius:50%;right:-160px;top:20px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 65%);pointer-events:none}
+    .hero .w{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:clamp(48px,6vw,80px) 0 clamp(64px,8vw,100px)}
+    .hero-text{color:#fff}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+    .hero-eyebrow .tag{padding:2px 8px;border-radius:999px;background:rgba(0,166,80,.2);color:#86efac;font-size:10px;font-weight:900;letter-spacing:.08em}
+    .hero h1{font-size:clamp(38px,5.8vw,68px);font-weight:900;line-height:.96;letter-spacing:-.05em;max-width:620px;margin-bottom:20px}
+    .hero-desc{font-size:18px;line-height:1.7;color:rgba(255,255,255,.82);max-width:540px;margin-bottom:32px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+    .hero-note{font-size:13px;font-weight:600;color:rgba(255,255,255,.55)}
+
+    /* phone mockup */
+    .phone-wrap{display:grid;place-items:center;position:relative}
+    .phone{width:340px;border-radius:44px;background:#111;padding:12px;box-shadow:0 48px 80px rgba(0,0,0,.35);position:relative}
+    .phone::before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:26px;border-radius:0 0 16px 16px;background:#000;z-index:4}
+    .phone-screen{border-radius:34px;overflow:hidden;background:#fff;min-height:600px}
+    .scr-top{background:linear-gradient(180deg,#dc0a17,#b0000d);color:#fff;padding:20px 22px 24px}
+    .scr-status{display:flex;justify-content:space-between;font-size:15px;font-weight:800}
+    .scr-nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+    .scr-nav svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .scr-tabs{display:flex;justify-content:space-between;margin-top:24px;font-size:16px;font-weight:700;position:relative}
+    .scr-tabs::after{content:"";position:absolute;left:0;bottom:-8px;width:110px;height:3px;border-radius:999px;background:rgba(255,255,255,.9)}
+    .scr-bal{text-align:center;margin-top:32px}
+    .scr-bal small{display:block;font-size:15px;opacity:.88;margin-bottom:8px}
+    .scr-bal strong{display:block;font-size:38px;font-weight:900;line-height:1;letter-spacing:-.04em}
+    .scr-bal span{display:block;margin-top:8px;font-size:13px;opacity:.8}
+    .scr-link{text-align:center;margin-top:14px;font-weight:800;font-size:16px}
+    .scr-actions{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+    .scr-circle{width:58px;height:58px;border-radius:50%;background:#fff;color:var(--brand);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .scr-circle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .scr-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;font-size:12px;text-align:center;font-weight:600}
+    .scr-bottom{background:#f1f3f6;padding:24px 18px 20px}
+    .scr-bottom h3{font-size:20px;letter-spacing:-.03em;margin-bottom:14px}
+    .scr-card{background:#fff;border-radius:20px;padding:18px 16px;box-shadow:0 10px 28px rgba(0,0,0,.06);display:grid;grid-template-columns:1fr 72px;gap:10px;align-items:center}
+    .scr-card h4{font-size:14px;font-weight:500;line-height:1.4;margin-bottom:12px}
+    .scr-card a{color:#007a82;font-weight:800;text-decoration:underline;text-underline-offset:2px;font-size:13px}
+    .scr-dots{display:flex;justify-content:center;gap:5px;margin-top:12px}
+    .scr-dots span{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.18)}
+    .scr-dots span:first-child{background:var(--brand)}
+
+    .float-card{position:absolute;right:-8px;bottom:60px;width:220px;padding:16px;border-radius:20px;background:rgba(255,255,255,.94);box-shadow:0 20px 48px rgba(0,0,0,.12);backdrop-filter:blur(10px)}
+    .float-card b{display:block;font-size:15px;letter-spacing:-.02em;margin-bottom:8px}
+    .float-card p{font-size:12px;color:var(--ink2);margin-bottom:10px;line-height:1.5}
+    .float-chip{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:var(--brand-soft);color:var(--brand);font-size:11px;font-weight:800}
+
+    /* ── asaas banner ── */
+    .asaas{background:linear-gradient(135deg,#041e17,#0a3327);border-top:1px solid rgba(0,166,80,.18);border-bottom:1px solid rgba(0,166,80,.18);padding:28px 0}
+    .asaas .w{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .asaas-left{display:flex;align-items:center;gap:16px}
+    .asaas-mark{width:48px;height:48px;border-radius:14px;background:var(--green);display:grid;place-items:center;font-size:24px;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 8px 24px rgba(0,166,80,.3)}
+    .asaas h3{font-size:17px;font-weight:800;color:#fff;margin-bottom:4px}
+    .asaas-sub{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;max-width:480px}
+    .asaas-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .asaas-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;border:1px solid rgba(0,166,80,.22);color:#5dda9a;font-size:11px;font-weight:700}
+
+    /* ── stats ── */
+    .stats{position:relative;z-index:3;margin-top:-36px;padding-bottom:48px}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .stat{background:#fff;border-radius:24px;padding:28px;box-shadow:0 12px 36px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04)}
+    .stat b{display:block;font-size:32px;line-height:1;letter-spacing:-.05em;margin-bottom:8px}
+    .stat p{font-size:13px;color:var(--ink3);line-height:1.5}
+
+    /* ── sections ── */
+    .section{padding:clamp(60px,8vw,100px) 0}
+    .section-alt{background:var(--bg2)}
+    .stag{display:inline-block;font-size:12px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+    .sh2{font-size:clamp(30px,4.2vw,48px);font-weight:900;line-height:1.02;letter-spacing:-.04em;margin-bottom:14px;max-width:680px}
+    .sp{font-size:17px;color:var(--ink2);line-height:1.7;max-width:600px}
+
+    /* trust panel */
+    .trust{background:#fff;border-radius:28px;padding:36px;box-shadow:0 16px 40px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.04);display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .trust h3{font-size:clamp(26px,3vw,38px);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:14px}
+    .trust>div p{font-size:16px;color:var(--ink2);line-height:1.7}
+    .trust-items{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+    .trust-item{flex:1 1 170px;padding:20px;border-radius:20px;background:var(--bg2)}
+    .trust-item .ti{width:44px;height:44px;border-radius:14px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;margin-bottom:12px}
+    .trust-item .ti svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .trust-item b{display:block;font-size:16px;letter-spacing:-.02em;margin-bottom:6px}
+    .trust-item p{font-size:13px;color:var(--ink3);line-height:1.55}
+    .trust-visual{min-height:320px;border-radius:28px;background:linear-gradient(160deg,#fff5f6,#fff 60%);border:1px solid rgba(220,10,23,.08);padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .trust-visual::after{content:"";position:absolute;right:-50px;bottom:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(220,10,23,.1),transparent 65%)}
+    .bal-chip{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:800;color:var(--brand);width:fit-content}
+    .vbal{position:relative;z-index:1;border-radius:24px;padding:24px;color:#fff;background:linear-gradient(150deg,#d00,#f22);box-shadow:0 20px 40px rgba(220,10,23,.18)}
+    .vbal small{display:block;opacity:.82;margin-bottom:8px;font-size:14px}
+    .vbal strong{display:block;font-size:38px;line-height:1;letter-spacing:-.05em;margin-bottom:12px}
+    .vbal-links{display:flex;gap:8px;margin-top:14px}
+    .vbal-links span{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12px;font-weight:700}
+
+    /* products */
+    .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .pcard{background:#fff;border:1px solid rgba(0,0,0,.04);box-shadow:0 8px 28px rgba(0,0,0,.04);border-radius:24px;padding:28px;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+    .pcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+    .pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--brand),#f66)}
+    .pcard .idx{width:36px;height:36px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-weight:800;font-size:14px;display:grid;place-items:center;margin-bottom:18px}
+    .pcard b{display:block;font-size:16px;letter-spacing:-.02em;margin-bottom:8px}
+    .pcard p{font-size:14px;color:var(--ink3);line-height:1.6}
+    .pcard em{display:inline-block;margin-top:16px;color:var(--brand);font-style:normal;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+
+    /* benefits */
+    .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .bcard{background:#fff;border:1px solid rgba(0,0,0,.04);box-shadow:0 8px 28px rgba(0,0,0,.04);border-radius:24px;padding:28px;position:relative;overflow:hidden}
+    .bcard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--brand),#f66)}
+    .bcard b{display:block;font-size:18px;letter-spacing:-.03em;margin-bottom:10px}
+    .bcard p{font-size:14px;color:var(--ink3);line-height:1.6}
+    .bcard .vline{width:100%;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(220,10,23,.12),rgba(220,10,23,.4));margin-top:22px}
+
+    /* showcase */
+    .showcase{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border-radius:28px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04)}
+    .showcase-info{padding:36px;background:#fff}
+    .showcase-info h3{font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:12px}
+    .showcase-info>p{font-size:15px;color:var(--ink2);line-height:1.7;margin-bottom:24px}
+    .showcase-hl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .showcase-hl div{padding:16px;border-radius:18px;background:var(--bg2)}
+    .showcase-hl b{display:block;font-size:26px;line-height:1;letter-spacing:-.05em;margin-bottom:6px}
+    .showcase-hl span{font-size:12px;color:var(--ink3);line-height:1.5}
+    .showcase-app{padding:36px;background:linear-gradient(180deg,var(--brand),#a00);color:#fff;position:relative;overflow:hidden}
+    .showcase-app::after{content:"";position:absolute;right:-50px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 65%)}
+    .showcase-app h3{font-size:26px;font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:10px;position:relative;z-index:1}
+    .showcase-app>p{color:rgba(255,255,255,.8);font-size:14px;line-height:1.7;margin-bottom:20px;position:relative;z-index:1}
+    .app-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:1}
+    .app-card{border-radius:20px;padding:20px;background:rgba(255,255,255,.1);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12)}
+    .app-card .ic{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center;margin-bottom:12px}
+    .app-card .ic svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .app-card b{display:block;font-size:14px;margin-bottom:6px}
+    .app-card p{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5}
+
+    /* security */
+    .sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .sec-card{background:#fff;border:1px solid rgba(0,0,0,.04);box-shadow:0 8px 28px rgba(0,0,0,.04);border-radius:24px;padding:28px;position:relative;overflow:hidden;transition:transform .3s var(--ease)}
+    .sec-card:hover{transform:translateY(-3px)}
+    .sec-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--brand),#f66)}
+    .sec-card .badge{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:800;margin-bottom:16px}
+    .sec-card b{display:block;font-size:16px;letter-spacing:-.02em;margin-bottom:8px}
+    .sec-card p{font-size:14px;color:var(--ink3);line-height:1.6}
+
+    /* access */
+    .access{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+    .access-info .stag{margin-bottom:12px}
+    .access-info h2{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:14px}
+    .access-info>p{font-size:16px;color:var(--ink2);line-height:1.7;max-width:460px}
+    .access-feats{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .access-feat{flex:1 1 130px;padding:14px;border-radius:16px;background:var(--bg2)}
+    .access-feat b{display:block;font-size:14px;margin-bottom:3px;letter-spacing:-.02em}
+    .access-feat span{font-size:12px;color:var(--ink3)}
+    .access-card{background:#fff;border-radius:28px;padding:32px;box-shadow:0 20px 52px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.04)}
+    .access-hdr{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+    .access-hdr .mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));display:grid;place-items:center;color:#fff}
+    .access-hdr .mark svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .access-hdr b{font-size:16px;letter-spacing:-.02em}
+    .demo-box{margin-bottom:22px;padding:16px;border-radius:14px;background:var(--brand-soft);border:1px solid rgba(220,10,23,.08)}
+    .demo-box .dt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--brand);margin-bottom:10px}
+    .demo-creds{display:grid;gap:6px}
+    .demo-creds div{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .demo-creds span{font-size:13px;color:var(--ink3)}
+    .demo-creds strong{font-family:"SF Mono",Menlo,monospace;font-size:13px;font-weight:600}
+    .access-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border-radius:14px;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-dark));box-shadow:0 10px 28px rgba(220,10,23,.2);transition:all .25s var(--ease)}
+    .access-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(220,10,23,.28)}
+    .access-reg{text-align:center;margin-top:16px;font-size:14px;color:var(--ink3)}
+    .access-reg a{color:var(--brand);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+    .access-note{margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.06);font-size:11px;color:var(--ink3);line-height:1.6}
+    .access-note a{color:var(--green);font-weight:700}
+
+    /* download */
+    .dl-section{background:linear-gradient(180deg,#111,#1a1a1a);color:#fff;position:relative;overflow:hidden}
+    .dl-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;position:relative}
+    .dl-copy .stag{color:var(--brand)}
+    .dl-copy h2{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:14px;color:#fff}
+    .dl-copy>p{color:rgba(255,255,255,.6);font-size:16px;line-height:1.7;max-width:460px}
+    .dl-platforms{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+    .dl-plat{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.06);font-size:11px;font-weight:600;color:rgba(255,255,255,.6)}
+    .dl-plat svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .dl-cards{display:flex;flex-direction:column;gap:14px}
+    .dl-card{padding:24px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+    .dl-card-hdr{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .dl-card-ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
+    .dl-card-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .dl-card-t{font-size:16px;font-weight:800;letter-spacing:-.02em}
+    .dl-card-s{font-size:11px;color:rgba(255,255,255,.45);font-weight:500}
+    .dl-card p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:14px}
+    .dl-btn{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 18px;border-radius:12px;font-size:13px;font-weight:800;transition:all .2s var(--ease)}
+    .dl-btn:hover{transform:translateY(-1px)}
+    .dl-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+    /* cta */
+    .cta-panel{background:linear-gradient(145deg,#c5000d,#f22);color:#fff;border-radius:28px;padding:42px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;box-shadow:0 20px 52px rgba(220,10,23,.16);position:relative;overflow:hidden}
+    .cta-panel::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 60%)}
+    .cta-panel h2{font-size:clamp(24px,3vw,36px);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:10px;position:relative;z-index:1}
+    .cta-panel p{color:rgba(255,255,255,.82);font-size:16px;line-height:1.7;max-width:580px;position:relative;z-index:1}
+    .cta-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;position:relative;z-index:1}
+
+    /* footer */
+    .footer{background:var(--dark);color:rgba(255,255,255,.7);padding:36px 0 44px}
+    .footer-top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:18px}
+    .footer .logo-t b,.footer .logo-t b em{color:#fff}
+    .footer .logo-t span{color:rgba(255,255,255,.4)}
+    .footer-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px}
+    .footer-links a{transition:color .2s}.footer-links a:hover{color:#fff}
+    .footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.4)}
+    .footer-bottom a{color:rgba(255,255,255,.45);text-decoration:underline}
+
+    /* ── responsive ── */
+    @media(max-width:1120px){
+      .hero .w,.trust,.showcase,.access,.dl-grid,.cta-panel{grid-template-columns:1fr}
+      .cta-btns{justify-content:flex-start}
+    }
+    @media(max-width:880px){
+      .nav{display:none}
+      .stats-grid,.pgrid,.bgrid,.sec-grid,.showcase-hl,.app-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      .topbar{display:none}
+      .hero .w{padding:36px 0 56px}
+      .hero h1{font-size:36px}
+      .phone{width:min(100%,320px)}
+      .phone-screen{min-height:540px}
+      .float-card{position:static;width:100%;margin-top:14px}
+      .trust,.showcase-info,.showcase-app,.cta-panel{padding:24px}
+      .access-card{padding:24px}
+      .dl-card{padding:20px}
+      .hdr-btns .btn-outline{display:none}
+    }
+    @media(max-width:520px){
+      .w{width:min(var(--max),100% - 24px)}
+      .stat,.pcard,.bcard,.sec-card,.app-card{min-height:auto}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar">
+  <div class="w">
+    <div class="topbar-l">
+      <a href="#contas">Conta digital</a>
+      <a href="#cartoes">Cartões</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#download">Baixar app</a>
+      <a href="#acesso">Acesso ao IB</a>
+    </div>
+    <div class="topbar-r">
+      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Repositório</a>
+      <span class="baas-chip">BaaS por Asaas</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header" id="topo">
+  <div class="w">
+    <a class="logo" href="#topo">
+      <div class="logo-icon"><img src="favicon.png" alt="CredBusiness"></div>
+      <div class="logo-t"><b>Cred<em>Business</em></b><span>Internet Banking</span></div>
+    </a>
+    <nav class="nav">
+      <a href="#contas">Para você</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#app">App</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#download">Download</a>
+      <a href="#acesso">Acesso</a>
+    </nav>
+    <div class="hdr-btns">
+      <a class="btn btn-outline" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-outline" href="#download">Baixar app</a>
+      <a class="btn btn-brand" href="#acesso" style="min-height:42px;padding:0 18px">Acessar conta</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="w">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="tag">BAAS</span>
+        Infraestrutura financeira por <strong style="color:#86efac">Asaas</strong>
+      </div>
+      <h1>O digital com a solidez de um grande banco.</h1>
+      <p class="hero-desc">Gerencie suas finanças com PIX instantâneo, transferências, boletos e cartão virtual. Tudo em uma plataforma segura, completa e disponível 24 horas.</p>
+      <div class="hero-btns">
+        <a class="btn btn-lg btn-white" href="#acesso">Acessar Internet Banking ›</a>
+        <a class="btn btn-lg btn-ghost" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Abrir repositório</a>
+      </div>
+      <p class="hero-note">Sem filas, sem burocracia. Abra sua conta em minutos.</p>
+    </div>
+
+    <div class="phone-wrap" id="app">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="scr-top">
+            <div class="scr-status"><span>9:41</span><span>5G</span></div>
+            <div class="scr-nav">
+              <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>
+              <div style="display:flex;gap:14px;align-items:center">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z"/><path d="m3 3 18 18"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+              </div>
+            </div>
+            <div class="scr-tabs"><span>CredBusiness</span><span style="opacity:.7;font-weight:500">Outras contas</span></div>
+            <div class="scr-bal">
+              <small>Saldo total</small>
+              <strong>R$ 13.989,21</strong>
+              <span>Saldo + limite: R$ 33.989,21</span>
+            </div>
+            <div class="scr-link">Acessar extrato</div>
+            <div class="scr-actions">
+              <div class="scr-circle"><svg viewBox="0 0 24 24"><path d="m9 3 6 6-6 6-6-6 6-6Z"/><path d="m15 9 6 6-6 6-6-6"/></svg></div>
+              <div class="scr-circle"><svg viewBox="0 0 24 24"><rect x="6" y="10" width="12" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+              <div class="scr-circle"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M17 7.5a4 4 0 0 0-4-2.5h-2a4 4 0 0 0 0 8h2a4 4 0 0 1 0 8H9a4 4 0 0 1-4-2.5"/></svg></div>
+              <div class="scr-circle"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></div>
+            </div>
+            <div class="scr-labels"><span>Pix</span><span>Glory ID</span><span>Reservas</span><span>Mais</span></div>
+          </div>
+          <div class="scr-bottom">
+            <h3>Importante para você</h3>
+            <div class="scr-card">
+              <div>
+                <h4>Cadastre suas contas no débito automático.</h4>
+                <a href="#contas">Configurar débito automático</a>
+              </div>
+              <div style="width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,#eef5fa,#dbe9f4);display:grid;place-items:center;font-size:28px">🚀</div>
+            </div>
+            <div class="scr-dots"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card">
+        <b>Atalhos com cara de banco real</b>
+        <p>Saldo em destaque, ações circulares e leitura rápida no mobile.</p>
+        <span class="float-chip">Mobile banking premium</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ASAAS BANNER ═══ -->
+<section class="asaas">
+  <div class="w">
+    <div class="asaas-left">
+      <div class="asaas-mark">A</div>
+      <div>
+        <h3>Operado por Asaas Pagamentos S.A.</h3>
+        <p class="asaas-sub">Infraestrutura financeira regulada pelo Banco Central do Brasil. PIX, boletos, TED e cartão virtual no modelo Banking as a Service.</p>
+        <div class="asaas-tags">
+          <span class="asaas-tag">✓ Regulado BACEN</span>
+          <span class="asaas-tag">✓ Instituição de Pagamento</span>
+          <span class="asaas-tag">✓ BaaS Certificado</span>
+          <span class="asaas-tag">✓ PIX + Boleto + TED</span>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-green" href="https://www.asaas.com" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+      Conheça a Asaas
+    </a>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats">
+  <div class="w">
+    <div class="stats-grid">
+      <div class="stat"><b>24h</b><p>Consulta de saldo, extrato, PIX e transferências com disponibilidade contínua.</p></div>
+      <div class="stat"><b>4 atalhos</b><p>Ações principais sempre visíveis na primeira dobra da experiência mobile.</p></div>
+      <div class="stat"><b>Visual clean</b><p>Blocos brancos, contraste forte e leitura institucional em toda a página.</p></div>
+      <div class="stat"><b>100% demo</b><p>Apresentação orientada a portfólio, navegação online e storytelling do produto.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTA DIGITAL ═══ -->
+<section class="section" id="contas">
+  <div class="w">
+    <div style="margin-bottom:36px"><span class="stag">Conta digital</span>
+      <h2 class="sh2">Uma home com hierarquia visual de banco tradicional, sem perder o ritmo do digital.</h2>
+      <p class="sp">Direção institucional: vermelho forte, superfícies brancas, sombras discretas, tipografia firme e foco no que mais importa.</p>
+    </div>
+    <div class="trust">
+      <div>
+        <h3>Presença de marca forte logo no primeiro contato.</h3>
+        <p>O topo sticky, o hero dominante em vermelho e o mockup mobile centralizado reproduzem a sensação de solidez dos grandes bancos.</p>
+        <div class="trust-items">
+          <div class="trust-item">
+            <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <b>Segurança percebida</b>
+            <p>Interface clara, organizada e coerente com o setor bancário.</p>
+          </div>
+          <div class="trust-item">
+            <div class="ti"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M12 4v16"/></svg></div>
+            <b>Acesso direto</b>
+            <p>Saldo, extrato e atalhos rápidos sem ruído visual.</p>
+          </div>
+          <div class="trust-item">
+            <div class="ti"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+            <b>Leitura rápida</b>
+            <p>Contraste alto, blocos largos e espaços generosos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="trust-visual">
+        <div class="bal-chip">Saldo atualizado em tempo real</div>
+        <div class="vbal">
+          <small>Conta principal CredBusiness</small>
+          <strong>R$ 12.450,00</strong>
+          <p style="font-size:13px;opacity:.82;max-width:260px">PIX, transferências, boletos e gerenciamento centralizado.</p>
+          <div class="vbal-links"><span>Pix</span><span>Transferir</span><span>Extrato</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFÍCIOS ═══ -->
+<section class="section section-alt" id="beneficios">
+  <div class="w">
+    <div style="margin-bottom:36px"><span class="stag">Benefícios</span>
+      <h2 class="sh2">Blocos redesenhados para vender confiança, rotina e conveniência.</h2>
+      <p class="sp">A página comunica serviços e valor percebido, mais próximo da linguagem dos grandes bancos.</p>
+    </div>
+    <div class="pgrid">
+      <article class="pcard"><div class="idx">01</div><b>Saldo e limite no centro</b><p>O mockup replica a lógica do banking mobile: primeiro o valor, depois extrato e atalhos.</p><em>Prioridade visual</em></article>
+      <article class="pcard" id="cartoes"><div class="idx">02</div><b>Cartões e identidade digital</b><p>Ícones circulares remetem ao comportamento esperado em apps bancários maduros.</p><em>Atalhos claros</em></article>
+      <article class="pcard"><div class="idx">03</div><b>Mensagens úteis para o dia a dia</b><p>O bloco "Importante para você" cria narrativa de banco ativo, orientando tarefas recorrentes.</p><em>Utilidade contínua</em></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="w">
+    <div class="bgrid">
+      <article class="bcard"><b>Vermelho como protagonista</b><p>Hero e módulos de destaque usam paleta agressiva e memorável, forte para branding.</p><div class="vline"></div></article>
+      <article class="bcard"><b>Superfícies brancas para respirarem</b><p>Cards amplos e fundos claros reduzem o peso e entregam leitura institucional.</p><div class="vline"></div></article>
+      <article class="bcard"><b>Comportamento mobile-first</b><p>Layout colapsa bem preservando hero, mockup, CTA e seções principais.</p><div class="vline"></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOWCASE ═══ -->
+<section class="section section-alt">
+  <div class="w">
+    <div class="showcase">
+      <div class="showcase-info">
+        <span class="stag">Experiência</span>
+        <h3>Uma landing que parece produto real, não uma página de portfólio.</h3>
+        <p>Visual que conversa com banco de varejo: áreas informativas, CTAs objetivos, seção institucional e mockup como peça de venda.</p>
+        <div class="showcase-hl">
+          <div><b>1ª dobra</b><span>Hero vermelha com mockup central e promessa clara.</span></div>
+          <div><b>2º bloco</b><span>Números que reforçam disponibilidade e leitura de banco.</span></div>
+          <div><b>3ª camada</b><span>Benefícios como oferta comercial, não documentação.</span></div>
+          <div><b>Mobile</b><span>Responsivo com hierarquia preservada em telas pequenas.</span></div>
+        </div>
+      </div>
+      <div class="showcase-app">
+        <h3>O app continua sendo o centro da narrativa.</h3>
+        <p>Saldo, atalhos, mensagens e módulos rápidos com a mesma lógica de um banco consolidado.</p>
+        <div class="app-grid">
+          <div class="app-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="m3 12 7-7 4 4 7-7"/><path d="M14 2h7v7"/><path d="m21 12-7 7-4-4-7 7"/></svg></div><b>Pix e transferências</b><p>Ações de alta frequência com prioridade máxima.</p></div>
+          <div class="app-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 6.5A4 4 0 0 0 13 4h-2a4 4 0 0 0 0 8h2a4 4 0 0 1 0 8H9a4 4 0 0 1-4-2.5"/></svg></div><b>Saldo em evidência</b><p>Valor principal com escala tipográfica dominante.</p></div>
+          <div class="app-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="5" y="10" width="14" height="11" rx="2"/></svg></div><b>Percepção de segurança</b><p>Visual consistente com internet banking confiável.</p></div>
+          <div class="app-card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="16" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div><b>Mensagem comercial</b><p>Interface pronta para apresentação e captação.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEGURANÇA ═══ -->
+<section class="section" id="seguranca">
+  <div class="w">
+    <div style="margin-bottom:36px"><span class="stag">Segurança</span>
+      <h2 class="sh2">O discurso visual transmite estabilidade. O produto reforça essa promessa.</h2>
+      <p class="sp">Mensagem de segurança e credibilidade sem termos excessivamente técnicos.</p>
+    </div>
+    <div class="sec-grid">
+      <article class="sec-card"><span class="badge">Proteção</span><b>Autenticação em duas etapas (2FA)</b><p>TOTP (Google Authenticator, Authy) com RFC 6238, cookies HTTPOnly, controle de sessão e audit log.</p></article>
+      <article class="sec-card"><span class="badge">Operação</span><b>Fluxos financeiros via Asaas BaaS</b><p>PIX, boletos, TED e extrato integrados via API Asaas com audit log por operação.</p></article>
+      <article class="sec-card"><span class="badge">Conformidade</span><b>Infraestrutura regulada pelo BACEN</b><p>Serviços pela <a href="https://www.asaas.com" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">Asaas Pagamentos S.A.</a>, autorizada pelo BACEN (BaaS).</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACESSO ═══ -->
+<section class="section section-alt" id="acesso">
+  <div class="w">
+    <div class="access">
+      <div class="access-info">
+        <span class="stag">Internet Banking</span>
+        <h2>Acesse sua conta digital ou experimente a demonstração.</h2>
+        <p>Gerencie finanças, faça PIX, transferências e gere boletos direto pelo Internet Banking CredBusiness.</p>
+        <div class="access-feats">
+          <div class="access-feat"><b>PIX Instantâneo</b><span>Envie e receba em segundos</span></div>
+          <div class="access-feat"><b>Extrato completo</b><span>Histórico em tempo real</span></div>
+          <div class="access-feat"><b>Boletos e TED</b><span>Gere e pague online</span></div>
+        </div>
+      </div>
+      <div class="access-card">
+        <div class="access-hdr">
+          <div class="mark"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M5 10h14"/><path d="M7 10v8"/><path d="M12 10v8"/><path d="M17 10v8"/><path d="M12 2 4 6v4h16V6Z"/></svg></div>
+          <b>CredBusiness Internet Banking</b>
+        </div>
+        <div class="demo-box">
+          <p class="dt">Conta de Demonstração</p>
+          <div class="demo-creds">
+            <div><span>Login</span><strong>demo@credbusiness.com</strong></div>
+            <div><span>Senha</span><strong>Demo@123456</strong></div>
+          </div>
+        </div>
+        <a class="access-btn" href="#" onclick="goToApp('/login');return false">Entrar na conta</a>
+        <p class="access-reg">Não tem conta? <a href="#" onclick="goToApp('/register');return false">Criar conta grátis</a></p>
+        <div class="access-note">Serviços financeiros por <a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a> — Instituição de Pagamento autorizada pelo BACEN.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOWNLOAD ═══ -->
+<section class="section dl-section" id="download">
+  <div class="w">
+    <div class="dl-grid">
+      <div class="dl-copy">
+        <span class="stag">Baixe o CredBusiness</span>
+        <h2>Instale o aplicativo no seu computador ou celular.</h2>
+        <p>Assim como grandes bancos oferecem apps desktop, o CredBusiness pode ser instalado direto no seu dispositivo.</p>
+        <div class="dl-platforms">
+          <span class="dl-plat"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Windows</span>
+          <span class="dl-plat"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>macOS</span>
+          <span class="dl-plat"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Linux</span>
+          <span class="dl-plat"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>Android</span>
+          <span class="dl-plat"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>iOS</span>
+        </div>
+      </div>
+      <div class="dl-cards">
+        <div class="dl-card">
+          <div class="dl-card-hdr">
+            <div class="dl-card-ic" style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+            <div><div class="dl-card-t">CredBusiness Desktop</div><div class="dl-card-s">Internet Banking para computador</div></div>
+          </div>
+          <p>Instale o Internet Banking no seu computador. Acesse com um clique sem precisar de navegador.</p>
+          <a class="dl-btn" id="installDesktopBtn" href="#" style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;box-shadow:0 6px 20px rgba(220,10,23,.18)">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Instalar Desktop
+          </a>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-hdr">
+            <div class="dl-card-ic" style="background:var(--green-soft);color:var(--green)"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <div><div class="dl-card-t">CredBusiness Mobile</div><div class="dl-card-s">App para celular e tablet</div></div>
+          </div>
+          <p>Adicione à tela inicial do celular. Funciona como nativo com acesso rápido a tudo.</p>
+          <a class="dl-btn" id="installMobileBtn" href="#" style="background:var(--green-soft);color:var(--green)">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Adicionar à tela inicial
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section" style="padding-top:16px">
+  <div class="w">
+    <div class="cta-panel">
+      <div>
+        <h2>CredBusiness fala a linguagem visual de um grande banco.</h2>
+        <p>Landing reposicionada como vitrine bancária profissional: credibilidade, clareza e um mockup mobile com impacto imediato.</p>
+      </div>
+      <div class="cta-btns">
+        <a class="btn btn-lg btn-ghost" href="#topo">Voltar ao topo</a>
+        <a class="btn btn-lg btn-white" href="#" onclick="goToApp('/login');return false">Acessar Internet Banking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="w">
+    <div class="footer-top">
+      <a class="logo" href="#topo">
+        <div class="logo-icon"><img src="favicon.png" alt="CredBusiness"></div>
+        <div class="logo-t"><b>Cred<em>Business</em></b><span>Internet Banking</span></div>
+      </a>
+      <div class="footer-links">
+        <a href="#contas">Conta digital</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#download">Baixar app</a>
+        <a href="#acesso">Acessar conta</a>
+        <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CredBusiness. Serviços financeiros pela <a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a>, regulada pelo BACEN (BaaS).</span>
+      <span style="display:flex;gap:12px">
+        <a href="https://credbusiness.vercel.app/privacidade" target="_blank" rel="noopener">Privacidade</a>
+        <a href="https://credbusiness.vercel.app/termos" target="_blank" rel="noopener">Termos de Uso</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var CREDBUSINESS_APP_URL="https://credbusiness.vercel.app";
+function goToApp(p){
+  var h=location.hostname;
+  if(h==="localhost"||h==="127.0.0.1")window.location.href=location.origin+p;
+  else window.location.href=CREDBUSINESS_APP_URL+p;
+}
+
+var deferredPrompt=null;
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredPrompt=e});
+
+document.getElementById("installDesktopBtn").addEventListener("click",function(e){
+  e.preventDefault();
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null})}
+  else goToApp("/login");
+});
+
+document.getElementById("installMobileBtn").addEventListener("click",function(e){
+  e.preventDefault();
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null})}
+  else goToApp("/login");
+});
+
+// Header scroll shadow
+var hdr=document.querySelector(".header");
+window.addEventListener("scroll",function(){hdr.classList.toggle("scrolled",window.scrollY>10)},{passive:true});
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CredBusiness | Internet Banking Digital</title>
+  <meta name="description" content="CredBusiness — Internet Banking digital com PIX, transferências, boletos e cartão virtual. Infraestrutura financeira Asaas BaaS regulada pelo BACEN.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --brand: #e30613;
-      --brand-dark: #bf0010;
-      --brand-soft: #ffedf0;
-      --ink: #161616;
-      --ink-soft: #4f4f4f;
-      --line: #e7e7e7;
-      --surface: #ffffff;
-      --surface-alt: #f5f6f8;
-      --shadow: 0 24px 60px rgba(130, 10, 20, 0.12);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --container: 1180px;
+      --brand: #dc0a17;
+      --brand-dark: #b0000d;
+      --brand-glow: rgba(220,10,23,0.14);
+      --ink: #0f172a;
+      --ink-2: #334155;
+      --ink-3: #64748b;
+      --line: #e2e8f0;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --bg-dark: #0f172a;
+      --radius: 20px;
+      --container: 1200px;
+      --ease: cubic-bezier(.4,0,.2,1);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
 
     body {
-      font-family: "Manrope", sans-serif;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(227, 6, 19, 0.08), transparent 22%),
-        linear-gradient(180deg, #fff 0%, #fbfbfc 38%, #f2f4f7 100%);
+      background: var(--bg);
       -webkit-font-smoothing: antialiased;
-      line-height: 1.5;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .wrap{
+      width:min(var(--container),100% - 48px);
+      margin:0 auto;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    /* ── Topbar ── */
+    .topbar{
+      background:var(--bg-dark);
+      color:rgba(255,255,255,.7);
+      font-size:12px;
+      font-weight:500;
+    }
+    .topbar .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      min-height:40px;
+      gap:12px;
+    }
+    .topbar-left,.topbar-right{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+    .topbar a{transition:color .2s}
+    .topbar a:hover{color:#fff}
+    .baas-chip{
+      display:inline-flex;align-items:center;gap:5px;
+      padding:3px 10px;border-radius:999px;
+      background:rgba(0,166,80,.15);color:#4ade80;
+      font-size:11px;font-weight:700;letter-spacing:.03em;
     }
 
-    .page-shell {
-      overflow: hidden;
+    /* ── Header ── */
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(20px) saturate(180%);
+      border-bottom:1px solid rgba(0,0,0,.05);
+      transition:box-shadow .3s var(--ease);
     }
-
-    .topbar {
-      background: #111;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 12px;
+    .header.scrolled{box-shadow:0 1px 24px rgba(0,0,0,.06)}
+    .header .wrap{
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:72px;gap:16px;
     }
-
-    .asaas-topbar-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 22px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(0,166,80,0.18);
-      color: #5dda9a;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand-icon{
+      width:40px;height:40px;border-radius:12px;
+      overflow:hidden;flex-shrink:0;
     }
+    .brand-icon img{width:100%;height:100%;object-fit:contain}
+    .brand-text{display:flex;flex-direction:column;line-height:1}
+    .brand-text strong{font-size:19px;letter-spacing:-.03em;color:var(--ink)}
+    .brand-text strong em{font-style:normal;color:var(--brand)}
+    .brand-text span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-top:4px}
 
-    .topbar-inner,
-    .header-inner,
-    .hero-inner,
-    .section-inner,
-    .footer-inner {
-      width: min(var(--container), calc(100% - 32px));
-      margin: 0 auto;
+    nav.main-nav{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600;color:var(--ink-2)}
+    nav.main-nav a{position:relative;transition:color .2s}
+    nav.main-nav a:hover{color:var(--ink)}
+    nav.main-nav a::after{
+      content:"";position:absolute;left:0;bottom:-6px;
+      width:100%;height:2px;border-radius:2px;
+      background:var(--brand);transform:scaleX(0);
+      transition:transform .25s var(--ease);transform-origin:left;
     }
-
-    .topbar-inner {
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .topbar-links,
-    .header-nav,
-    .hero-actions,
-    .quick-links,
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .topbar a,
-    .footer-links a {
-      opacity: 0.82;
-      transition: opacity 0.2s ease;
-    }
-
-    .topbar a:hover,
-    .footer-links a:hover {
-      opacity: 1;
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(22, 22, 22, 0.06);
-    }
-
-    .header-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      box-shadow: 0 12px 28px rgba(227, 6, 19, 0.24);
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-
-    .brand-copy strong {
-      font-size: 20px;
-    }
-
-    .brand-copy span {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--ink-soft);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 5px;
-    }
-
-    .header-nav {
-      gap: 24px;
-      color: #333;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .header-nav a {
-      position: relative;
-    }
-
-    .header-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 100%;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--brand);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
+    nav.main-nav a:hover::after{transform:scaleX(1)}
     }
 
     .header-nav a:hover::after {
