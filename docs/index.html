@@ -66,6 +66,20 @@
       font-size: 12px;
     }
 
+    .asaas-topbar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 22px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(0,166,80,0.18);
+      color: #5dda9a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
     .topbar-inner,
     .header-inner,
     .hero-inner,
@@ -250,8 +264,7 @@
     .hero::before {
       content: "";
       position: absolute;
-      inset: 0 0 auto;
-      height: 560px;
+      inset: 0;
       background: linear-gradient(135deg, #d90012 0%, #e30613 46%, #ff2b2b 100%);
       border-bottom-left-radius: 40px;
       border-bottom-right-radius: 40px;
@@ -623,9 +636,100 @@
       font-weight: 800;
     }
 
-    .section {
-      padding: 84px 0;
+    .asaas-banner {
+      background: linear-gradient(135deg, #05221a 0%, #0a3327 100%);
+      border-top: 1px solid rgba(0,166,80,0.2);
+      border-bottom: 1px solid rgba(0,166,80,0.2);
+      padding: 28px 0;
     }
+
+    .asaas-banner-inner {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .asaas-logo-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .asaas-logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #00a650;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0,166,80,0.35);
+    }
+
+    .asaas-banner h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+
+    .asaas-banner p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .asaas-banner-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: #00a650;
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0,166,80,0.3);
+    }
+
+    .asaas-banner-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px rgba(0,166,80,0.4);
+    }
+
+    .asaas-attrs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .asaas-attr-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,166,80,0.25);
+      color: #5dda9a;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
 
     .section-alt {
       background: var(--surface-alt);
@@ -1511,7 +1615,6 @@
       }
 
       .hero::before {
-        height: 660px;
         border-bottom-left-radius: 28px;
         border-bottom-right-radius: 28px;
       }
@@ -1642,6 +1745,7 @@
         <div class="topbar-links">
           <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">Repositório</a>
           <a href="https://github.com/jovemegidio/GloryBank#readme" target="_blank" rel="noopener">Documentação</a>
+          <span class="asaas-topbar-badge">BaaS por Asaas</span>
         </div>
       </div>
     </div>
@@ -1679,7 +1783,10 @@
       <section class="hero">
         <div class="hero-inner">
           <div class="hero-copy">
-            <div class="eyebrow">Conta digital completa e segura</div>
+            <div class="eyebrow">
+              <span style="display:inline-flex;align-items:center;gap:5px;min-height:20px;padding:0 8px;border-radius:999px;background:rgba(0,166,80,0.22);color:#7eeab4;font-size:10px;font-weight:900;letter-spacing:0.08em;">BAAS</span>
+              Infraestrutura financeira por <strong style="color:#7eeab4;">Asaas</strong>
+            </div>
             <h1>O digital com a solidez visual de um grande banco.</h1>
             <p>Gerencie suas finanças com PIX instantâneo, transferências, boletos e cartão virtual. Tudo em uma plataforma segura, completa e disponível 24 horas, no computador ou no celular.</p>
             <div class="hero-actions">
@@ -1761,6 +1868,29 @@
               <span class="mini-chip">Mobile banking premium</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Asaas BaaS Infrastructure Banner -->
+      <section class="asaas-banner" aria-label="Infraestrutura financeira Asaas BaaS">
+        <div class="asaas-banner-inner">
+          <div class="asaas-logo-block">
+            <div class="asaas-logo-mark" aria-hidden="true">A</div>
+            <div>
+              <h3>Operado por Asaas Pagamentos S.A.</h3>
+              <p>Infraestrutura financeira regulada pelo Banco Central do Brasil. PIX, boletos, TED e cartão virtual disponíveis 24h no modelo Banking as a Service.</p>
+              <div class="asaas-attrs">
+                <span class="asaas-attr-pill">&#10003; Regulado BACEN</span>
+                <span class="asaas-attr-pill">&#10003; Instituição de Pagamento</span>
+                <span class="asaas-attr-pill">&#10003; BaaS Certificado</span>
+                <span class="asaas-attr-pill">&#10003; PIX + Boleto + TED</span>
+              </div>
+            </div>
+          </div>
+          <a class="asaas-banner-link" href="https://www.asaas.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px;" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+            Conheça a Asaas
+          </a>
         </div>
       </section>
 

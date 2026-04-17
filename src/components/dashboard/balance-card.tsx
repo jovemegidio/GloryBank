@@ -113,6 +113,25 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
             </div>
           </div>
         </div>
+
+        {/* Asaas attribution */}
+        <div
+          className="mt-5 pt-4 flex items-center gap-1.5"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          <span
+            className="flex items-center justify-center rounded-md text-[10px] font-black text-white"
+            style={{ background: "rgba(0,166,80,0.85)", width: 18, height: 18, flexShrink: 0 }}
+            aria-hidden="true"
+          >
+            A
+          </span>
+          <p className="text-[10px] text-white/45 leading-tight">
+            Serviços financeiros por{" "}
+            <span className="font-bold text-white/60">Asaas Pagamentos S.A.</span>
+            {" "}— Instituição de Pagamento autorizada pelo BACEN
+          </p>
+        </div>
       </div>
     </div>
   );
