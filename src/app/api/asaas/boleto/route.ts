@@ -6,6 +6,7 @@ import { boletoSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { DEMO_USER_ID, demoBoleto } from "@/lib/demo";
+import { createAuditLog } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -92,6 +93,14 @@ export async function POST(request: NextRequest) {
         recipientName: customerName,
         recipientCpfCnpj: customerCpfCnpj,
       },
+    });
+
+    await createAuditLog({
+      userId: user.id,
+      action: "BOLETO_CREATED",
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent"),
+      metadata: { amount },
     });
 
     return successResponse({

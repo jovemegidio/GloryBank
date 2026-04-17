@@ -11,6 +11,7 @@ import {
   Lock,
   Wifi,
   Landmark,
+  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
@@ -118,6 +119,33 @@ export default function CartaoPage() {
           <Button onClick={() => setShowModal(true)}>
             <Plus className="mr-2 h-4 w-4" />
             Solicitar cartão
+          </Button>
+        </div>
+
+        {/* Quick action: Pagar Fatura */}
+        <Link href="/dashboard/cartao/fatura">
+          <Card hover>
+            <div className="flex items-center gap-4">
+              <div
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                style={{
+                  background: "linear-gradient(135deg, #e30613, #ff4d4d)",
+                  boxShadow: "0 4px 12px rgba(227,6,19,0.2)",
+                }}
+              >
+                <Wallet className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-[14px] font-bold text-slate-800">
+                  Pagar ou Parcelar Fatura
+                </p>
+                <p className="text-[12px] text-slate-500">
+                  Pague a fatura do seu cartão de crédito
+                </p>
+              </div>
+            </div>
+          </Card>
+        </Link>
           </Button>
         </div>
 

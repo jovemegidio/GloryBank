@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -149,6 +150,17 @@ export default function RegisterPage() {
           >
             Entrar
           </Link>
+        </p>
+
+        <div className="mt-6">
+          <AsaasBadge variant="inline" />
+        </div>
+
+        <p className="mt-4 text-center text-[11px] text-slate-400">
+          Ao criar conta, você concorda com os{" "}
+          <Link href="/termos" className="underline hover:text-slate-600">Termos de Uso</Link>
+          {" "}e a{" "}
+          <Link href="/privacidade" className="underline hover:text-slate-600">Política de Privacidade</Link>.
         </p>
       </div>
     </>

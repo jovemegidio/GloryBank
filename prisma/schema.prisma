@@ -37,6 +37,7 @@ model User {
   notifications      Notification[]
   scheduledTransfers ScheduledTransfer[]
   cardRequests       CardRequest[]
+  auditLogs          AuditLog[]
 
   @@map("users")
 }
@@ -152,4 +153,21 @@ model CardRequest {
 
   @@index([userId])
   @@map("card_requests")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  action     String
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  metadata   String?  // JSON string with additional context
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
 }

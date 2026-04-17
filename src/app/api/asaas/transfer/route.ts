@@ -6,6 +6,7 @@ import { transferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_USER_ID, demoTransfer } from "@/lib/demo";
+import { createAuditLog } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -62,6 +63,14 @@ export async function POST(request: NextRequest) {
         pixKey,
         pixKeyType,
       },
+    });
+
+    await createAuditLog({
+      userId: user.id,
+      action: "TRANSFER_SENT",
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent"),
+      metadata: { amount, pixKeyType },
     });
 
     return successResponse(transfer);

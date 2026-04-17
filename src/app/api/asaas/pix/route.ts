@@ -6,6 +6,7 @@ import { pixTransferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_USER_ID, DEMO_PIX_KEYS, demoPIXQrCode, demoPIXTransfer } from "@/lib/demo";
+import { createAuditLog } from "@/lib/audit";
 
 // Send PIX
 export async function POST(request: NextRequest) {
@@ -62,6 +63,14 @@ export async function POST(request: NextRequest) {
         pixKey,
         pixKeyType,
       },
+    });
+
+    await createAuditLog({
+      userId: user.id,
+      action: "PIX_SENT",
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent"),
+      metadata: { amount, pixKeyType },
     });
 
     return successResponse(pixResult);

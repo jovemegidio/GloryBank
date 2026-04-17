@@ -1,4 +1,5 @@
 import { Landmark, ShieldCheck, Zap, Clock } from "lucide-react";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 export default function AuthLayout({
   children,
@@ -70,6 +71,11 @@ export default function AuthLayout({
                 <p className="text-[10px] text-white/50">{sub}</p>
               </div>
             ))}
+          </div>
+
+          {/* Asaas BaaS attribution — required by Asaas BaaS agreement */}
+          <div className="mt-8">
+            <AsaasBadge variant="inline" dark />
           </div>
         </div>
       </div>

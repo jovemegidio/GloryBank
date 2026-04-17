@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_MODE, DEMO_EMAIL, DEMO_PASSWORD, DEMO_USER } from "@/lib/demo";
+import { createAuditLog } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +51,13 @@ export async function POST(request: NextRequest) {
     // Create session
     const userAgent = request.headers.get("user-agent") || undefined;
     await createSession(user.id, userAgent, ip);
+
+    await createAuditLog({
+      userId: user.id,
+      action: "LOGIN",
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent"),
+    });
 
     return successResponse({
       user: {

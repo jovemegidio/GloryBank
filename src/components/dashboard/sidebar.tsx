@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 import {
   LayoutDashboard,
   ArrowUpDown,
@@ -18,19 +19,87 @@ import {
   Bell,
   CalendarClock,
   CreditCard,
+  Wallet,
+  TrendingUp,
+  Banknote,
+  Package,
+  Wrench,
+  Receipt,
 } from "lucide-react";
 import { useState } from "react";
 
-const menuItems = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Início" },
-  { href: "/dashboard/pix", icon: QrCode, label: "PIX" },
-  { href: "/dashboard/transferir", icon: ArrowUpDown, label: "Transferências" },
-  { href: "/dashboard/boleto", icon: FileText, label: "Boletos" },
-  { href: "/dashboard/extrato", icon: Clock, label: "Extrato" },
-  { href: "/dashboard/cartao", icon: CreditCard, label: "Cartão" },
-  { href: "/dashboard/agendamentos", icon: CalendarClock, label: "Agendamentos" },
-  { href: "/dashboard/notificacoes", icon: Bell, label: "Notificações" },
-  { href: "/dashboard/conta", icon: Settings, label: "Minha Conta" },
+interface MenuItem {
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+}
+
+interface MenuGroup {
+  category: string;
+  items: MenuItem[];
+}
+
+const menuGroups: MenuGroup[] = [
+  {
+    category: "",
+    items: [
+      { href: "/dashboard", icon: LayoutDashboard, label: "Início" },
+    ],
+  },
+  {
+    category: "Conta Corrente",
+    items: [
+      { href: "/dashboard/extrato", icon: Clock, label: "Extrato" },
+      { href: "/dashboard/conta", icon: Settings, label: "Minha Conta" },
+    ],
+  },
+  {
+    category: "Transferências",
+    items: [
+      { href: "/dashboard/pix", icon: QrCode, label: "PIX" },
+      { href: "/dashboard/transferir", icon: ArrowUpDown, label: "Transferir" },
+    ],
+  },
+  {
+    category: "Pagamentos e Recargas",
+    items: [
+      { href: "/dashboard/boleto", icon: FileText, label: "Boletos" },
+      { href: "/dashboard/agendamentos", icon: CalendarClock, label: "Agendamentos" },
+      { href: "/dashboard/pagamentos", icon: Receipt, label: "Pagamentos" },
+    ],
+  },
+  {
+    category: "Cartões",
+    items: [
+      { href: "/dashboard/cartao", icon: CreditCard, label: "Meus Cartões" },
+      { href: "/dashboard/cartao/fatura", icon: Wallet, label: "Pagar Fatura" },
+    ],
+  },
+  {
+    category: "Investimentos e Poupança",
+    items: [
+      { href: "/dashboard/investimentos", icon: TrendingUp, label: "Investimentos" },
+    ],
+  },
+  {
+    category: "Empréstimos e Financiamentos",
+    items: [
+      { href: "/dashboard/emprestimos", icon: Banknote, label: "Empréstimos" },
+    ],
+  },
+  {
+    category: "Outros Produtos",
+    items: [
+      { href: "/dashboard/produtos", icon: Package, label: "Produtos" },
+    ],
+  },
+  {
+    category: "Utilidades",
+    items: [
+      { href: "/dashboard/notificacoes", icon: Bell, label: "Notificações" },
+      { href: "/dashboard/utilidades", icon: Wrench, label: "Utilidades" },
+    ],
+  },
 ];
 
 interface SidebarProps {
@@ -113,55 +182,63 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        {(!collapsed || mobileSidebarOpen) && (
-          <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
-            Menu Principal
-          </p>
-        )}
-        <ul className="space-y-0.5">
-          {menuItems.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/dashboard" && pathname.startsWith(item.href));
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onMobileClose}
-                  title={collapsed && !mobileSidebarOpen ? item.label : undefined}
-                  className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-150 ${
-                    isActive
-                      ? "bg-red-600/15 text-red-300"
-                      : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200"
-                  }`}
-                >
-                  <item.icon
-                    className={`h-[18px] w-[18px] shrink-0 transition-colors ${
-                      isActive
-                        ? "text-red-400"
-                        : "text-slate-500 group-hover:text-slate-300"
-                    }`}
-                  />
-                  {(!collapsed || mobileSidebarOpen) && (
-                    <span className="truncate">{item.label}</span>
-                  )}
-                  {isActive && (!collapsed || mobileSidebarOpen) && (
-                    <span
-                      className="ml-auto h-1.5 w-1.5 rounded-full bg-red-400"
-                      aria-hidden="true"
-                    />
-                  )}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        {menuGroups.map((group, gi) => (
+          <div key={gi} className={gi > 0 ? "mt-4" : ""}>
+            {group.category && (!collapsed || mobileSidebarOpen) && (
+              <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
+                {group.category}
+              </p>
+            )}
+            {group.category && collapsed && !mobileSidebarOpen && gi > 0 && (
+              <div className="mx-auto mb-2 h-px w-6 bg-white/[0.06]" />
+            )}
+            <ul className="space-y-0.5">
+              {group.items.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/dashboard" && pathname.startsWith(item.href + "/")) ||
+                  (item.href !== "/dashboard" && pathname === item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={onMobileClose}
+                      title={collapsed && !mobileSidebarOpen ? item.label : undefined}
+                      className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-150 ${
+                        isActive
+                          ? "bg-red-600/15 text-red-300"
+                          : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200"
+                      }`}
+                    >
+                      <item.icon
+                        className={`h-[18px] w-[18px] shrink-0 transition-colors ${
+                          isActive
+                            ? "text-red-400"
+                            : "text-slate-500 group-hover:text-slate-300"
+                        }`}
+                      />
+                      {(!collapsed || mobileSidebarOpen) && (
+                        <span className="truncate">{item.label}</span>
+                      )}
+                      {isActive && (!collapsed || mobileSidebarOpen) && (
+                        <span
+                          className="ml-auto h-1.5 w-1.5 rounded-full bg-red-400"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </nav>
 
       {/* Security Badge */}
       {(!collapsed || mobileSidebarOpen) && (
         <div
-          className="mx-3 mb-3 rounded-xl p-3"
+          className="mx-3 mb-2 rounded-xl p-3"
           style={{
             background: "rgba(227,6,19,0.05)",
             border: "1px solid rgba(227,6,19,0.1)",
@@ -177,6 +254,11 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
             Conexão criptografada TLS 1.3
           </p>
         </div>
+      )}
+
+      {/* Asaas BaaS attribution — required by Asaas BaaS agreement */}
+      {(!collapsed || mobileSidebarOpen) && (
+        <AsaasBadge variant="footer" className="mx-3 mb-3" />
       )}
 
       {/* Collapsed security indicator */}

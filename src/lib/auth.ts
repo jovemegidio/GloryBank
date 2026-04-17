@@ -3,9 +3,10 @@ import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 import { DEMO_MODE, DEMO_USER_ID, DEMO_USER } from "./demo";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "fallback-secret-do-not-use-in-production"
-);
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET environment variable is not set. Generate one with: openssl rand -base64 32");
+}
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
 const SESSION_DURATION = 60 * 60 * 24 * 7; // 7 days in seconds
 
