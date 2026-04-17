@@ -243,12 +243,6 @@ img{max-width:100%;display:block}
 .access-mark{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));display:grid;place-items:center;color:#fff}
 .access-mark svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .access-hdr b{font-size:17px;letter-spacing:-.02em}
-.demo-area{margin-bottom:24px;padding:18px;border-radius:16px;background:var(--indigo-soft);border:1px solid rgba(79,70,229,.08)}
-.demo-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--indigo);margin-bottom:12px}
-.demo-creds{display:grid;gap:8px}
-.demo-creds div{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.demo-creds span{font-size:13px;color:var(--ink3)}
-.demo-creds strong{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;font-weight:600}
 .access-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:100px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));box-shadow:0 8px 28px rgba(79,70,229,.22);transition:all .3s var(--ease)}
 .access-cta:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(79,70,229,.3)}
 .access-reg{text-align:center;margin-top:16px;font-size:14px;color:var(--ink3)}
@@ -321,7 +315,6 @@ img{max-width:100%;display:block}
   .phone-screen{min-height:480px}
   .show-left,.show-right,.cta-band{padding:28px}
   .access-box{padding:28px}
-  .hdr-btns .btn-outline{display:none}
   .hero-trust{flex-direction:column;align-items:flex-start;gap:8px}
 }
 @media(max-width:520px){
@@ -345,9 +338,8 @@ img{max-width:100%;display:block}
       <a href="#acesso">Internet Banking</a>
     </div>
     <div class="topbar-r">
-      <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
       <span class="baas-chip">
-        <img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="Asaas" onerror="this.style.display='none'">
+       
         BaaS por Asaas
       </span>
     </div>
@@ -369,8 +361,7 @@ img{max-width:100%;display:block}
       <a href="#download">Download</a>
     </nav>
     <div class="hdr-btns">
-      <a class="btn btn-outline" href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-md btn-indigo" href="#acesso">Acessar conta</a>
+      <a class="btn btn-md btn-indigo" href="#" onclick="goToApp('/login');return false">Acessar conta</a>
     </div>
   </div>
 </header>
@@ -382,7 +373,7 @@ img{max-width:100%;display:block}
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        <img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="Asaas" onerror="this.style.display='none'">
+       
         Infraestrutura BaaS por <strong style="color:var(--gold-light);margin-left:4px">Asaas</strong>
       </div>
       <h1>Sua conta digital com a <span class="gold">solidez</span> que você merece.</h1>
@@ -458,7 +449,7 @@ img{max-width:100%;display:block}
         </div>
         <span class="partner-x">×</span>
         <div class="partner-logo">
-          <img src="https://avatars.githubusercontent.com/u/17380327?s=200" alt="Asaas Pagamentos S.A." onerror="this.onerror=null;this.parentElement.innerHTML='<span style=&quot;font-size:22px;font-weight:900;color:#00a650&quot;>A</span>'">
+          <img src="asaas-logo.svg" alt="Asaas Pagamentos S.A." style="filter:brightness(0) saturate(100%) invert(36%) sepia(95%) saturate(1000%) hue-rotate(130deg);padding:6px">
         </div>
       </div>
       <div class="asaas-content">
@@ -537,21 +528,21 @@ img{max-width:100%;display:block}
         <h4>PIX Instantâneo</h4>
         <p>Transfira e receba dinheiro em segundos. Disponível 24 horas, 7 dias por semana, sem taxas extras.</p>
         <span class="prod-tag">Disponível 24h</span>
-        <span class="prod-asaas"><img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="" onerror="this.style.display='none'">via Asaas</span>
+        <span class="prod-asaas">via Asaas</span>
       </article>
       <article class="prod-card">
         <div class="prod-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
         <h4>Cartão Virtual</h4>
         <p>Gere cartões virtuais para compras online com total segurança. Bloqueie e desbloqueie quando quiser.</p>
         <span class="prod-tag">Segurança extra</span>
-        <span class="prod-asaas"><img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="" onerror="this.style.display='none'">via Asaas</span>
+        <span class="prod-asaas">via Asaas</span>
       </article>
       <article class="prod-card">
         <div class="prod-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
         <h4>Boletos e TED</h4>
         <p>Gere boletos de cobrança e realize TEDs em poucos cliques. Tudo rastreável no extrato.</p>
         <span class="prod-tag">Praticidade</span>
-        <span class="prod-asaas"><img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="" onerror="this.style.display='none'">via Asaas</span>
+        <span class="prod-asaas">via Asaas</span>
       </article>
     </div>
   </div>
@@ -648,7 +639,7 @@ img{max-width:100%;display:block}
     <div class="access">
       <div class="access-left">
         <span class="tag-label"><span class="tag-dot"></span>Internet Banking</span>
-        <h2>Acesse sua conta ou experimente a demonstração.</h2>
+        <h2>Acesse sua conta digital.</h2>
         <p>Gerencie suas finanças, faça PIX, transferências e gere boletos diretamente pelo Internet Banking CredBusiness.</p>
         <div class="access-pills">
           <div class="access-pill"><b>PIX Instantâneo</b><span>Envie e receba em segundos</span></div>
@@ -661,16 +652,9 @@ img{max-width:100%;display:block}
           <div class="access-mark"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M5 10h14"/><path d="M7 10v8"/><path d="M12 10v8"/><path d="M17 10v8"/><path d="M12 2 4 6v4h16V6Z"/></svg></div>
           <b>CredBusiness Internet Banking</b>
         </div>
-        <div class="demo-area">
-          <p class="demo-label">Conta de Demonstração</p>
-          <div class="demo-creds">
-            <div><span>Login</span><strong>demo@credbusiness.com</strong></div>
-            <div><span>Senha</span><strong>Demo@123456</strong></div>
-          </div>
-        </div>
         <a class="access-cta" href="#" onclick="goToApp('/login');return false">Entrar na conta →</a>
         <p class="access-reg">Não tem conta? <a href="#" onclick="goToApp('/register');return false">Criar conta grátis</a></p>
-        <div class="access-foot">Serviços financeiros por <img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="Asaas" onerror="this.style.display='none'"><a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a> — Instituição de Pagamento autorizada pelo BACEN (BaaS).</div>
+        <div class="access-foot">Serviços financeiros por <a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a> — Instituição de Pagamento autorizada pelo BACEN (BaaS).</div>
       </div>
     </div>
   </div>
@@ -750,11 +734,10 @@ img{max-width:100%;display:block}
         <a href="#seguranca">Segurança</a>
         <a href="#download">Download</a>
         <a href="#acesso">Acessar conta</a>
-        <a href="https://github.com/jovemegidio/GloryBank" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 CredBusiness. Serviços financeiros por <img src="https://avatars.githubusercontent.com/u/17380327?s=28" alt="Asaas" onerror="this.style.display='none'"><a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a>, regulada pelo BACEN (BaaS).</span>
+      <span>© 2026 CredBusiness. Serviços financeiros por<a href="https://www.asaas.com" target="_blank" rel="noopener">Asaas Pagamentos S.A.</a>, regulada pelo BACEN (BaaS).</span>
       <span style="display:flex;gap:14px">
         <a href="https://credbusiness.vercel.app/privacidade" target="_blank" rel="noopener">Privacidade</a>
         <a href="https://credbusiness.vercel.app/termos" target="_blank" rel="noopener">Termos de Uso</a>
@@ -762,7 +745,7 @@ img{max-width:100%;display:block}
     </div>
     <div class="footer-baas">
       <div class="footer-baas-logo">
-        <img src="https://avatars.githubusercontent.com/u/17380327?s=200" alt="Asaas" onerror="this.onerror=null;this.parentElement.innerHTML='<span style=&quot;font-size:16px;font-weight:900;color:#00a650&quot;>A</span>'">
+        <img src="asaas-logo.svg" alt="Asaas" style="filter:brightness(0) saturate(100%) invert(36%) sepia(95%) saturate(1000%) hue-rotate(130deg)">
       </div>
       <p>Infraestrutura financeira operada por <strong style="color:rgba(255,255,255,.6)">Asaas Pagamentos S.A.</strong> — Instituição de Pagamento autorizada pelo Banco Central do Brasil no modelo Banking as a Service (BaaS).</p>
     </div>
