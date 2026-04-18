@@ -121,7 +121,7 @@ img{max-width:100%;display:block}
 .float-badge-2 p{font-size:11px;color:var(--gold-dark);line-height:1.4}
 
 /* ── Regulatory Strip ── */
-.reg-strip{background:#0a0e1a;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:14px 0}
+.reg-strip{background:var(--indigo-deeper);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:16px 0}
 .reg-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .reg-strip-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .reg-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
@@ -133,16 +133,16 @@ img{max-width:100%;display:block}
 .reg-tag{padding:3px 10px;border-radius:4px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);font-size:10px;font-weight:700;letter-spacing:.06em}
 
 /* ── Stats ── */
-.stats{position:relative;z-index:4;padding:60px 0}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.stat-card{background:#fff;border-radius:24px;padding:28px 24px;box-shadow:0 8px 32px rgba(0,0,0,.06);border:1px solid rgba(79,70,229,.06);transition:transform .3s var(--ease)}
-.stat-card:hover{transform:translateY(-3px)}
-.stat-num{font-size:36px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:8px;background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-card p{font-size:13px;color:var(--ink3);line-height:1.5}
+.stats{position:relative;z-index:4;padding:64px 0;background:var(--bg2);border-bottom:1px solid var(--line)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-card{background:#fff;border-radius:20px;padding:32px 28px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.05);transition:all .35s var(--ease)}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(79,70,229,.08)}
+.stat-num{font-size:34px;font-weight:900;line-height:1;letter-spacing:-.04em;margin-bottom:10px;background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-card p{font-size:13px;color:var(--ink3);line-height:1.55}
 
 /* ── Sections ── */
-.section{padding:clamp(64px,9vw,110px) 0}
-.section-alt{background:var(--bg2)}
+.section{padding:clamp(72px,10vw,120px) 0}
+.section-alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .section-dark{background:var(--indigo-deeper);color:#fff}
 .tag-label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--indigo);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
 .tag-label .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
@@ -451,8 +451,8 @@ img{max-width:100%;display:block}
   <div class="w">
     <div style="margin-bottom:48px">
       <span class="tag-label"><span class="tag-dot"></span>Conta digital</span>
-      <h2 class="sec-title">Tudo que você precisa em um internet banking completo.</h2>
-      <p class="sec-desc">Uma plataforma pensada para ser simples, rápida e segura. Com visual de banco, mas sem a burocracia de um.</p>
+      <h2 class="sec-title">Tudo que você precisa em um internet banking.</h2>
+      <p class="sec-desc">Gerencie todas as suas finanças em uma plataforma única — simples, rápida e segura, sem burocracia.</p>
     </div>
     <div class="split">
       <div class="split-info">
@@ -484,7 +484,7 @@ img{max-width:100%;display:block}
     <div style="margin-bottom:48px">
       <span class="tag-label"><span class="tag-dot"></span>Serviços</span>
       <h2 class="sec-title">Funcionalidades pensadas para o seu dia a dia financeiro.</h2>
-      <p class="sec-desc">Cada recurso foi projetado para trazer agilidade, transparência e controle total — operado via Asaas BaaS.</p>
+      <p class="sec-desc">Cada funcionalidade integrada com a infraestrutura Asaas para máxima agilidade e segurança.</p>
     </div>
     <div class="prod-grid">
       <article class="prod-card">
@@ -518,12 +518,12 @@ img{max-width:100%;display:block}
     <div style="margin-bottom:48px">
       <span class="tag-label"><span class="tag-dot"></span>Benefícios</span>
       <h2 class="sec-title">Por que escolher o CredBusiness?</h2>
-      <p class="sec-desc">Tecnologia, segurança e design pensados para quem leva finanças a sério.</p>
+      <p class="sec-desc">Tecnologia bancária de ponta, segurança institucional e experiência pensada para o seu dia a dia.</p>
     </div>
     <div class="ben-grid">
-      <article class="ben-card"><div class="bar"></div><h4>Zero burocracia</h4><p>Abra sua conta em minutos. Sem agência, sem papelada, sem dor de cabeça.</p></article>
-      <article class="ben-card"><div class="bar"></div><h4>Visual de banco real</h4><p>Interface profissional com experiência equivalente aos maiores bancos digitais do mercado.</p></article>
-      <article class="ben-card"><div class="bar"></div><h4>100% responsivo</h4><p>Funciona perfeitamente em celular, tablet e desktop. Instale como app nativo via PWA.</p></article>
+      <article class="ben-card"><div class="bar"></div><h4>Conta em minutos</h4><p>Abertura 100% digital, sem burocracia. Sem agência física, sem papelada.</p></article>
+      <article class="ben-card"><div class="bar"></div><h4>Operações com segurança</h4><p>Todas as transações protegidas com autenticação em dois fatores e criptografia de ponta.</p></article>
+      <article class="ben-card"><div class="bar"></div><h4>Acesse de qualquer lugar</h4><p>Disponível no celular, tablet e computador. Instale como aplicativo nativo via PWA.</p></article>
     </div>
   </div>
 </section>
@@ -534,18 +534,18 @@ img{max-width:100%;display:block}
     <div class="showcase">
       <div class="show-left">
         <span class="tag-label"><span class="tag-dot"></span>Experiência</span>
-        <h3>Uma plataforma completa de internet banking.</h3>
-        <p>Design que conversa com banco de varejo: áreas informativas, CTAs claros, seção institucional e mockup de impacto.</p>
+        <h3>Gestão financeira completa em um só lugar.</h3>
+        <p>Tenha visão total das suas finanças com ferramentas pensadas para agilidade e controle.</p>
         <div class="show-metrics">
-          <div class="show-metric"><b>1ª dobra</b><span>Hero impactante com saldo e atalhos rápidos.</span></div>
-          <div class="show-metric"><b>24/7</b><span>Operações financeiras disponíveis a qualquer momento.</span></div>
-          <div class="show-metric"><b>BaaS</b><span>Backend financeiro via Asaas Pagamentos.</span></div>
-          <div class="show-metric"><b>PWA</b><span>Instale como app nativo em qualquer dispositivo.</span></div>
+          <div class="show-metric"><b>24/7</b><span>Operações financeiras disponíveis a qualquer hora.</span></div>
+          <div class="show-metric"><b>Tempo real</b><span>Saldo e extrato atualizados instantaneamente.</span></div>
+          <div class="show-metric"><b>BaaS</b><span>Infraestrutura financeira Asaas regulada pelo BACEN.</span></div>
+          <div class="show-metric"><b>PWA</b><span>Instale como app nativo no celular ou computador.</span></div>
         </div>
       </div>
       <div class="show-right">
-        <h3>O app no centro da experiência financeira.</h3>
-        <p>Saldo, atalhos, histórico e funcionalidades rápidas com a mesma lógica dos grandes bancos.</p>
+        <h3>Seu banco no celular, tablet ou computador.</h3>
+        <p>Acesse saldo, extrato, PIX e transferências de qualquer dispositivo, a qualquer momento.</p>
         <div class="show-features">
           <div class="show-feat">
             <div class="show-feat-ico"><svg viewBox="0 0 24 24"><path d="m3 12 7-7 4 4 7-7"/><path d="M14 2h7v7"/></svg></div>
@@ -668,7 +668,7 @@ img{max-width:100%;display:block}
 </section>
 
 <!-- ═══ CTA ═══ -->
-<section class="section" style="padding-top:20px">
+<section class="section">
   <div class="w">
     <div class="cta-band">
       <div>
