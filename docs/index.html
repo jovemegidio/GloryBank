@@ -112,13 +112,7 @@ img{max-width:100%;display:block}
 .ph-tx-info{flex:1}.ph-tx-info b{display:block;font-size:13px;letter-spacing:-.01em}.ph-tx-info span{font-size:11px;color:var(--ink3)}
 .ph-tx-val{font-size:13px;font-weight:700}.ph-tx-val.neg{color:#ef4444}.ph-tx-val.pos{color:var(--green)}
 
-.float-badge{position:absolute;right:-12px;top:80px;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 16px 40px rgba(0,0,0,.1);backdrop-filter:blur(10px);z-index:3;max-width:200px}
-.float-badge b{display:block;font-size:14px;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
-.float-badge p{font-size:11px;color:var(--ink3);line-height:1.5;margin-bottom:8px}
-.float-badge .chip{display:inline-flex;padding:4px 10px;border-radius:999px;background:var(--indigo-soft);color:var(--indigo);font-size:10px;font-weight:800}
-.float-badge-2{position:absolute;left:-16px;bottom:100px;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-light));box-shadow:0 12px 32px rgba(212,160,23,.2);z-index:3;max-width:180px}
-.float-badge-2 b{display:block;font-size:13px;color:var(--ink);margin-bottom:4px}
-.float-badge-2 p{font-size:11px;color:var(--gold-dark);line-height:1.4}
+
 
 /* ── Regulatory Strip ── */
 .reg-strip{background:var(--indigo-deeper);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:16px 0}
@@ -151,9 +145,10 @@ img{max-width:100%;display:block}
 
 /* ── Conta Digital (split) ── */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.split-visual{position:relative;min-height:380px;border-radius:32px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:32px}
+.split-visual{position:relative;min-height:380px;border-radius:32px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:32px;gap:16px}
 .split-visual.gold-accent{background:linear-gradient(160deg,#1e1b4b,#312e81);border:1px solid rgba(212,160,23,.12)}
 .split-visual::after{content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.15),transparent 60%);pointer-events:none}
+.split-visual::before{content:"";position:absolute;left:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.2),transparent 60%);pointer-events:none}
 .vis-chip{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:700;color:rgba(255,255,255,.8);width:fit-content;margin-bottom:16px;position:relative;z-index:1}
 .vis-card{position:relative;z-index:1;border-radius:24px;padding:24px;color:#fff;background:linear-gradient(150deg,var(--indigo),var(--indigo-dark));box-shadow:0 20px 48px rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06)}
 .vis-card small{display:block;opacity:.7;margin-bottom:6px;font-size:13px}
@@ -293,7 +288,6 @@ img{max-width:100%;display:block}
   .cta-actions{justify-content:flex-start}
   .hero .w{padding:60px 0 80px}
   .phone-area{margin-top:40px}
-  .float-badge,.float-badge-2{position:static;max-width:100%;margin-top:14px}
 }
 @media(max-width:880px){
   .nav{display:none}
@@ -401,15 +395,6 @@ img{max-width:100%;display:block}
           </div>
         </div>
       </div>
-      <div class="float-badge">
-        <b>Banking premium</b>
-        <p>Experiência completa de internet banking no seu bolso.</p>
-        <span class="chip">CredBusiness App</span>
-      </div>
-      <div class="float-badge-2">
-        <b>PIX sem limites</b>
-        <p>Envie e receba 24h, todos os dias.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -472,6 +457,10 @@ img{max-width:100%;display:block}
           <strong>R$ 12.450,00</strong>
           <p style="font-size:13px;opacity:.7;max-width:240px">Gerencie PIX, transferências e boletos de forma centralizada.</p>
           <div class="vis-card-pills"><span>Pix</span><span>Transferir</span><span>Extrato</span></div>
+        </div>
+        <div style="display:flex;gap:8px;position:relative;z-index:1">
+          <span style="padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:700;color:rgba(255,255,255,.5)">🔒 2FA ativo</span>
+          <span style="padding:5px 14px;border-radius:999px;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.15);font-size:11px;font-weight:700;color:var(--gold-light)">⚡ PIX 24h</span>
         </div>
       </div>
     </div>
