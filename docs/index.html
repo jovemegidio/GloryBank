@@ -113,6 +113,17 @@ img{max-width:100%;display:block}
 .ph-tx-val{font-size:13px;font-weight:700}.ph-tx-val.neg{color:#ef4444}.ph-tx-val.pos{color:var(--green)}
 
 
+.float-badge{position:absolute;right:-12px;top:80px;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 16px 40px rgba(0,0,0,.1);backdrop-filter:blur(10px);z-index:3;max-width:200px}
+.float-badge-ico{width:36px;height:36px;border-radius:12px;background:var(--indigo-soft);color:var(--indigo);display:grid;place-items:center;margin-bottom:10px}
+.float-badge-ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.float-badge b{display:block;font-size:14px;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
+.float-badge p{font-size:11px;color:var(--ink3);line-height:1.5;margin-bottom:8px}
+.float-badge .chip{display:inline-flex;padding:4px 10px;border-radius:999px;background:var(--indigo-soft);color:var(--indigo);font-size:10px;font-weight:800}
+.float-badge-2{position:absolute;left:-16px;bottom:100px;padding:14px 18px;border-radius:18px;background:linear-gradient(135deg,var(--gold),var(--gold-light));box-shadow:0 12px 32px rgba(212,160,23,.2);z-index:3;max-width:180px}
+.float-badge-2-ico{width:32px;height:32px;border-radius:10px;background:rgba(0,0,0,.1);display:grid;place-items:center;margin-bottom:8px}
+.float-badge-2-ico svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.float-badge-2 b{display:block;font-size:13px;color:var(--ink);margin-bottom:4px}
+.float-badge-2 p{font-size:11px;color:var(--gold-dark);line-height:1.4}
 
 /* ── Regulatory Strip ── */
 .reg-strip{background:var(--indigo-deeper);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:16px 0}
@@ -288,6 +299,10 @@ img{max-width:100%;display:block}
   .cta-actions{justify-content:flex-start}
   .hero .w{padding:60px 0 80px}
   .phone-area{margin-top:40px}
+  .float-badge,.float-badge-2{position:static;max-width:100%;margin-top:14px;display:flex;gap:14px;align-items:center}
+  .float-badge-ico,.float-badge-2-ico{margin-bottom:0;flex-shrink:0}
+  .float-badge b,.float-badge-2 b{margin-bottom:2px}
+  .float-badge p,.float-badge-2 p{margin-bottom:0}
 }
 @media(max-width:880px){
   .nav{display:none}
@@ -364,7 +379,7 @@ img{max-width:100%;display:block}
           <div class="ph-top">
             <div class="ph-status"><span>9:41</span><span>5G ●●●</span></div>
             <p class="ph-greeting">Olá,</p>
-            <p class="ph-name">Egidio 👋</p>
+            <p class="ph-name">Egidio</p>
             <div class="ph-balance">
               <small>Saldo disponível</small>
               <strong>R$ 13.989,21</strong>
@@ -393,6 +408,21 @@ img{max-width:100%;display:block}
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="float-badge">
+        <div class="float-badge-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div>
+        <div>
+          <b>Banking premium</b>
+          <p>Experiência completa de internet banking no seu bolso.</p>
+          <span class="chip">CredBusiness App</span>
+        </div>
+      </div>
+      <div class="float-badge-2">
+        <div class="float-badge-2-ico"><svg viewBox="0 0 24 24"><path d="m9 3 6 6-6 6-6-6 6-6Z"/><path d="m15 9 6 6-6 6-6-6"/></svg></div>
+        <div>
+          <b>PIX sem limites</b>
+          <p>Envie e receba 24h, todos os dias.</p>
         </div>
       </div>
     </div>
@@ -459,8 +489,8 @@ img{max-width:100%;display:block}
           <div class="vis-card-pills"><span>Pix</span><span>Transferir</span><span>Extrato</span></div>
         </div>
         <div style="display:flex;gap:8px;position:relative;z-index:1">
-          <span style="padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:700;color:rgba(255,255,255,.5)">🔒 2FA ativo</span>
-          <span style="padding:5px 14px;border-radius:999px;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.15);font-size:11px;font-weight:700;color:var(--gold-light)">⚡ PIX 24h</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:700;color:rgba(255,255,255,.5)"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>2FA ativo</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:999px;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.15);font-size:11px;font-weight:700;color:var(--gold-light)"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="m13 2-2 10h5l-6 10 2-10H7l6-10Z"/></svg>PIX 24h</span>
         </div>
       </div>
     </div>
