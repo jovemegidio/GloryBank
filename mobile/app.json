@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "CredBusiness",
+    "slug": "credbusiness",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "credbusiness",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#e30613"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.credbusiness.app",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Use Face ID para acessar sua conta CredBusiness."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#e30613"
+      },
+      "package": "com.credbusiness.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}
