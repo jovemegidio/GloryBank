@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+*.log
+.env
+.env.*
+!.env.example
+mobile/node_modules
+mobile/.expo
+mobile/.next
+docs
+scripts
+*.md
+.vercel
+vercel.json
