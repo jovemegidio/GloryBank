@@ -153,10 +153,11 @@ export async function DELETE(request: Request) {
 // ─── TOTP helpers (RFC 6238, no external library required) ────────────────────
 
 async function hmacSHA1(key: Uint8Array, data: Uint8Array): Promise<Uint8Array> {
+  const keyBuffer = new Uint8Array(key).buffer;
   const cryptoKey = await crypto.subtle.importKey(
-    "raw", key, { name: "HMAC", hash: "SHA-1" }, false, ["sign"]
+    "raw", keyBuffer, { name: "HMAC", hash: "SHA-1" }, false, ["sign"]
   );
-  const signature = await crypto.subtle.sign("HMAC", cryptoKey, data);
+  const signature = await crypto.subtle.sign("HMAC", cryptoKey, new Uint8Array(data).buffer);
   return new Uint8Array(signature);
 }
 

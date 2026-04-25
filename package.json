@@ -11,7 +11,8 @@
     "db:push": "npx prisma db push",
     "db:generate": "npx prisma generate",
     "db:studio": "npx prisma studio",
-    "db:seed": "npx tsx prisma/seed.ts"
+    "db:seed": "npx tsx prisma/seed.ts",
+    "asaas:sandbox:test": "node --env-file=.env scripts/test-asaas-sandbox.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

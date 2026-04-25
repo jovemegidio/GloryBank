@@ -146,8 +146,6 @@ export default function CartaoPage() {
             </div>
           </Card>
         </Link>
-          </Button>
-        </div>
 
         {/* Cards List */}
         {cards.length === 0 ? (

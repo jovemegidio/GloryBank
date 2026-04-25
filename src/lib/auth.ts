@@ -1,12 +1,15 @@
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { prisma } from "./prisma";
 import { DEMO_MODE, DEMO_USER_ID, DEMO_USER } from "./demo";
 
-if (!process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET environment variable is not set. Generate one with: openssl rand -base64 32");
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("JWT_SECRET environment variable is not set. Generate one with: openssl rand -base64 32");
+  }
+  return new TextEncoder().encode(secret);
 }
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
 const SESSION_DURATION = 60 * 60 * 24 * 7; // 7 days in seconds
 
@@ -31,14 +34,14 @@ export async function createToken(payload: {
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(`${SESSION_DURATION}s`)
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 }
 
 export async function verifyToken(
   token: string
 ): Promise<{ userId: string; sessionId: string } | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     return payload as { userId: string; sessionId: string };
   } catch {
     return null;
@@ -68,20 +71,35 @@ export async function createSession(
   });
 
   const cookieStore = await cookies();
+  const isSecure =
+    process.env.NODE_ENV === "production" &&
+    process.env.COOKIE_SECURE !== "false";
+
   cookieStore.set("session", jwt, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isSecure,
     sameSite: "lax",
     path: "/",
     maxAge: SESSION_DURATION,
   });
 
-  return session;
+  return { session, token: jwt };
+}
+
+async function getRequestSessionToken(): Promise<string | null> {
+  const requestHeaders = await headers();
+  const authorization = requestHeaders.get("authorization");
+
+  if (authorization?.startsWith("Bearer ")) {
+    return authorization.slice("Bearer ".length).trim();
+  }
+
+  const cookieStore = await cookies();
+  return cookieStore.get("session")?.value ?? null;
 }
 
 export async function getSession() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("session")?.value;
+  const token = await getRequestSessionToken();
 
   if (!token) return null;
 
@@ -120,7 +138,7 @@ export async function getSession() {
 
 export async function destroySession() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("session")?.value;
+  const token = await getRequestSessionToken();
 
   if (token) {
     const payload = await verifyToken(token);
@@ -137,13 +155,19 @@ export async function destroySession() {
 export async function createDemoSession() {
   const jwt = await createToken({ userId: DEMO_USER_ID, sessionId: "demo-session" });
   const cookieStore = await cookies();
+  const isSecureDemoSession =
+    process.env.NODE_ENV === "production" &&
+    process.env.COOKIE_SECURE !== "false";
+
   cookieStore.set("session", jwt, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isSecureDemoSession,
     sameSite: "lax",
     path: "/",
     maxAge: SESSION_DURATION,
   });
+
+  return jwt;
 }
 
 export async function getCurrentUser() {
