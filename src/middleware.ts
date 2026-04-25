@@ -7,6 +7,7 @@ const JWT_SECRET = new TextEncoder().encode(
 
 const PUBLIC_PATHS = ["/login", "/register", "/privacidade", "/termos", "/api/auth/login", "/api/auth/register", "/api/auth/demo", "/api/asaas/webhook"];
 const AUTH_PAGES = ["/login", "/register"];
+const PUBLIC_FILE = /\.(?:png|jpg|jpeg|gif|webp|svg|ico)$/i;
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -17,6 +18,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
     pathname.startsWith("/icons/") ||
+    PUBLIC_FILE.test(pathname) ||
     pathname === "/manifest.json" ||
     pathname === "/sw.js" ||
     pathname === "/"

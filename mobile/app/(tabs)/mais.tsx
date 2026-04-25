@@ -5,6 +5,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Linking,
+  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -41,6 +43,27 @@ export default function MaisScreen() {
         { label: 'Transferir', icon: 'send', route: '/transferir' },
         { label: 'Gerar Boleto', icon: 'file-text', route: '/boleto' },
         { label: 'Cobrar via PIX', icon: 'dollar-sign', route: '/cobrar' },
+      ],
+    },
+    {
+      title: 'Suporte',
+      items: [
+        {
+          label: 'WhatsApp (0800 009 0037)',
+          icon: 'message-circle',
+          onPress: () => Linking.openURL('https://wa.me/5508000090037').catch(() =>
+            Alert.alert('Erro', 'Não foi possível abrir o WhatsApp')),
+        },
+        {
+          label: 'Ligar para suporte',
+          icon: 'phone',
+          onPress: () => Linking.openURL('tel:08000090037'),
+        },
+        {
+          label: 'Enviar e-mail',
+          icon: 'mail',
+          onPress: () => Linking.openURL('mailto:contato@asaas.com.br'),
+        },
       ],
     },
     {

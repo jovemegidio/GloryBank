@@ -37,7 +37,7 @@ export function CardHeader({ title, subtitle, right }: CardHeaderProps) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.card,
-    borderRadius: radius.xl,
+    borderRadius: radius.lg,
     borderWidth: 1,
     borderColor: colors.cardBorder,
     ...shadows.md,

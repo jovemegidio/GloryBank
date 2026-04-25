@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { asaasConfig } from "@/lib/asaas-config";
 
 export interface AsaasSealProps {
@@ -48,48 +47,44 @@ export function AsaasSeal({
     "mono-black": asaasConfig.seal.monoBlack,
     "mono-white": asaasConfig.seal.monoWhite,
   };
-  const imageUrl = urls[variant];
+  const configuredImageUrl = urls[variant];
+  const imageUrl = configuredImageUrl || "/asaas-logo.svg";
+  const isFallbackLogo = !configuredImageUrl;
   const isDark = variant === "mono-white";
 
-  const sealContent = imageUrl ? (
-    <Image
-      src={imageUrl}
-      alt={ariaLabel}
-      width={width}
-      height={height}
-      style={{ width, height, objectFit: "contain" }}
-      priority={false}
-    />
-  ) : (
-    /* Placeholder textual — substituir pelas imagens oficiais do Asaas após homologação */
+  const sealContent = (
     <span
-      className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1"
+      className="inline-flex items-center justify-center rounded-md"
       style={{
-        background: isDark ? "rgba(255,255,255,0.15)" : "rgba(0,166,80,0.08)",
-        border: isDark ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(0,166,80,0.2)",
+        width,
+        minHeight: height,
+        padding: isFallbackLogo ? "6px 10px" : 0,
+        background: isFallbackLogo
+          ? "#00a650"
+          : "transparent",
+        border: isFallbackLogo
+          ? isDark
+            ? "1px solid rgba(255,255,255,0.18)"
+            : "1px solid rgba(0,166,80,0.2)"
+          : "none",
+        boxShadow: isFallbackLogo && !isDark ? "0 4px 14px rgba(0,166,80,0.16)" : undefined,
       }}
       aria-label={ariaLabel}
       role="img"
     >
-      <span
-        className="flex items-center justify-center rounded text-[9px] font-black text-white"
+      <img
+        src={imageUrl}
+        alt={ariaLabel}
+        width={width}
+        height={height}
         style={{
-          background: "#00a650",
-          width: 16,
-          height: 16,
-          flexShrink: 0,
+          display: "block",
+          width: isFallbackLogo ? Math.max(58, width - 18) : width,
+          height: "auto",
+          maxHeight: isFallbackLogo ? Math.max(12, height - 10) : height,
+          objectFit: "contain",
         }}
-        aria-hidden="true"
-      >
-        A
-      </span>
-      <span
-        className="text-[10px] font-semibold leading-none"
-        style={{ color: isDark ? "rgba(255,255,255,0.75)" : "#00a650" }}
-      >
-        Serviços financeiros{" "}
-        <strong style={{ color: isDark ? "white" : "#007a3d" }}>Asaas</strong>
-      </span>
+      />
     </span>
   );
 

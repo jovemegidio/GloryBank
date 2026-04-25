@@ -3,6 +3,7 @@ import type { TransactionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/lib/api-response";
 import { DEMO_MODE } from "@/lib/demo";
+import { sendExpoPushNotification } from "@/lib/push-notifications";
 
 const STATUS_MAP: Record<string, string> = {
   PAYMENT_CONFIRMED: "CONFIRMED",
@@ -71,15 +72,17 @@ export async function POST(request: NextRequest) {
 
       if (transaction) {
         const isPaymentEvent = event.startsWith("PAYMENT_");
-        await prisma.notification.create({
-          data: {
-            userId: transaction.userId,
-            title: isPaymentEvent ? "Pagamento confirmado" : "Transferencia atualizada",
-            message: isPaymentEvent
-              ? `Recebemos a confirmacao de um pagamento de R$ ${Number(transaction.amount).toFixed(2)}.`
-              : `A transferencia vinculada ao Asaas foi atualizada para ${newStatus}.`,
-          },
-        });
+        const title = isPaymentEvent ? "Pagamento confirmado" : "Transferencia atualizada";
+        const message = isPaymentEvent
+          ? `Recebemos a confirmacao de um pagamento de R$ ${Number(transaction.amount).toFixed(2)}.`
+          : `A transferencia vinculada ao Asaas foi atualizada para ${newStatus}.`;
+
+        await prisma.notification.create({ data: { userId: transaction.userId, title, message } });
+
+        const userRecord = await prisma.user.findUnique({ where: { id: transaction.userId }, select: { pushToken: true } });
+        if (userRecord?.pushToken) {
+          await sendExpoPushNotification(userRecord.pushToken, title, message);
+        }
       }
     }
 

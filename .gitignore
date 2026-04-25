@@ -49,6 +49,7 @@ prisma/migrations/
 # IDE
 .idea/
 .vscode/
+.claude/
 *.swp
 *.swo
 next-env.d.ts

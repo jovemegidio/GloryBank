@@ -452,10 +452,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div
-                className="flex h-12 w-12 items-center justify-center rounded-2xl text-[22px] font-black text-white flex-shrink-0"
+                className="flex h-12 items-center justify-center rounded-xl px-3 flex-shrink-0"
                 style={{ background: "#00a650", boxShadow: "0 8px 24px rgba(0,166,80,0.35)" }}
               >
-                A
+                <Image src="/asaas-logo.svg" alt="Asaas" width={82} height={14} className="h-auto w-[82px]" />
               </div>
               <div>
                 <p className="text-[18px] font-extrabold text-white tracking-tight mb-1">
@@ -546,8 +546,8 @@ export default function Home() {
               , Instituição de Pagamento autorizada pelo Banco Central do Brasil (BACEN), operando no modelo Banking as a Service (BaaS).
             </p>
             <div className="flex items-center gap-2 shrink-0">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md text-[10px] font-black text-white" style={{ background: "#00a650" }}>
-                A
+              <div className="flex h-7 items-center justify-center rounded-md px-2" style={{ background: "#00a650" }}>
+                <Image src="/asaas-logo.svg" alt="Asaas" width={56} height={10} className="h-auto w-14" />
               </div>
               <span className="text-[11px] font-bold text-white/40">Powered by Asaas</span>
             </div>

@@ -41,8 +41,8 @@ export const colors = {
 
 export const gradients = {
   primary: ['#cc0511', '#e30613', '#ff2d3a'] as const,
-  sidebar: ['#1a1a2e', '#16162a'] as const,
-  card: ['#1a1a2e', '#2d1b4e', '#1a1a2e'] as const,
+  sidebar: ['#ffffff', '#f7f8fa'] as const,
+  card: ['#111111', '#2a1114', '#bf0010'] as const,
 } as const;
 
 export const spacing = {
@@ -58,9 +58,9 @@ export const spacing = {
 export const radius = {
   sm: 8,
   md: 12,
-  lg: 16,
-  xl: 20,
-  xxl: 24,
+  lg: 14,
+  xl: 18,
+  xxl: 22,
   full: 999,
 } as const;
 

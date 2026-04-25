@@ -115,7 +115,7 @@ export default function ContaPage() {
               Minha Conta
             </h1>
             <p className="text-sm text-slate-500">
-              Gerencie suas informaÃ§Ãµes e seguranÃ§a
+              Gerencie suas informações e segurança
             </p>
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function ContaPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-400" />
-                  SeguranÃ§a
+                  Segurança
                 </CardTitle>
               </CardHeader>
 
@@ -186,7 +186,7 @@ export default function ContaPage() {
                   <div>
                     <p className="text-sm font-medium">Status da Conta</p>
                     <p className="text-xs text-slate-500">
-                      Conta bancÃ¡ria digital
+                      Conta bancária digital
                     </p>
                   </div>
                   <Badge variant="success">
@@ -196,9 +196,9 @@ export default function ContaPage() {
 
                 <div className="flex items-center justify-between rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
                   <div>
-                    <p className="text-sm font-medium">VerificaÃ§Ã£o</p>
+                    <p className="text-sm font-medium">Verificação</p>
                     <p className="text-xs text-slate-500">
-                      VerificaÃ§Ã£o de identidade
+                      Verificação de identidade
                     </p>
                   </div>
                   <Badge
@@ -268,7 +268,7 @@ export default function ContaPage() {
                       }
                     }}
                   >
-                    Criar chave aleatÃ³ria
+                    Criar chave aleatória
                   </Button>
                 </div>
               )}

@@ -13,6 +13,7 @@ import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-res
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_USER_ID, DEMO_PIX_KEYS, demoPIXQrCode, demoPIXTransfer } from "@/lib/demo";
 import { createAuditLog } from "@/lib/audit";
+import { checkFraud } from "@/lib/fraud-detection";
 
 // Send PIX
 export async function POST(request: NextRequest) {
@@ -42,6 +43,12 @@ export async function POST(request: NextRequest) {
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
     const normalizedPixKey = normalizePixKey(pixKey, pixKeyType);
+
+    // Fraud check
+    if (user.id !== DEMO_USER_ID) {
+      const fraud = await checkFraud(user.id, amount, ip);
+      if (fraud.blocked) return errorResponse(fraud.reason ?? "Transação bloqueada por segurança", 429);
+    }
 
     // Demo mode: return mock PIX result
     if (user.id === DEMO_USER_ID) {

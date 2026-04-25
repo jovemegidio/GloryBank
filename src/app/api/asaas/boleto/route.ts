@@ -7,6 +7,7 @@ import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-res
 import { checkRateLimit } from "@/lib/rate-limit";
 import { DEMO_USER_ID, demoBoleto } from "@/lib/demo";
 import { createAuditLog } from "@/lib/audit";
+import { checkFraud } from "@/lib/fraud-detection";
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,6 +34,12 @@ export async function POST(request: NextRequest) {
 
     const { customerName, customerCpfCnpj, amount, dueDate, description } =
       validation.data;
+
+    // Fraud check
+    if (user.id !== DEMO_USER_ID) {
+      const fraud = await checkFraud(user.id, amount, ip);
+      if (fraud.blocked) return errorResponse(fraud.reason ?? "Transação bloqueada por segurança", 429);
+    }
 
     // Demo mode: return mock boleto
     if (user.id === DEMO_USER_ID) {

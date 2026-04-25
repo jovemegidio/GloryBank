@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,12 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import * as LocalAuthentication from 'expo-local-authentication';
+import * as SecureStore from 'expo-secure-store';
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
 import { useAuth } from '@/lib/auth';
+import * as api from '@/lib/api';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { colors, gradients, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
@@ -23,6 +28,26 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [biometricAvailable, setBiometricAvailable] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const hasHardware = await LocalAuthentication.hasHardwareAsync();
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+      const saved = await SecureStore.getItemAsync('biometric_email').catch(() => null);
+      setBiometricAvailable(hasHardware && isEnrolled && !!saved);
+    })();
+  }, []);
+
+  const registerPushToken = async () => {
+    try {
+      if (!Device.isDevice) return;
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== 'granted') return;
+      const token = (await Notifications.getExpoPushTokenAsync()).data;
+      await api.post('/notifications/push-token', { token });
+    } catch {}
+  };
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -31,6 +56,47 @@ export default function LoginScreen() {
     }
     const success = await login(email.trim(), password);
     if (success) {
+      await registerPushToken();
+      const hasHardware = await LocalAuthentication.hasHardwareAsync();
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+      if (hasHardware && isEnrolled) {
+        const saved = await SecureStore.getItemAsync('biometric_email').catch(() => null);
+        if (!saved) {
+          Alert.alert(
+            'Usar biometria?',
+            'Deseja usar digital ou Face ID para entrar nas próximas vezes?',
+            [
+              { text: 'Não', style: 'cancel' },
+              {
+                text: 'Sim',
+                onPress: async () => {
+                  await SecureStore.setItemAsync('biometric_email', email.trim());
+                  await SecureStore.setItemAsync('biometric_password', password);
+                },
+              },
+            ]
+          );
+        }
+      }
+      router.replace('/(tabs)');
+    }
+  };
+
+  const handleBiometricLogin = async () => {
+    const result = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'Confirme sua identidade',
+      fallbackLabel: 'Usar senha',
+    });
+    if (!result.success) return;
+    const savedEmail = await SecureStore.getItemAsync('biometric_email').catch(() => null);
+    const savedPassword = await SecureStore.getItemAsync('biometric_password').catch(() => null);
+    if (!savedEmail || !savedPassword) {
+      Alert.alert('Erro', 'Credenciais salvas não encontradas. Faça login com senha.');
+      return;
+    }
+    const success = await login(savedEmail, savedPassword);
+    if (success) {
+      await registerPushToken();
       router.replace('/(tabs)');
     }
   };
@@ -103,6 +169,13 @@ export default function LoginScreen() {
             isLoading={isLoading}
             size="lg"
           />
+
+          {biometricAvailable && (
+            <TouchableOpacity style={styles.biometricButton} onPress={handleBiometricLogin}>
+              <Feather name="cpu" size={20} color={colors.primary} />
+              <Text style={styles.biometricText}>Entrar com biometria</Text>
+            </TouchableOpacity>
+          )}
 
           <View style={styles.registerContainer}>
             <Text style={styles.registerText}>Não tem conta? </Text>
@@ -197,6 +270,22 @@ const styles = StyleSheet.create({
   registerLink: {
     fontSize: fontSize.md,
     fontWeight: fontWeight.semibold,
+    color: colors.primary,
+  },
+  biometricButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+    paddingVertical: spacing.md,
+    marginTop: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    borderRadius: radius.full,
+  },
+  biometricText: {
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.medium,
     color: colors.primary,
   },
 });

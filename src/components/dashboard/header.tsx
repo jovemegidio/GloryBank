@@ -4,6 +4,7 @@ import { Bell, Menu } from "lucide-react";
 import { getInitials } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PushNotificationButton } from "@/components/ui/push-notification-button";
 
 interface HeaderProps {
   userName: string;
@@ -27,9 +28,10 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
     <header
       className="sticky top-0 z-30 flex h-[64px] shrink-0 items-center gap-3 px-4 sm:px-6 lg:px-8"
       style={{
-        background: "rgba(255,255,255,0.92)",
+        background: "rgba(255,255,255,0.96)",
         backdropFilter: "blur(20px) saturate(1.4)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
+        boxShadow: "0 1px 0 rgba(227,6,19,0.04)",
       }}
     >
       {/* Mobile hamburger */}
@@ -53,6 +55,9 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
 
       {/* Right actions */}
       <div className="flex items-center gap-1">
+        {/* Web push opt-in */}
+        <PushNotificationButton />
+
         {/* Notification bell */}
         <Link
           href="/dashboard/notificacoes"

@@ -11,12 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
-   CredBusiness LP — Indigo + Gold (Nubank Style)
+   CredBusiness LP — vermelho institucional
    ═══════════════════════════════════════════════ */
 :root{
-  --indigo:#4F46E5;--indigo-dark:#3730A3;--indigo-deeper:#1e1b4b;
-  --indigo-soft:#eef2ff;--indigo-glow:rgba(79,70,229,.14);
-  --gold:#d4a017;--gold-light:#fbbf24;--gold-soft:#fef9c3;--gold-dark:#92710b;
+  --indigo:#e30613;--indigo-dark:#bf0010;--indigo-deeper:#111111;
+  --indigo-soft:#fff1f2;--indigo-glow:rgba(227,6,19,.14);
+  --gold:#ffcc33;--gold-light:#ffe27a;--gold-soft:#fff8d6;--gold-dark:#8a6500;
   --ink:#0f172a;--ink2:#334155;--ink3:#64748b;
   --line:#e2e8f0;--bg:#fff;--bg2:#f8fafc;
   --green:#00a650;--green-soft:rgba(0,166,80,.1);
@@ -65,7 +65,7 @@ img{max-width:100%;display:block}
 .hdr-btns{display:flex;align-items:center;gap:8px}
 
 /* ── Hero ── */
-.hero{position:relative;background:linear-gradient(160deg,var(--indigo-deeper) 0%,var(--indigo-dark) 35%,var(--indigo) 100%);overflow:hidden;min-height:90vh;display:flex;align-items:center}
+.hero{position:relative;background:linear-gradient(160deg,#111 0%,var(--indigo-dark) 38%,var(--indigo) 100%);overflow:hidden;min-height:90vh;display:flex;align-items:center}
 .hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat}
 .hero::after{content:"";position:absolute;width:800px;height:800px;border-radius:50%;right:-200px;top:-100px;background:radial-gradient(circle,rgba(212,160,23,.12),transparent 60%);pointer-events:none}
 .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;left:-200px;bottom:-200px;background:radial-gradient(circle,rgba(79,70,229,.25),transparent 60%);pointer-events:none}

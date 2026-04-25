@@ -29,6 +29,8 @@ model User {
   state           String?
   twoFactorSecret  String?  @map("two_factor_secret")
   twoFactorEnabled Boolean  @default(false) @map("two_factor_enabled")
+  pushToken       String?  @map("push_token")
+  webPushSubscription String? @map("web_push_subscription")
   isActive        Boolean  @default(true) @map("is_active")
   isVerified      Boolean  @default(false) @map("is_verified")
   createdAt       DateTime @default(now()) @map("created_at")

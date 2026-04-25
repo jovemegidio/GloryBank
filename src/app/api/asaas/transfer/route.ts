@@ -7,6 +7,7 @@ import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-res
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_USER_ID, demoTransfer } from "@/lib/demo";
 import { createAuditLog } from "@/lib/audit";
+import { checkFraud } from "@/lib/fraud-detection";
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,6 +35,12 @@ export async function POST(request: NextRequest) {
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
     const normalizedPixKey = normalizePixKey(pixKey, pixKeyType);
+
+    // Fraud check
+    if (user.id !== DEMO_USER_ID) {
+      const fraud = await checkFraud(user.id, amount, ip);
+      if (fraud.blocked) return errorResponse(fraud.reason ?? "Transação bloqueada por segurança", 429);
+    }
 
     // Demo mode: return mock transfer result
     if (user.id === DEMO_USER_ID) {
