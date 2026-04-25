@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-  ActivityIndicator,
   Alert,
 } from 'react-native';
 import { useFocusEffect } from 'expo-router';
@@ -18,14 +17,73 @@ import Badge from '@/components/Badge';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { formatCPF, formatPhone, formatDate } from '@/lib/utils';
 
+type FeesData = {
+  verifiedAt: string;
+  disclaimer: string;
+  incoming: {
+    pix: {
+      standardFormatted: string;
+      promotionalFormatted: string;
+    };
+    boleto: {
+      standardFormatted: string;
+      promotionalFormatted: string;
+    };
+  };
+  outgoing: {
+    pixTransferPf: {
+      standardFormatted: string;
+    };
+    pixTransferPj: {
+      monthlyFreeTransactions: number;
+      afterFreeFormatted: string;
+    };
+    ted: {
+      standardFormatted: string;
+    };
+  };
+};
+
 export default function ContaScreen() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [fees, setFees] = useState<FeesData | null>(null);
+
+  const loadFees = useCallback(async () => {
+    try {
+      const result = await api.getAsaasFees();
+      if (result.success && result.data) {
+        setFees(result.data);
+      }
+    } catch {
+      setFees(null);
+    }
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadFees();
+    setRefreshing(false);
+  }, [loadFees]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFees();
+    }, [loadFees])
+  );
 
   return (
     <ScrollView
       style={styles.container}
       showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          tintColor={colors.primary}
+        />
+      }
     >
       {/* Profile Card */}
       <Card style={styles.profileCard}>
@@ -130,6 +188,74 @@ export default function ContaScreen() {
         />
       </Card>
 
+      <Card style={styles.feesCard}>
+        <Text style={styles.sectionTitle}>Taxas Asaas</Text>
+
+        {fees ? (
+          <View style={styles.feesContent}>
+            <View style={styles.feesBlock}>
+              <Text style={styles.feesBlockTitle}>Recebimentos</Text>
+
+              <View style={styles.feeRow}>
+                <Text style={styles.feeLabel}>PIX recebido</Text>
+                <View style={styles.feeValueWrapper}>
+                  <Text style={styles.feeValue}>{fees.incoming.pix.standardFormatted}</Text>
+                  <Text style={styles.feePromo}>
+                    Promo {fees.incoming.pix.promotionalFormatted}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.feeRow}>
+                <Text style={styles.feeLabel}>Boleto recebido</Text>
+                <View style={styles.feeValueWrapper}>
+                  <Text style={styles.feeValue}>{fees.incoming.boleto.standardFormatted}</Text>
+                  <Text style={styles.feePromo}>
+                    Promo {fees.incoming.boleto.promotionalFormatted}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.feesBlock}>
+              <Text style={styles.feesBlockTitle}>Saídas da conta</Text>
+
+              <View style={styles.feeRow}>
+                <Text style={styles.feeLabel}>PIX PF</Text>
+                <Text style={styles.feeValue}>{fees.outgoing.pixTransferPf.standardFormatted}</Text>
+              </View>
+
+              <View style={styles.feeRow}>
+                <Text style={styles.feeLabel}>PIX PJ</Text>
+                <View style={styles.feeValueWrapper}>
+                  <Text style={styles.feeValue}>
+                    {fees.outgoing.pixTransferPj.monthlyFreeTransactions} grátis/mês
+                  </Text>
+                  <Text style={styles.feeSecondary}>
+                    Depois {fees.outgoing.pixTransferPj.afterFreeFormatted}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.feeRow}>
+                <Text style={styles.feeLabel}>TED</Text>
+                <Text style={styles.feeValue}>{fees.outgoing.ted.standardFormatted}</Text>
+              </View>
+            </View>
+
+            <Text style={styles.feesDisclaimer}>
+              Referência pública verificada em {fees.verifiedAt}. {fees.disclaimer}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.feesFallback}>
+            <Text style={styles.feesFallbackText}>
+              Não foi possível carregar as taxas agora.
+            </Text>
+          </View>
+        )}
+      </Card>
+
       <View style={styles.bottomSpacer} />
     </ScrollView>
   );
@@ -220,6 +346,70 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     fontWeight: fontWeight.medium,
     color: colors.text,
+  },
+  feesCard: {
+    marginTop: spacing.lg,
+  },
+  feesContent: {
+    gap: spacing.md,
+  },
+  feesBlock: {
+    borderRadius: radius.lg,
+    backgroundColor: colors.cardHover,
+    padding: spacing.md,
+    gap: spacing.sm,
+  },
+  feesBlockTitle: {
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.bold,
+    color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
+  },
+  feeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.md,
+  },
+  feeLabel: {
+    flex: 1,
+    fontSize: fontSize.sm,
+    color: colors.textSecondary,
+  },
+  feeValueWrapper: {
+    alignItems: 'flex-end',
+    maxWidth: '52%',
+  },
+  feeValue: {
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.semibold,
+    color: colors.text,
+  },
+  feePromo: {
+    fontSize: fontSize.xs,
+    color: colors.success,
+    marginTop: 2,
+  },
+  feeSecondary: {
+    fontSize: fontSize.xs,
+    color: colors.textMuted,
+    marginTop: 2,
+    textAlign: 'right',
+  },
+  feesDisclaimer: {
+    fontSize: fontSize.xs,
+    color: colors.textMuted,
+    lineHeight: 18,
+  },
+  feesFallback: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  feesFallbackText: {
+    fontSize: fontSize.sm,
+    color: colors.textSecondary,
   },
   bottomSpacer: {
     height: 40,

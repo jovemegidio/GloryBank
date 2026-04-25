@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,47 +7,57 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
-import Input from '@/components/Input';
-import Button from '@/components/Button';
-import Card from '@/components/Card';
-import { colors, fontSize, fontWeight, spacing } from '@/lib/theme';
+  Image,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import * as api from "@/lib/api";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import Card from "@/components/Card";
+import { colors, fontSize, fontWeight, spacing, radius } from "@/lib/theme";
 
 export default function CobrarScreen() {
-  const router = useRouter();
-  const [amount, setAmount] = useState('');
-  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [qrCodeData, setQrCodeData] = useState<{ encodedImage: string; payload: string } | null>(
+    null
+  );
 
-  const handleCobrar = () => {
-    const value = parseFloat(amount.replace(',', '.'));
+  const handleCobrar = async () => {
+    const value = parseFloat(amount.replace(",", "."));
     if (isNaN(value) || value <= 0) {
-      Alert.alert('Atenção', 'Informe um valor válido');
+      Alert.alert("Atencao", "Informe um valor valido");
       return;
     }
-    Alert.alert(
-      'Cobrança Criada',
-      `QR Code PIX de ${value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} gerado! Compartilhe com o pagador.`,
-      [{ text: 'OK', onPress: () => router.back() }]
-    );
+
+    setLoading(true);
+    try {
+      const result = await api.generatePixQrCode(value, description.trim() || undefined);
+      if (result.success && result.data) {
+        setQrCodeData({
+          encodedImage: result.data.encodedImage,
+          payload: result.data.payload,
+        });
+      } else {
+        Alert.alert("Erro", result.error || "Falha ao gerar cobranca");
+      }
+    } catch {
+      Alert.alert("Erro", "Nao foi possivel gerar a cobranca PIX");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView
-        style={styles.content}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         <Card>
           <Text style={styles.title}>Cobrar via PIX</Text>
-          <Text style={styles.subtitle}>
-            Gere um QR Code para receber pagamentos
-          </Text>
+          <Text style={styles.subtitle}>Gere um QR Code real para receber pagamentos</Text>
           <View style={{ marginTop: spacing.xl }}>
             <Input
               label="Valor (R$)"
@@ -58,20 +68,36 @@ export default function CobrarScreen() {
               keyboardType="decimal-pad"
             />
             <Input
-              label="Descrição (opcional)"
+              label="Descricao (opcional)"
               icon="edit-3"
-              placeholder="Ex: Serviço prestado"
+              placeholder="Ex: Servico prestado"
               value={description}
               onChangeText={setDescription}
             />
             <Button
-              title="Gerar Cobrança"
+              title="Gerar Cobranca"
               onPress={handleCobrar}
+              isLoading={loading}
               size="lg"
               icon={<Feather name="dollar-sign" size={18} color="#fff" />}
             />
           </View>
         </Card>
+
+        {qrCodeData && (
+          <Card>
+            <Text style={styles.resultTitle}>QR Code gerado</Text>
+            <View style={styles.qrCodeWrapper}>
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <Image
+                source={{ uri: `data:image/png;base64,${qrCodeData.encodedImage}` }}
+                style={styles.qrCodeImage}
+              />
+            </View>
+            <Text style={styles.copyLabel}>Codigo copia e cola</Text>
+            <Text style={styles.copyPayload}>{qrCodeData.payload}</Text>
+          </Card>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -95,5 +121,34 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     color: colors.textSecondary,
     marginTop: 4,
+  },
+  resultTitle: {
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.semibold,
+    color: colors.text,
+    marginBottom: spacing.lg,
+  },
+  qrCodeWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.lg,
+    borderWidth: 1,
+    borderColor: colors.separator,
+    borderRadius: radius.xl,
+    backgroundColor: "#ffffff",
+  },
+  qrCodeImage: {
+    width: 220,
+    height: 220,
+  },
+  copyLabel: {
+    fontSize: fontSize.sm,
+    color: colors.textSecondary,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  copyPayload: {
+    fontSize: fontSize.xs,
+    color: colors.text,
   },
 });

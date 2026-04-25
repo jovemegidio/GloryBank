@@ -1,11 +1,18 @@
-import * as SecureStore from 'expo-secure-store';
-import type { ApiResponse } from '@/types';
+import * as SecureStore from "expo-secure-store";
+import type { ApiResponse } from "@/types";
 
-const API_BASE_URL = 'https://credbusiness.vercel.app/api';
-const TOKEN_KEY = 'credbusiness_token';
-const USER_KEY = 'credbusiness_user';
+const DEFAULT_API_BASE_URL = "http://187.45.255.152/api";
+const TOKEN_KEY = "glorybank_session_token";
+const USER_KEY = "glorybank_user";
 
 let authToken: string | null = null;
+
+function normalizeApiBaseUrl(url?: string): string {
+  const trimmed = (url ?? DEFAULT_API_BASE_URL).trim().replace(/\/+$/, "");
+  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+}
+
+const API_BASE_URL = normalizeApiBaseUrl(process.env.EXPO_PUBLIC_API_BASE_URL);
 
 export async function loadToken(): Promise<string | null> {
   if (authToken) return authToken;
@@ -35,47 +42,45 @@ export async function loadUserData(): Promise<object | null> {
 
 async function request<T>(
   endpoint: string,
-  options: RequestInit = {},
+  options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
   const token = await loadToken();
   const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
+    "X-GloryBank-Client": "mobile",
     ...(options.headers as Record<string, string>),
   };
 
   if (token) {
-    headers['Cookie'] = `session=${token}`;
+    headers.Authorization = `Bearer ${token}`;
   }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
     headers,
-    credentials: 'include',
   });
 
-  const setCookie = response.headers.get('set-cookie');
-  if (setCookie) {
-    const match = setCookie.match(/session=([^;]+)/);
-    if (match?.[1]) {
-      await saveToken(match[1]);
-    }
-  }
+  const contentType = response.headers.get("content-type") ?? "";
+  const data = contentType.includes("application/json")
+    ? ((await response.json()) as ApiResponse<T>)
+    : ({ success: response.ok, error: response.ok ? undefined : "Resposta invalida do servidor" } as ApiResponse<T>);
 
   if (!response.ok && response.status === 401) {
     await clearToken();
-    throw new Error('UNAUTHORIZED');
+    throw new Error("UNAUTHORIZED");
   }
 
-  const data = await response.json();
-  return data as ApiResponse<T>;
+  return data;
 }
 
-// Auth
 export async function login(email: string, password: string) {
-  return request<{ user: { id: string; name: string; email: string } }>('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-  });
+  return request<{ user: { id: string; name: string; email: string }; sessionToken?: string }>(
+    "/auth/login",
+    {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    }
+  );
 }
 
 export async function register(data: {
@@ -83,17 +88,27 @@ export async function register(data: {
   email: string;
   cpfCnpj: string;
   phone: string;
+  birthDate?: string;
+  companyType?: string;
+  incomeValue: number | string;
+  address: string;
+  addressNumber: string;
+  province: string;
+  postalCode: string;
   password: string;
   confirmPassword: string;
 }) {
-  return request<{ user: { id: string; name: string; email: string } }>('/auth/register', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
+  return request<{ user: { id: string; name: string; email: string }; sessionToken?: string }>(
+    "/auth/register",
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  );
 }
 
 export async function logout() {
-  const result = await request('/auth/logout', { method: 'POST' });
+  const result = await request("/auth/logout", { method: "POST" });
   await clearToken();
   return result;
 }
@@ -110,18 +125,46 @@ export async function getSession() {
       isVerified?: boolean;
       createdAt?: string;
     };
-  }>('/auth/session');
+  }>("/auth/session");
 }
 
-// Balance
 export async function getBalance() {
   return request<{
     balance: number;
     statistics: { pending: number; overdue: number; confirmed: number };
-  }>('/asaas/balance');
+  }>("/asaas/balance");
 }
 
-// Transactions
+export async function getAsaasFees() {
+  return request<{
+    sourceUrl: string;
+    verifiedAt: string;
+    disclaimer: string;
+    incoming: {
+      pix: {
+        standardFormatted: string;
+        promotionalFormatted: string;
+      };
+      boleto: {
+        standardFormatted: string;
+        promotionalFormatted: string;
+      };
+    };
+    outgoing: {
+      pixTransferPf: {
+        standardFormatted: string;
+      };
+      pixTransferPj: {
+        monthlyFreeTransactions: number;
+        afterFreeFormatted: string;
+      };
+      ted: {
+        standardFormatted: string;
+      };
+    };
+  }>("/asaas/fees");
+}
+
 export async function getTransactions(params?: {
   limit?: number;
   offset?: number;
@@ -129,10 +172,11 @@ export async function getTransactions(params?: {
   finishDate?: string;
 }) {
   const query = new URLSearchParams();
-  if (params?.limit) query.set('limit', String(params.limit));
-  if (params?.offset) query.set('offset', String(params.offset));
-  if (params?.startDate) query.set('startDate', params.startDate);
-  if (params?.finishDate) query.set('finishDate', params.finishDate);
+  if (params?.limit) query.set("limit", String(params.limit));
+  if (params?.offset) query.set("offset", String(params.offset));
+  if (params?.startDate) query.set("startDate", params.startDate);
+  if (params?.finishDate) query.set("finishDate", params.finishDate);
+
   const qs = query.toString();
   return request<{
     data: Array<{
@@ -146,37 +190,45 @@ export async function getTransactions(params?: {
     }>;
     total: number;
     hasMore: boolean;
-  }>(`/asaas/transactions${qs ? `?${qs}` : ''}`);
+  }>(`/asaas/transactions${qs ? `?${qs}` : ""}`);
 }
 
-// PIX
 export async function sendPix(data: {
   pixKey: string;
   pixKeyType: string;
   amount: number;
   description?: string;
 }) {
-  return request('/asaas/pix', {
-    method: 'POST',
+  return request<{ id: string; value: number; status: string }>("/asaas/pix", {
+    method: "POST",
     body: JSON.stringify(data),
   });
 }
 
 export async function getPixKeys() {
-  return request<{ data: Array<{ id: string; key: string; type: string }> }>(
-    '/asaas/pix?action=keys',
+  return request<{ data: Array<{ id: string; key: string; type: string; status: string }> }>(
+    "/asaas/pix?action=keys"
   );
 }
 
-export async function createPixKey(type: string) {
-  return request(`/asaas/pix?action=create-key&type=${type}`);
+export async function createPixKey(type: "EVP") {
+  return request<{ id: string; key: string; type: string; status: string }>(
+    `/asaas/pix?action=create-key&type=${type}`
+  );
 }
 
-export async function generatePixQrCode(value: number) {
-  return request(`/asaas/pix?action=qrcode&value=${value}`);
+export async function generatePixQrCode(value: number, description?: string) {
+  const query = new URLSearchParams({ value: String(value) });
+  if (description) query.set("description", description);
+
+  return request<{
+    id: string;
+    encodedImage: string;
+    payload: string;
+    expirationDate?: string;
+  }>(`/asaas/pix?action=qrcode&${query.toString()}`);
 }
 
-// Boleto
 export async function createBoleto(data: {
   customerName: string;
   customerCpfCnpj: string;
@@ -184,28 +236,26 @@ export async function createBoleto(data: {
   dueDate: string;
   description?: string;
 }) {
-  return request('/asaas/boleto', {
-    method: 'POST',
+  return request("/asaas/boleto", {
+    method: "POST",
     body: JSON.stringify(data),
   });
 }
 
-// Transfer
 export async function createTransfer(data: {
   pixKey: string;
   pixKeyType: string;
   amount: number;
   description?: string;
 }) {
-  return request('/asaas/transfer', {
-    method: 'POST',
+  return request("/asaas/transfer", {
+    method: "POST",
     body: JSON.stringify(data),
   });
 }
 
-// Scheduled
 export async function getScheduled() {
-  return request<{ data: Array<Record<string, unknown>> }>('/asaas/scheduled');
+  return request<{ data: Array<Record<string, unknown>> }>("/asaas/scheduled");
 }
 
 export async function createScheduled(data: {
@@ -216,17 +266,16 @@ export async function createScheduled(data: {
   recurrence?: string;
   description?: string;
 }) {
-  return request('/asaas/scheduled', {
-    method: 'POST',
+  return request("/asaas/scheduled", {
+    method: "POST",
     body: JSON.stringify(data),
   });
 }
 
 export async function cancelScheduled(id: string) {
-  return request(`/asaas/scheduled?id=${id}`, { method: 'DELETE' });
+  return request(`/asaas/scheduled?id=${id}`, { method: "DELETE" });
 }
 
-// Cards
 export async function getCards() {
   return request<{
     data: Array<{
@@ -239,17 +288,16 @@ export async function getCards() {
       requestedAt: string;
       approvedAt?: string;
     }>;
-  }>('/card');
+  }>("/card");
 }
 
-export async function requestCard(cardType: 'VIRTUAL' | 'PHYSICAL') {
-  return request('/card', {
-    method: 'POST',
+export async function requestCard(cardType: "VIRTUAL" | "PHYSICAL") {
+  return request("/card", {
+    method: "POST",
     body: JSON.stringify({ cardType }),
   });
 }
 
-// Notifications
 export async function getNotifications() {
   return request<{
     data: Array<{
@@ -260,12 +308,12 @@ export async function getNotifications() {
       createdAt: string;
     }>;
     unreadCount: number;
-  }>('/notifications');
+  }>("/notifications");
 }
 
 export async function markNotificationRead(notificationId?: string) {
-  return request('/notifications', {
-    method: 'PATCH',
+  return request("/notifications", {
+    method: "PATCH",
     body: JSON.stringify(notificationId ? { notificationId } : { markAllRead: true }),
   });
 }

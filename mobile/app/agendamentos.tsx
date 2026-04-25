@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -8,17 +8,17 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
-} from 'react-native';
-import { useFocusEffect } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
-import * as api from '@/lib/api';
-import Card from '@/components/Card';
-import Badge from '@/components/Badge';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Select from '@/components/Select';
-import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
-import { formatCurrency, formatDate } from '@/lib/utils';
+} from "react-native";
+import { useFocusEffect } from "expo-router";
+import { Feather } from "@expo/vector-icons";
+import * as api from "@/lib/api";
+import Card from "@/components/Card";
+import Badge from "@/components/Badge";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Select from "@/components/Select";
+import { colors, fontSize, fontWeight, spacing } from "@/lib/theme";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
 interface ScheduledItem {
   id: string;
@@ -32,18 +32,14 @@ interface ScheduledItem {
 }
 
 const pixKeyTypes = [
-  { label: 'CPF', value: 'CPF' },
-  { label: 'CNPJ', value: 'CNPJ' },
-  { label: 'E-mail', value: 'EMAIL' },
-  { label: 'Telefone', value: 'PHONE' },
-  { label: 'Chave Aleatória', value: 'EVP' },
+  { label: "CPF", value: "CPF" },
+  { label: "CNPJ", value: "CNPJ" },
+  { label: "E-mail", value: "EMAIL" },
+  { label: "Telefone", value: "PHONE" },
+  { label: "Chave Aleatoria", value: "EVP" },
 ];
 
-const recurrenceOptions = [
-  { label: 'Única vez', value: 'once' },
-  { label: 'Semanal', value: 'weekly' },
-  { label: 'Mensal', value: 'monthly' },
-];
+const recurrenceOptions = [{ label: "Unica vez", value: "ONCE" }];
 
 export default function AgendamentosScreen() {
   const [loading, setLoading] = useState(true);
@@ -51,14 +47,12 @@ export default function AgendamentosScreen() {
   const [items, setItems] = useState<ScheduledItem[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [creating, setCreating] = useState(false);
-
-  // Form
-  const [pixKey, setPixKey] = useState('');
-  const [pixKeyType, setPixKeyType] = useState('CPF');
-  const [amount, setAmount] = useState('');
-  const [scheduledDate, setScheduledDate] = useState('');
-  const [recurrence, setRecurrence] = useState('once');
-  const [description, setDescription] = useState('');
+  const [pixKey, setPixKey] = useState("");
+  const [pixKeyType, setPixKeyType] = useState("CPF");
+  const [amount, setAmount] = useState("");
+  const [scheduledDate, setScheduledDate] = useState("");
+  const [recurrence, setRecurrence] = useState("ONCE");
+  const [description, setDescription] = useState("");
 
   const fetchScheduled = async () => {
     try {
@@ -67,7 +61,7 @@ export default function AgendamentosScreen() {
         setItems(result.data.data as ScheduledItem[]);
       }
     } catch {
-      // silent
+      // ignore
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -82,13 +76,13 @@ export default function AgendamentosScreen() {
 
   const handleCreate = async () => {
     if (!pixKey.trim() || !amount.trim() || !scheduledDate.trim()) {
-      Alert.alert('Atenção', 'Preencha todos os campos obrigatórios');
+      Alert.alert("Atencao", "Preencha todos os campos obrigatorios");
       return;
     }
 
-    const value = parseFloat(amount.replace(',', '.'));
+    const value = parseFloat(amount.replace(",", "."));
     if (isNaN(value) || value <= 0) {
-      Alert.alert('Atenção', 'Valor inválido');
+      Alert.alert("Atencao", "Valor invalido");
       return;
     }
 
@@ -99,52 +93,54 @@ export default function AgendamentosScreen() {
         pixKeyType,
         amount: value,
         scheduledDate: scheduledDate.trim(),
-        recurrence: recurrence !== 'once' ? recurrence : undefined,
+        recurrence,
         description: description.trim() || undefined,
       });
 
       if (result.success) {
-        Alert.alert('Sucesso', 'Agendamento criado!');
+        Alert.alert("Sucesso", "Agendamento criado!");
         setShowForm(false);
-        setPixKey('');
-        setAmount('');
-        setScheduledDate('');
-        setDescription('');
+        setPixKey("");
+        setAmount("");
+        setScheduledDate("");
+        setDescription("");
+        setRecurrence("ONCE");
         fetchScheduled();
       } else {
-        Alert.alert('Erro', result.error || 'Falha ao criar agendamento');
+        Alert.alert("Erro", result.error || "Falha ao criar agendamento");
       }
     } catch {
-      Alert.alert('Erro', 'Erro ao criar agendamento');
+      Alert.alert("Erro", "Erro ao criar agendamento");
     } finally {
       setCreating(false);
     }
   };
 
   const handleCancel = async (id: string) => {
-    Alert.alert('Cancelar', 'Deseja cancelar este agendamento?', [
-      { text: 'Não', style: 'cancel' },
+    Alert.alert("Cancelar", "Deseja cancelar este agendamento?", [
+      { text: "Nao", style: "cancel" },
       {
-        text: 'Sim, cancelar',
-        style: 'destructive',
+        text: "Sim, cancelar",
+        style: "destructive",
         onPress: async () => {
           try {
             await api.cancelScheduled(id);
             fetchScheduled();
           } catch {
-            Alert.alert('Erro', 'Falha ao cancelar');
+            Alert.alert("Erro", "Falha ao cancelar");
           }
         },
       },
     ]);
   };
 
-  const getRecurrenceLabel = (r?: string) => {
+  const getRecurrenceLabel = (value?: string) => {
     const map: Record<string, string> = {
-      weekly: 'Semanal',
-      monthly: 'Mensal',
+      WEEKLY: "Semanal",
+      MONTHLY: "Mensal",
+      ONCE: "Unica",
     };
-    return r ? map[r] || 'Única' : 'Única';
+    return value ? map[value] || "Unica" : "Unica";
   };
 
   if (loading) {
@@ -162,7 +158,10 @@ export default function AgendamentosScreen() {
       refreshControl={
         <RefreshControl
           refreshing={refreshing}
-          onRefresh={() => { setRefreshing(true); fetchScheduled(); }}
+          onRefresh={() => {
+            setRefreshing(true);
+            fetchScheduled();
+          }}
           tintColor={colors.primary}
           colors={[colors.primary]}
         />
@@ -170,24 +169,19 @@ export default function AgendamentosScreen() {
     >
       <View style={styles.content}>
         <Button
-          title={showForm ? 'Cancelar' : 'Novo Agendamento'}
+          title={showForm ? "Cancelar" : "Novo Agendamento"}
           onPress={() => setShowForm(!showForm)}
-          variant={showForm ? 'outline' : 'primary'}
-          icon={<Feather name={showForm ? 'x' : 'plus'} size={18} color={showForm ? colors.primary : '#fff'} />}
+          variant={showForm ? "outline" : "primary"}
+          icon={<Feather name={showForm ? "x" : "plus"} size={18} color={showForm ? colors.primary : "#fff"} />}
         />
 
         {showForm && (
           <Card style={styles.formCard}>
-            <Select
-              label="Tipo de chave"
-              value={pixKeyType}
-              options={pixKeyTypes}
-              onSelect={setPixKeyType}
-            />
+            <Select label="Tipo de chave" value={pixKeyType} options={pixKeyTypes} onSelect={setPixKeyType} />
             <Input
               label="Chave PIX"
               icon="key"
-              placeholder="Chave do destinatário"
+              placeholder="Chave do destinatario"
               value={pixKey}
               onChangeText={setPixKey}
               autoCapitalize="none"
@@ -207,29 +201,18 @@ export default function AgendamentosScreen() {
               value={scheduledDate}
               onChangeText={setScheduledDate}
             />
-            <Select
-              label="Recorrência"
-              value={recurrence}
-              options={recurrenceOptions}
-              onSelect={setRecurrence}
-            />
+            <Select label="Recorrencia" value={recurrence} options={recurrenceOptions} onSelect={setRecurrence} />
             <Input
-              label="Descrição (opcional)"
+              label="Descricao (opcional)"
               icon="edit-3"
-              placeholder="Ex: Aluguel mensal"
+              placeholder="Ex: aluguel"
               value={description}
               onChangeText={setDescription}
             />
-            <Button
-              title="Agendar"
-              onPress={handleCreate}
-              isLoading={creating}
-              size="lg"
-            />
+            <Button title="Agendar" onPress={handleCreate} isLoading={creating} size="lg" />
           </Card>
         )}
 
-        {/* List */}
         {items.length === 0 ? (
           <View style={styles.empty}>
             <Feather name="calendar" size={48} color={colors.textMuted} />
@@ -240,7 +223,9 @@ export default function AgendamentosScreen() {
             <Card key={item.id} style={styles.itemCard}>
               <View style={styles.itemHeader}>
                 <View>
-                  <Text style={styles.itemKey} numberOfLines={1}>{item.pixKey}</Text>
+                  <Text style={styles.itemKey} numberOfLines={1}>
+                    {item.pixKey}
+                  </Text>
                   <Text style={styles.itemType}>{item.pixKeyType}</Text>
                 </View>
                 <Text style={styles.itemAmount}>{formatCurrency(item.amount)}</Text>
@@ -250,7 +235,7 @@ export default function AgendamentosScreen() {
                   <Badge label={formatDate(item.scheduledDate)} variant="info" size="sm" />
                   <Badge label={getRecurrenceLabel(item.recurrence)} variant="default" size="sm" />
                 </View>
-                {item.status === 'PENDING' && (
+                {["PENDING", "SCHEDULED"].includes(item.status) && (
                   <TouchableOpacity onPress={() => handleCancel(item.id)}>
                     <Feather name="trash-2" size={18} color={colors.danger} />
                   </TouchableOpacity>
@@ -272,8 +257,8 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: colors.background,
   },
   content: {
@@ -287,9 +272,9 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   itemHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
     marginBottom: spacing.md,
   },
   itemKey: {
@@ -309,16 +294,16 @@ const styles = StyleSheet.create({
     color: colors.text,
   },
   itemFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   itemTags: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: spacing.sm,
   },
   empty: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 40,
     gap: spacing.lg,
   },

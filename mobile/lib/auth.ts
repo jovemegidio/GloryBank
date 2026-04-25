@@ -14,6 +14,13 @@ interface AuthState {
     email: string;
     cpfCnpj: string;
     phone: string;
+    birthDate?: string;
+    companyType?: string;
+    incomeValue: number | string;
+    address: string;
+    addressNumber: string;
+    province: string;
+    postalCode: string;
     password: string;
     confirmPassword: string;
   }) => Promise<boolean>;
@@ -34,6 +41,9 @@ export const useAuth = create<AuthState>((set) => ({
       const result = await api.login(email, password);
       if (result.success && result.data) {
         const user = result.data.user as User;
+        if (result.data.sessionToken) {
+          await api.saveToken(result.data.sessionToken);
+        }
         set({ user, isAuthenticated: true, isLoading: false });
         await api.saveUserData(user);
         return true;
@@ -55,6 +65,9 @@ export const useAuth = create<AuthState>((set) => ({
       const result = await api.register(data);
       if (result.success && result.data) {
         const user = result.data.user as User;
+        if (result.data.sessionToken) {
+          await api.saveToken(result.data.sessionToken);
+        }
         set({ user, isAuthenticated: true, isLoading: false });
         await api.saveUserData(user);
         return true;
