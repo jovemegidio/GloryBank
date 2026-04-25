@@ -1,6 +1,6 @@
 ﻿import { NextRequest } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
-import { createTransfer } from "@/lib/asaas";
+import { createTransfer, normalizePixKey } from "@/lib/asaas";
 import { prisma } from "@/lib/prisma";
 import { transferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
@@ -33,17 +33,18 @@ export async function POST(request: NextRequest) {
     }
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
+    const normalizedPixKey = normalizePixKey(pixKey, pixKeyType);
 
     // Demo mode: return mock transfer result
     if (user.id === DEMO_USER_ID) {
-      return successResponse(demoTransfer(amount, pixKey, description));
+      return successResponse(demoTransfer(amount, normalizedPixKey, description));
     }
 
     const transfer = await createTransfer(
       {
         value: amount,
         operationType: "PIX",
-        pixAddressKey: pixKey,
+        pixAddressKey: normalizedPixKey,
         pixAddressKeyType: pixKeyType,
         description,
       },
@@ -60,7 +61,7 @@ export async function POST(request: NextRequest) {
         amount,
         fee: transfer.transferFee,
         description,
-        pixKey,
+        pixKey: normalizedPixKey,
         pixKeyType,
       },
     });

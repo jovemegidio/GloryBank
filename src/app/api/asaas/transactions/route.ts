@@ -5,15 +5,33 @@ import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/lib/api-response";
 import { DEMO_USER_ID, DEMO_TRANSACTIONS } from "@/lib/demo";
 
+function mapAsaasTransactionType(type: string, description: string, transactionType: string): string {
+  const haystack = `${type} ${description} ${transactionType}`.toLowerCase();
+  const isCredit = type.toUpperCase() === "CREDIT";
+
+  if (haystack.includes("pix")) {
+    return isCredit ? "PIX_RECEIVED" : "PIX_SENT";
+  }
+
+  if (haystack.includes("boleto")) {
+    return isCredit ? "BOLETO_PAID" : "BOLETO_CREATED";
+  }
+
+  if (haystack.includes("transfer")) {
+    return isCredit ? "TRANSFER_RECEIVED" : "TRANSFER_SENT";
+  }
+
+  return isCredit ? "DEPOSIT" : "WITHDRAWAL";
+}
+
 export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser();
-    if (!user) return errorResponse("Não autenticado", 401);
+    if (!user) return errorResponse("Nao autenticado", 401);
 
-    // Demo mode: return mock transaction list
     if (user.id === DEMO_USER_ID) {
-      const limit = Math.min(parseInt(new URL(request.url).searchParams.get("limit") || "20"), 100);
-      const offset = parseInt(new URL(request.url).searchParams.get("offset") || "0");
+      const limit = Math.min(parseInt(new URL(request.url).searchParams.get("limit") || "20", 10), 100);
+      const offset = parseInt(new URL(request.url).searchParams.get("offset") || "0", 10);
       const slice = DEMO_TRANSACTIONS.data.slice(offset, offset + limit);
       return successResponse({
         data: slice,
@@ -23,31 +41,54 @@ export async function GET(request: NextRequest) {
     }
 
     const url = new URL(request.url);
-    const source = url.searchParams.get("source") || "local";
-    const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
-    const offset = parseInt(url.searchParams.get("offset") || "0");
+    const source = url.searchParams.get("source") || "auto";
+    const limit = Math.min(parseInt(url.searchParams.get("limit") || "20", 10), 100);
+    const offset = parseInt(url.searchParams.get("offset") || "0", 10);
     const startDate = url.searchParams.get("startDate") || undefined;
     const finishDate = url.searchParams.get("finishDate") || undefined;
 
-    if (source === "asaas" && user.asaasApiKey) {
-      const transactions = await getTransactions(user.asaasApiKey, {
-        limit,
-        offset,
-        startDate,
-        finishDate,
-      });
-      return successResponse(transactions);
+    if ((source === "asaas" || source === "auto") && user.asaasApiKey) {
+      try {
+        const transactions = await getTransactions(user.asaasApiKey, {
+          limit,
+          offset,
+          startDate,
+          finishDate,
+        });
+
+        return successResponse({
+          data: transactions.data.map((tx) => ({
+            id: tx.id,
+            type: mapAsaasTransactionType(tx.type, tx.description, tx.transactionType),
+            status: "CONFIRMED",
+            amount: Math.abs(Number(tx.value)),
+            description: tx.description,
+            pixKey: null,
+            recipientName: null,
+            date: tx.date,
+            rawType: tx.type,
+            rawTransactionType: tx.transactionType,
+          })),
+          total: transactions.totalCount,
+          hasMore: transactions.hasMore,
+        });
+      } catch (error) {
+        if (source === "asaas") {
+          throw error;
+        }
+      }
     }
 
-    // Local transactions from database
     const where: Record<string, unknown> = { userId: user.id };
 
     if (startDate || finishDate) {
       where.createdAt = {};
-      if (startDate)
+      if (startDate) {
         (where.createdAt as Record<string, unknown>).gte = new Date(startDate);
-      if (finishDate)
+      }
+      if (finishDate) {
         (where.createdAt as Record<string, unknown>).lte = new Date(finishDate);
+      }
     }
 
     const [transactions, total] = await Promise.all([
@@ -77,6 +118,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("Transactions error:", error);
-    return errorResponse("Erro ao buscar transações", 500);
+    return errorResponse("Erro ao buscar transacoes", 500);
   }
 }

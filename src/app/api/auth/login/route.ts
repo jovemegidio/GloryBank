@@ -25,12 +25,14 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password } = validation.data;
+    const isMobileClient = request.headers.get("x-glorybank-client") === "mobile";
 
     // Demo mode: accept hardcoded credentials without any database access
     if (DEMO_MODE && email === DEMO_EMAIL && password === DEMO_PASSWORD) {
-      await createDemoSession();
+      const sessionToken = await createDemoSession();
       return successResponse({
         user: { id: DEMO_USER.id, name: DEMO_USER.name, email: DEMO_USER.email },
+        sessionToken: isMobileClient ? sessionToken : undefined,
       });
     }
 
@@ -50,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     // Create session
     const userAgent = request.headers.get("user-agent") || undefined;
-    await createSession(user.id, userAgent, ip);
+    const { token } = await createSession(user.id, userAgent, ip);
 
     await createAuditLog({
       userId: user.id,
@@ -65,6 +67,7 @@ export async function POST(request: NextRequest) {
         name: user.name,
         email: user.email,
       },
+      sessionToken: isMobileClient ? token : undefined,
     });
   } catch (error) {
     console.error("Login error:", error);

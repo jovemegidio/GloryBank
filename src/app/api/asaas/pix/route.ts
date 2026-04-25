@@ -1,6 +1,12 @@
 import { NextRequest } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
-import { createPixTransfer, createPixQrCode, getPixKeys, createPixKey } from "@/lib/asaas";
+import {
+  createPixTransfer,
+  createPixQrCode,
+  getPixKeys,
+  createPixKey,
+  normalizePixKey,
+} from "@/lib/asaas";
 import { prisma } from "@/lib/prisma";
 import { pixTransferSchema } from "@/lib/validations";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
@@ -35,16 +41,17 @@ export async function POST(request: NextRequest) {
     }
 
     const { pixKey, pixKeyType, amount, description } = validation.data;
+    const normalizedPixKey = normalizePixKey(pixKey, pixKeyType);
 
     // Demo mode: return mock PIX result
     if (user.id === DEMO_USER_ID) {
-      return successResponse(demoPIXTransfer(pixKey, amount, description));
+      return successResponse(demoPIXTransfer(normalizedPixKey, amount, description));
     }
 
     const pixResult = await createPixTransfer(
       {
         value: amount,
-        pixAddressKey: pixKey,
+        pixAddressKey: normalizedPixKey,
         pixAddressKeyType: pixKeyType,
         description,
       },
@@ -60,7 +67,7 @@ export async function POST(request: NextRequest) {
         status: pixResult.status === "DONE" ? "CONFIRMED" : "PENDING",
         amount,
         description,
-        pixKey,
+        pixKey: normalizedPixKey,
         pixKeyType,
       },
     });
@@ -100,11 +107,18 @@ export async function GET(request: NextRequest) {
         return successResponse({
           id: "demo-key-" + Date.now(),
           key: "random-evp-key-" + Date.now(),
-          keyType: "EVP",
+          type: "EVP",
           status: "ACTIVE",
         });
       }
-      return successResponse(DEMO_PIX_KEYS);
+      return successResponse({
+        data: DEMO_PIX_KEYS.data.map((key) => ({
+          id: key.id,
+          key: key.key,
+          type: key.keyType,
+          status: key.status,
+        })),
+      });
     }
 
     if (action === "qrcode") {
@@ -131,13 +145,30 @@ export async function GET(request: NextRequest) {
     }
 
     if (action === "create-key") {
-      const type = (url.searchParams.get("type") || "EVP") as "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP";
-      const key = await createPixKey(type, user.asaasApiKey);
-      return successResponse(key);
+      const type = url.searchParams.get("type") || "EVP";
+
+      if (type !== "EVP") {
+        return errorResponse("A API do Asaas permite criar apenas chaves aleatorias (EVP)", 400);
+      }
+
+      const key = await createPixKey("EVP", user.asaasApiKey);
+      return successResponse({
+        id: key.id,
+        key: key.key,
+        type: key.type ?? key.keyType ?? "EVP",
+        status: key.status,
+      });
     }
 
     const keys = await getPixKeys(user.asaasApiKey);
-    return successResponse(keys);
+    return successResponse({
+      data: (keys.data ?? []).map((key) => ({
+        id: key.id,
+        key: key.key,
+        type: key.type ?? key.keyType ?? "EVP",
+        status: key.status,
+      })),
+    });
   } catch (error) {
     console.error("PIX keys error:", error);
     return errorResponse("Erro ao buscar chaves PIX", 500);

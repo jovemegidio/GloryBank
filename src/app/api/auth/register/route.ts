@@ -2,10 +2,11 @@ import { NextRequest } from "next/server";
 import { registerSchema } from "@/lib/validations";
 import { hashPassword, createSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { createSubAccount } from "@/lib/asaas";
+import { createSubAccount, approveSandboxAccount, isSandboxAsaasApiUrl } from "@/lib/asaas";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_MODE } from "@/lib/demo";
+import { createAuditLog } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,6 +28,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const validation = registerSchema.safeParse(body);
+    const isMobileClient = request.headers.get("x-glorybank-client") === "mobile";
 
     if (!validation.success) {
       const errors: Record<string, string[]> = {};
@@ -38,7 +40,22 @@ export async function POST(request: NextRequest) {
       return errorResponse("Dados inválidos", 400, errors);
     }
 
-    const { name, email, cpfCnpj, phone, password } = validation.data;
+    const {
+      name,
+      email,
+      cpfCnpj,
+      phone,
+      password,
+      birthDate,
+      companyType,
+      incomeValue,
+      address,
+      addressNumber,
+      province,
+      postalCode,
+    } = validation.data;
+    const normalizedBirthDate = cpfCnpj.length === 11 ? birthDate || undefined : undefined;
+    const normalizedCompanyType = cpfCnpj.length === 14 ? companyType || undefined : undefined;
 
     // Check if email or CPF/CNPJ already exists
     const existingUser = await prisma.user.findFirst({
@@ -65,10 +82,29 @@ export async function POST(request: NextRequest) {
         email,
         cpfCnpj,
         phone,
+        mobilePhone: phone,
+        incomeValue,
+        birthDate: normalizedBirthDate,
+        companyType: normalizedCompanyType,
+        address,
+        addressNumber,
+        province,
+        postalCode,
       });
+
+      if (asaasAccount.apiKey && isSandboxAsaasApiUrl()) {
+        await approveSandboxAccount(asaasAccount.apiKey).catch((error) => {
+          console.warn("Sandbox sub-account approval failed:", error);
+        });
+      }
     } catch (error) {
       console.error("Asaas sub-account creation failed:", error);
-      // Continue without Asaas account - can be retried later
+      return errorResponse(
+        error instanceof Error
+          ? error.message
+          : "Nao foi possivel abrir a conta digital no Asaas",
+        400
+      );
     }
 
     // Create user
@@ -83,12 +119,29 @@ export async function POST(request: NextRequest) {
         asaasAccountId: asaasAccount?.id || null,
         asaasApiKey: asaasAccount?.apiKey || null,
         asaasWalletId: asaasAccount?.walletId || null,
+        companyType: normalizedCompanyType || null,
+        incomeValue,
+        birthDate: normalizedBirthDate ? new Date(normalizedBirthDate) : null,
+        address,
+        addressNumber,
+        province,
+        postalCode,
       },
     });
 
     // Create session
     const userAgent = request.headers.get("user-agent") || undefined;
-    await createSession(user.id, userAgent, ip);
+    const { token } = await createSession(user.id, userAgent, ip);
+
+    await createAuditLog({
+      userId: user.id,
+      action: "REGISTER",
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent"),
+      metadata: {
+        hasAsaasAccount: Boolean(asaasAccount?.id),
+      },
+    });
 
     return successResponse(
       {
@@ -97,6 +150,7 @@ export async function POST(request: NextRequest) {
           name: user.name,
           email: user.email,
         },
+        sessionToken: isMobileClient ? token : undefined,
       },
       201
     );

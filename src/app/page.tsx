@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck,
   Zap,
@@ -14,8 +15,11 @@ import {
   BadgeCheck,
   TrendingUp,
 } from "lucide-react";
+import { getAsaasFeesConfig } from "@/lib/asaas-fees";
 
 export default function Home() {
+  const fees = getAsaasFeesConfig();
+
   return (
     <div className="min-h-screen bg-white text-slate-800" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* ─── TOPBAR ─── */}
@@ -45,7 +49,7 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 h-[72px]">
           <Link href="/" className="flex items-center gap-3">
-            <img src="/favicon.png" alt="CredBusiness" className="h-10 w-10 object-contain" />
+            <Image src="/favicon.png" alt="CredBusiness" width={40} height={40} className="h-10 w-10 object-contain" />
             <div className="flex flex-col leading-none">
               <span className="text-[20px] font-extrabold tracking-tight text-slate-800">
                 Cred<span className="text-red-600">Business</span>
@@ -58,6 +62,7 @@ export default function Home() {
 
           <nav className="hidden lg:flex items-center gap-7 text-[14px] font-semibold text-slate-600">
             <a href="#funcionalidades" className="hover:text-slate-900 transition-colors">Funcionalidades</a>
+            <a href="#taxas" className="hover:text-slate-900 transition-colors">Taxas</a>
             <a href="#seguranca" className="hover:text-slate-900 transition-colors">Segurança</a>
             <a href="#baas" className="hover:text-slate-900 transition-colors">BaaS</a>
           </nav>
@@ -146,7 +151,7 @@ export default function Home() {
                 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <img src="/favicon.png" alt="" className="h-10 w-10 object-contain" aria-hidden="true" />
+                  <Image src="/favicon.png" alt="" width={40} height={40} className="h-10 w-10 object-contain" aria-hidden="true" />
                   <div>
                     <p className="text-[16px] font-bold text-white">CredBusiness Internet Banking</p>
                     <p className="text-[12px] text-white/50">Conta Corrente Digital</p>
@@ -272,7 +277,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-5">
             {[
               { icon: QrCode, title: "PIX Instantâneo", desc: "Envie e receba pagamentos via PIX em segundos. Transferências 24h, todos os dias, com confirmação imediata.", color: "#e30613", bg: "rgba(227,6,19,0.08)" },
-              { icon: ArrowUpDown, title: "Transferências TED/PIX", desc: "Realize transferências entre contas de forma rápida e segura. PIX gratuito para pessoas físicas.", color: "#3b82f6", bg: "rgba(59,130,246,0.08)" },
+              { icon: ArrowUpDown, title: "Transferências TED/PIX", desc: "Realize transferências entre contas de forma rápida e segura. Tarifas seguem a tabela pública do Asaas ou o contrato BaaS da conta raiz.", color: "#3b82f6", bg: "rgba(59,130,246,0.08)" },
               { icon: FileText, title: "Boletos Bancários", desc: "Gere boletos registrados com código de barras e QR Code. Acompanhe pagamentos em tempo real.", color: "#8b5cf6", bg: "rgba(139,92,246,0.08)" },
               { icon: CreditCard, title: "Cartão Virtual", desc: "Emita seu cartão virtual para compras online com total segurança e controle de limite.", color: "#ec4899", bg: "rgba(236,72,153,0.08)" },
               { icon: TrendingUp, title: "Extrato Completo", desc: "Histórico detalhado de todas as movimentações com filtros por período, tipo e valor.", color: "#f59e0b", bg: "rgba(245,158,11,0.08)" },
@@ -294,6 +299,108 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── FEES ─── */}
+      <section className="py-20 px-6" id="taxas">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-14">
+            <span className="inline-block text-[12px] font-extrabold uppercase tracking-[0.1em] text-red-500 mb-3">
+              Taxas
+            </span>
+            <h2 className="text-[clamp(28px,4vw,44px)] font-extrabold text-slate-800 tracking-tight mb-4">
+              Transparência de preços alinhada ao padrão Asaas.
+            </h2>
+            <p className="text-[17px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+              Estes valores de referência podem ser sobrescritos pelas variáveis da sua operação BaaS e já aparecem no internet banking e no app.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            <div
+              className="rounded-3xl p-7"
+              style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 8px 28px rgba(0,0,0,0.05)" }}
+            >
+              <p className="text-[12px] font-extrabold uppercase tracking-[0.12em] text-emerald-500 mb-4">
+                Recebimentos
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800">PIX recebido</p>
+                    <p className="text-[13px] text-slate-500">Tabela pública Asaas</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[18px] font-extrabold text-slate-800">{fees.incoming.pix.standardFormatted}</p>
+                    <p className="text-[12px] text-emerald-500">Promo {fees.incoming.pix.promotionalFormatted}</p>
+                  </div>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800">Boleto recebido</p>
+                    <p className="text-[13px] text-slate-500">Tabela pública Asaas</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[18px] font-extrabold text-slate-800">{fees.incoming.boleto.standardFormatted}</p>
+                    <p className="text-[12px] text-emerald-500">Promo {fees.incoming.boleto.promotionalFormatted}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="rounded-3xl p-7"
+              style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 8px 28px rgba(0,0,0,0.05)" }}
+            >
+              <p className="text-[12px] font-extrabold uppercase tracking-[0.12em] text-blue-500 mb-4">
+                Saídas
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800">PIX pessoa física</p>
+                    <p className="text-[13px] text-slate-500">Transferência e pagamento</p>
+                  </div>
+                  <p className="text-[18px] font-extrabold text-slate-800">{fees.outgoing.pixTransferPf.standardFormatted}</p>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800">TED</p>
+                    <p className="text-[13px] text-slate-500">Por transferência</p>
+                  </div>
+                  <p className="text-[18px] font-extrabold text-slate-800">{fees.outgoing.ted.standardFormatted}</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="rounded-3xl p-7 text-white"
+              style={{ background: "linear-gradient(135deg, #111827 0%, #1f2937 100%)", boxShadow: "0 12px 32px rgba(15,23,42,0.18)" }}
+            >
+              <p className="text-[12px] font-extrabold uppercase tracking-[0.12em] text-amber-300 mb-4">
+                PIX PJ
+              </p>
+              <p className="text-[30px] font-extrabold tracking-tight mb-2">
+                {fees.outgoing.pixTransferPj.monthlyFreeTransactions} grátis/mês
+              </p>
+              <p className="text-[14px] text-white/65 leading-relaxed mb-6">
+                Depois da franquia mensal, o valor de referência fica em {fees.outgoing.pixTransferPj.afterFreeFormatted} por transação.
+              </p>
+              <a
+                href={fees.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-bold text-slate-900 bg-amber-300 transition-all hover:opacity-90"
+              >
+                Ver tabela oficial
+              </a>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-[13px] leading-relaxed text-slate-500">
+            Referência pública verificada em {fees.verifiedAt}. {fees.disclaimer}
+          </p>
         </div>
       </section>
 
@@ -412,7 +519,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-10">
             <div className="flex items-center gap-3">
-              <img src="/favicon.png" alt="CredBusiness" className="h-9 w-9 object-contain" />
+              <Image src="/favicon.png" alt="CredBusiness" width={36} height={36} className="h-9 w-9 object-contain" />
               <div className="flex flex-col leading-none">
                 <span className="text-[18px] font-extrabold text-white">
                   Cred<span className="text-red-400">Business</span>

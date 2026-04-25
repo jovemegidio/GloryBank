@@ -1,18 +1,112 @@
-const ASAAS_API_URL = process.env.ASAAS_API_URL ?? "https://sandbox.asaas.com/api/v3";
+const DEFAULT_ASAAS_API_URL = "https://api-sandbox.asaas.com/v3";
+const ASAAS_API_URL = normalizeAsaasApiUrl(process.env.ASAAS_API_URL);
 const ASAAS_API_KEY = process.env.ASAAS_API_KEY ?? "";
 
 interface AsaasRequestOptions {
   method: "GET" | "POST" | "PUT" | "DELETE";
   path: string;
   body?: Record<string, unknown>;
+  query?: Record<string, string | number | boolean | undefined>;
   apiKey?: string;
+  allowNoContent?: boolean;
+}
+
+type AsaasStatisticsPayload = Record<string, unknown>;
+
+function normalizeAsaasApiUrl(url?: string): string {
+  const raw = (url ?? DEFAULT_ASAAS_API_URL).trim();
+  if (!raw) return DEFAULT_ASAAS_API_URL;
+
+  let normalized = raw.replace(/\/+$/, "");
+
+  if (normalized.endsWith("/api/v3")) {
+    normalized = `${normalized.slice(0, -7)}/v3`;
+  }
+
+  if (!normalized.endsWith("/v3")) {
+    normalized = `${normalized}/v3`;
+  }
+
+  return normalized
+    .replace("https://sandbox.asaas.com/v3", DEFAULT_ASAAS_API_URL)
+    .replace("https://sandbox.asaas.com/api/v3", DEFAULT_ASAAS_API_URL)
+    .replace("https://api.asaas.com/api/v3", "https://api.asaas.com/v3");
+}
+
+export function isSandboxAsaasApiUrl(url = ASAAS_API_URL): boolean {
+  return normalizeAsaasApiUrl(url).includes("api-sandbox.asaas.com");
+}
+
+function buildAsaasUrl(
+  path: string,
+  query?: Record<string, string | number | boolean | undefined>
+): string {
+  const pathname = path.startsWith("/") ? path : `/${path}`;
+  const url = new URL(`${ASAAS_API_URL}${pathname}`);
+
+  Object.entries(query ?? {}).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  return url.toString();
+}
+
+function toNumber(value: unknown): number {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return 0;
+}
+
+function extractStatisticsValue(payload: AsaasStatisticsPayload): number {
+  const candidateKeys = ["value", "totalValue", "sum", "netValue", "amount", "total"];
+
+  for (const key of candidateKeys) {
+    if (key in payload) {
+      return toNumber(payload[key]);
+    }
+  }
+
+  return 0;
+}
+
+function extractAsaasErrorMessage(error: unknown): string {
+  if (typeof error === "string") return error;
+
+  if (error && typeof error === "object") {
+    if ("errors" in error && Array.isArray(error.errors)) {
+      const descriptions = error.errors
+        .map((entry) =>
+          entry && typeof entry === "object" && "description" in entry
+            ? String(entry.description)
+            : null
+        )
+        .filter(Boolean);
+
+      if (descriptions.length > 0) {
+        return descriptions.join("; ");
+      }
+    }
+
+    if ("message" in error && typeof error.message === "string") {
+      return error.message;
+    }
+  }
+
+  return "Erro desconhecido ao comunicar com o Asaas";
 }
 
 async function asaasRequest<T>({
   method,
   path,
   body,
+  query,
   apiKey,
+  allowNoContent,
 }: AsaasRequestOptions): Promise<T> {
   const key = apiKey || ASAAS_API_KEY;
 
@@ -20,38 +114,48 @@ async function asaasRequest<T>({
     throw new Error("Asaas API key not configured");
   }
 
-  const response = await fetch(`${ASAAS_API_URL}${path}`, {
+  const response = await fetch(buildAsaasUrl(path, query), {
     method,
     headers: {
       "Content-Type": "application/json",
       access_token: key,
     },
     body: body ? JSON.stringify(body) : undefined,
+    cache: "no-store",
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    throw new Error(
-      `Asaas API error: ${response.status} - ${JSON.stringify(error)}`
-    );
+    const error = await response.json().catch(async () => ({
+      message: await response.text().catch(() => ""),
+    }));
+
+    throw new Error(`Asaas API error ${response.status}: ${extractAsaasErrorMessage(error)}`);
+  }
+
+  if (allowNoContent || response.status === 204) {
+    return undefined as T;
+  }
+
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    return undefined as T;
   }
 
   return response.json();
 }
 
-// ============ SUB-ACCOUNTS ============
-
 export interface CreateSubAccountData {
   name: string;
   email: string;
   cpfCnpj: string;
-  phone: string;
-  mobilePhone?: string;
+  phone?: string;
+  mobilePhone: string;
+  incomeValue: number;
   birthDate?: string;
-  address?: string;
-  addressNumber?: string;
-  province?: string;
-  postalCode?: string;
+  address: string;
+  addressNumber: string;
+  province: string;
+  postalCode: string;
   companyType?: string;
 }
 
@@ -75,14 +179,18 @@ export async function createSubAccount(
   return asaasRequest<SubAccountResponse>({
     method: "POST",
     path: "/accounts",
-    body: {
-      ...data,
-      companyType: data.companyType || "MEI",
-    },
+    body: data as unknown as Record<string, unknown>,
   });
 }
 
-// ============ BALANCE ============
+export async function approveSandboxAccount(apiKey: string): Promise<void> {
+  await asaasRequest<void>({
+    method: "POST",
+    path: "/sandbox/myAccount/approve",
+    apiKey,
+    allowNoContent: true,
+  });
+}
 
 export interface BalanceResponse {
   balance: number;
@@ -94,26 +202,41 @@ export interface BalanceResponse {
 }
 
 export async function getBalance(apiKey: string): Promise<BalanceResponse> {
-  const [balance, statistics] = await Promise.all([
+  const [balance, pendingStatistics, receivedStatistics, overdueStatistics] = await Promise.all([
     asaasRequest<{ balance: number }>({
       method: "GET",
       path: "/finance/balance",
       apiKey,
     }),
-    asaasRequest<{ pending: number; overdue: number; confirmed: number }>({
+    asaasRequest<AsaasStatisticsPayload>({
       method: "GET",
-      path: "/finance/statistics",
+      path: "/finance/payment/statistics",
+      query: { status: "PENDING" },
       apiKey,
-    }).catch(() => ({ pending: 0, overdue: 0, confirmed: 0 })),
+    }).catch(() => ({})),
+    asaasRequest<AsaasStatisticsPayload>({
+      method: "GET",
+      path: "/finance/payment/statistics",
+      query: { status: "RECEIVED" },
+      apiKey,
+    }).catch(() => ({})),
+    asaasRequest<AsaasStatisticsPayload>({
+      method: "GET",
+      path: "/finance/payment/statistics",
+      query: { status: "OVERDUE" },
+      apiKey,
+    }).catch(() => ({})),
   ]);
 
   return {
-    balance: balance.balance,
-    statistics,
+    balance: toNumber(balance.balance),
+    statistics: {
+      pending: extractStatisticsValue(pendingStatistics),
+      confirmed: extractStatisticsValue(receivedStatistics),
+      overdue: extractStatisticsValue(overdueStatistics),
+    },
   };
 }
-
-// ============ PIX ============
 
 export interface PixTransferData {
   value: number;
@@ -176,7 +299,8 @@ export async function createPixQrCode(
 export interface PixKeyResponse {
   id: string;
   key: string;
-  type: string;
+  type?: string;
+  keyType?: string;
   status: string;
 }
 
@@ -189,7 +313,7 @@ export async function getPixKeys(apiKey: string): Promise<{ data: PixKeyResponse
 }
 
 export async function createPixKey(
-  type: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP",
+  type: "EVP",
   apiKey: string
 ): Promise<PixKeyResponse> {
   return asaasRequest<PixKeyResponse>({
@@ -199,8 +323,6 @@ export async function createPixKey(
     apiKey,
   });
 }
-
-// ============ BOLETO / PAYMENTS ============
 
 export interface CreatePaymentData {
   customer: string;
@@ -235,8 +357,6 @@ export async function createPayment(
   });
 }
 
-// ============ TRANSFERS ============
-
 export interface TransferData {
   value: number;
   bankAccount?: {
@@ -254,6 +374,9 @@ export interface TransferData {
   pixAddressKey?: string;
   pixAddressKeyType?: string;
   description?: string;
+  scheduleDate?: string;
+  externalReference?: string;
+  recurring?: Record<string, unknown>;
 }
 
 export interface TransferResponse {
@@ -276,7 +399,17 @@ export async function createTransfer(
   });
 }
 
-// ============ TRANSACTIONS / STATEMENTS ============
+export async function cancelTransfer(
+  transferId: string,
+  apiKey: string
+): Promise<void> {
+  await asaasRequest<void>({
+    method: "DELETE",
+    path: `/transfers/${transferId}/cancel`,
+    apiKey,
+    allowNoContent: true,
+  });
+}
 
 export interface FinancialTransaction {
   id: string;
@@ -303,21 +436,18 @@ export async function getTransactions(
     finishDate?: string;
   }
 ): Promise<TransactionsResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.offset) searchParams.set("offset", String(params.offset));
-  if (params?.limit) searchParams.set("limit", String(params.limit));
-  if (params?.startDate) searchParams.set("startDate", params.startDate);
-  if (params?.finishDate) searchParams.set("finishDate", params.finishDate);
-
-  const query = searchParams.toString();
   return asaasRequest<TransactionsResponse>({
     method: "GET",
-    path: `/financialTransactions${query ? `?${query}` : ""}`,
+    path: "/financialTransactions",
+    query: {
+      offset: params?.offset,
+      limit: params?.limit,
+      startDate: params?.startDate,
+      finishDate: params?.finishDate,
+    },
     apiKey,
   });
 }
-
-// ============ CUSTOMER (for boleto payments) ============
 
 export interface CustomerData {
   name: string;
@@ -349,10 +479,27 @@ export async function getCustomers(
   apiKey: string,
   cpfCnpj?: string
 ): Promise<{ data: CustomerResponse[] }> {
-  const query = cpfCnpj ? `?cpfCnpj=${cpfCnpj}` : "";
   return asaasRequest<{ data: CustomerResponse[] }>({
     method: "GET",
-    path: `/customers${query}`,
+    path: "/customers",
+    query: { cpfCnpj },
     apiKey,
   });
+}
+
+export function normalizePixKey(
+  pixKey: string,
+  pixKeyType: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP"
+): string {
+  const trimmed = pixKey.trim();
+
+  if (pixKeyType === "EMAIL") {
+    return trimmed.toLowerCase();
+  }
+
+  if (pixKeyType === "EVP") {
+    return trimmed;
+  }
+
+  return trimmed.replace(/\D/g, "");
 }

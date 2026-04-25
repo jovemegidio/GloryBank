@@ -5,12 +5,32 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Lock, User, Phone, CreditCard, Wallet } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User,
+  Phone,
+  CreditCard,
+  Wallet,
+  CalendarDays,
+  MapPin,
+  Building2,
+  Home,
+  Landmark,
+} from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { AsaasBadge } from "@/components/ui/asaas-badge";
+
+const companyTypeOptions = [
+  { value: "MEI", label: "MEI" },
+  { value: "LIMITED", label: "LTDA / Empresarial" },
+  { value: "INDIVIDUAL", label: "Empresario Individual" },
+  { value: "ASSOCIATION", label: "Associacao" },
+];
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,10 +39,19 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      companyType: "MEI",
+    },
   });
+
+  const cpfCnpj = watch("cpfCnpj") || "";
+  const documentLength = cpfCnpj.replace(/\D/g, "").length;
+  const isCompany = documentLength === 14;
+  const isIndividual = documentLength === 11;
 
   const onSubmit = async (data: RegisterInput) => {
     setIsLoading(true);
@@ -49,7 +78,7 @@ export default function RegisterPage() {
       toast.success("Conta criada com sucesso!");
       router.push("/dashboard");
     } catch {
-      toast.error("Erro de conexão. Tente novamente.");
+      toast.error("Erro de conexao. Tente novamente.");
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +88,11 @@ export default function RegisterPage() {
     <>
       <Toaster position="top-right" />
       <div>
-        {/* Mobile logo */}
         <div className="mb-8 flex items-center gap-3 lg:hidden">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "rgba(227,6,19,0.06)" }}>
+          <div
+            className="flex h-10 w-10 items-center justify-center rounded-xl"
+            style={{ background: "rgba(227,6,19,0.06)" }}
+          >
             <Wallet className="h-5 w-5 text-red-500" />
           </div>
           <span className="text-xl font-bold text-slate-800">
@@ -70,18 +101,16 @@ export default function RegisterPage() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-slate-800">
-            Criar sua conta
-          </h2>
+          <h2 className="text-2xl font-bold text-slate-800">Criar sua conta</h2>
           <p className="mt-2 text-sm text-slate-500">
-            Abra sua conta digital em poucos minutos
+            Preencha os dados exigidos para abrir sua conta digital via Asaas.
           </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <Input
             label="Nome completo"
-            placeholder="João da Silva"
+            placeholder="Joao da Silva"
             icon={<User className="h-4 w-4" />}
             error={errors.name?.message}
             {...register("name")}
@@ -112,6 +141,68 @@ export default function RegisterPage() {
             {...register("phone")}
           />
 
+          {isIndividual && (
+            <Input
+              label="Data de nascimento"
+              type="date"
+              icon={<CalendarDays className="h-4 w-4" />}
+              error={errors.birthDate?.message}
+              {...register("birthDate")}
+            />
+          )}
+
+          {isCompany && (
+            <Select
+              label="Tipo de empresa"
+              options={companyTypeOptions}
+              error={errors.companyType?.message}
+              {...register("companyType")}
+            />
+          )}
+
+          <Input
+            label="Renda mensal"
+            type="number"
+            step="0.01"
+            min="0.01"
+            placeholder="5000"
+            icon={<Landmark className="h-4 w-4" />}
+            error={errors.incomeValue?.message}
+            {...register("incomeValue", { valueAsNumber: true })}
+          />
+
+          <Input
+            label="CEP"
+            placeholder="01310-100"
+            icon={<MapPin className="h-4 w-4" />}
+            error={errors.postalCode?.message}
+            {...register("postalCode")}
+          />
+
+          <Input
+            label="Endereco"
+            placeholder="Av. Paulista"
+            icon={<Home className="h-4 w-4" />}
+            error={errors.address?.message}
+            {...register("address")}
+          />
+
+          <Input
+            label="Numero"
+            placeholder="1000"
+            icon={<Building2 className="h-4 w-4" />}
+            error={errors.addressNumber?.message}
+            {...register("addressNumber")}
+          />
+
+          <Input
+            label="Bairro"
+            placeholder="Bela Vista"
+            icon={<MapPin className="h-4 w-4" />}
+            error={errors.province?.message}
+            {...register("province")}
+          />
+
           <Input
             label="Senha"
             type="password"
@@ -131,23 +222,15 @@ export default function RegisterPage() {
           />
 
           <div className="pt-2">
-            <Button
-              type="submit"
-              isLoading={isLoading}
-              className="w-full"
-              size="lg"
-            >
+            <Button type="submit" isLoading={isLoading} className="w-full" size="lg">
               Criar conta
             </Button>
           </div>
         </form>
 
         <p className="mt-6 text-center text-sm text-slate-500">
-          Já tem uma conta?{" "}
-          <Link
-            href="/login"
-            className="font-semibold text-red-500 hover:text-red-600 transition-colors"
-          >
+          Ja tem uma conta?{" "}
+          <Link href="/login" className="font-semibold text-red-500 hover:text-red-600 transition-colors">
             Entrar
           </Link>
         </p>
@@ -157,10 +240,15 @@ export default function RegisterPage() {
         </div>
 
         <p className="mt-4 text-center text-[11px] text-slate-400">
-          Ao criar conta, você concorda com os{" "}
-          <Link href="/termos" className="underline hover:text-slate-600">Termos de Uso</Link>
-          {" "}e a{" "}
-          <Link href="/privacidade" className="underline hover:text-slate-600">Política de Privacidade</Link>.
+          Ao criar conta, voce concorda com os{" "}
+          <Link href="/termos" className="underline hover:text-slate-600">
+            Termos de Uso
+          </Link>{" "}
+          e a{" "}
+          <Link href="/privacidade" className="underline hover:text-slate-600">
+            Politica de Privacidade
+          </Link>
+          .
         </p>
       </div>
     </>
