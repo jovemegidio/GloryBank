@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Modal } from "@/components/ui/modal";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 const pixKeyTypes = [
   { value: "CPF", label: "CPF" },
@@ -332,6 +333,9 @@ export default function PixPage() {
             </div>
           )}
         </Modal>
+
+        {/* Asaas attribution — obrigatório em fluxos PIX */}
+        <AsaasBadge variant="footer" className="mt-2" />
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import { AsaasSeal } from "@/components/ui/asaas-seal";
+import { asaasConfig } from "@/lib/asaas-config";
 
 interface AsaasBadgeProps {
   variant?: "footer" | "inline" | "compact";
@@ -9,19 +10,25 @@ interface AsaasBadgeProps {
 }
 
 /**
- * Componente obrigatório para conformidade com o modelo BaaS do Asaas.
- * Deve ser exibido em todas as telas que envolvam serviços financeiros:
- * saldo, extrato, PIX, boleto, transferências e cartões.
+ * Componente de atribuição Asaas para conformidade com o playbook BaaS.
+ * Obrigatório em todas as telas que envolvam serviços financeiros.
+ *
+ * Para o selo de imagem oficial, use <AsaasSeal /> em paralelo ou no lugar deste.
  */
 export function AsaasBadge({ variant = "footer", className = "", dark = false }: AsaasBadgeProps) {
   if (variant === "compact") {
     return (
       <span
-        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium text-slate-500 ${className}`}
-        style={{ background: "rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.06)" }}
+        className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium ${dark ? "text-white/60" : "text-slate-500"} ${className}`}
+        style={{
+          background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)",
+          border: dark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.06)",
+        }}
       >
         Serviços financeiros por{" "}
-        <strong className="text-[#00a650]">Asaas</strong>
+        <strong className={dark ? "text-green-400" : "text-[#00a650]"}>
+          {asaasConfig.tradeName}
+        </strong>
       </span>
     );
   }
@@ -29,16 +36,16 @@ export function AsaasBadge({ variant = "footer", className = "", dark = false }:
   if (variant === "inline") {
     return (
       <p className={`text-[11px] ${dark ? "text-white/50" : "text-slate-400"} ${className}`}>
-        Servi\u00e7os financeiros fornecidos por{" "}
+        Serviços financeiros fornecidos por{" "}
         <a
-          href="https://www.asaas.com"
+          href={asaasConfig.support.homeUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={`font-semibold hover:underline ${dark ? "text-green-400" : "text-[#00a650]"}`}
         >
-          Asaas Pagamentos S.A.
+          {asaasConfig.legalName}
         </a>{" "}
-        \u2014 Institui\u00e7\u00e3o de Pagamento autorizada pelo Banco Central do Brasil (BACEN).
+        — {asaasConfig.regulatoryDescription} (BACEN).
       </p>
     );
   }
@@ -48,32 +55,26 @@ export function AsaasBadge({ variant = "footer", className = "", dark = false }:
     <div
       className={`flex items-start gap-3 rounded-xl p-3 ${className}`}
       style={{
-        background: "rgba(0,166,80,0.04)",
-        border: "1px solid rgba(0,166,80,0.12)",
+        background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,166,80,0.04)",
+        border: dark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,166,80,0.12)",
       }}
     >
-      <div
-        className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[10px] font-black text-white"
-        style={{ background: "#00a650" }}
-        aria-hidden="true"
-      >
-        A
-      </div>
+      <AsaasSeal variant={dark ? "mono-white" : "positive"} width={80} height={26} clickable />
       <div className="min-w-0">
-        <p className="text-[11px] font-semibold text-slate-600">
-          Serviços Financeiros por Asaas
+        <p className={`text-[11px] font-semibold ${dark ? "text-white/80" : "text-slate-600"}`}>
+          Serviços Financeiros por {asaasConfig.tradeName}
         </p>
-        <p className="mt-0.5 text-[10px] leading-relaxed text-slate-400">
+        <p className={`mt-0.5 text-[10px] leading-relaxed ${dark ? "text-white/40" : "text-slate-400"}`}>
           Os serviços financeiros desta plataforma são prestados pela{" "}
           <a
-            href="https://www.asaas.com"
+            href={asaasConfig.support.homeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-[#00a650] hover:underline"
+            className={`font-medium hover:underline ${dark ? "text-green-400" : "text-[#00a650]"}`}
           >
-            Asaas Pagamentos S.A.
+            {asaasConfig.legalName}
           </a>
-          , Instituição de Pagamento autorizada pelo Banco Central do Brasil.
+          , {asaasConfig.regulatoryDescription}.
         </p>
       </div>
     </div>

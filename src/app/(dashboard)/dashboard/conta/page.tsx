@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PageLoading } from "@/components/ui/loading";
 import { formatCPF, formatPhone } from "@/lib/utils";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface UserData {
   name: string;
@@ -35,23 +36,54 @@ interface PixKey {
   status: string;
 }
 
+interface FeesData {
+  verifiedAt: string;
+  disclaimer: string;
+  incoming: {
+    pix: {
+      standardFormatted: string;
+      promotionalFormatted: string;
+    };
+    boleto: {
+      standardFormatted: string;
+      promotionalFormatted: string;
+    };
+  };
+  outgoing: {
+    pixTransferPf: {
+      standardFormatted: string;
+    };
+    pixTransferPj: {
+      monthlyFreeTransactions: number;
+      afterFreeFormatted: string;
+    };
+    ted: {
+      standardFormatted: string;
+    };
+  };
+}
+
 export default function ContaPage() {
   const [user, setUser] = useState<UserData | null>(null);
   const [pixKeys, setPixKeys] = useState<PixKey[]>([]);
+  const [fees, setFees] = useState<FeesData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
     try {
-      const [userRes, keysRes] = await Promise.all([
+      const [userRes, keysRes, feesRes] = await Promise.all([
         fetch("/api/auth/session"),
         fetch("/api/asaas/pix"),
+        fetch("/api/asaas/fees"),
       ]);
 
       const userData = await userRes.json();
       const keysData = await keysRes.json();
+      const feesData = await feesRes.json();
 
       if (userData.success) setUser(userData.data.user);
       if (keysData.success) setPixKeys(keysData.data.data || []);
+      if (feesData.success) setFees(feesData.data);
     } catch (error) {
       console.error("Error fetching account data:", error);
     } finally {
@@ -241,6 +273,81 @@ export default function ContaPage() {
                 </div>
               )}
             </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-emerald-400" />
+                  Taxas Asaas
+                </CardTitle>
+              </CardHeader>
+
+              {fees ? (
+                <div className="space-y-3">
+                  <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
+                    <p className="text-xs uppercase tracking-wider text-slate-400">Recebimentos</p>
+                    <div className="mt-2 space-y-2 text-sm text-slate-600">
+                      <div className="flex items-center justify-between">
+                        <span>Pix recebido</span>
+                        <span className="font-semibold text-slate-800">
+                          {fees.incoming.pix.standardFormatted}
+                          <span className="ml-2 text-xs font-normal text-emerald-500">
+                            promo {fees.incoming.pix.promotionalFormatted}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Boleto recebido</span>
+                        <span className="font-semibold text-slate-800">
+                          {fees.incoming.boleto.standardFormatted}
+                          <span className="ml-2 text-xs font-normal text-emerald-500">
+                            promo {fees.incoming.boleto.promotionalFormatted}
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.03)" }}>
+                    <p className="text-xs uppercase tracking-wider text-slate-400">Saidas da conta</p>
+                    <div className="mt-2 space-y-2 text-sm text-slate-600">
+                      <div className="flex items-center justify-between">
+                        <span>Pix PF</span>
+                        <span className="font-semibold text-slate-800">
+                          {fees.outgoing.pixTransferPf.standardFormatted}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Pix PJ</span>
+                        <span className="text-right font-semibold text-slate-800">
+                          {fees.outgoing.pixTransferPj.monthlyFreeTransactions} gratis/mes
+                          <span className="block text-xs font-normal text-slate-500">
+                            depois {fees.outgoing.pixTransferPj.afterFreeFormatted}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>TED</span>
+                        <span className="font-semibold text-slate-800">
+                          {fees.outgoing.ted.standardFormatted}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-xs leading-relaxed text-slate-400">
+                    Referencia publica verificada em {fees.verifiedAt}. {fees.disclaimer}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-sm text-slate-500">
+                  Nao foi possivel carregar as taxas de referencia agora.
+                </p>
+              )}
+            </Card>
+
+            {/* Asaas attribution — obrigatório em área de conta/KYC */}
+            <AsaasBadge variant="footer" />
           </div>
         </div>
       </div>

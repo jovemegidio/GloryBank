@@ -11,6 +11,7 @@ import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface BoletoResult {
   id: string;
@@ -201,6 +202,9 @@ export default function BoletoPage() {
             </Card>
           )}
         </div>
+
+        {/* Asaas attribution — obrigatório em fluxos de boleto */}
+        <AsaasBadge variant="footer" className="mt-2" />
       </div>
     </>
   );

@@ -2,7 +2,9 @@
 
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { asaasConfig } from "@/lib/asaas-config";
 import { Download, Share2, CheckCircle } from "lucide-react";
 
 interface Transaction {
@@ -32,6 +34,14 @@ const typeLabels: Record<string, string> = {
   WITHDRAWAL: "Saque",
 };
 
+const statusLabels: Record<string, string> = {
+  CONFIRMED: "Confirmado",
+  PENDING: "Pendente",
+  CANCELLED: "Cancelado",
+  FAILED: "Falhou",
+  REFUNDED: "Estornado",
+};
+
 export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps) {
   if (!transaction) return null;
 
@@ -41,33 +51,35 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
     transaction.type === "BOLETO_PAID";
 
   const handlePrint = () => {
-    const receiptContent = document.getElementById("receipt-content");
-    if (!receiptContent) return;
-
-    const printWindow = window.open("", "_blank", "width=400,height=600");
+    const printWindow = window.open("", "_blank", "width=460,height=700");
     if (!printWindow) return;
 
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html>
+      <html lang="pt-BR">
       <head>
-        <title>Comprovante - CredBusiness</title>
+        <meta charset="UTF-8" />
+        <title>Comprovante — CredBusiness</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 24px; color: #1e293b; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 28px; color: #1e293b; }
           .header { text-align: center; padding-bottom: 16px; border-bottom: 2px solid #e30613; margin-bottom: 20px; }
-          .header h1 { color: #e30613; font-size: 20px; margin-bottom: 4px; }
+          .header h1 { color: #e30613; font-size: 20px; margin-bottom: 2px; font-weight: 700; }
           .header p { color: #64748b; font-size: 11px; }
-          .icon { text-align: center; margin: 16px 0; }
-          .icon svg { width: 40px; height: 40px; color: #22c55e; }
-          .section { margin-bottom: 16px; }
-          .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+          .amount { font-size: 26px; font-weight: 700; text-align: center; padding: 18px 0; color: ${isPositive ? "#22c55e" : "#ef4444"}; }
+          .section { background: #f8fafc; border-radius: 8px; padding: 12px; margin-bottom: 14px; }
+          .row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #f1f5f9; }
           .row:last-child { border-bottom: none; }
           .label { color: #64748b; font-size: 12px; }
-          .value { font-weight: 600; font-size: 13px; text-align: right; max-width: 60%; }
-          .amount { font-size: 22px; font-weight: 700; text-align: center; padding: 16px 0; color: ${isPositive ? "#22c55e" : "#ef4444"}; }
-          .footer { text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px dashed #cbd5e1; color: #94a3b8; font-size: 10px; }
-          .auth-code { font-family: monospace; letter-spacing: 1px; margin-top: 4px; font-size: 11px; }
+          .value { font-weight: 600; font-size: 12px; text-align: right; max-width: 60%; }
+          .auth-code { font-family: 'Courier New', monospace; letter-spacing: 0.5px; font-size: 11px; color: #94a3b8; }
+          .footer { margin-top: 20px; padding-top: 14px; border-top: 1px dashed #cbd5e1; }
+          .footer-main { text-align: center; color: #94a3b8; font-size: 10px; margin-bottom: 12px; line-height: 1.6; }
+          .asaas-block { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px 12px; }
+          .asaas-label { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+          .asaas-a { background: #00a650; color: white; font-weight: 900; font-size: 9px; width: 16px; height: 16px; border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+          .asaas-name { font-weight: 600; font-size: 11px; color: #15803d; }
+          .asaas-desc { font-size: 10px; color: #4b5563; line-height: 1.5; }
           @media print { body { padding: 16px; } }
         </style>
       </head>
@@ -78,17 +90,45 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
         </div>
         <div class="amount">${isPositive ? "+" : "−"} ${formatCurrency(Math.abs(transaction.amount))}</div>
         <div class="section">
-          <div class="row"><span class="label">Tipo</span><span class="value">${typeLabels[transaction.type] || transaction.type}</span></div>
-          <div class="row"><span class="label">Status</span><span class="value">${transaction.status === "CONFIRMED" ? "Confirmado" : transaction.status === "PENDING" ? "Pendente" : transaction.status}</span></div>
-          <div class="row"><span class="label">Data/Hora</span><span class="value">${formatDate(transaction.date)}</span></div>
+          <div class="row">
+            <span class="label">Tipo</span>
+            <span class="value">${typeLabels[transaction.type] || transaction.type}</span>
+          </div>
+          <div class="row">
+            <span class="label">Status</span>
+            <span class="value">${statusLabels[transaction.status] || transaction.status}</span>
+          </div>
+          <div class="row">
+            <span class="label">Data/Hora</span>
+            <span class="value">${formatDate(transaction.date)}</span>
+          </div>
           ${transaction.recipientName ? `<div class="row"><span class="label">Destinatário</span><span class="value">${transaction.recipientName}</span></div>` : ""}
           ${transaction.description ? `<div class="row"><span class="label">Descrição</span><span class="value">${transaction.description}</span></div>` : ""}
-          <div class="row"><span class="label">ID Transação</span><span class="value auth-code">${transaction.id}</span></div>
+          <div class="row">
+            <span class="label">ID Transação</span>
+            <span class="value auth-code">${transaction.id}</span>
+          </div>
+          <div class="row">
+            <span class="label">Cód. Autenticação</span>
+            <span class="value auth-code">${transaction.id.toUpperCase().slice(-12)}</span>
+          </div>
         </div>
         <div class="footer">
-          <p>Documento emitido eletronicamente por CredBusiness</p>
-          <p class="auth-code">Código de autenticação: ${transaction.id.toUpperCase().slice(-12)}</p>
-          <p style="margin-top: 8px;">Este comprovante tem validade legal conforme Resolução BCB nº 1/2020</p>
+          <div class="footer-main">
+            <div>Documento emitido eletronicamente em ${new Date().toLocaleDateString("pt-BR", { dateStyle: "long" })}</div>
+            <div>Este comprovante tem validade legal conforme Resolução BCB nº 1/2020</div>
+          </div>
+          <div class="asaas-block">
+            <div class="asaas-label">
+              <div class="asaas-a">A</div>
+              <span class="asaas-name">Serviços financeiros por ${asaasConfig.legalName}</span>
+            </div>
+            <p class="asaas-desc">
+              ${asaasConfig.regulatoryDescription}.
+              Os serviços financeiros desta transação são de responsabilidade do ${asaasConfig.legalName}.
+              Suporte: ${asaasConfig.support.phonePJ} | ${asaasConfig.support.email}
+            </p>
+          </div>
         </div>
       </body>
       </html>
@@ -99,7 +139,18 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
   };
 
   const handleShare = async () => {
-    const text = `Comprovante CredBusiness\n${typeLabels[transaction.type]}\nValor: ${isPositive ? "+" : "-"}${formatCurrency(Math.abs(transaction.amount))}\nData: ${formatDate(transaction.date)}${transaction.recipientName ? `\nDestinatário: ${transaction.recipientName}` : ""}\nID: ${transaction.id}`;
+    const text = [
+      "Comprovante CredBusiness",
+      `${typeLabels[transaction.type] || transaction.type}`,
+      `Valor: ${isPositive ? "+" : "-"}${formatCurrency(Math.abs(transaction.amount))}`,
+      `Status: ${statusLabels[transaction.status] || transaction.status}`,
+      `Data: ${formatDate(transaction.date)}`,
+      transaction.recipientName ? `Destinatário: ${transaction.recipientName}` : "",
+      `ID: ${transaction.id}`,
+      `Serviços financeiros: ${asaasConfig.legalName}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     if (navigator.share) {
       await navigator.share({ title: "Comprovante CredBusiness", text });
@@ -124,11 +175,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
 
         {/* Amount */}
         <div className="text-center">
-          <p
-            className={`text-2xl font-bold ${
-              isPositive ? "text-green-500" : "text-red-500"
-            }`}
-          >
+          <p className={`text-2xl font-bold ${isPositive ? "text-green-500" : "text-red-500"}`}>
             {isPositive ? "+" : "−"} {formatCurrency(Math.abs(transaction.amount))}
           </p>
           <p className="mt-1 text-sm text-slate-500">
@@ -151,11 +198,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
                   : "text-red-600"
               }`}
             >
-              {transaction.status === "CONFIRMED"
-                ? "Confirmado"
-                : transaction.status === "PENDING"
-                ? "Pendente"
-                : transaction.status}
+              {statusLabels[transaction.status] || transaction.status}
             </span>
           </Row>
 
@@ -182,17 +225,18 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
           )}
 
           <Row label="ID Transação">
-            <span className="text-xs font-mono text-slate-500">
-              {transaction.id}
-            </span>
+            <span className="text-xs font-mono text-slate-500">{transaction.id}</span>
           </Row>
 
-          <Row label="Código Auth.">
+          <Row label="Cód. Auth.">
             <span className="text-xs font-mono text-slate-500">
               {transaction.id.toUpperCase().slice(-12)}
             </span>
           </Row>
         </div>
+
+        {/* Asaas attribution — obrigatório em comprovantes */}
+        <AsaasBadge variant="footer" />
 
         {/* Actions */}
         <div className="flex gap-3">
@@ -210,13 +254,7 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
   );
 }
 
-function Row({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-4">
       <span className="text-xs text-slate-500 shrink-0">{label}</span>

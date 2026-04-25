@@ -8,6 +8,8 @@ import { TransactionList } from "@/components/dashboard/transaction-list";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageLoading } from "@/components/ui/loading";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
+import { asaasConfig } from "@/lib/asaas-config";
 import { Toaster } from "react-hot-toast";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
@@ -144,11 +146,26 @@ export default function ExtratoPage() {
       .header h1{color:#e30613;font-size:22px}.header p{color:#64748b;font-size:12px;margin-top:4px}
       table{width:100%;border-collapse:collapse;margin-top:16px}th{background:#f8fafc;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;text-align:left;padding:8px 12px;border-bottom:2px solid #e2e8f0}
       td{padding:8px 12px;border-bottom:1px solid #f1f5f9;font-size:12px}tr:hover{background:#fafafa}
-      .footer{text-align:center;margin-top:24px;padding-top:16px;border-top:1px dashed #cbd5e1;color:#94a3b8;font-size:10px}
+      .footer{margin-top:24px;padding-top:16px;border-top:1px dashed #cbd5e1}
+      .footer-main{text-align:center;color:#94a3b8;font-size:10px;margin-bottom:12px}
+      .asaas-block{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px}
+      .asaas-label{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+      .asaas-a{background:#00a650;color:white;font-weight:900;font-size:9px;width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+      .asaas-name{font-weight:600;font-size:11px;color:#15803d}
+      .asaas-desc{font-size:10px;color:#4b5563;line-height:1.5}
       @media print{body{padding:16px}}</style></head><body>
       <div class="header"><h1>CredBusiness</h1><p>Extrato de Transações — ${new Date().toLocaleDateString("pt-BR")}</p></div>
       <table><thead><tr><th>Data</th><th>Tipo</th><th>Destino/Descrição</th><th style="text-align:right">Valor</th></tr></thead><tbody>${rows}</tbody></table>
-      <div class="footer"><p>${transactions.length} transações listadas</p><p>Documento gerado eletronicamente por CredBusiness</p></div>
+      <div class="footer">
+        <div class="footer-main"><p>${transactions.length} transação(ões) — Documento gerado em ${new Date().toLocaleDateString("pt-BR", { dateStyle: "long" })}</p></div>
+        <div class="asaas-block">
+          <div class="asaas-label">
+            <div class="asaas-a">A</div>
+            <span class="asaas-name">Serviços financeiros por ${asaasConfig.legalName}</span>
+          </div>
+          <p class="asaas-desc">${asaasConfig.regulatoryDescription}. Os serviços financeiros desta conta são de responsabilidade do ${asaasConfig.legalName}. Suporte: ${asaasConfig.support.phonePJ} | ${asaasConfig.support.email}</p>
+        </div>
+      </div>
       </body></html>`);
     printWin.document.close();
     printWin.focus();
@@ -253,6 +270,9 @@ export default function ExtratoPage() {
             </div>
           )}
         </Card>
+
+        {/* Asaas attribution — obrigatório em extratos financeiros */}
+        <AsaasBadge variant="footer" />
       </div>
     </>
   );
