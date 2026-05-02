@@ -1,44 +1,34 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// Generate PWA icons for CredBusiness
+// Generate CredBusiness PWA icons from the official mark.
 // Run: node public/icons/generate-icons.js
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 function createSVG(size, maskable = false) {
-  const padding = maskable ? size * 0.1 : 0;
-  const iconSize = size - padding * 2;
-  const cx = size / 2;
-  const cy = size / 2;
-  const fontSize = Math.round(iconSize * 0.3);
-  
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+  const transform = maskable ? 'transform="translate(9 9) scale(0.8125)"' : "";
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 96 96" role="img" aria-label="CredBusiness">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#00A650"/>
-      <stop offset="58%" stop-color="#008D58"/>
-      <stop offset="100%" stop-color="#0F2F2A"/>
+    <linearGradient id="cb-bg" x1="12" y1="8" x2="84" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E63F0"/>
+      <stop offset="0.55" stop-color="#1746C2"/>
+      <stop offset="1" stop-color="#0A1F44"/>
     </linearGradient>
   </defs>
-  ${maskable
-    ? `<rect width="${size}" height="${size}" fill="url(#bg)" rx="${size * 0.2}"/>`
-    : `<rect width="${size}" height="${size}" fill="url(#bg)" rx="${size * 0.22}"/>`
-  }
-  <text x="${cx}" y="${cy + fontSize * 0.28}" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="800">CB</text>
+  <rect width="96" height="96" rx="${maskable ? 20 : 22}" fill="url(#cb-bg)"/>
+  <g ${transform}>
+    <path d="M25 61.5V34.5C25 30.9 27.9 28 31.5 28H49C57.8 28 64.5 34.6 64.5 43.1V52.9C64.5 61.4 57.8 68 49 68H31.5C27.9 68 25 65.1 25 61.5Z" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 28H57.5C66.2 28 72 33.7 72 41C72 48.3 66.2 54 57.5 54H48" fill="none" stroke="#9DC3FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 54H60C67.2 54 72 58.3 72 64C72 69.7 67.2 74 60 74H48" fill="none" stroke="#9DC3FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>`;
 }
 
-const sizes = [192, 512];
-const variants = [false, true]; // normal, maskable
-
-for (const size of sizes) {
-  for (const maskable of variants) {
+for (const size of [192, 512]) {
+  for (const maskable of [false, true]) {
     const filename = maskable ? `icon-maskable-${size}.svg` : `icon-${size}.svg`;
-    const svg = createSVG(size, maskable);
-    fs.writeFileSync(path.join(__dirname, filename), svg);
+    fs.writeFileSync(path.join(__dirname, filename), createSVG(size, maskable));
     console.log(`Created ${filename}`);
   }
 }
-
-console.log('\nNote: For production, convert SVGs to PNG using a tool like Sharp or Inkscape.');
-console.log('For now, update manifest.json to reference .svg files or convert manually.');

@@ -7,7 +7,7 @@ import { asaasConfig } from "@/lib/asaas-config";
 
 export const metadata: Metadata = {
   title: "Termos de Uso | CredBusiness",
-  description: "Termos de Uso do CredBusiness — condições para utilização dos serviços financeiros prestados pela ASAAS GESTÃO FINANCEIRA S.A.",
+  description: "Termos de Uso do CredBusiness — condições para utilização dos serviços financeiros prestados pela ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A.",
 };
 
 export default function TermsPage() {
@@ -20,10 +20,10 @@ export default function TermsPage() {
             <div
               className="flex h-8 w-8 items-center justify-center rounded-lg"
             >
-              <Image src="/brand-mark.svg" alt="" width={32} height={32} className="h-8 w-8" aria-hidden="true" />
+              <Image src="/favicon.png" alt="" width={32} height={32} className="h-8 w-8 object-contain" aria-hidden="true" />
             </div>
             <span className="font-bold text-slate-800">
-              Cred<span className="text-emerald-700">Business</span>
+              Cred<span className="text-[#1E63F0]">Business</span>
             </span>
           </Link>
           <Link
@@ -39,7 +39,7 @@ export default function TermsPage() {
       {/* Content */}
       <main className="mx-auto max-w-3xl px-6 py-12">
         <div className="mb-8 flex items-center gap-3">
-          <FileText className="h-8 w-8 text-emerald-700" />
+          <FileText className="h-8 w-8 text-[#1E63F0]" />
           <h1 className="text-3xl font-bold text-slate-800">Termos de Uso</h1>
         </div>
 

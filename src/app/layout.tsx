@@ -18,14 +18,13 @@ export const metadata: Metadata = {
     template: "%s | CredBusiness",
   },
   description:
-    "CredBusiness — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança institucional.",
+    "CredBusiness — Internet Banking digital completo. PIX, boletos, transferências e gestão financeira com segurança institucional e infraestrutura financeira Asaas.",
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
   manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any", rel: "icon" },
       { url: "/favicon.png", type: "image/png", sizes: "48x48" },
-      { url: "/brand-mark.svg", type: "image/svg+xml" },
     ],
     shortcut: "/favicon.ico",
     apple: "/favicon.png",
@@ -42,7 +41,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#00A650",
+  themeColor: "#0A1F44",
 };
 
 export default function RootLayout({

@@ -197,6 +197,7 @@ export default function PixPage() {
               >
                 Enviar PIX
               </Button>
+              <AsaasBadge variant="transaction" />
             </form>
           </Card>
 
@@ -241,6 +242,7 @@ export default function PixPage() {
                 </div>
               </div>
             </Card>
+            <AsaasBadge variant="transaction" />
           </div>
         </div>
 
@@ -278,6 +280,8 @@ export default function PixPage() {
                   )}
                 </div>
               </div>
+
+              <AsaasBadge variant="transaction" />
 
               <div className="flex gap-3">
                 <Button
@@ -330,6 +334,7 @@ export default function PixPage() {
               >
                 Copiar código
               </Button>
+              <AsaasBadge variant="transaction" />
             </div>
           )}
         </Modal>

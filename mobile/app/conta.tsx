@@ -14,6 +14,7 @@ import * as api from '@/lib/api';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import Badge from '@/components/Badge';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { formatCPF, formatPhone, formatDate } from '@/lib/utils';
 
@@ -95,6 +96,7 @@ export default function ContaScreen() {
         {user?.isVerified && (
           <Badge label="Conta Verificada" variant="success" />
         )}
+        <AsaasNotice variant="compact" />
       </Card>
 
       {/* Info Card */}
@@ -186,6 +188,7 @@ export default function ContaScreen() {
           isLoading={loading}
           icon={<Feather name="plus" size={18} color={colors.primary} />}
         />
+        <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
       </Card>
 
       <Card style={styles.feesCard}>

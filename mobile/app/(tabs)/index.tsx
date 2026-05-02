@@ -16,6 +16,7 @@ import * as api from '@/lib/api';
 import BalanceCard from '@/components/BalanceCard';
 import QuickActions from '@/components/QuickActions';
 import TransactionList from '@/components/TransactionList';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { getInitials } from '@/lib/utils';
 import type { TransactionItem } from '@/types';
@@ -144,6 +145,8 @@ export default function DashboardScreen() {
           transactions={transactions}
           onViewAll={() => router.push('/(tabs)/extrato')}
         />
+
+        <AsaasNotice variant="inline" style={{ marginTop: spacing.lg }} />
 
         <View style={styles.bottomSpacer} />
       </ScrollView>

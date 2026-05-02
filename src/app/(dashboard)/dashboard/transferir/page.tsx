@@ -145,6 +145,7 @@ export default function TransferPage() {
               >
                 Transferir
               </Button>
+              <AsaasBadge variant="transaction" />
             </form>
           </Card>
         </div>
@@ -173,6 +174,7 @@ export default function TransferPage() {
                   </div>
                 </div>
               </div>
+              <AsaasBadge variant="transaction" />
               <div className="flex gap-3">
                 <Button
                   variant="outline"

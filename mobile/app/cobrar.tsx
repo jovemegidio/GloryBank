@@ -14,6 +14,7 @@ import * as api from "@/lib/api";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import AsaasNotice from "@/components/AsaasNotice";
 import { colors, fontSize, fontWeight, spacing, radius } from "@/lib/theme";
 
 export default function CobrarScreen() {
@@ -81,6 +82,7 @@ export default function CobrarScreen() {
               size="lg"
               icon={<Feather name="dollar-sign" size={18} color="#fff" />}
             />
+            <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
           </View>
         </Card>
 
@@ -96,6 +98,7 @@ export default function CobrarScreen() {
             </View>
             <Text style={styles.copyLabel}>Codigo copia e cola</Text>
             <Text style={styles.copyPayload}>{qrCodeData.payload}</Text>
+            <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
           </Card>
         )}
       </ScrollView>

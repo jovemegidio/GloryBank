@@ -89,8 +89,9 @@ export default function SuportePage() {
           </a>
         </div>
         <p className="mt-3 text-xs text-slate-400">
-          Atendimento de seg. a sex., das 8h às 20h. O suporte é prestado pela ASAAS GESTÃO FINANCEIRA S.A., responsável pelos serviços financeiros desta plataforma.
+          Atendimento de seg. a sex., das 8h às 20h. O suporte é prestado pela ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A., responsável pelos serviços financeiros desta plataforma.
         </p>
+        <AsaasBadge variant="inline" className="mt-3" />
       </Card>
 
       {/* FAQ */}

@@ -94,6 +94,7 @@ export default function PagamentosPage() {
             </Link>
           ))}
         </div>
+        <AsaasBadge variant="transaction" className="mt-4" />
       </Card>
 
       <AsaasBadge variant="footer" />

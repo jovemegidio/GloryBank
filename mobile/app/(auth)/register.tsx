@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   Alert,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -16,6 +17,7 @@ import { useAuth } from "@/lib/auth";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Select from "@/components/Select";
+import AsaasNotice from "@/components/AsaasNotice";
 import { colors, gradients, fontSize, fontWeight, spacing, radius } from "@/lib/theme";
 
 const companyTypeOptions = [
@@ -136,10 +138,11 @@ export default function RegisterScreen() {
           </TouchableOpacity>
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
-              <Feather name="shield" size={28} color={colors.primary} />
+              <Image source={require("../../assets/icon.png")} style={styles.logoImage} resizeMode="contain" />
             </View>
             <Text style={styles.brand}>Criar Conta</Text>
             <Text style={styles.subtitle}>Conta digital com onboarding Asaas</Text>
+            <AsaasNotice variant="compact" style={{ marginTop: spacing.md }} />
           </View>
         </LinearGradient>
 
@@ -317,6 +320,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: spacing.md,
+  },
+  logoImage: {
+    width: 38,
+    height: 38,
   },
   brand: {
     fontSize: fontSize.xl,

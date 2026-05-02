@@ -79,11 +79,11 @@ export default function LoginPage() {
         <div
           className="mb-6 rounded-xl p-4"
           style={{
-            background: "rgba(0,166,80,0.06)",
-            border: "1px solid rgba(0,166,80,0.16)",
+            background: "rgba(30,99,240,0.06)",
+            border: "1px solid rgba(30,99,240,0.16)",
           }}
         >
-          <p className="mb-2.5 text-[10px] font-bold uppercase text-emerald-700">
+          <p className="mb-2.5 text-[10px] font-bold uppercase text-[#1746C2]">
             Conta de Demonstração
           </p>
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -102,7 +102,7 @@ export default function LoginPage() {
               onClick={loginAsDemo}
               disabled={isLoading}
               className="shrink-0 rounded-lg px-4 py-2 text-[12px] font-semibold text-white transition-all hover:opacity-85 disabled:opacity-50 active:scale-95"
-              style={{ background: "linear-gradient(135deg, #00A650, #0F766E)" }}
+              style={{ background: "linear-gradient(135deg, #1E63F0, #0A1F44)" }}
             >
               Entrar como Demo
             </button>

@@ -114,8 +114,8 @@ Todos os endpoints seguem o padrão `{success: boolean, data?: T, error?: string
 
 ## Design
 
-- **Cor primária**: `#00A650` (verde institucional)
-- **Gradiente principal**: `#071F1B → #0F3A33 → #00A650`
-- **Background**: `#f5f6f8`
+- **Cor primária**: `#1E63F0` (azul institucional)
+- **Gradiente principal**: `#06143A → #0A1F44 → #1E63F0`
+- **Background**: `#F4F7FC`
 - **Texto**: `#1a1a2e`
 - **Sucesso**: `#22C55E` | **Erro**: `#EF4444` | **Info**: `#3B82F6`

@@ -37,7 +37,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Transferir',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
           <Stack.Screen
@@ -46,7 +46,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Gerar Boleto',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
           <Stack.Screen
@@ -55,7 +55,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Cobrar',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
           <Stack.Screen
@@ -64,7 +64,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Notificações',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
           <Stack.Screen
@@ -73,7 +73,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Minha Conta',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
           <Stack.Screen
@@ -82,7 +82,7 @@ export default function RootLayout() {
               presentation: 'modal',
               headerShown: true,
               headerTitle: 'Agendamentos',
-              headerTintColor: '#00A650',
+              headerTintColor: '#1E63F0',
             }}
           />
         </Stack>

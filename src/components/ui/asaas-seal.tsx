@@ -96,7 +96,7 @@ export function AsaasSeal({
         rel="noopener noreferrer"
         className={`inline-flex ${className}`}
         aria-label={`${ariaLabel} — abre em nova aba`}
-        title="Serviços financeiros prestados por ASAAS GESTÃO FINANCEIRA S.A."
+        title="Servicos financeiros prestados por ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A."
       >
         {sealContent}
       </a>

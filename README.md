@@ -80,6 +80,8 @@ Variáveis mínimas:
 | `ASAAS_API_URL` | endpoint Asaas |
 | `ASAAS_API_KEY` | chave da conta raiz |
 | `ASAAS_WEBHOOK_TOKEN` | validação de webhooks |
+| `ASAAS_WEBHOOK_URL` | endpoint público HTTPS de eventos |
+| `ASAAS_AUTO_WEBHOOKS` | cria webhooks em novas subcontas |
 
 ## Segurança
 
@@ -89,3 +91,9 @@ Variáveis mínimas:
 - Validação de entrada com Zod
 - Headers de segurança no Next/Vercel
 - Atribuição Asaas em fluxos financeiros regulados
+
+## BaaS Asaas
+
+O sistema está tecnicamente preparado para criação de subcontas Asaas, uso de chaves por subconta, Pix, boletos, transferências, saldos, histórico financeiro e webhooks por conta. A operação como BaaS/white label depende de aprovação formal e playbook recebido do Asaas.
+
+Relatório técnico: [`docs/baas-readiness.md`](docs/baas-readiness.md).

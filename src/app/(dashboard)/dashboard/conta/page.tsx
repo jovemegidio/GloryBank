@@ -272,6 +272,7 @@ export default function ContaPage() {
                   </Button>
                 </div>
               )}
+              <AsaasBadge variant="transaction" className="mt-4" />
             </Card>
 
             <Card>

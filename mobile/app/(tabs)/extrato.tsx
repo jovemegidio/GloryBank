@@ -15,6 +15,7 @@ import * as api from '@/lib/api';
 import TransactionList from '@/components/TransactionList';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import type { TransactionItem } from '@/types';
 
@@ -137,6 +138,7 @@ export default function ExtratoScreen() {
             transactions={transactions}
             showHeader={false}
           />
+          <AsaasNotice variant="inline" style={{ marginTop: spacing.lg }} />
           {hasMore && (
             <Button
               title="Carregar mais"

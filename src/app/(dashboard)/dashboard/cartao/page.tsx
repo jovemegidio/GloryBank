@@ -130,8 +130,8 @@ export default function CartaoPage() {
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                 style={{
-                  background: "linear-gradient(135deg, #00A650, #0F766E)",
-                  boxShadow: "0 4px 12px rgba(0,166,80,0.18)",
+                  background: "linear-gradient(135deg, #1E63F0, #0A1F44)",
+                  boxShadow: "0 4px 12px rgba(30,99,240,0.18)",
                 }}
               >
                 <Wallet className="h-5 w-5 text-white" />
@@ -182,7 +182,7 @@ export default function CartaoPage() {
                       background:
                         card.cardType === "VIRTUAL"
                           ? "linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%)"
-                          : "linear-gradient(135deg, #071F1B 0%, #0F3A33 56%, #00A650 140%)",
+                          : "linear-gradient(135deg, #06143A 0%, #0A1F44 58%, #1E63F0 140%)",
                       boxShadow:
                         card.cardType === "VIRTUAL"
                           ? "0 8px 32px rgba(45,27,78,0.4)"

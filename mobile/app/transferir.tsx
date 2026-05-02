@@ -15,6 +15,7 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Select from '@/components/Select';
 import Card from '@/components/Card';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { formatCurrency } from '@/lib/utils';
 
@@ -81,6 +82,7 @@ export default function TransferScreen() {
         <Text style={styles.successAmount}>
           {formatCurrency(parseFloat(amount.replace(',', '.')) || 0)}
         </Text>
+        <AsaasNotice variant="transaction" style={{ marginTop: 20, width: '100%' }} />
         <Button
           title="Voltar"
           onPress={() => router.back()}
@@ -143,6 +145,7 @@ export default function TransferScreen() {
               isLoading={loading}
               size="lg"
             />
+            <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
           </View>
         </Card>
       </ScrollView>
@@ -161,6 +164,7 @@ export default function TransferScreen() {
                 {formatCurrency(parseFloat(amount.replace(',', '.')) || 0)}
               </Text>
             </View>
+            <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
             <View style={styles.modalActions}>
               <Button
                 title="Cancelar"

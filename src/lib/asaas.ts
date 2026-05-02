@@ -13,6 +13,29 @@ interface AsaasRequestOptions {
 
 type AsaasStatisticsPayload = Record<string, unknown>;
 
+const ASAAS_WEBHOOK_EVENTS = [
+  "PAYMENT_CREATED",
+  "PAYMENT_AWAITING_RISK_ANALYSIS",
+  "PAYMENT_APPROVED_BY_RISK_ANALYSIS",
+  "PAYMENT_REPROVED_BY_RISK_ANALYSIS",
+  "PAYMENT_AUTHORIZED",
+  "PAYMENT_UPDATED",
+  "PAYMENT_CONFIRMED",
+  "PAYMENT_RECEIVED",
+  "PAYMENT_OVERDUE",
+  "PAYMENT_DELETED",
+  "PAYMENT_RESTORED",
+  "PAYMENT_REFUND_IN_PROGRESS",
+  "PAYMENT_REFUNDED",
+  "TRANSFER_CREATED",
+  "TRANSFER_PENDING",
+  "TRANSFER_IN_BANK_PROCESSING",
+  "TRANSFER_BLOCKED",
+  "TRANSFER_DONE",
+  "TRANSFER_FAILED",
+  "TRANSFER_CANCELLED",
+];
+
 function normalizeAsaasApiUrl(url?: string): string {
   const raw = (url ?? DEFAULT_ASAAS_API_URL).trim();
   if (!raw) return DEFAULT_ASAAS_API_URL;
@@ -189,6 +212,66 @@ export async function approveSandboxAccount(apiKey: string): Promise<void> {
     path: "/sandbox/myAccount/approve",
     apiKey,
     allowNoContent: true,
+  });
+}
+
+export interface AsaasWebhookResponse {
+  id: string;
+  name: string;
+  url: string;
+  enabled: boolean;
+  interrupted: boolean;
+  authToken?: string;
+  events?: string[];
+}
+
+export function buildAsaasWebhookUrl(): string | null {
+  const explicitUrl = process.env.ASAAS_WEBHOOK_URL?.trim();
+  if (explicitUrl) return explicitUrl;
+
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.APP_BASE_URL ||
+    process.env.PUBLIC_APP_URL ||
+    ""
+  ).trim();
+
+  if (!appUrl) return null;
+
+  try {
+    return new URL("/api/asaas/webhook", appUrl).toString();
+  } catch {
+    return null;
+  }
+}
+
+export function shouldConfigureAsaasWebhook(): boolean {
+  return process.env.ASAAS_AUTO_WEBHOOKS !== "false";
+}
+
+export async function configureAsaasWebhook(apiKey: string): Promise<AsaasWebhookResponse | null> {
+  if (!shouldConfigureAsaasWebhook()) return null;
+
+  const webhookUrl = buildAsaasWebhookUrl();
+  const authToken = process.env.ASAAS_WEBHOOK_TOKEN?.trim();
+
+  if (!webhookUrl || !authToken) return null;
+
+  return asaasRequest<AsaasWebhookResponse>({
+    method: "POST",
+    path: "/webhooks",
+    apiKey,
+    body: {
+      name: "CredBusiness - Eventos financeiros",
+      url: webhookUrl,
+      email: process.env.ASAAS_WEBHOOK_EMAIL || "contato@credbusinessbank.com.br",
+      enabled: true,
+      interrupted: false,
+      apiVersion: 3,
+      authToken,
+      sendType: "SEQUENTIALLY",
+      events: ASAAS_WEBHOOK_EVENTS,
+    },
   });
 }
 

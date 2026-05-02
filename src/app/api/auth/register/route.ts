@@ -2,7 +2,12 @@ import { NextRequest } from "next/server";
 import { registerSchema } from "@/lib/validations";
 import { hashPassword, createSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { createSubAccount, approveSandboxAccount, isSandboxAsaasApiUrl } from "@/lib/asaas";
+import {
+  createSubAccount,
+  approveSandboxAccount,
+  isSandboxAsaasApiUrl,
+  configureAsaasWebhook,
+} from "@/lib/asaas";
 import { successResponse, errorResponse, rateLimitResponse } from "@/lib/api-response";
 import { checkRateLimit, getRateLimitConfig } from "@/lib/rate-limit";
 import { DEMO_MODE } from "@/lib/demo";
@@ -76,6 +81,8 @@ export async function POST(request: NextRequest) {
 
     // Create Asaas sub-account
     let asaasAccount = null;
+    let webhookConfigured = false;
+    let webhookConfigError: string | null = null;
     try {
       asaasAccount = await createSubAccount({
         name,
@@ -96,6 +103,20 @@ export async function POST(request: NextRequest) {
         await approveSandboxAccount(asaasAccount.apiKey).catch((error) => {
           console.warn("Sandbox sub-account approval failed:", error);
         });
+      }
+
+      if (asaasAccount.apiKey) {
+        const webhook = await configureAsaasWebhook(asaasAccount.apiKey).catch((error) => {
+          webhookConfigError = error instanceof Error ? error.message : "Falha ao configurar webhook Asaas";
+          console.warn("Asaas webhook configuration failed:", error);
+          return null;
+        });
+
+        webhookConfigured = Boolean(webhook?.id);
+
+        if (!webhookConfigured && process.env.ASAAS_REQUIRE_WEBHOOKS === "true") {
+          throw new Error(webhookConfigError || "Webhook Asaas nao foi configurado");
+        }
       }
     } catch (error) {
       console.error("Asaas sub-account creation failed:", error);
@@ -140,6 +161,9 @@ export async function POST(request: NextRequest) {
       userAgent: request.headers.get("user-agent"),
       metadata: {
         hasAsaasAccount: Boolean(asaasAccount?.id),
+        asaasWebhookConfigured: webhookConfigured,
+        asaasWebhookPending: Boolean(asaasAccount?.apiKey && !webhookConfigured),
+        asaasWebhookError: webhookConfigError,
       },
     });
 

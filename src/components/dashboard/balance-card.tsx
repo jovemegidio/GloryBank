@@ -3,6 +3,7 @@
 import { Eye, EyeOff, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface BalanceCardProps {
   balance: number;
@@ -17,7 +18,7 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
     <div
       className="relative overflow-hidden rounded-2xl fade-in-up"
       style={{
-        background: "linear-gradient(135deg, #071F1B 0%, #0F3A33 56%, #00A650 140%)",
+        background: "linear-gradient(135deg, #06143A 0%, #0A1F44 58%, #1E63F0 140%)",
         border: "none",
         boxShadow: "0 16px 42px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.12)",
       }}
@@ -110,22 +111,8 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
         </div>
 
         {/* Asaas attribution */}
-        <div
-          className="mt-5 pt-4 flex items-center gap-1.5"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
-        >
-          <span
-            className="flex items-center justify-center rounded-md text-[10px] font-black text-white"
-            style={{ background: "rgba(183,247,207,0.18)", color: "#B7F7CF", width: 18, height: 18, flexShrink: 0 }}
-            aria-hidden="true"
-          >
-            A
-          </span>
-          <p className="text-[10px] text-white/45 leading-tight">
-            Serviços financeiros por{" "}
-            <span className="font-bold text-white/60">Asaas Pagamentos S.A.</span>
-            {" "}— Instituição de Pagamento autorizada pelo BACEN
-          </p>
+        <div className="mt-5 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+          <AsaasBadge variant="compact" dark />
         </div>
       </div>
     </div>

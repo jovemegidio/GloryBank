@@ -17,6 +17,7 @@ import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
+import AsaasNotice from "@/components/AsaasNotice";
 import { colors, fontSize, fontWeight, spacing } from "@/lib/theme";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
@@ -210,6 +211,7 @@ export default function AgendamentosScreen() {
               onChangeText={setDescription}
             />
             <Button title="Agendar" onPress={handleCreate} isLoading={creating} size="lg" />
+            <AsaasNotice variant="transaction" />
           </Card>
         )}
 

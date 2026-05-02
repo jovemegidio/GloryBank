@@ -15,6 +15,7 @@ import * as api from '@/lib/api';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { formatCurrency } from '@/lib/utils';
 
@@ -83,6 +84,8 @@ export default function BoletoScreen() {
             </Text>
           </View>
         )}
+
+        <AsaasNotice variant="transaction" style={{ width: '100%', marginBottom: spacing.xl }} />
 
         <View style={styles.successActions}>
           {result.bankSlipUrl && (
@@ -171,6 +174,7 @@ export default function BoletoScreen() {
               size="lg"
               icon={<Feather name="file-plus" size={18} color="#fff" />}
             />
+            <AsaasNotice variant="transaction" style={{ marginTop: spacing.lg }} />
           </View>
         </Card>
       </ScrollView>

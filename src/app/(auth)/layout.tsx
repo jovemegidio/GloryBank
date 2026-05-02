@@ -14,7 +14,7 @@ export default function AuthLayout({
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(160deg, #071F1B 0%, #0F3A33 56%, #00A650 130%)",
+            background: "linear-gradient(160deg, #06143A 0%, #0A1F44 58%, #1E63F0 130%)",
           }}
         />
         <div
@@ -31,7 +31,7 @@ export default function AuthLayout({
               width={392}
               height={110}
               priority
-              className="h-14 w-auto object-contain brightness-0 invert"
+              className="h-14 w-auto object-contain"
             />
           </div>
 

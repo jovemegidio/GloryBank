@@ -3,17 +3,18 @@ import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 export const colors = {
-  primary: '#00A650',
-  primaryDark: '#008D58',
-  primaryLight: '#B7F7CF',
+  primary: '#1E63F0',
+  primaryDark: '#0A1F44',
+  primaryLight: '#E6EEFE',
+  asaas: '#00A650',
 
-  dark: '#071F1B',
-  darkSecondary: '#0F3A33',
+  dark: '#06143A',
+  darkSecondary: '#0A1F44',
 
-  background: '#f5f6f8',
+  background: '#F4F7FC',
   card: '#ffffff',
   cardBorder: 'rgba(0,0,0,0.06)',
-  cardHover: '#eef0f4',
+  cardHover: '#E6EEFE',
 
   text: '#0f172a',
   textSecondary: '#64748B',
@@ -29,8 +30,8 @@ export const colors = {
   info: '#3B82F6',
   infoSoft: 'rgba(59,130,246,0.1)',
 
-  gold: '#D97706',
-  goldLight: '#F59E0B',
+  gold: '#B8872B',
+  goldLight: '#E5BD5C',
 
   border: '#e2e8f0',
   separator: 'rgba(0,0,0,0.05)',
@@ -40,9 +41,9 @@ export const colors = {
 } as const;
 
 export const gradients = {
-  primary: ['#071F1B', '#0F3A33', '#00A650'] as const,
+  primary: ['#06143A', '#0A1F44', '#1E63F0'] as const,
   sidebar: ['#ffffff', '#f7f8fa'] as const,
-  card: ['#071F1B', '#0F3A33', '#00A650'] as const,
+  card: ['#06143A', '#0A1F44', '#1E63F0'] as const,
 } as const;
 
 export const spacing = {

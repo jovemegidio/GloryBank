@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  ArrowUpDown,
   BadgeCheck,
   Banknote,
   BarChart3,
@@ -23,13 +22,13 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
-  TrendingUp,
   Users,
   WalletCards,
   Workflow,
   Zap,
 } from "lucide-react";
 import { getAsaasFeesConfig } from "@/lib/asaas-fees";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 const heroBadges = [
   { Icon: ShieldCheck, label: "Regulado pelo BACEN" },
@@ -73,7 +72,7 @@ const productModules = [
 const trustItems = [
   { Icon: ShieldCheck, title: "Autenticação forte", desc: "2FA, biometria, sessões seguras e cookies HttpOnly." },
   { Icon: Lock, title: "Dados protegidos", desc: "Criptografia AES-256, rate limit e trilhas de auditoria." },
-  { Icon: Layers3, title: "Infraestrutura BaaS", desc: "Operação financeira regulada via Asaas Pagamentos S.A." },
+  { Icon: Layers3, title: "Infraestrutura BaaS", desc: "Operação financeira regulada via Asaas." },
 ];
 
 const bankingFeatures = [
@@ -113,7 +112,7 @@ const faqs = [
   },
   {
     q: "Qual a infraestrutura financeira utilizada?",
-    a: "Os serviços financeiros são prestados pela Asaas Pagamentos S.A., instituição autorizada pelo Banco Central do Brasil, com identificação nos fluxos regulados.",
+    a: "Os serviços financeiros são prestados pelo Asaas, instituição autorizada pelo Banco Central do Brasil, com identificação nos fluxos regulados.",
   },
   {
     q: "Existe acesso pelo celular?",
@@ -139,9 +138,7 @@ export default function Home() {
             <span>API e integrações</span>
             <span>Suporte especializado</span>
           </div>
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold text-white/70">
-            Infraestrutura financeira por Asaas Pagamentos S.A.
-          </span>
+          <AsaasBadge variant="compact" dark />
         </div>
       </div>
 
@@ -249,7 +246,7 @@ export default function Home() {
                 <div className="rounded-[22px] bg-white p-4 text-[#0A1F44] sm:p-5">
                   <div className="mb-5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Image src="/brand-mark.svg" alt="" width={40} height={40} className="h-10 w-10" aria-hidden="true" />
+                      <Image src="/favicon.png" alt="" width={40} height={40} className="h-10 w-10 object-contain" aria-hidden="true" />
                       <div>
                         <p className="text-sm font-extrabold">CredBusiness</p>
                         <p className="text-xs text-[#5B6B85]">Conta corrente digital</p>
@@ -416,7 +413,7 @@ export default function Home() {
               <div className="rounded-[22px] bg-white">
                 <div className="flex items-center justify-between border-b border-[#E2E8F5] px-5 py-4">
                   <div className="flex items-center gap-3">
-                    <Image src="/brand-mark.svg" alt="" width={34} height={34} aria-hidden="true" />
+                    <Image src="/favicon.png" alt="" width={34} height={34} className="object-contain" aria-hidden="true" />
                     <div>
                       <p className="text-sm font-extrabold text-[#0A1F44]">Painel financeiro</p>
                       <p className="text-xs text-[#5B6B85]">Visão consolidada</p>
@@ -470,7 +467,7 @@ export default function Home() {
                   <div className="mx-auto mb-4 h-1.5 w-14 rounded-full bg-[#CBD5EE]" />
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Image src="/brand-mark.svg" alt="" width={34} height={34} aria-hidden="true" />
+                      <Image src="/favicon.png" alt="" width={34} height={34} className="object-contain" aria-hidden="true" />
                       <div>
                         <p className="text-xs font-extrabold text-[#0A1F44]">CredBusiness</p>
                         <p className="text-[11px] text-[#5B6B85]">Mobile</p>
@@ -585,7 +582,7 @@ export default function Home() {
                   Operação identificada, infraestrutura regulada e camadas de proteção ponta a ponta.
                 </h2>
                 <p className="mt-4 text-base leading-8 text-white/70">
-                  CredBusiness mantém atribuição clara dos serviços financeiros prestados pela Asaas Pagamentos S.A.,
+                  CredBusiness mantém atribuição clara dos serviços financeiros prestados pelo Asaas,
                   com 2FA, biometria, criptografia, comprovantes auditáveis e trilhas de log para sua tranquilidade.
                 </p>
               </div>
@@ -601,7 +598,7 @@ export default function Home() {
 
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                "Provedor regulado pelo BACEN (Asaas Pagamentos S.A.)",
+                "Provedor regulado pelo BACEN (Asaas)",
                 "Autenticação 2FA e biometria no app mobile",
                 "Criptografia AES-256 e TLS 1.3 nas comunicações",
                 "Comprovantes auditáveis e trilhas de log",
@@ -729,21 +726,16 @@ export default function Home() {
                 alt="CredBusiness"
                 width={196}
                 height={56}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain"
               />
               <span className="text-xs uppercase tracking-widest text-white/50">Banco Digital PJ</span>
             </div>
             <p className="mt-4 max-w-md text-xs leading-6 text-white/50">
-              Os serviços financeiros desta plataforma são prestados pela ASAAS GESTÃO FINANCEIRA S.A.,
+              Os serviços financeiros desta plataforma são prestados pela ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A.,
               instituição de pagamento autorizada a funcionar pelo Banco Central do Brasil. CredBusiness atua
               como integradora tecnológica e distribuidora da experiência do produto.
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.06] px-3 py-2">
-              <Image src="/asaas-logo.svg" alt="Asaas" width={64} height={12} className="h-3 w-auto" />
-              <span className="text-[10px] font-semibold uppercase tracking-widest text-white/70">
-                Powered by BaaS Asaas
-              </span>
-            </div>
+            <AsaasBadge variant="footer" dark className="mt-5 max-w-md" />
           </div>
 
           <div>
@@ -771,7 +763,7 @@ export default function Home() {
             <ul className="mt-4 space-y-2 text-sm">
               <li><Link href="/privacidade" className="hover:text-white">Privacidade</Link></li>
               <li><Link href="/termos" className="hover:text-white">Termos</Link></li>
-              <li><a href="https://www.asaas.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">Asaas Pagamentos</a></li>
+              <li><a href="https://www.asaas.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">Asaas</a></li>
             </ul>
           </div>
         </div>

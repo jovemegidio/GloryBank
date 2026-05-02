@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 import { useAuth } from '@/lib/auth';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 import { getInitials } from '@/lib/utils';
 
@@ -134,6 +135,8 @@ export default function MaisScreen() {
             </View>
           </View>
         ))}
+
+        <AsaasNotice variant="inline" style={{ marginBottom: spacing.xl }} />
 
         <Text style={styles.version}>CredBusiness v1.0.0</Text>
         <View style={styles.bottomSpacer} />

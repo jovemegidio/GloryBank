@@ -357,6 +357,7 @@ export default function FaturaPage() {
                 <Button onClick={handleConfirm} className="w-full" size="lg">
                   Continuar
                 </Button>
+                <AsaasBadge variant="transaction" className="mt-4" />
               </div>
             </Card>
           </div>
@@ -415,6 +416,8 @@ export default function FaturaPage() {
                 </div>
               </div>
 
+              <AsaasBadge variant="transaction" />
+
               <div className="flex gap-3">
                 <Button
                   variant="outline"
@@ -449,6 +452,7 @@ export default function FaturaPage() {
                   ? "Sua fatura está em dia. Nenhum valor pendente."
                   : `O valor de ${formatCurrency(getPaymentAmount())} foi debitado da sua conta.`}
               </p>
+              <AsaasBadge variant="transaction" className="mt-5 text-left" />
               <div className="mt-6 flex justify-center gap-3">
                 <Link href="/dashboard/cartao">
                   <Button variant="outline">Ver cartões</Button>

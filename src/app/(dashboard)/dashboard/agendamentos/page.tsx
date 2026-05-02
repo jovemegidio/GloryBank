@@ -264,6 +264,7 @@ export default function AgendamentosPage() {
                 Agendar
               </Button>
             </div>
+            <AsaasBadge variant="transaction" />
           </form>
         </Modal>
 

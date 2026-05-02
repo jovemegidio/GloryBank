@@ -18,10 +18,10 @@ export default function PrivacyPage() {
             <div
               className="flex h-8 w-8 items-center justify-center rounded-lg"
             >
-              <Image src="/brand-mark.svg" alt="" width={32} height={32} className="h-8 w-8" aria-hidden="true" />
+              <Image src="/favicon.png" alt="" width={32} height={32} className="h-8 w-8 object-contain" aria-hidden="true" />
             </div>
             <span className="font-bold text-slate-800">
-              Cred<span className="text-emerald-700">Business</span>
+              Cred<span className="text-[#1E63F0]">Business</span>
             </span>
           </Link>
           <Link
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
       {/* Content */}
       <main className="mx-auto max-w-3xl px-6 py-12">
         <div className="mb-8 flex items-center gap-3">
-          <ShieldCheck className="h-8 w-8 text-emerald-700" />
+          <ShieldCheck className="h-8 w-8 text-[#1E63F0]" />
           <h1 className="text-3xl font-bold text-slate-800">Política de Privacidade</h1>
         </div>
 
@@ -55,9 +55,9 @@ export default function PrivacyPage() {
                 href="https://www.asaas.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-emerald-700 hover:underline"
+                className="font-medium text-[#1E63F0] hover:underline"
               >
-                Asaas Pagamentos S.A.
+                ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A.
               </a>
               , Instituição de Pagamento autorizada e regulada pelo Banco Central do Brasil (BACEN).
               Os serviços financeiros (contas digitais, PIX, boletos, transferências) são prestados
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-800">4. Compartilhamento de Dados</h2>
             <p>
-              Seus dados são compartilhados com a Asaas Pagamentos S.A. para viabilizar os serviços
+              Seus dados são compartilhados com a ASAAS GESTAO FINANCEIRA INSTITUICAO DE PAGAMENTO S.A. para viabilizar os serviços
               financeiros. O Asaas possui política de privacidade própria, disponível em{" "}
               <a
                 href="https://www.asaas.com/politica-privacidade"

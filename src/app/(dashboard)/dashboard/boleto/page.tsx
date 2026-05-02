@@ -140,6 +140,7 @@ export default function BoletoPage() {
                 >
                   Gerar Boleto
                 </Button>
+                <AsaasBadge variant="transaction" />
               </form>
             </Card>
           ) : (
@@ -198,6 +199,7 @@ export default function BoletoPage() {
                     Novo Boleto
                   </Button>
                 </div>
+                <AsaasBadge variant="transaction" />
               </div>
             </Card>
           )}

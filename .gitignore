@@ -33,6 +33,7 @@ yarn-error.log*
 .pnpm-debug.log*
 dev-server*.log
 artifacts-*.png
+.deploy/
 
 # env files - NEVER commit these
 .env

@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -20,6 +21,7 @@ import { useAuth } from '@/lib/auth';
 import * as api from '@/lib/api';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import AsaasNotice from '@/components/AsaasNotice';
 import { colors, gradients, fontSize, fontWeight, spacing, radius } from '@/lib/theme';
 
 export default function LoginScreen() {
@@ -118,10 +120,11 @@ export default function LoginScreen() {
         >
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
-              <Feather name="shield" size={32} color={colors.primary} />
+              <Image source={require('../../assets/icon.png')} style={styles.logoImage} resizeMode="contain" />
             </View>
             <Text style={styles.brand}>CredBusiness</Text>
             <Text style={styles.subtitle}>Sua conta digital completa</Text>
+            <AsaasNotice variant="compact" style={{ marginTop: spacing.md }} />
           </View>
         </LinearGradient>
 
@@ -213,6 +216,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,
+  },
+  logoImage: {
+    width: 42,
+    height: 42,
   },
   brand: {
     fontSize: fontSize.xxl,
