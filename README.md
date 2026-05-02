@@ -37,10 +37,34 @@ npm start
 
 ## Deploy em VPS
 
-O projeto inclui `Dockerfile`, `docker-compose.yml` e `nginx/nginx.conf`.
+O domínio `credbusinessbank.com.br` deve apontar para a VPS. No momento do ajuste, o DNS resolvia para:
+
+| Host | IP |
+|---|---|
+| `credbusinessbank.com.br` | `187.45.255.152` |
+| `www.credbusinessbank.com.br` | `187.45.255.152` |
+
+O projeto inclui `Dockerfile`, `docker-compose.yml`, `nginx/nginx.conf` e scripts para deploy via SSH.
+
+### Deploy via PowerShell
+
+```powershell
+.\scripts\deploy-vps.ps1 -HostName 187.45.255.152 -User root
+```
+
+Na primeira execução, o script cria `/opt/credbusiness/.env` a partir de `.env.example` e para antes de subir a aplicação. Edite esse arquivo na VPS com os valores reais e rode o comando novamente.
+
+Para habilitar HTTPS após o primeiro deploy HTTP:
+
+```powershell
+.\scripts\deploy-vps.ps1 -HostName 187.45.255.152 -User root -EnableSsl -LetsEncryptEmail contato@credbusinessbank.com.br
+```
+
+Renovação manual do certificado na VPS:
 
 ```bash
-docker compose up -d --build
+cd /opt/credbusiness
+sh scripts/renew-ssl.sh
 ```
 
 Variáveis mínimas:
@@ -50,6 +74,7 @@ Variáveis mínimas:
 | `DATABASE_URL` | conexão Prisma/PostgreSQL |
 | `DB_PASSWORD` | senha do banco no compose |
 | `JWT_SECRET` | assinatura das sessões |
+| `COOKIE_SECURE` | cookies seguros em HTTPS |
 | `DEMO_MODE` | habilita modo demonstração |
 | `NEXT_PUBLIC_APP_URL` | URL pública |
 | `ASAAS_API_URL` | endpoint Asaas |

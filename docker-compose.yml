@@ -42,6 +42,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./public/brand-mark.svg:/etc/nginx/html/favicon.svg:ro
       - ./public/asaas-logo.svg:/etc/nginx/html/asaas-logo.svg:ro
       - ./nginx/certbot/www:/var/www/certbot:ro
