@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Modal } from "@/components/ui/modal";
 import { PageLoading } from "@/components/ui/loading";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface CardData {
   id: string;
@@ -317,6 +318,9 @@ export default function CartaoPage() {
           isOpen={showDetails}
           onClose={() => setShowDetails(false)}
         />
+
+        {/* Asaas BaaS attribution — emissão de cartões */}
+        <AsaasBadge variant="footer" />
       </div>
     </>
   );

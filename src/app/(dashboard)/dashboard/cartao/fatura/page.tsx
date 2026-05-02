@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PageLoading } from "@/components/ui/loading";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface CardData {
   id: string;
@@ -459,6 +460,9 @@ export default function FaturaPage() {
             </div>
           </Card>
         )}
+
+        {/* Asaas BaaS attribution — pagamento de fatura */}
+        <AsaasBadge variant="footer" />
       </div>
     </>
   );

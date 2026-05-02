@@ -40,7 +40,7 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
                 boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
               }}
             >
-              <img src="/brand-mark.svg" alt="CredBusiness" className="h-6 w-6 object-contain" />
+              <img src="/favicon.png" alt="CredBusiness" className="h-6 w-6 object-contain" />
             </div>
             <div>
               <p className="text-[11px] font-semibold uppercase text-white/80">

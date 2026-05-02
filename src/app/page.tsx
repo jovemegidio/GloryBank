@@ -149,11 +149,17 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-[#E2E8F5] bg-white/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-6">
           <Link href="/" className="flex items-center gap-3" aria-label="CredBusiness">
-            <Image src="/brand-mark.svg" alt="" width={42} height={42} className="h-10 w-10" aria-hidden="true" />
-            <div className="flex flex-col leading-none">
-              <span className="text-[18px] font-extrabold tracking-tight text-[#0A1F44] sm:text-[20px]">CredBusiness</span>
-              <span className="mt-1 hidden text-[10px] font-bold uppercase tracking-[0.18em] text-[#1E63F0] sm:block">Banco Digital PJ</span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="CredBusiness"
+              width={196}
+              height={56}
+              priority
+              className="h-10 w-auto object-contain"
+            />
+            <span className="hidden text-[10px] font-bold uppercase tracking-[0.18em] text-[#1E63F0] sm:block">
+              Banco Digital PJ
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-7 text-sm font-semibold text-[#3B4863] lg:flex">
@@ -718,16 +724,26 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
           <div>
             <div className="flex items-center gap-3">
-              <Image src="/brand-mark.svg" alt="" width={40} height={40} className="h-10 w-10" aria-hidden="true" />
-              <div>
-                <p className="text-lg font-extrabold tracking-tight text-white">CredBusiness</p>
-                <p className="text-xs uppercase tracking-widest text-white/50">Banco Digital PJ</p>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CredBusiness"
+                width={196}
+                height={56}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
+              <span className="text-xs uppercase tracking-widest text-white/50">Banco Digital PJ</span>
             </div>
             <p className="mt-4 max-w-md text-xs leading-6 text-white/50">
-              Os serviços financeiros são prestados pela Asaas Pagamentos S.A., instituição autorizada pelo Banco
-              Central do Brasil. CredBusiness é a camada de software que conecta sua empresa à infraestrutura financeira.
+              Os serviços financeiros desta plataforma são prestados pela ASAAS GESTÃO FINANCEIRA S.A.,
+              instituição de pagamento autorizada a funcionar pelo Banco Central do Brasil. CredBusiness atua
+              como integradora tecnológica e distribuidora da experiência do produto.
             </p>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.06] px-3 py-2">
+              <Image src="/asaas-logo.svg" alt="Asaas" width={64} height={12} className="h-3 w-auto" />
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-white/70">
+                Powered by BaaS Asaas
+              </span>
+            </div>
           </div>
 
           <div>

@@ -59,17 +59,11 @@ export default function LoginPage() {
       <div>
         {/* Mobile logo */}
         <div className="mb-8 flex items-center gap-3 lg:hidden">
-          <div
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden"
-            style={{
-              background: "transparent",
-            }}
-          >
-            <img src="/brand-mark.svg" alt="CredBusiness" className="h-8 w-8 object-contain" />
-          </div>
-          <span className="text-xl font-bold text-slate-800">
-            Cred<span className="text-emerald-700">Business</span>
-          </span>
+          <img
+            src="/logo.png"
+            alt="CredBusiness"
+            className="h-9 w-auto object-contain"
+          />
         </div>
 
         <div className="mb-7">

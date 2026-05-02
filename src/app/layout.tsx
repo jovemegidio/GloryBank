@@ -22,8 +22,13 @@ export const metadata: Metadata = {
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
   manifest: "/manifest.json",
   icons: {
-    icon: "/brand-mark.svg",
-    apple: "/brand-mark.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any", rel: "icon" },
+      { url: "/favicon.png", type: "image/png", sizes: "48x48" },
+      { url: "/brand-mark.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
   },
   robots: { index: false, follow: false },
   appleWebApp: {

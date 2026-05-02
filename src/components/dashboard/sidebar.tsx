@@ -118,19 +118,16 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         style={{ borderBottom: "1px solid rgba(10,31,68,0.08)" }}
       >
         <Link href="/dashboard" className="flex items-center gap-3 min-w-0" onClick={onMobileClose}>
-          <div
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl overflow-hidden"
-            style={{
-              background: "transparent",
-            }}
-          >
-            <img src="/brand-mark.svg" alt="CredBusiness" className="h-8 w-8 object-contain" />
-          </div>
-          {(!collapsed || mobileSidebarOpen) && (
-            <div className="min-w-0">
-              <span className="text-[17px] font-bold text-[#0A1F44]">Cred</span>
-              <span className="text-[17px] font-bold text-[#1E63F0]">Business</span>
+          {collapsed && !mobileSidebarOpen ? (
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl overflow-hidden">
+              <img src="/favicon.png" alt="CredBusiness" className="h-8 w-8 object-contain" />
             </div>
+          ) : (
+            <img
+              src="/logo.png"
+              alt="CredBusiness"
+              className="h-9 w-auto object-contain"
+            />
           )}
         </Link>
 

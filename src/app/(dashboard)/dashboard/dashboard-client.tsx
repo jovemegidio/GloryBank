@@ -6,6 +6,7 @@ import { BalanceCard } from "@/components/dashboard/balance-card";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { TransactionList } from "@/components/dashboard/transaction-list";
 import { SkeletonBalanceCard, SkeletonTransactions } from "@/components/ui/loading";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 import { Toaster } from "react-hot-toast";
 
 interface DashboardClientProps {
@@ -112,6 +113,9 @@ export function DashboardClient({ userName }: DashboardClientProps) {
             )}
           </Card>
         </div>
+
+        {/* Asaas BaaS attribution — obrigatório no painel principal */}
+        <AsaasBadge variant="footer" />
       </div>
     </>
   );

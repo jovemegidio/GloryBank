@@ -5,6 +5,7 @@ import { getInitials } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PushNotificationButton } from "@/components/ui/push-notification-button";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 interface HeaderProps {
   userName: string;
@@ -55,6 +56,11 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
 
       {/* Right actions */}
       <div className="flex items-center gap-1">
+        {/* Asaas BaaS attribution — obrigatório no contato com o cliente */}
+        <div className="hidden md:inline-flex">
+          <AsaasBadge variant="compact" />
+        </div>
+
         {/* Web push opt-in */}
         <PushNotificationButton />
 

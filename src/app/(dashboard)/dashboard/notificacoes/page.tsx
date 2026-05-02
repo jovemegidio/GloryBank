@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PageLoading } from "@/components/ui/loading";
+import { AsaasBadge } from "@/components/ui/asaas-badge";
 import { Toaster } from "react-hot-toast";
 
 interface NotificationData {
@@ -198,6 +199,9 @@ export default function NotificacoesPage() {
             </div>
           )}
         </Card>
+
+        {/* Asaas BaaS attribution */}
+        <AsaasBadge variant="footer" />
       </div>
     </>
   );

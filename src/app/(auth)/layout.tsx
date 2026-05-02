@@ -23,22 +23,18 @@ export default function AuthLayout({
         />
 
         <div className="relative max-w-sm text-center">
-          {/* Logo */}
+          {/* Logo oficial CredBusiness */}
           <div className="mb-8 flex justify-center">
-            <div
-              className="flex h-16 w-16 items-center justify-center rounded-2xl"
-              style={{
-                background: "rgba(255,255,255,0.2)",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
-              }}
-            >
-              <Image src="/brand-mark.svg" alt="" width={40} height={40} className="h-10 w-10" aria-hidden="true" />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="CredBusiness"
+              width={392}
+              height={110}
+              priority
+              className="h-14 w-auto object-contain brightness-0 invert"
+            />
           </div>
 
-          <h1 className="mb-2 text-4xl font-bold text-white">
-            CredBusiness
-          </h1>
           <p className="mb-2 text-[13px] font-semibold uppercase tracking-widest text-white/70">
             Internet Banking Digital
           </p>
