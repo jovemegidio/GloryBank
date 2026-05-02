@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   CreditCard,
   CheckCircle2,
-  Calendar,
   DollarSign,
   FileText,
   ChevronRight,
@@ -177,7 +176,7 @@ export default function FaturaPage() {
                   </p>
                   <Link
                     href="/dashboard/cartao"
-                    className="mt-2 text-[13px] font-medium text-red-600 hover:underline"
+                    className="mt-2 text-[13px] font-medium text-emerald-700 hover:underline"
                   >
                     Solicitar cartão
                   </Link>
@@ -189,7 +188,7 @@ export default function FaturaPage() {
                       key={card.id}
                       className={`flex cursor-pointer items-start gap-3 rounded-xl p-3 transition-all ${
                         selectedCard?.id === card.id
-                          ? "bg-red-50 ring-2 ring-red-500/30"
+                          ? "bg-emerald-50 ring-2 ring-emerald-500/30"
                           : "hover:bg-slate-50"
                       }`}
                     >
@@ -198,7 +197,7 @@ export default function FaturaPage() {
                         name="card"
                         checked={selectedCard?.id === card.id}
                         onChange={() => setSelectedCard(card)}
-                        className="mt-1 accent-red-600"
+                        className="mt-1 accent-emerald-600"
                       />
                       <div>
                         <p className="text-[13px] font-bold text-slate-800">
@@ -244,13 +243,13 @@ export default function FaturaPage() {
                     name="option"
                     checked={paymentOption === "updated"}
                     onChange={() => setPaymentOption("updated")}
-                    className="mt-1 accent-red-600"
+                    className="mt-1 accent-emerald-600"
                   />
                   <div>
                     <p className="text-[14px] font-bold text-slate-800">
                       Atualizado
                     </p>
-                    <p className="text-[16px] font-bold text-red-600">
+                    <p className="text-[16px] font-bold text-emerald-700">
                       {formatCurrency(invoiceData.updated)}
                     </p>
                     <p className="mt-0.5 text-[11px] leading-snug text-slate-400">
@@ -269,7 +268,7 @@ export default function FaturaPage() {
                     name="option"
                     checked={paymentOption === "total"}
                     onChange={() => setPaymentOption("total")}
-                    className="mt-1 accent-red-600"
+                    className="mt-1 accent-emerald-600"
                   />
                   <div>
                     <p className="text-[14px] font-bold text-slate-800">
@@ -293,7 +292,7 @@ export default function FaturaPage() {
                     name="option"
                     checked={paymentOption === "minimum"}
                     onChange={() => setPaymentOption("minimum")}
-                    className="mt-1 accent-red-600"
+                    className="mt-1 accent-emerald-600"
                   />
                   <div>
                     <p className="text-[14px] font-bold text-slate-800">
@@ -322,7 +321,7 @@ export default function FaturaPage() {
                     name="date"
                     checked={paymentDate === "today"}
                     onChange={() => setPaymentDate("today")}
-                    className="accent-red-600"
+                    className="accent-emerald-600"
                   />
                   <span className="text-[14px] font-medium text-slate-700">
                     Pagar hoje
@@ -335,7 +334,7 @@ export default function FaturaPage() {
                     name="date"
                     checked={paymentDate === "schedule"}
                     onChange={() => setPaymentDate("schedule")}
-                    className="accent-red-600"
+                    className="accent-emerald-600"
                   />
                   <span className="text-[14px] font-medium text-slate-700">
                     Agendar para
@@ -348,7 +347,7 @@ export default function FaturaPage() {
                     value={scheduleDate}
                     onChange={(e) => setScheduleDate(e.target.value)}
                     min={new Date().toISOString().split("T")[0]}
-                    className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-[13px] text-slate-700 outline-none focus:ring-2 focus:ring-red-500/30"
+                    className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-[13px] text-slate-700 outline-none focus:ring-2 focus:ring-emerald-500/30"
                   />
                 )}
               </div>
@@ -367,7 +366,7 @@ export default function FaturaPage() {
           <Card>
             <div className="mx-auto max-w-lg space-y-6">
               <div className="text-center">
-                <FileText className="mx-auto mb-2 h-10 w-10 text-red-500" />
+                <FileText className="mx-auto mb-2 h-10 w-10 text-emerald-700" />
                 <h2 className="text-lg font-bold text-slate-800">
                   Confirme o pagamento
                 </h2>
@@ -401,7 +400,7 @@ export default function FaturaPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[13px] text-slate-500">Valor</span>
-                  <span className="text-[16px] font-bold text-red-600">
+                  <span className="text-[16px] font-bold text-emerald-700">
                     {formatCurrency(getPaymentAmount())}
                   </span>
                 </div>
@@ -481,7 +480,7 @@ function StepIndicator({
       ) : (
         <div
           className={`h-5 w-5 rounded-full border-2 ${
-            active ? "border-red-500 bg-red-500" : "border-slate-300"
+            active ? "border-emerald-600 bg-emerald-500" : "border-slate-300"
           }`}
         />
       )}

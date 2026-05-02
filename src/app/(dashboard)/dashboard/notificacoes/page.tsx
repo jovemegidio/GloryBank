@@ -114,7 +114,7 @@ export default function NotificacoesPage() {
         <Card noPadding>
           <CardHeader className="px-4 pt-5 pb-0 sm:px-6">
             <CardTitle className="flex items-center gap-2">
-              <Bell className="h-5 w-5 text-red-500" />
+              <Bell className="h-5 w-5 text-emerald-700" />
               Todas as notificações
             </CardTitle>
           </CardHeader>
@@ -143,13 +143,13 @@ export default function NotificacoesPage() {
                 <div
                   key={notif.id}
                   className={`flex items-start gap-3 px-4 py-4 sm:px-6 transition-colors ${
-                    !notif.isRead ? "bg-red-50/50" : "hover:bg-black/[0.02]"
+                    !notif.isRead ? "bg-emerald-50/50" : "hover:bg-black/[0.02]"
                   }`}
                 >
                   <div
                     className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
                       !notif.isRead
-                        ? "bg-red-100 text-red-500"
+                        ? "bg-emerald-100 text-emerald-700"
                         : "bg-slate-100 text-slate-400"
                     }`}
                   >
@@ -185,7 +185,7 @@ export default function NotificacoesPage() {
                       {!notif.isRead && (
                         <button
                           onClick={() => markAsRead(notif.id)}
-                          className="flex items-center gap-1 text-[11px] text-red-500 hover:text-red-600 font-medium"
+                          className="flex items-center gap-1 text-[11px] text-emerald-700 hover:text-emerald-700 font-medium"
                         >
                           <Check className="h-3 w-3" />
                           Marcar como lida

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Landmark, FileText, ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
+import Image from "next/image";
+import { FileText, ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
 import { AsaasSeal } from "@/components/ui/asaas-seal";
 import { asaasConfig } from "@/lib/asaas-config";
 
@@ -17,13 +18,12 @@ export default function TermsPage() {
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
           <Link href="/login" className="flex items-center gap-2.5">
             <div
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-white"
-              style={{ background: "linear-gradient(135deg, #e30613, #ff4d4d)" }}
+              className="flex h-8 w-8 items-center justify-center rounded-lg"
             >
-              <Landmark className="h-4 w-4" strokeWidth={2} />
+              <Image src="/brand-mark.svg" alt="" width={32} height={32} className="h-8 w-8" aria-hidden="true" />
             </div>
             <span className="font-bold text-slate-800">
-              Cred<span className="text-red-500">Business</span>
+              Cred<span className="text-emerald-700">Business</span>
             </span>
           </Link>
           <Link
@@ -39,7 +39,7 @@ export default function TermsPage() {
       {/* Content */}
       <main className="mx-auto max-w-3xl px-6 py-12">
         <div className="mb-8 flex items-center gap-3">
-          <FileText className="h-8 w-8 text-red-500" />
+          <FileText className="h-8 w-8 text-emerald-700" />
           <h1 className="text-3xl font-bold text-slate-800">Termos de Uso</h1>
         </div>
 
@@ -72,7 +72,7 @@ export default function TermsPage() {
             <p>
               Ao criar uma conta ou utilizar os serviços do CredBusiness, você concorda com estes
               Termos de Uso e com nossa{" "}
-              <Link href="/privacidade" className="font-medium text-red-500 hover:underline">
+              <Link href="/privacidade" className="font-medium text-emerald-700 hover:underline">
                 Política de Privacidade
               </Link>
               . Caso não concorde, não utilize o serviço.
@@ -159,7 +159,7 @@ export default function TermsPage() {
                 href={asaasConfig.support.feesUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-red-500 hover:underline"
+                className="font-medium text-emerald-700 hover:underline"
               >
                 asaas.com/precos-e-taxas
               </a>
@@ -172,7 +172,7 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold text-slate-800">7. Suporte ao Cliente</h2>
             <p className="mb-4">
               Para dúvidas sobre a plataforma CredBusiness, entre em contato por{" "}
-              <a href="mailto:suporte@credbusiness.com.br" className="font-medium text-red-500 hover:underline">
+              <a href="mailto:suporte@credbusiness.com.br" className="font-medium text-emerald-700 hover:underline">
                 suporte@credbusiness.com.br
               </a>
               .
@@ -220,7 +220,7 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold text-slate-800">8. Privacidade e LGPD</h2>
             <p>
               O tratamento de dados pessoais segue nossa{" "}
-              <Link href="/privacidade" className="font-medium text-red-500 hover:underline">
+              <Link href="/privacidade" className="font-medium text-emerald-700 hover:underline">
                 Política de Privacidade
               </Link>{" "}
               e a Lei Geral de Proteção de Dados (Lei nº 13.709/2018). Os dados necessários
@@ -230,7 +230,7 @@ export default function TermsPage() {
                 href={asaasConfig.support.privacyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-red-500 hover:underline"
+                className="font-medium text-emerald-700 hover:underline"
               >
                 Política de Privacidade do Asaas
               </a>

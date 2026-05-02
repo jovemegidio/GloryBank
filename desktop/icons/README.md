@@ -1,4 +1,4 @@
-# Ícones do GloryBank Desktop
+# Ícones do CredBusiness Desktop
 
 Gere os ícones a partir do SVG do projeto:
 

@@ -23,9 +23,9 @@ async function generate() {
   if (!fs.existsSync(SVG_PATH)) {
     console.error("SVG not found at", SVG_PATH);
     console.log("Creating fallback icon...");
-    // Create a simple red square with GB text as fallback
+    // Create a simple institutional square with CB text as fallback
     const fallbackSvg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-      <rect width="512" height="512" rx="102" fill="#e30613"/>
+      <rect width="512" height="512" rx="102" fill="#00A650"/>
       <path d="M128 384h256M160 256h192M192 256v96M256 256v96M320 256v96M256 128l-128 64v64h256v-64Z" stroke="white" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     </svg>`;
     fs.writeFileSync(path.join(OUTPUT_DIR, "fallback.svg"), fallbackSvg);

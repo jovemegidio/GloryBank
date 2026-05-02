@@ -91,12 +91,12 @@ export default function RegisterPage() {
         <div className="mb-8 flex items-center gap-3 lg:hidden">
           <div
             className="flex h-10 w-10 items-center justify-center rounded-xl"
-            style={{ background: "rgba(227,6,19,0.06)" }}
+            style={{ background: "rgba(0,166,80,0.08)" }}
           >
-            <Wallet className="h-5 w-5 text-red-500" />
+            <Wallet className="h-5 w-5 text-emerald-700" />
           </div>
           <span className="text-xl font-bold text-slate-800">
-            Glory<span className="text-red-500">Bank</span>
+            Cred<span className="text-emerald-700">Business</span>
           </span>
         </div>
 
@@ -230,7 +230,7 @@ export default function RegisterPage() {
 
         <p className="mt-6 text-center text-sm text-slate-500">
           Ja tem uma conta?{" "}
-          <Link href="/login" className="font-semibold text-red-500 hover:text-red-600 transition-colors">
+          <Link href="/login" className="font-semibold text-emerald-700 hover:text-emerald-800 transition-colors">
             Entrar
           </Link>
         </p>

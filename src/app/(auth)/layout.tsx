@@ -1,4 +1,5 @@
-import { Landmark, ShieldCheck, Zap, Clock } from "lucide-react";
+import Image from "next/image";
+import { ShieldCheck, Zap, Clock } from "lucide-react";
 import { AsaasBadge } from "@/components/ui/asaas-badge";
 
 export default function AuthLayout({
@@ -13,17 +14,12 @@ export default function AuthLayout({
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(160deg, #bf0010 0%, #e30613 50%, #ff2d3a 100%)",
+            background: "linear-gradient(160deg, #071F1B 0%, #0F3A33 56%, #00A650 130%)",
           }}
         />
-        {/* Decorative glows */}
         <div
-          className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 65%)" }}
-        />
-        <div
-          className="absolute -bottom-20 -left-20 w-[300px] h-[300px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)" }}
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{ backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "42px 42px" }}
         />
 
         <div className="relative max-w-sm text-center">
@@ -36,12 +32,12 @@ export default function AuthLayout({
                 boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
               }}
             >
-              <Landmark className="h-8 w-8 text-white" strokeWidth={1.75} />
+              <Image src="/brand-mark.svg" alt="" width={40} height={40} className="h-10 w-10" aria-hidden="true" />
             </div>
           </div>
 
-          <h1 className="mb-2 text-4xl font-bold tracking-tight text-white">
-            Glory<span className="text-white/80">Bank</span>
+          <h1 className="mb-2 text-4xl font-bold text-white">
+            CredBusiness
           </h1>
           <p className="mb-2 text-[13px] font-semibold uppercase tracking-widest text-white/70">
             Internet Banking Digital

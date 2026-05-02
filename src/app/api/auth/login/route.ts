@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password } = validation.data;
-    const isMobileClient = request.headers.get("x-glorybank-client") === "mobile";
+    const isMobileClient = request.headers.get("x-credbusiness-client") === "mobile";
 
     // Demo mode: accept hardcoded credentials without any database access
     if (DEMO_MODE && email === DEMO_EMAIL && password === DEMO_PASSWORD) {

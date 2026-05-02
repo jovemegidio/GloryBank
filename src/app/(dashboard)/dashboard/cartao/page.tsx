@@ -129,8 +129,8 @@ export default function CartaoPage() {
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                 style={{
-                  background: "linear-gradient(135deg, #e30613, #ff4d4d)",
-                  boxShadow: "0 4px 12px rgba(227,6,19,0.2)",
+                  background: "linear-gradient(135deg, #00A650, #0F766E)",
+                  boxShadow: "0 4px 12px rgba(0,166,80,0.18)",
                 }}
               >
                 <Wallet className="h-5 w-5 text-white" />
@@ -181,11 +181,11 @@ export default function CartaoPage() {
                       background:
                         card.cardType === "VIRTUAL"
                           ? "linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%)"
-                          : "linear-gradient(135deg, #cc0511 0%, #e30613 50%, #ff2d3a 100%)",
+                          : "linear-gradient(135deg, #071F1B 0%, #0F3A33 56%, #00A650 140%)",
                       boxShadow:
                         card.cardType === "VIRTUAL"
                           ? "0 8px 32px rgba(45,27,78,0.4)"
-                          : "0 8px 32px rgba(227,6,19,0.3)",
+                          : "0 8px 32px rgba(0,166,80,0.24)",
                       minHeight: "200px",
                     }}
                     onClick={() => viewCard(card)}
@@ -289,8 +289,8 @@ export default function CartaoPage() {
               className="cursor-pointer"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-100">
-                  <CreditCard className="h-6 w-6 text-red-500" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100">
+                  <CreditCard className="h-6 w-6 text-emerald-700" />
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-slate-800">

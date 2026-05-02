@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, EyeOff, ArrowDownLeft, ArrowUpRight, Landmark } from "lucide-react";
+import { Eye, EyeOff, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
 
@@ -17,20 +17,15 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
     <div
       className="relative overflow-hidden rounded-2xl fade-in-up"
       style={{
-        background: "linear-gradient(135deg, #cc0511 0%, #e30613 50%, #ff2d3a 100%)",
+        background: "linear-gradient(135deg, #071F1B 0%, #0F3A33 56%, #00A650 140%)",
         border: "none",
-        boxShadow: "0 8px 40px rgba(227,6,19,0.25), inset 0 1px 0 rgba(255,255,255,0.12)",
+        boxShadow: "0 16px 42px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.12)",
       }}
     >
-      {/* Background glows */}
+      {/* Subtle institutional texture */}
       <div
-        className="pointer-events-none absolute right-0 top-0 h-64 w-64 translate-x-20 -translate-y-20 rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 65%)" }}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -left-10 bottom-0 h-40 w-40 translate-y-10 rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)" }}
+        className="pointer-events-none absolute inset-0 opacity-25"
+        style={{ backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "34px 34px" }}
         aria-hidden="true"
       />
 
@@ -41,14 +36,14 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
             <div
               className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden"
               style={{
-                background: "rgba(255,255,255,0.2)",
+                background: "rgba(255,255,255,0.14)",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
               }}
             >
-              <img src="/favicon.png" alt="CredBusiness" className="h-6 w-6 object-contain" />
+              <img src="/brand-mark.svg" alt="CredBusiness" className="h-6 w-6 object-contain" />
             </div>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
+              <p className="text-[11px] font-semibold uppercase text-white/80">
                 CredBusiness
               </p>
               <p className="text-[10px] text-white/50">Conta Corrente Digital</p>
@@ -67,7 +62,7 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
         {/* Main balance */}
         <div className="mb-6">
           <p className="mb-1 text-[11px] font-medium text-white/60">Saldo disponível</p>
-          <p className="text-[clamp(1.75rem,4vw,2.25rem)] font-bold tracking-tight text-white">
+          <p className="text-[clamp(1.75rem,4vw,2.25rem)] font-bold text-white">
             {visible ? formatCurrency(balance) : (
               <span className="tracking-[0.2em] text-white/40">•••••••</span>
             )}
@@ -121,7 +116,7 @@ export function BalanceCard({ balance, pending, available }: BalanceCardProps) {
         >
           <span
             className="flex items-center justify-center rounded-md text-[10px] font-black text-white"
-            style={{ background: "rgba(0,166,80,0.85)", width: 18, height: 18, flexShrink: 0 }}
+            style={{ background: "rgba(183,247,207,0.18)", color: "#B7F7CF", width: 18, height: 18, flexShrink: 0 }}
             aria-hidden="true"
           >
             A

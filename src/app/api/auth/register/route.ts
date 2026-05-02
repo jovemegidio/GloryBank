@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const validation = registerSchema.safeParse(body);
-    const isMobileClient = request.headers.get("x-glorybank-client") === "mobile";
+    const isMobileClient = request.headers.get("x-credbusiness-client") === "mobile";
 
     if (!validation.success) {
       const errors: Record<string, string[]> = {};

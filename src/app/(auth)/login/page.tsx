@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Lock, Landmark } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { loginSchema, type LoginInput } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
@@ -65,10 +65,10 @@ export default function LoginPage() {
               background: "transparent",
             }}
           >
-            <img src="/favicon.png" alt="CredBusiness" className="h-8 w-8 object-contain" />
+            <img src="/brand-mark.svg" alt="CredBusiness" className="h-8 w-8 object-contain" />
           </div>
           <span className="text-xl font-bold text-slate-800">
-            Cred<span className="text-red-500">Business</span>
+            Cred<span className="text-emerald-700">Business</span>
           </span>
         </div>
 
@@ -85,11 +85,11 @@ export default function LoginPage() {
         <div
           className="mb-6 rounded-xl p-4"
           style={{
-            background: "rgba(227,6,19,0.04)",
-            border: "1px solid rgba(227,6,19,0.12)",
+            background: "rgba(0,166,80,0.06)",
+            border: "1px solid rgba(0,166,80,0.16)",
           }}
         >
-          <p className="mb-2.5 text-[10px] font-bold uppercase tracking-widest text-red-500">
+          <p className="mb-2.5 text-[10px] font-bold uppercase text-emerald-700">
             Conta de Demonstração
           </p>
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -108,7 +108,7 @@ export default function LoginPage() {
               onClick={loginAsDemo}
               disabled={isLoading}
               className="shrink-0 rounded-lg px-4 py-2 text-[12px] font-semibold text-white transition-all hover:opacity-85 disabled:opacity-50 active:scale-95"
-              style={{ background: "linear-gradient(135deg, #e30613, #ff4d4d)" }}
+              style={{ background: "linear-gradient(135deg, #00A650, #0F766E)" }}
             >
               Entrar como Demo
             </button>
@@ -150,7 +150,7 @@ export default function LoginPage() {
           Ainda não tem conta?{" "}
           <Link
             href="/register"
-            className="font-semibold text-red-500 hover:text-red-600 transition-colors"
+            className="font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
           >
             Criar conta grátis
           </Link>

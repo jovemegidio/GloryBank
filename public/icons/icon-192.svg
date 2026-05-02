@@ -1,17 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#cc0511"/>
-      <stop offset="100%" stop-color="#e30613"/>
+      <stop offset="0%" stop-color="#00A650"/>
+      <stop offset="58%" stop-color="#008D58"/>
+      <stop offset="100%" stop-color="#0F2F2A"/>
     </linearGradient>
   </defs>
   <rect width="192" height="192" fill="url(#bg)" rx="42.24"/>
-  <g transform="translate(24, 24) scale(6)" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="3" y1="22" x2="21" y2="22"/>
-    <line x1="6" y1="18" x2="6" y2="11"/>
-    <line x1="10" y1="18" x2="10" y2="11"/>
-    <line x1="14" y1="18" x2="14" y2="11"/>
-    <line x1="18" y1="18" x2="18" y2="11"/>
-    <polygon points="12,2 20,7 4,7"/>
-  </g>
+  <text x="96" y="112" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="58" font-weight="800">CB</text>
 </svg>

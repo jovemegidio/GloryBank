@@ -63,8 +63,8 @@ export function ReceiptModal({ transaction, isOpen, onClose }: ReceiptModalProps
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 28px; color: #1e293b; }
-          .header { text-align: center; padding-bottom: 16px; border-bottom: 2px solid #e30613; margin-bottom: 20px; }
-          .header h1 { color: #e30613; font-size: 20px; margin-bottom: 2px; font-weight: 700; }
+          .header { text-align: center; padding-bottom: 16px; border-bottom: 2px solid #00A650; margin-bottom: 20px; }
+          .header h1 { color: #00A650; font-size: 20px; margin-bottom: 2px; font-weight: 700; }
           .header p { color: #64748b; font-size: 11px; }
           .amount { font-size: 26px; font-weight: 700; text-align: center; padding: 18px 0; color: ${isPositive ? "#22c55e" : "#ef4444"}; }
           .section { background: #f8fafc; border-radius: 8px; padding: 12px; margin-bottom: 14px; }

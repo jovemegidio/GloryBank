@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect , useState } from "react";
+import { useEffect } from "react";
 import { X } from "lucide-react";
 
 interface ModalProps {
@@ -24,12 +24,6 @@ export function Modal({
   children,
   size = "md",
 }: ModalProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -41,7 +35,7 @@ export function Modal({
     };
   }, [isOpen]);
 
-  if (!mounted || !isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">

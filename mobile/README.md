@@ -61,7 +61,7 @@ mobile/
 
 | Tela | Descrição |
 |---|---|
-| **Login** | Login com email/senha, gradiente vermelho |
+| **Login** | Login com email/senha, gradiente institucional |
 | **Cadastro** | Registro com CPF, telefone, validação |
 | **Dashboard** | Saldo, ações rápidas, transações recentes |
 | **PIX** | Enviar PIX, gerar QR Code, gerenciar chaves |
@@ -114,8 +114,8 @@ Todos os endpoints seguem o padrão `{success: boolean, data?: T, error?: string
 
 ## Design
 
-- **Cor primária**: `#e30613` (vermelho CredBusiness)
-- **Gradiente principal**: `#cc0511 → #e30613 → #ff2d3a`
+- **Cor primária**: `#00A650` (verde institucional)
+- **Gradiente principal**: `#071F1B → #0F3A33 → #00A650`
 - **Background**: `#f5f6f8`
 - **Texto**: `#1a1a2e`
 - **Sucesso**: `#22C55E` | **Erro**: `#EF4444` | **Info**: `#3B82F6`

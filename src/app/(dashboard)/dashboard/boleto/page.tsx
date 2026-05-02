@@ -145,7 +145,7 @@ export default function BoletoPage() {
           ) : (
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-red-500">
+                <CardTitle className="flex items-center gap-2 text-emerald-700">
                   <FileText className="h-5 w-5" />
                   Boleto Gerado!
                 </CardTitle>
@@ -153,7 +153,7 @@ export default function BoletoPage() {
 
               <div className="space-y-4">
                 <div className="rounded-xl p-4" style={{ background: "rgba(16,185,129,0.08)" }}>
-                  <p className="text-center text-2xl font-bold text-red-500">
+                  <p className="text-center text-2xl font-bold text-emerald-700">
                     {formatCurrency(boletoResult.value)}
                   </p>
                 </div>
@@ -184,7 +184,7 @@ export default function BoletoPage() {
                       href={boletoResult.bankSlipUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-red-600 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
+                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-600 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
                     >
                       <ExternalLink className="h-4 w-4" />
                       Ver Boleto

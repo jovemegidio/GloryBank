@@ -55,7 +55,11 @@ export function DashboardClient({ userName }: DashboardClientProps) {
   }, []);
 
   useEffect(() => {
-    fetchDashboardData();
+    const timeout = window.setTimeout(() => {
+      void fetchDashboardData();
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, [fetchDashboardData]);
 
   return (

@@ -6,9 +6,9 @@ import { colors, radius, fontSize, fontWeight, spacing, shadows } from '@/lib/th
 
 const actions = [
   { label: 'PIX', icon: 'zap' as const, route: '/(tabs)/pix', color: colors.primary },
-  { label: 'Transferir', icon: 'send' as const, route: '/transferir', color: colors.primaryDark },
-  { label: 'Boleto', icon: 'file-text' as const, route: '/boleto', color: colors.primaryLight },
-  { label: 'Cobrar', icon: 'dollar-sign' as const, route: '/cobrar', color: colors.success },
+  { label: 'Transferir', icon: 'send' as const, route: '/transferir', color: colors.info },
+  { label: 'Boleto', icon: 'file-text' as const, route: '/boleto', color: '#0F766E' },
+  { label: 'Cobrar', icon: 'dollar-sign' as const, route: '/cobrar', color: colors.gold },
 ];
 
 export default function QuickActions() {

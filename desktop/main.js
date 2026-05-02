@@ -40,18 +40,18 @@ function createSplash() {
     <!DOCTYPE html><html><head><style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{background:transparent;display:flex;align-items:center;justify-content:center;height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-app-region:drag;user-select:none}
-    .card{background:#1a1a2e;border-radius:24px;padding:48px 56px;text-align:center;box-shadow:0 32px 64px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.06)}
-    .logo{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#e30613,#ff4d4d);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(227,6,19,0.4)}
+    .card{background:#071F1B;border-radius:24px;padding:48px 56px;text-align:center;box-shadow:0 32px 64px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.08)}
+    .logo{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#00A650,#0F766E);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(0,166,80,0.28)}
     .logo svg{width:28px;height:28px;color:#fff;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    h1{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:4px}
-    h1 span{color:#f87171}
+    h1{color:#fff;font-size:22px;font-weight:800;margin-bottom:4px}
+    h1 span{color:#B7F7CF}
     p{color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:24px}
     .bar{width:180px;height:3px;border-radius:99px;background:rgba(255,255,255,0.08);margin:0 auto;overflow:hidden}
-    .bar::after{content:'';display:block;width:40%;height:100%;border-radius:99px;background:linear-gradient(90deg,#e30613,#ff4d4d);animation:load 1.2s ease-in-out infinite}
+    .bar::after{content:'';display:block;width:40%;height:100%;border-radius:99px;background:linear-gradient(90deg,#00A650,#B7F7CF);animation:load 1.2s ease-in-out infinite}
     @keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
     </style></head><body><div class="card">
     <div class="logo"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M5 10h14"/><path d="M7 10v8"/><path d="M12 10v8"/><path d="M17 10v8"/><path d="M12 2 4 6v4h16V6Z"/></svg></div>
-    <h1>Glory<span>Bank</span></h1>
+    <h1>Cred<span>Business</span></h1>
     <p>Internet Banking Desktop</p>
     <div class="bar"></div>
     </div></body></html>
@@ -110,16 +110,16 @@ function createWindow() {
     mainWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(`
       <!DOCTYPE html><html><head><style>
       *{margin:0;padding:0;box-sizing:border-box}
-      body{background:#1a1a2e;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center}
+      body{background:#071F1B;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center}
       .c{max-width:400px;padding:40px}
       .icon{width:64px;height:64px;border-radius:18px;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
       h2{font-size:20px;margin-bottom:8px}
       p{color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:24px;line-height:1.6}
-      button{background:linear-gradient(135deg,#e30613,#ff4d4d);color:#fff;border:none;padding:12px 32px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.2s}
+      button{background:linear-gradient(135deg,#00A650,#0F766E);color:#fff;border:none;padding:12px 32px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.2s}
       button:hover{opacity:0.9}
       code{display:block;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.3)}
       </style></head><body><div class="c">
-      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg></div>
+      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B7F7CF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg></div>
       <h2>Sem conexão</h2>
       <p>Não foi possível conectar ao servidor do CredBusiness. Verifique sua conexão com a internet e tente novamente.</p>
       <button onclick="location.href='${APP_URL}'">Tentar novamente</button>

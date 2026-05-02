@@ -1,11 +1,11 @@
 #!/bin/sh
 set -e
 
-echo "[GloryBank] Aguardando banco de dados..."
+echo "[CredBusiness] Aguardando banco de dados..."
 sleep 3
 
-echo "[GloryBank] Aplicando schema no banco..."
+echo "[CredBusiness] Aplicando schema no banco..."
 npx prisma db push --accept-data-loss
 
-echo "[GloryBank] Iniciando aplicação..."
+echo "[CredBusiness] Iniciando aplicação..."
 exec npm start

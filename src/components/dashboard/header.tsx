@@ -31,7 +31,7 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
         background: "rgba(255,255,255,0.96)",
         backdropFilter: "blur(20px) saturate(1.4)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 1px 0 rgba(227,6,19,0.04)",
+        boxShadow: "0 1px 0 rgba(0,166,80,0.08)",
       }}
     >
       {/* Mobile hamburger */}
@@ -67,8 +67,8 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
           <Bell className="h-[18px] w-[18px]" />
           {unreadCount > 0 && (
             <span
-              className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white"
-              style={{ boxShadow: "0 0 6px rgba(227,6,19,0.7)" }}
+              className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-[9px] font-bold text-white"
+              style={{ boxShadow: "0 0 6px rgba(0,166,80,0.55)" }}
             >
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
@@ -80,8 +80,8 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
           <div
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
             style={{
-              background: "linear-gradient(135deg, #e30613, #ff4d4d)",
-              boxShadow: "0 2px 8px rgba(227,6,19,0.4)",
+              background: "linear-gradient(135deg, #00A650, #0F766E)",
+              boxShadow: "0 2px 8px rgba(0,166,80,0.28)",
             }}
           >
             {getInitials(userName)}

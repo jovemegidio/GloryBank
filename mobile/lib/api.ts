@@ -2,8 +2,8 @@ import * as SecureStore from "expo-secure-store";
 import type { ApiResponse } from "@/types";
 
 const DEFAULT_API_BASE_URL = "http://187.45.255.152/api";
-const TOKEN_KEY = "glorybank_session_token";
-const USER_KEY = "glorybank_user";
+const TOKEN_KEY = "credbusiness_session_token";
+const USER_KEY = "credbusiness_user";
 
 let authToken: string | null = null;
 
@@ -47,7 +47,7 @@ async function request<T>(
   const token = await loadToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    "X-GloryBank-Client": "mobile",
+    "X-CredBusiness-Client": "mobile",
     ...(options.headers as Record<string, string>),
   };
 

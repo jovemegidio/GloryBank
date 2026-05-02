@@ -16,7 +16,7 @@ const paymentActions = [
     icon: QrCode,
     title: "Pagar com PIX",
     description: "Envie PIX por CPF, CNPJ, e-mail, telefone ou chave aleatória.",
-    color: "text-red-600",
+    color: "text-emerald-700",
     bg: "#fff1f2",
   },
   {
@@ -24,7 +24,7 @@ const paymentActions = [
     icon: FileText,
     title: "Gerar boleto",
     description: "Crie cobranças por boleto com vencimento e dados do pagador.",
-    color: "text-red-600",
+    color: "text-emerald-700",
     bg: "#fff1f2",
   },
   {
@@ -63,7 +63,7 @@ export default function PagamentosPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-red-600" />
+            <Receipt className="h-5 w-5 text-emerald-700" />
             O que você quer fazer?
           </CardTitle>
         </CardHeader>
@@ -73,7 +73,7 @@ export default function PagamentosPage() {
             <Link
               key={action.href}
               href={action.href}
-              className="group rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-red-200 hover:bg-red-50/40"
+              className="group rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-emerald-200 hover:bg-emerald-50/40"
             >
               <div className="flex items-start gap-3">
                 <div
@@ -83,7 +83,7 @@ export default function PagamentosPage() {
                   <action.icon className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[14px] font-bold text-slate-800 group-hover:text-red-700">
+                  <p className="text-[14px] font-bold text-slate-800 group-hover:text-emerald-800">
                     {action.title}
                   </p>
                   <p className="mt-1 text-[12px] leading-relaxed text-slate-500">

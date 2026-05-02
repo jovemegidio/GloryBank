@@ -124,12 +124,12 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
               background: "transparent",
             }}
           >
-            <img src="/favicon.png" alt="CredBusiness" className="h-8 w-8 object-contain" />
+            <img src="/brand-mark.svg" alt="CredBusiness" className="h-8 w-8 object-contain" />
           </div>
           {(!collapsed || mobileSidebarOpen) && (
             <div className="min-w-0">
-              <span className="text-[17px] font-bold tracking-tight text-slate-900">Cred</span>
-              <span className="text-[17px] font-bold tracking-tight text-red-600">Business</span>
+              <span className="text-[17px] font-bold text-slate-900">Cred</span>
+              <span className="text-[17px] font-bold text-emerald-700">Business</span>
             </div>
           )}
         </Link>
@@ -137,7 +137,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         {/* Desktop collapse toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden lg:flex rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
+          className="hidden lg:flex rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
           aria-label={collapsed ? "Expandir sidebar" : "Colapsar sidebar"}
         >
           {collapsed ? (
@@ -150,7 +150,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         {/* Mobile close button */}
         <button
           onClick={onMobileClose}
-          className="flex lg:hidden rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
+          className="flex lg:hidden rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
           aria-label="Fechar menu"
         >
           <X className="h-4 w-4" />
@@ -183,14 +183,14 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
                       title={collapsed && !mobileSidebarOpen ? item.label : undefined}
                       className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-150 ${
                         isActive
-                          ? "bg-red-50 text-red-700 shadow-sm"
+                          ? "bg-emerald-50 text-emerald-800 shadow-sm"
                           : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                       }`}
                     >
                       <item.icon
                         className={`h-[18px] w-[18px] shrink-0 transition-colors ${
                           isActive
-                            ? "text-red-600"
+                            ? "text-emerald-700"
                             : "text-slate-400 group-hover:text-slate-700"
                         }`}
                       />
@@ -199,7 +199,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
                       )}
                       {isActive && (!collapsed || mobileSidebarOpen) && (
                         <span
-                          className="ml-auto h-1.5 w-1.5 rounded-full bg-red-600"
+                          className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-600"
                           aria-hidden="true"
                         />
                       )}
@@ -217,13 +217,13 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         <div
           className="mx-3 mb-2 rounded-xl p-3"
           style={{
-            background: "#fff1f2",
-            border: "1px solid rgba(227,6,19,0.12)",
+            background: "#F0FDF4",
+            border: "1px solid rgba(0,166,80,0.16)",
           }}
         >
           <div className="mb-1 flex items-center gap-2">
-            <ShieldCheck className="h-3.5 w-3.5 text-red-600" />
-            <span className="text-[10px] font-bold uppercase tracking-wider text-red-600">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-700" />
+            <span className="text-[10px] font-bold uppercase text-emerald-700">
               Ambiente Seguro
             </span>
           </div>
@@ -240,8 +240,8 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
 
       {/* Collapsed security indicator */}
       {collapsed && !mobileSidebarOpen && (
-        <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "#fff1f2" }}>
-          <ShieldCheck className="h-4 w-4 text-red-600" />
+        <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "#F0FDF4" }}>
+          <ShieldCheck className="h-4 w-4 text-emerald-700" />
         </div>
       )}
 

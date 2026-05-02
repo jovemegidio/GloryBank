@@ -3,19 +3,19 @@ import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 export const colors = {
-  primary: '#e30613',
-  primaryDark: '#bf0010',
-  primaryLight: '#ff4d4d',
+  primary: '#00A650',
+  primaryDark: '#008D58',
+  primaryLight: '#B7F7CF',
 
-  dark: '#1a1a2e',
-  darkSecondary: '#16162a',
+  dark: '#071F1B',
+  darkSecondary: '#0F3A33',
 
   background: '#f5f6f8',
   card: '#ffffff',
   cardBorder: 'rgba(0,0,0,0.06)',
   cardHover: '#eef0f4',
 
-  text: '#1a1a2e',
+  text: '#0f172a',
   textSecondary: '#64748B',
   textMuted: '#94A3B8',
   textInverse: '#ffffff',
@@ -40,9 +40,9 @@ export const colors = {
 } as const;
 
 export const gradients = {
-  primary: ['#cc0511', '#e30613', '#ff2d3a'] as const,
+  primary: ['#071F1B', '#0F3A33', '#00A650'] as const,
   sidebar: ['#ffffff', '#f7f8fa'] as const,
-  card: ['#111111', '#2a1114', '#bf0010'] as const,
+  card: ['#071F1B', '#0F3A33', '#00A650'] as const,
 } as const;
 
 export const spacing = {

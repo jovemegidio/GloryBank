@@ -210,7 +210,7 @@ export default function AgendamentosPage() {
                       {canCancel && (
                         <button
                           onClick={() => cancelTransfer(transfer.id)}
-                          className="rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+                          className="rounded-lg p-1.5 text-slate-400 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
                           title="Cancelar"
                         >
                           <Trash2 className="h-4 w-4" />

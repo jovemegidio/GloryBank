@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,17 +18,26 @@ export const metadata: Metadata = {
     template: "%s | CredBusiness",
   },
   description:
-    "CredBusiness — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança AES-256.",
+    "CredBusiness — Internet Banking digital completo. PIX instantâneo, boletos, transferências e gestão financeira com segurança institucional.",
   keywords: ["internet banking", "pix", "boleto", "transferência", "banco digital"],
-  themeColor: "#e30613",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/brand-mark.svg",
+    apple: "/brand-mark.svg",
+  },
   robots: { index: false, follow: false },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "CredBusiness",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#00A650",
 };
 
 export default function RootLayout({
