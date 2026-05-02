@@ -30,14 +30,14 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
       style={{
         background: "rgba(255,255,255,0.96)",
         backdropFilter: "blur(20px) saturate(1.4)",
-        borderBottom: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 1px 0 rgba(0,166,80,0.08)",
+        borderBottom: "1px solid rgba(10,31,68,0.06)",
+        boxShadow: "0 1px 0 rgba(30,99,240,0.08)",
       }}
     >
       {/* Mobile hamburger */}
       <button
         onClick={onMenuOpen}
-        className="flex lg:hidden -ml-1 rounded-xl p-2 text-slate-500 transition-colors hover:bg-black/[0.04] hover:text-slate-700"
+        className="flex lg:hidden -ml-1 rounded-xl p-2 text-[#5B6B85] transition-colors hover:bg-[#F4F7FC] hover:text-[#0A1F44]"
         aria-label="Abrir menu"
       >
         <Menu className="h-5 w-5" />
@@ -45,10 +45,10 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
 
       {/* Page context */}
       <div className="flex-1 min-w-0">
-        <h2 className="text-[14px] font-semibold text-slate-800 truncate">
+        <h2 className="text-[14px] font-semibold text-[#0A1F44] truncate">
           Olá, {userName.split(" ")[0]}!
         </h2>
-        <p className="hidden sm:block text-[11px] text-slate-500">
+        <p className="hidden sm:block text-[11px] text-[#5B6B85]">
           Internet Banking — CredBusiness
         </p>
       </div>
@@ -61,14 +61,14 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
         {/* Notification bell */}
         <Link
           href="/dashboard/notificacoes"
-          className="relative rounded-xl p-2.5 text-slate-500 transition-all duration-150 hover:bg-black/[0.04] hover:text-slate-700"
+          className="relative rounded-xl p-2.5 text-[#5B6B85] transition-all duration-150 hover:bg-[#F4F7FC] hover:text-[#0A1F44]"
           aria-label="Notificações"
         >
           <Bell className="h-[18px] w-[18px]" />
           {unreadCount > 0 && (
             <span
-              className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-[9px] font-bold text-white"
-              style={{ boxShadow: "0 0 6px rgba(0,166,80,0.55)" }}
+              className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#1E63F0] text-[9px] font-bold text-white"
+              style={{ boxShadow: "0 0 6px rgba(30,99,240,0.55)" }}
             >
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
@@ -76,21 +76,21 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
         </Link>
 
         {/* User avatar */}
-          <div className="ml-1 flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-all duration-150 hover:bg-black/[0.03] cursor-default">
+          <div className="ml-1 flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-all duration-150 hover:bg-[#F4F7FC] cursor-default">
           <div
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
             style={{
-              background: "linear-gradient(135deg, #00A650, #0F766E)",
-              boxShadow: "0 2px 8px rgba(0,166,80,0.28)",
+              background: "linear-gradient(135deg, #1E63F0, #06143A)",
+              boxShadow: "0 2px 8px rgba(30,99,240,0.32)",
             }}
           >
             {getInitials(userName)}
           </div>
           <div className="hidden lg:block min-w-0">
-            <p className="text-[13px] font-medium text-slate-700 truncate max-w-[140px]">
+            <p className="text-[13px] font-medium text-[#0A1F44] truncate max-w-[140px]">
               {userName}
             </p>
-            <p className="text-[11px] text-slate-400 truncate max-w-[140px]">
+            <p className="text-[11px] text-[#5B6B85] truncate max-w-[140px]">
               {userEmail}
             </p>
           </div>
@@ -99,4 +99,3 @@ export function Header({ userName, userEmail, onMenuOpen }: HeaderProps) {
     </header>
   );
 }
-

@@ -1,24 +1,26 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --brand-primary: #00A650;
-  --brand-primary-dark: #008D58;
-  --brand-primary-soft: #DDFBE8;
-  --brand-navy: #071F1B;
+  --brand-primary: #1E63F0;
+  --brand-primary-dark: #1746C2;
+  --brand-primary-soft: #E6EEFE;
+  --brand-navy: #0A1F44;
+  --brand-navy-deep: #06143A;
   --brand-gold: #D97706;
   --brand-blue: #2563EB;
-  --brand-surface: #f6f8fb;
+  --brand-blue-soft: #DBEAFE;
+  --brand-surface: #F4F7FC;
   --brand-card: #ffffff;
   --brand-border: rgba(15,23,42,0.08);
-  --brand-hover: #edf8f1;
-  --brand-text: #0f172a;
-  --brand-text-muted: #64748B;
+  --brand-hover: #EEF3FE;
+  --brand-text: #0A1F44;
+  --brand-text-muted: #5B6B85;
   --brand-danger: #EF4444;
   --brand-warning: #F59E0B;
   --brand-info: #2563EB;
-  --brand-success: #00A650;
-  --background: #f5f6f8;
-  --foreground: #0f172a;
+  --brand-success: #16A34A;
+  --background: #F4F7FC;
+  --foreground: #0A1F44;
 }
 
 @theme inline {
@@ -69,14 +71,14 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #00A650, #2563EB);
+  background: linear-gradient(135deg, #1E63F0, #06143A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 /* Focus ring */
-*:focus-visible { outline: 2px solid #00A650; outline-offset: 2px; }
+*:focus-visible { outline: 2px solid #1E63F0; outline-offset: 2px; }
 
 /* Entrance animations */
 @keyframes fadeInUp {
@@ -99,7 +101,7 @@ body {
 }
 
 /* Selection */
-::selection { background: rgba(0, 166, 80, 0.22); color: #071f1b; }
+::selection { background: rgba(30, 99, 240, 0.22); color: #0A1F44; }
 
 /* Smooth page transitions */
 .page-enter              { opacity: 0; transform: translateY(8px); }

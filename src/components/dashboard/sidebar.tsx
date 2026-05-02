@@ -108,14 +108,14 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
       ].join(" ")}
       style={{
         background: "#ffffff",
-        borderRight: "1px solid rgba(15,23,42,0.08)",
-        boxShadow: mobileSidebarOpen ? "4px 0 32px rgba(15,23,42,0.16)" : undefined,
+        borderRight: "1px solid rgba(10,31,68,0.08)",
+        boxShadow: mobileSidebarOpen ? "4px 0 32px rgba(10,31,68,0.18)" : undefined,
       }}
     >
       {/* Logo */}
       <div
         className="flex h-[72px] shrink-0 items-center justify-between px-4"
-        style={{ borderBottom: "1px solid rgba(15,23,42,0.08)" }}
+        style={{ borderBottom: "1px solid rgba(10,31,68,0.08)" }}
       >
         <Link href="/dashboard" className="flex items-center gap-3 min-w-0" onClick={onMobileClose}>
           <div
@@ -128,8 +128,8 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
           </div>
           {(!collapsed || mobileSidebarOpen) && (
             <div className="min-w-0">
-              <span className="text-[17px] font-bold text-slate-900">Cred</span>
-              <span className="text-[17px] font-bold text-emerald-700">Business</span>
+              <span className="text-[17px] font-bold text-[#0A1F44]">Cred</span>
+              <span className="text-[17px] font-bold text-[#1E63F0]">Business</span>
             </div>
           )}
         </Link>
@@ -137,7 +137,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         {/* Desktop collapse toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden lg:flex rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+          className="hidden lg:flex rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-[#E6EEFE] hover:text-[#1746C2]"
           aria-label={collapsed ? "Expandir sidebar" : "Colapsar sidebar"}
         >
           {collapsed ? (
@@ -150,7 +150,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         {/* Mobile close button */}
         <button
           onClick={onMobileClose}
-          className="flex lg:hidden rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+          className="flex lg:hidden rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-[#E6EEFE] hover:text-[#1746C2]"
           aria-label="Fechar menu"
         >
           <X className="h-4 w-4" />
@@ -183,15 +183,15 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
                       title={collapsed && !mobileSidebarOpen ? item.label : undefined}
                       className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-150 ${
                         isActive
-                          ? "bg-emerald-50 text-emerald-800 shadow-sm"
-                          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                          ? "bg-[#E6EEFE] text-[#1746C2] shadow-sm"
+                          : "text-[#3B4863] hover:bg-[#F4F7FC] hover:text-[#0A1F44]"
                       }`}
                     >
                       <item.icon
                         className={`h-[18px] w-[18px] shrink-0 transition-colors ${
                           isActive
-                            ? "text-emerald-700"
-                            : "text-slate-400 group-hover:text-slate-700"
+                            ? "text-[#1E63F0]"
+                            : "text-slate-400 group-hover:text-[#0A1F44]"
                         }`}
                       />
                       {(!collapsed || mobileSidebarOpen) && (
@@ -199,7 +199,7 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
                       )}
                       {isActive && (!collapsed || mobileSidebarOpen) && (
                         <span
-                          className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-600"
+                          className="ml-auto h-1.5 w-1.5 rounded-full bg-[#1E63F0]"
                           aria-hidden="true"
                         />
                       )}
@@ -217,17 +217,17 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
         <div
           className="mx-3 mb-2 rounded-xl p-3"
           style={{
-            background: "#F0FDF4",
-            border: "1px solid rgba(0,166,80,0.16)",
+            background: "#E6EEFE",
+            border: "1px solid rgba(30,99,240,0.18)",
           }}
         >
           <div className="mb-1 flex items-center gap-2">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-700" />
-            <span className="text-[10px] font-bold uppercase text-emerald-700">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#1746C2]" />
+            <span className="text-[10px] font-bold uppercase text-[#1746C2]">
               Ambiente Seguro
             </span>
           </div>
-          <p className="text-[10px] leading-relaxed text-slate-500">
+          <p className="text-[10px] leading-relaxed text-[#5B6B85]">
             Conexão criptografada TLS 1.3
           </p>
         </div>
@@ -240,15 +240,15 @@ export function Sidebar({ mobileSidebarOpen = false, onMobileClose }: SidebarPro
 
       {/* Collapsed security indicator */}
       {collapsed && !mobileSidebarOpen && (
-        <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "#F0FDF4" }}>
-          <ShieldCheck className="h-4 w-4 text-emerald-700" />
+        <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "#E6EEFE" }}>
+          <ShieldCheck className="h-4 w-4 text-[#1746C2]" />
         </div>
       )}
 
       {/* Logout */}
       <div
         className="px-3 pb-4"
-        style={{ borderTop: "1px solid rgba(15,23,42,0.08)" }}
+        style={{ borderTop: "1px solid rgba(10,31,68,0.08)" }}
       >
         <button
           onClick={handleLogout}
